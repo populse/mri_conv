@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+	<meta charset="utf-8"/>
+	<meta name = "author"			content = "Olivier MONTIGON">
+	<meta name = "description"	content = "logiciel de gestion de données IRM">
+	<link rel="stylesheet" media="screen" type="text/css" href="../styles.css">
+	<link rel="stylesheet" media="screen" type="text/css" href="../menu.css">
+	<link rel="stylesheet" media="screen" type="text/css" href="../haiku.css">
+	<title>MRI File Manager (IRMaGe)</title>
+	<script src="../datemodif.js"></script>
+	<script src="../buttontop.js"></script>
+  </head>
+  
+  <body link="#ff5500">
+  <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+  
+	<div>
+		<object data="../bandeau.html" type="text/html" width="100%" height="100%"></object>
+		<div id='cssmenu'>
+		<ul>
+			<li><a href='../Home/index.html' target="_parent"><span>Home</span></a></li>
+			<li class='active'><a href='#' target="_parent"><span>Installation</span></a></li>
+			<li><a href='../Documentation/documentation.html' target="_parent"><span>Documentation</span></a></li>
+			<li><a href='#' target="_parent"><span>Troubleshooting</span></a></li>
+			<li class='last'><a href='#'><span>Dictionaries</span></a></li>
+		</ul>
+		</div>
+  
+		<p class="style4" ><u><a href="#installation">Installation</a></u> - <u><a href="#launching">Launching of the software</a></u> - <u><a href="#pluginImagej">ImageJ plugins</a></u></p>	
+	
+		<h2 id="installation" class="style1"> Installation </h2>
+		<p class="style2"> This section explains how to install MRI File Manager 
+		<div class= "style3">
+		<ul>
+		<li>
+		<p>Firstly, make sure to have Java 8 (or more) installed on your machine</p>
+		<!-- <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">java</span> <span class="o">-</span><span class="n">Version</span></pre></div></div> -->
+		</li>
+		<li>
+		<p>Download MRI File Manager <a href="https://github.com/populse/mri_conv/archive/master.zip">here</a></p>
+		</li>
+		<li>
+		<p>Unzip the archive in the folder of your choice. </p>
+		<img alt="treeview" align="center" src="./images/treeview.png" />
+		</li>
+		</ul>
+		</div>
+		</p>
+
+		<h2 id="launching" class="style1"> Launching of the software </h2>
+		<p class="style2"> This section explains how to launch MRI File Manager in <u>standalone mode</u> or by <u>script</u>.</p>
+		<div class= "style5">
+		<ul>
+		<li>
+		<p><u>In standalone mode:</u><br><br>
+		You can double-click directly on the <i>MRIManager.bat</i> file.<br><br>
+		But it's better to use batch file (<i> MRIManager.bat</i> for Windows) or shell (<i>MRIManager.sh</i> for Linux and MacOS), the reasons are :<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- to show error messages in the terminal<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- you can force to exit software when crashed (by closing terminal)<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- you can allocate memory for classes of Java<br>
+		<br><br>
+		Edit the MRIManager.bat or MRIManager.sh file according to your operating system (with a simple text editor):<br>
+		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">java -Xms512m -Xmx4096m -jar MRIManager.jar</span></pre></div></div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Xms specifies the initial memory allocation pool for a Java virtual machine (JVM) (keep the default value 512m) <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Xmx specifies the maximum memory allocation pool, set the value 1/2 of the total RAM memory of your machine (for example 4096m for 8Go of RAM)
+		<br><br>
+		Launch the batch or shell file in a terminal:<br>
+		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">C:\Program Files\MFM_Irmage\MRIFileManager>MRIManager.bat 		(Windows)</span></pre></div></div>
+		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">wiki@ubuntu:~/MRIFileManager$ ./MRIManager.sh 		(Linux, Mac)</span></pre></div></div>
+		</p>
+		</li>
+		</ul>
+		<br>
+
+		<ul>
+		<li>		
+		<p><u>By script with options:</u><br><br>
+		You can launch MRI File Manager through another application by script with some options. In this instance, <u>some functions are deactivated.</u><br><br>
+		<b>usage :</b>
+		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"> java Xms512m -Xmx4096m -jar [options]  </span></pre></div></div>		
+
+		<b>options :</b><br>
+		
+		<table style="margin-left:50px">
+		<tr>
+		<td>'[ExportNifti] &lt;repertory&gt;'</td>
+		<td> (1) </td>
+		</tr>
+		<tr>
+		<td>'[ExportToMIA] &lt;string&gt;'</td>
+		<td>(2)</td>
+		</tr>
+		<tr>
+		<td>'CloseAfterExport'</td>
+		<td>(3)</td>
+		</tr>
+		<tr>
+		<td>'NoLogExport'</td>
+		<td>(4)</td>
+		</tr>
+		<tr>
+		<td>'[LookAndFeel] &lt;string&gt;'</td>
+		<td>(5)</td>
+		</tr>
+		<tr>
+		<td>'NoExitSystem'</td>
+		<td>(6)</td>
+		</tr>
+		<tr>
+		<td>'[ExportOptions] &lt;integer&gt;'</td>
+		<td>(7)</td>
+		</tr>
+		</table>
+		<br><br>
+		
+		<table style="margin-left:50px" border="0">
+<!-- 		<tr>
+		<td></td>
+		<td>Example</td>
+		</tr> -->
+		<tr>
+		<td><br> (1) </td>
+		<td>
+		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"> java Xms512m -Xmx4096m -jar '[ExportNifti] C:\\Users\\Documents\\DataIRM\\NifTI'  </span></pre></div></div>
+		</td>
+		</tr>
+		<tr>
+		<td><br>(2)</td>
+		<td>
+		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"> java Xms512m -Xmx4096m -jar '[ExportToMIA] PatientName-StudyName-CreationDate-<br>SeqNumber-Protocol-SequenceName-AcquisitionTime'  </span></pre></div></div>
+		</td>
+		</tr>
+		<tr>
+		<td><br>(3)</td>
+		<td>
+		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"> java Xms512m -Xmx4096m -jar 'CloseAfterExport'  </span></pre></div></div>
+		</td>
+		</tr>
+		<tr>
+		<td>(4)</td>
+		<td></td>
+		</tr>
+		<tr>
+		<td>(5)</td>
+		<td></td>
+		</tr>
+		<tr>
+		<td>(6)</td>
+		<td></td>
+		</tr>
+		<tr>
+		<td>(7)</td>
+		<td></td>
+		</tr>
+		</table>
+		
+		</li>
+		</ul>
+		</div>
+		</p>
+
+		<br>
+		<h2 id="pluginImagej" class="style1"> ImageJ plugins </h2>
+		<p class="style2"> This section explains how to put plugins of ImageJ  </p>
+
+		<br><br><br><br><br><br><br><br>
+		<script>document.write("This page was last modified on "+ DateModif())</script>
+  
+	</div>
+  </body>
+</html>
