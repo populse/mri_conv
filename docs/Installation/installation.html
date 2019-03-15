@@ -23,8 +23,8 @@
 			<li><a href='../Home/index.html' target="_parent"><span>Home</span></a></li>
 			<li class='active'><a href='#' target="_parent"><span>Installation</span></a></li>
 			<li><a href='../Documentation/documentation.html' target="_parent"><span>Documentation</span></a></li>
-			<li><a href='#' target="_parent"><span>Troubleshooting</span></a></li>
-			<li class='last'><a href='#'><span>Dictionaries</span></a></li>
+			<li><a href='../Troubleshooting/troubleshooting.html' target="_parent"><span>Troubleshooting</span></a></li>
+			<li class='last'><a href='../Dictionaries/dictionaries.html'><span>Dictionaries</span></a></li>
 		</ul>
 		</div>
   
@@ -122,39 +122,59 @@
 		</tr> -->
 		<tr>
 		<td><br> (1) </td>
+		<td> </td>
 		<td>
 		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"> java Xms512m -Xmx4096m -jar '[ExportNifti] C:\\Users\\Documents\\DataIRM\\NifTI'  </span></pre></div></div>
 		</td>
 		</tr>
 		<tr>
 		<td><br>(2)</td>
+		<td> </td>
 		<td>
 		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"> java Xms512m -Xmx4096m -jar '[ExportToMIA] PatientName-StudyName-CreationDate-<br>SeqNumber-Protocol-SequenceName-AcquisitionTime'  </span></pre></div></div>
 		</td>
 		</tr>
 		<tr>
 		<td><br>(3)</td>
+		<td> </td>
 		<td>
 		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"> java Xms512m -Xmx4096m -jar 'CloseAfterExport'  </span></pre></div></div>
 		</td>
 		</tr>
 		<tr>
-		<td>(4)</td>
-		<td></td>
+		<td><br>(4)</td>
+		<td> </td>
+		<td>
+		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"> java Xms512m -Xmx4096m -jar 'NoLogExport'  </span></pre></div></div>
+		</td>
 		</tr>
 		<tr>
-		<td>(5)</td>
-		<td></td>
+		<td><br>(5)</td>
+		<td> </td>
+		<td>
+		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"> java Xms512m -Xmx4096m -jar '[LookAndFeel] com.sun.java.swing.plaf.windows.WindowsLookAndFeel'</span></pre></div></div>
+		</td>
 		</tr>
 		<tr>
-		<td>(6)</td>
-		<td></td>
+		<td><br>(6)</td>
+		<td> </td>
+		<td>
+		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"> java Xms512m -Xmx4096m -jar 'NoExitSystem'</span></pre></div></div>
+		</td>
 		</tr>
 		<tr>
-		<td>(7)</td>
-		<td></td>
+		<td><br>(7)</td>
+		<td> </td>
+		<td>
+		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"> java Xms512m -Xmx4096m -jar '[ExportOptions] 000'</span></pre></div></div>
+		</td>
 		</tr>
 		</table>
+		
+		<b>examples :</b><br>
+		<p class="style3"> Python</p>
+		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"> import <b>subprocess</b><br> <b>subprocess</b>.call(['java','-Xms512M','-Xmx4096M','-jar','MRIManager.jar',options])</span></pre></div></div>
+		
 		
 		</li>
 		</ul>
