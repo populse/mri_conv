@@ -40,8 +40,9 @@ div#contenu {
 	/*font-family:verdana;*/
 }
 .style4 {
-	font-size:120%;
+	font-size:100%;
 	margin-left:20px;
+	text-align:center;
 	font-weight: bold;
 	color:red;
 	/*font-family:verdana;*/
