@@ -24,12 +24,55 @@
 			<li><a href='../Installation/installation.html' target="_parent"><span>Installation</span></a></li>
 			<li><a href='../Documentation/documentation.html' target="_parent"><span>Documentation</span></a></li>
 			<li><a href='../Troubleshooting/troubleshooting.html' target="_parent"><span>Troubleshooting</span></a></li>
-			<li class='active'><a href='#'><span>Dictionaries</span></a></li>
+			<li class='active'><a href='#'><span>MRI Dictionaries</span></a></li>
+			<li  class='last'><a href='../Irmagejson/irmagejson.html' target="_parent"><span>IRMaGe Json</span></a></li>
+			
 		</ul>
 		</div>
+		<br>
+				(page under construction)
+		<br>
+		<p class="style4" >	<u><a href="#introduction">Introduction</a></u> - <u><a href="#brukerdict">To define the Bruker MRI parameters</a></u> - <u><a href="#dicomdict">To define the Dicom MRI parameters</a></u> - 
+							<u><a href="#philipsdict">To define the Philips MRI parameters</a></u> - <u><a href="#niftidict">To define the Nifti MRI parameters</a></u></p>
 		
 		<br>
-		(page under construction)
+		
+		<h2 id="introduction" class="style1">Introduction</h2>
+		<p class="style2">
+		- This page explains how to extract the MRI parameters with the <b>DictionaryMRI_System.yml</b> and <b>DictionaryMRI_User.yml</b> files which are located in MRI File Manager directory. <br><br>
+		- This allows the user to display his MRI parameters in the viewer and export the values in the Json file when converting to Nifti.  <br><br>
+		- The files are written in Yaml. The header file explains the structure of document. <br><br>
+		- The <b>DictionaryMRI_System.yml</b> file allows the extraction of the most important MRI parameters (resolution, number of slice, size ...). 
+			This file is very important for the regular functionning of the software. <b> It is better not to change it !</b> It is only available to verify parameters and for advanced users.
+			The extracted values are displayed in the 'Info param.' tab of the 'MRI parameters' table. <br><br> 
+		- The <b>DictionaryMRI_User.yml</b> file allows the extraction of the MRI parameters in a personalized way. This file can be modified by the user. 
+			The extracted values are displayed in the 'User param.' tab of the 'MRI parameters' table. <br><br>
+		- For each format, the setting of a MRI parameter must take the following form :
+		<div class= "style5">
+		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">
+		<b><i>MRI label of your choice:</i><br>
+			description: {info: "<i>your comment</i>"}
+			
+			whereBruker:  {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
+			wherePhilips: {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
+			whereDicom:   {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
+			whereNifti:   {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
+                  
+			viewer: {category: xxx}
+			json:   {tagJson: xxx, type: xxx, format: xxx, units: xxx}
+			</b>
+		</span></pre></div></div>
+		</div>
+		</p>
+		
+		<h2 id="brukerdict" class="style1">To define the Bruker MRI parameters</h2>
+		<p class="style2">
+		- Edit an yaml file<br>
+		- 
+		</p>
+		<h2 id="dicomdict" class="style1">To define the Dicom MRI parameters</h2>
+		<h2 id="philipsdict" class="style1">To define the Philips MRI parameters</h2>
+		<h2 id="niftidict" class="style1">To define the Nifti MRI parameters</h2>
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	
 	
