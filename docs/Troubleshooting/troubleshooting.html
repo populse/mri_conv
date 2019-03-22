@@ -28,7 +28,142 @@
 		</ul>
 		</div>
 		<br>
-		(under construction)
+		<p class="style4" >	<u><a href="#soft">Software</a></u> - <u><a href="#bruker">Bruker</a></u> - <u><a href="#dicom">Dicom</a></u> - 
+							<u><a href="#philips">Philips</a></u> - <u><a href="#nifti">Nifti</a></u></p>
+		
+		
+		<h2 id="soft" class="style1">Software</h2>
+		<table border="1">
+		<tr>
+		<td width="20%"> <b>What </b></td>
+		<td width="30%"> <b>Problem </b></td>
+		<td width="20%"> <b>Possible cause </b></td>
+		<td width="100%"> <b>Correction </b></td>
+		</tr>
+		
+		<tr>
+		<td> Software </td>
+		<td> The software does not start when double-clicking on 'MRIManager.jar' </td>
+		<td> <b>1)</b> your java version is old <br>
+			 <b>2)</b> out of memory </td>
+		<td> <b>1)</b> update to the latest version of Java   <br>
+			 <b>2)</b> use MRIManager.bat (Windows) or MRIManager.sh (Linux, MAC) - <a href="../Installation/installation.html">see 'Installation' page<a></td>
+		</tr>
+		<tr>
+		<td> Software </td>
+		<td> The software does not start when launching 'MRIManager.bat' or 'MRIManager.sh' </td>
+		<td> <b>1)</b> the maximum memory allocation pool is too high </td>
+		<td> <b>1)</b> edit the MRIManager.bat or MRIManager.sh file according to your operating system, decrease the value of -Xmx (for example 4096m to 2048m)<br></td>
+		</tr>
+		<tr>
+		<td> Software </td>
+		<td> An error message appears 'Warning: DictionaryMRI_System.yml not found' </td>
+		<td> <b>1)</b> the DictionaryMRI_System.yml and DictionaryMRI_User.yml files are missing in the software directory</td>
+		<td> <b>1)</b> re-download MRI FIle Manager - <a href="../Installation/installation.html">see 'Installation' page<a><br></td>
+		</tr>
+		</table>
+		
+		<h2 id="bruker" class="style1">Bruker</h2>
+		<table border="1">
+		<tr>
+		<td width="20%"> <b>What  </b></td>
+		<td width="30%"> <b>Problem </b></td>
+		<td width="20%"> <b>Possible cause </b></td>
+		<td width="100%"> <b>Correction </b></td>
+		</tr>
+		<tr>
+		<td> Bruker - data</td>
+		<td> No data found in the table at the top (data browser)</td>
+		<td> <b>1)</b> data folder is not right <br>
+			 <b>2)</b> data format is not right <br>
+			 <b>3)</b> Bruker format not compatible with the software <br>
+			 <b>4)</b> the 'subject' file is corrupted or missing</td>
+		<td> <b>1)</b> try to select folder <b><u>before</u> or <u>after</u></b> that you chose  <br>
+			 <b>2)</b> click on the right button 'Bruker'  <br>
+			 <b>3)</b> verify that Bruker format is Paravision 5 or Paravision 6 <br>
+			 <b>4)</b> In the Bruker data folder, verify that the 'subject' file is present or not empty </td>
+		</tr>
+		<tr>
+		<td> Bruker - sequence </td>
+		<td> No sequence found in the table at the bottom (MRI sequence browser)<br>
+			(or a  few sequences are missing)  </td>
+		<td> <b>1)</b> some metadata is missing <br>
+			 <b>2)</b> the '2dseq' file is missing </td>
+		<td> <b>1)</b> In the Bruker data folder, verify that the 'acqp', 'reco', 'method' and 'visu_pars' file are present or not empty  <br>
+			 <b>2)</b> In the Bruker data folder, verify that the '2dseq' is present or not empty <br></td>
+
+		</tr>
+		<tr>
+		<td> Bruker - MRI parameters </td>
+		<td> Some MRI parameters are missing in the 'MRI parameters' table<br></td>
+		<td> <b>1)</b> some metadata is missing or empty <br>
+			 <b>2)</b> some informations in the DictionaryMRI_System.yml or DictionaryMRI_User.yml file are missing or improperly completed  </td>
+		<td> <b>1)</b> In the Bruker data folder, verify that the 'acqp', 'reco', 'method' and 'visu_pars' file are present or not empty  <br>
+			 <b>2)</b> <a href="../Dictionaries/dictionaries.html">see 'Dictionaries' page<a> <br></td>
+
+		</tr>
+		</table>
+		
+		<h2 id="dicom" class="style1">Dicom</h2>
+		<table border="1">
+		<tr>
+		<td width="20%"> <b>What  </b></td>
+		<td width="30%"> <b>Problem </b></td>
+		<td width="20%"> <b>Possible cause </b></td>
+		<td width="100%"> <b>Correction </b></td>
+		</tr>
+		<tr>
+		<td>Dicom - data</td>
+		<td>No data found in the table at the top (data browser)</td>
+		<td> <b>1)</b> data folder is not right <br>
+			 <b>2)</b> data format is not right <br>
+			 <b>3)</b> Dicom format not compatible with the software </td>
+		<td> <b>1)</b> try to select folder <b><u>before</u> or <u>after</u></b> that you chose  <br>
+			 <b>2)</b> click on the right button 'Dicom' <br>
+			 <b>3)</b> verify that Dicom is from Philips, Siemens or Bruker</td>
+		</tr>
+		</table>
+		
+		<h2 id="philips" class="style1">Philips</h2>
+		<table border="1">
+		<tr>
+		<td width="20%"> <b>What  </b></td>
+		<td width="30%"> <b>Problem </b></td>
+		<td width="20%"> <b>Possible cause </b></td>
+		<td width="100%"> <b>Correction </b></td>
+		</tr>
+		<tr>
+		<td>Philips - data</td>
+		<td>No data found in the table at the top (data browser)</td>
+		<td> <b>1)</b> data folder is not right <br>
+			 <b>2)</b> data format is not right <br>
+			 <b>3)</b> Philips format not compatible with the software </td>
+		<td> <b>1)</b> try to select folder <b><u>before</u> or <u>after</u></b> that you chose  <br>
+			 <b>2)</b> click on the right button 'Dicom' <br>
+			 <b>3)</b> verify that Philips format (*.PAR or *.Xml) is 4.2</td>
+		</tr>
+		</table>
+		
+		<h2 id="nifti" class="style1">Nifti</h2>
+		<table border="1">
+		<tr>
+		<td width="20%"> <b>What  </b></td>
+		<td width="30%"> <b>Problem </b></td>
+		<td width="20%"> <b>Possible cause </b></td>
+		<td width="100%"> <b>Correction </b></td>
+		</tr>
+		<tr>
+		<td>Nifti - data</td>
+		<td>No data found in the table at the top (data browser)</td>
+		<td> <b>1)</b> data folder is not right <br>
+			 <b>2)</b> data format is not right <br>
+			 <b>3)</b> Nifti format not compatible with the software </td>
+		<td> <b>1)</b> try to select folder <b><u>before</u> or <u>after</u></b> that you chose  <br>
+			 <b>2)</b> click on the right button 'Nifti' <br>
+			 <b>3)</b> verify that Nifti format is Nifti-1 </td>
+		</tr>
+		</table>		
+		
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	
 	
