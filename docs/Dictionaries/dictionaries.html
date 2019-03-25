@@ -29,9 +29,7 @@
 			
 		</ul>
 		</div>
-		<br>
-				(page under construction)
-		<br>
+
 		<p class="style4" >	<u><a href="#introduction">Introduction</a></u> - <u><a href="#brukerdict">To define the Bruker MRI parameters</a></u> - <u><a href="#dicomdict">To define the Dicom MRI parameters</a></u> - 
 							<u><a href="#philipsdict">To define the Philips MRI parameters</a></u> - <u><a href="#niftidict">To define the Nifti MRI parameters</a></u></p>
 		
@@ -50,15 +48,15 @@
 		- For each format, the setting of a MRI parameter must take the following form :
 		<div class= "style5">
 		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"><b><i>MRI label of your choice:</i><br>
-		description: {info: "<i>your comment</i>"}
+	description: {info: "<i>your comment</i>"}
 			
-		whereBruker:  {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
-		wherePhilips: {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
-		whereDicom:   {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
-		whereNifti:   {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
+	whereBruker:  {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
+	wherePhilips: {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
+	whereDicom:   {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
+	whereNifti:   {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
                   
-		viewer: {category: xxx}
-		json:   {tagJson: xxx, type: xxx, format: xxx, units: xxx}
+	viewer: {category: xxx}
+	json:   {tagJson: xxx, type: xxx, format: xxx, units: xxx}
 		</b>
 		</span></pre></div></div>
 		</div>
@@ -67,17 +65,15 @@
 		<h2 id="brukerdict" class="style1">To define the Bruker MRI parameters</h2>
 		<p class="style2">
 		- Edit an yaml file<br>
-		- Example of the setting of a Bruker MRI parameter in DictionaryMRI_User.yml:
+		- Example of the setting of a Bruker MRI parameter in DictionaryMRI_System.yml:
 		<div class= "style5">
 		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"><b><i>Echo Time:</i><br>
-		description: {info: "Time in ms between the middle of the excitation pulse and the peak of the echo produced "}
+	description: {info: "Time in ms between the middle of the excitation pulse and the peak of the echo produced "}
   
-		whereBruker:  {file: acqp, keyName: $ACQ_echo_time=, type: float, format: ~, units: ms}
-<!-- 		wherePhilips: {file: PAR ; Xml, keyName: echo_time ; Echo Time, type: float ; float, format: ~, units: ms ; ms}
-		whereDicom:   {file: dirfile, keyName: Echo Time, type: float, format: ~, units: ms}
-		whereNifti:   {file: json, keyName: EchoTime, type: float, format: ~, units: ms} -->
-		viewer: {category: MRI parameters}
-		json:   {tagJson: EchoTime, type: float, format: ~, units: ms}
+	whereBruker:  {file: acqp, keyName: $ACQ_echo_time=, type: float, format: ~, units: ms}
+
+	viewer: {category: MRI parameters}
+	json:   {tagJson: EchoTime, type: float, format: ~, units: ms}
 		</b>
 		</span></pre></div></div>
 		</div>
@@ -86,15 +82,15 @@
 		<h2 id="dicomdict" class="style1">To define the Dicom MRI parameters</h2>
 		<p class="style2">
 		- Edit an yaml file<br>
-		- Example of the setting of a Dicom MRI parameter in DictionaryMRI_User.yml:
+		- Example of the setting of a Dicom MRI parameter in DictionaryMRI_System.yml:
 		<div class= "style5">
 		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"><b><i>Echo Time:</i><br>
-		description: {info: "Time in ms between the middle of the excitation pulse and the peak of the echo produced "}
+	description: {info: "Time in ms between the middle of the excitation pulse and the peak of the echo produced "}
 
-		whereDicom:   {file: dirfile, keyName: Echo Time, type: float, format: ~, units: ms}
+	whereDicom:   {file: dirfile, keyName: Echo Time, type: float, format: ~, units: ms}
 
-		viewer: {category: MRI parameters}
-		json:   {tagJson: EchoTime, type: float, format: ~, units: ms}
+	viewer: {category: MRI parameters}
+	json:   {tagJson: EchoTime, type: float, format: ~, units: ms}
 		</b>
 		</span></pre></div></div>
 		</div>
@@ -103,15 +99,15 @@
 		<h2 id="philipsdict" class="style1">To define the Philips MRI parameters</h2>
 		<p class="style2">
 		- Edit an yaml file<br>
-		- Example of the setting of a Philips MRI parameter in DictionaryMRI_User.yml:
+		- Example of the setting of a Philips MRI parameter in DictionaryMRI_System.yml:
 		<div class= "style5">
 		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"><b><i>Echo Time:</i><br>
-		description: {info: "Time in ms between the middle of the excitation pulse and the peak of the echo produced "}
+	description: {info: "Time in ms between the middle of the excitation pulse and the peak of the echo produced "}
 
-		wherePhilips: {file: PAR ; Xml, keyName: echo_time ; Echo Time, type: float ; float, format: ~, units: ms ; ms}
+	wherePhilips: {file: PAR ; Xml, keyName: echo_time ; Echo Time, type: float ; float, format: ~, units: ms ; ms}
 
-		viewer: {category: MRI parameters}
-		json:   {tagJson: EchoTime, type: float, format: ~, units: ms}
+	viewer: {category: MRI parameters}
+	json:   {tagJson: EchoTime, type: float, format: ~, units: ms}
 		</b>
 		</span></pre></div></div>
 		</div>
@@ -120,15 +116,15 @@
 		<h2 id="niftidict" class="style1">To define the Nifti MRI parameters</h2>
 		<p class="style2">
 		- Edit an yaml file<br>
-		- Example of the setting of a Nifti MRI parameter in DictionaryMRI_User.yml:
+		- Example of the setting of a Nifti MRI parameter in DictionaryMRI_System.yml:
 		<div class= "style5">
 		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"><b><i>Echo Time:</i><br>
-		description: {info: "Time in ms between the middle of the excitation pulse and the peak of the echo produced "}
+	description: {info: "Time in ms between the middle of the excitation pulse and the peak of the echo produced "}
 
-		whereNifti:   {file: json, keyName: EchoTime, type: float, format: ~, units: ms}
+	whereNifti:   {file: json, keyName: EchoTime, type: float, format: ~, units: ms}
 
-		viewer: {category: MRI parameters}
-		json:   {tagJson: EchoTime, type: float, format: ~, units: ms}
+	viewer: {category: MRI parameters}
+	json:   {tagJson: EchoTime, type: float, format: ~, units: ms}
 		</b>
 		</span></pre></div></div>
 		</div>
