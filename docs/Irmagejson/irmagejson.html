@@ -30,7 +30,7 @@
 		</ul>
 		</div>
 
-		<p class="style4" >	<u><a href="#introduction">Introduction</a></u></p>
+		<p class="style4" >	<u><a href="#introduction">Introduction</a></u> - <u><a href="#addparam">Additionnal parameters</a></u> - <u><a href="#example">Example</a></u></p>
 		
 		<h2 id="introduction" class="style1">Introduction</h2>
 		<p class="style2">
@@ -47,8 +47,7 @@
 	"value": [
 		xxxx
 		]
-	},
-		</b>
+	},</b>
 		</span></pre></div></div>
 		</div>
 		</p>
@@ -59,7 +58,6 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>"units"</b> indicates the unit of the parameter (s, ms, Hz, ....).<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>"type"</b> indicates the type of value (int, float, string).<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>"value"</b> gives the value of the parameter. It may be a simple value ([ ]) or a list of value ([[ ]]) .<br>
-
 		</p>
 		<br>
 		
@@ -112,8 +110,33 @@
 		</div>
 		</p>
 		<br>
+		<h2 id="addparam" class="style1">Additional parameters</h2>
 		<p class="style2">	
-		Example of a Json file :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../Irmagejson/exampleJson.html" target="_blank">13-SO2_MSME_SENSE.json</a>
+		In addition to the MRI parameters, 2 other parameters supplement the Json file :<br><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <b>"Json_Version"</b> that indicates the Json version.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <b>"DataAnonymized"</b> that indicates if the export has been anonymized.
+			
+		<div class= "style5">
+		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"><b>
+	"Json_Version": [
+		"Irmage2018"
+	],
+	<i>"DataAnonymized</i>: {	
+		"format": "",
+		"description": "",
+		"units": "",
+		"type": "string",
+		"value": [
+			"yes"
+		]
+	},</b>
+		</span></pre></div></div>
+		</div>
+		</p>
+		<br>		
+		<h2 id="example" class="style1">Example</h2>
+		<p class="style2">	
+		Example of a Json file created by MRI File Manager :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../Irmagejson/exampleJson.html" target="_blank">13-SO2_MSME_SENSE.json</a>
 		</p>
 
 		<br><br><br><br><br><br><br><br>
