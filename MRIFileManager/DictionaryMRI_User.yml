@@ -70,10 +70,11 @@ dictionaryMRI:
   Diffusion AP_FH_RL:
                   description: {info: ""}
   
-                  wherePhilips:  {file: PAR ; Xml, keyName: diffusion ; Diffusion AP, type: ~ ; ~, format: ~, units: ~}          
+                  wherePhilips:  {file: PAR ; Xml, keyName: diffusion ; Diffusion AP, type: ~ ; ~, format: ~, units: ~}
+                  whereNifti:    {file: json, keyName: DiffusionAPFHRL, type: string, format: ~, units: ~}                  
                   
                   viewer: {category: Diffusion} 
-                  json:   {tag_Json: ~, type: ~, format: ~, units: ~}
+                  json:   {tagJson: DiffusionAPFHRL, type: ~, format: ~, units: ~}
   
   Direction Diffusion Number:
                   description: {info: ""}
@@ -144,5 +145,13 @@ dictionaryMRI:
                   whereBruker:  {file: acqp, keyName: $ACQ_grad_matrix=, type: string, format: ~, units: ~}
                    
                   viewer: {category: Grad Orient}
-                  json:   {tagJson: ~, type: ~, format: ~, units: ~}                  
+                  json:   {tagJson: ~, type: ~, format: ~, units: ~}
+
+  Water Fat Shift:
+                  description: {info: ""}
+  
+                  wherePhilips:  {file: PAR ; Xml, keyName: Water Fat shift ; Water Fat shift, type: ~ ; ~, format: ~, units: ~}          
+                  
+                  viewer: {category: Diffusion} 
+                  json:   {tagJson: WaterFatShift, type: float, format: ~, units: ~}                
              
