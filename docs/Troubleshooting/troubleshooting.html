@@ -54,13 +54,15 @@
 		<tr>
 		<td> Software </td>
 		<td> The software does not start when launching 'MRIManager.bat' or 'MRIManager.sh' </td>
-		<td> <b>1)</b> the maximum memory allocation pool is too high </td>
-		<td> <b>1)</b> edit the MRIManager.bat or MRIManager.sh file according to your operating system, decrease the value of -Xmx (for example 4096m to 2048m)<br></td>
+		<td> <b>1)</b> the maximum memory allocation pool is too high<br>
+			 <b>2)</b> under Linux, MRIManager.sh is not executable </td>
+		<td> <b>1)</b> edit the MRIManager.bat or MRIManager.sh file according to your operating system, decrease the value of -Xmx (for example 4096m to 2048m)<br>
+			 <b>2)</b> Command line : just run 'chmod +x /path/to/your/MRIFileManager/MRIManager.sh'</td>
 		</tr>
 		<tr>
 		<td> Software </td>
 		<td> An error message appears 'Warning: DictionaryMRI_System.yml not found' </td>
-		<td> <b>1)</b> the DictionaryMRI_System.yml and DictionaryMRI_User.yml files are missing in the software directory</td>
+		<td> <b>1)</b> the DictionaryMRI_System.yml and DictionaryMRI_User.yml files are corrupted or missing in the software directory</td>
 		<td> <b>1)</b> re-download MRI FIle Manager - <a href="../Installation/installation.html">see 'Installation' page</a><br></td>
 		</tr>
 		</table>
@@ -98,7 +100,7 @@
 		<tr>
 		<td> Bruker - MRI parameters </td>
 		<td> Some MRI parameters are missing in the 'MRI parameters' table<br></td>
-		<td> <b>1)</b> some metadata is missing or empty <br>
+		<td> <b>1)</b> some Bruker metadata are missing or empty <br>
 			 <b>2)</b> some informations in the DictionaryMRI_System.yml or DictionaryMRI_User.yml file are missing or improperly completed  </td>
 		<td> <b>1)</b> In the Bruker data folder, verify that the 'acqp', 'reco', 'method' and 'visu_pars' file are present or not empty  <br>
 			 <b>2)</b> <a href="../Dictionaries/dictionaries.html">see 'MRI Dictionaries' page</a> <br></td>
