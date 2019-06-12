@@ -3,6 +3,13 @@
 The documentation is available on mri_conv's website here: [https://populse.github.io/mri_conv](https://populse.github.io/mri_conv)
 
 # Release history
+
+    12/06/2019 : Version 19.3.1a
+	Bugs fixed:
+	  - DICOM : problem reading Dicom files without rescale slope and intercept
+
+<p></p>	
+
     06/06/2019 : Version 19.3.0a	
 	Bugs fixed:
 	  - DICOM : dimension reversed for some Dicom.
