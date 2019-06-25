@@ -4,6 +4,15 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 
 # Release history
 
+    21/06/2019 : Version 19.3.2a
+    	Bugs fixed:
+	  - NIFTI : problem reading some Nifti files (16 bits unsigned) fixed.
+	  - Philips : problem reading when files had lowercase extensions (*.rec, *.par) fixed.
+	Features added :
+	  - Philips : possibility to generate bvecs/bvals files for reading of diffusion by MrTrix and FSL.
+
+<p></p>	
+
     12/06/2019 : Version 19.3.1a
 	Bugs fixed:
 	  - DICOM : problem reading Dicom files without rescale slope and intercept
