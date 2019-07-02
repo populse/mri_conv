@@ -4,8 +4,16 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 
 # Release history
 
+    25/06/2019 : Version 19.3.3a
+	Bugs fixed:
+	  - Bruker : affine transformation problem of some Bruker sequences fixed.
+	  - NIFTI : problem reading some Nifti files (64 bits float) fixed.
+	  - Philips : problem reading when sequences had same number serial, protocol, acquisition time ... fixed.
+
+<p></p>	
+
     21/06/2019 : Version 19.3.2a
-    	Bugs fixed:
+	Bugs fixed:
 	  - NIFTI : problem reading some Nifti files (16 bits unsigned) fixed.
 	  - Philips : problem reading when files had lowercase extensions (*.rec, *.par) fixed.
 	Features added :
