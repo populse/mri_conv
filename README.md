@@ -4,6 +4,15 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 
 # Release history
 
+    02/07/2019 : Version 19.4.3a
+	Features added :
+	  - DICOM (Philips): possibility to generate bvecs/bvals files for reading of diffusion in MRtrix or FSL.
+	Others:
+	  - best display of JSON text in log
+	  - best display of no-isotropic images in thumbnail list
+
+<p></p>	
+
     25/06/2019 : Version 19.3.3a
 	Bugs fixed:
 	  - Bruker : affine transformation problem of some Bruker sequences fixed.
