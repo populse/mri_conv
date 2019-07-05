@@ -4,6 +4,12 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 
 # Release history
 
+    02/07/2019 : Version 19.4.3b
+	Bug fixed:
+	  - DICOM: problem reading some Dicom files.
+
+<p></p>	
+
     02/07/2019 : Version 19.4.3a
 	Features added :
 	  - DICOM (Philips): possibility to generate bvecs/bvals files for reading of diffusion in MRtrix or FSL.
