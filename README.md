@@ -6,7 +6,7 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 
     05/07/2019 : Version 19.5.3b
 	Features added:
-	  - Bids [Brain Imaging Data Structure](https://bids.neuroimaging.io/): new IRM file format introduced in the software (still in trial version).
+	  - Bids - Brain Imaging Data Structure: new IRM file format introduced in the software (still in trial version).
 
 <p></p>
 
