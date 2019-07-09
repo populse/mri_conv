@@ -4,6 +4,12 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 
 # Release history
 
+    09/07/2019 : Version 19.5.4b
+	Features added:
+	  - Bids : following the Bids development(still in trial version).
+
+<p></p>
+
     05/07/2019 : Version 19.5.3b
 	Features added:
 	  - Bids - Brain Imaging Data Structure: new MRI file format introduced in the software (still in trial version).
