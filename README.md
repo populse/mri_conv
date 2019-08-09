@@ -4,6 +4,12 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 
 # Release history
 
+    09/08/2019 : Version 19.5.6a
+	Bug fixed:
+	  - Bids : some bugs who crashed Populse_mia fixed.
+
+<p></p>
+ 
     09/08/2019 : Version 19.5.5a
 	Others:
 	  - Bids : following the Bids development, now possibility to export Bids structures to Nifti .
