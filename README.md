@@ -4,6 +4,14 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 
 # Release history
 
+    29/08/2019 : Version 19.6.0a
+	Features added:
+	  - Bruker : possibility to launch MRI File Manager by script in windowless mode (see section 'Launching of the software'    in 'Installation' page).
+	  - Bids : menus "see 'dataset_description.json' file" and "see 'participants.tsv' file" added in popup menu.
+	Bug fixed:
+	  - Dicom Philips: image order problem in some sequences 5D fixed.
+<p></p>
+
     09/08/2019 : Version 19.5.6a
 	Bug fixed:
 	  - Bids : some bugs who crashed Populse_mia fixed.
