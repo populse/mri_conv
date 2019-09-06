@@ -52,13 +52,13 @@
 
 
 		<h2 id="launching" class="style1"> Launching of the software </h2>
-		<p class="style2"> This section explains how to launch MRI File Manager in <a class="style1" href="#standalone"><u>standalone mode (with GUI)</u></a>, by <a class="style1" href="#scriptwithGUI"><u>script (with GUI)</u></a> 
-			or by <a class="style1" href="#scriptwithoutGUI"><u>script in windowless mode (without GUI)</u></a>.</p><br>
+		<p class="style2"> This section explains how to launch MRI File Manager in <a class="style1" href="#standalone"><u><b>standalone mode (with GUI)</b></u></a>, by <a class="style1" href="#scriptwithGUI"><u><b>script (with GUI)</b></u></a> 
+			or by <a class="style1" href="#scriptwithoutGUI"><u><b>script in windowless mode (without GUI)</b></u></a>.</p><br>
 		
 		<div class= "style5">
 		<ul>
 		<li>
-		<u id="standalone">In standalone mode:</u><br><br>
+		<u id="standalone"><b>In standalone mode:</b></u><br><br>
 		You can double-click directly on the <i>MRIManager.jar </i> file.<br><br>
 		But it's better to use batch file (<i> MRIManager.bat</i> for Windows) or shell (<i>MRIManager.sh</i> for Linux and MacOS), the reasons are :<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;- to show error messages in the terminal<br>
@@ -71,8 +71,8 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Xmx specifies the maximum memory allocation pool, set the value 1/2 of the total RAM memory of your machine (for example 4096m for 8Go of RAM)
 		<br><br>
 		Launch the batch or shell file in a terminal:<br>
-		<div class="highlight-default notranslate"><div class="highlight"><pre class="console"><span class="n">C:\Program Files\MFM_Irmage\MRIFileManager>MRIManager.bat 		(Windows)</span></pre></div></div>
-		<div class="highlight-default notranslate"><div class="highlight"><pre class="console"><span class="n">wiki@ubuntu:~/MRIFileManager$ ./MRIManager.sh 		(Linux, Mac)</span></pre></div></div>
+		<div class="highlight-default notranslate"><div class="highlight"><pre class="console"><span class="n"><font color=#00bbff>C:\Program Files\MFM_Irmage\MRIFileManager></font> MRIManager.bat 		(Windows)</span></pre></div></div>
+		<div class="highlight-default notranslate"><div class="highlight"><pre class="console"><span class="n"><font color=#00bbff>wiki@ubuntu:~/MRIFileManager$</font> ./MRIManager.sh 		(Linux, Mac)</span></pre></div></div>
 
 		</li>
 		</ul>
@@ -80,7 +80,7 @@
 
 		<ul>
 		<li>		
-		<u id="scriptwithGUI">By script (with GUI):</u><br><br>
+		<u id="scriptwithGUI"><b>By script (with GUI):</b></u><br><br>
 		You can launch MRI File Manager through another application by script with some options. In this instance, <u>some functions are deactivated.</u><br><br>
 		<b>usage :</b><br><br>
 		<pre class="console"><span class="n"> java -Xms512m -Xmx4096m -jar MRIManager.jar [options]  </span></pre><br>
@@ -188,21 +188,54 @@
 			
 		<ul>
 		<li>
-		<u id="scriptwithoutGUI">By script in windowless mode (without GUI):</u><br><br>
+		<u id="scriptwithoutGUI"><b>By script in windowless mode (without GUI):</b></u><br><br>
 		You can launch MRI File Manager by script without opening its GUI. In the command line, arguments are the list of files to convert, the conversion directory and the naming. An export option must also be added.<br><br>
-		<b>usage : </b><font color="red">(The current version of the software allows for the moment only the conversion Bruker files in windowless mode)</font><br><br>
-		<pre class="console"><span class="n"> <b>java -classpath MRIManager.jar BrukerToNifti</b> "<i>file1;file2;...</i>" "<i>export directory</i>" "<i>nifti files naming</i>" [<i>options</i>]</span></pre> <br>
-		<b>list of files to convert :</b> <i>2dseq</i> files (file by file) or <i>subject</i> files (all sequences) separated by the character '<b>;</b>'.<br><br>
+		<b>usage : </b><font color="red">(The current version of the software allows for the moment only the conversion Bruker and Philips files in windowless mode)</font><br><br>
+		<pre class="console"><span class="n"> <b>java -classpath MRIManager.jar BrukerToNifti</b> "<i>file1;file2;...</i>" "<i>export directory</i>" "<i>nifti files naming</i>" [<i>options</i>]</span></pre>
+		<pre class="console"><span class="n"> <b>java -classpath MRIManager.jar PhilipsToNifti</b> "<i>file1;file2;...</i>" "<i>export directory</i>" "<i>nifti files naming</i>" [<i>options</i>]</span></pre> <br>
+		<b>list of files to convert :</b> list of files or directories separated by the character '<b>;</b>'.<br>			
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										Bruker : <i>2dseq</i> files (file by file) or <i>subject</i> files (all sequences).<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										Philips : <i>*.REC</i> files (file by file) or <i>directory</i> containing all the PAR/REC or XML/REC files.<br><br>
+
 		<b>export directory :</b> directory where the exported files should be saved <br><br>
 		<b>nifti files naming  :</b> only the following terms can be used : 'PatientName', 'StudyName', 'CreationDate', 'SeqNumber', 'Protocol', 'SequenceName', 'AcquisitionTime'. 
 			Use slash (/) to indicate the directory and a separating charactere in the name of file ('-' or '_' character advised)<br><br>
 		<b>[options]</b>  : [ExportOptions] 00000 (put 00013 if you want generate bvecs/bvals files for diffusion sequences)<br><br>
-		<b>examples</b> : <br><br>
-		with <i>subject</i> files<br>
-		<img alt="script_windowless" align="center" src="./images/example_script_windowless.png" style="width:70%;height:70%;border:0;" onclick="window.open(this.src,'_parent','toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, menuBar=0, width='+this.width+', height='+this.height);"/> <br><br><br><br>
-		with <i>2dseq</i> files<br>
-		<img alt="script_windowless" align="center" src="./images/example_script_windowless_2.png" style="width:70%;height:70%;border:0;" onclick="window.open(this.src,'_parent','toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, menuBar=0, width='+this.width+', height='+this.height);"/>
 
+		<table border="0">
+			<thead>
+        		<tr>
+            		<th colspan="3">Examples <i>(Click on the image to enlarge)</i></th>
+        		</tr>
+    		</thead>
+    		<tbody>
+        		<tr>
+            		<td bgcolor="#39E547">Bruker </td>
+					<td>&nbsp;</td>
+            		<td bgcolor="#E5C039">Philips </td>
+        		</tr>
+        		<tr>
+            		<td bgcolor="#39E547" align="center"><br>
+						with <i>subject</i> files <i></i><br>
+						<img alt="script_windowless" align="center" src="./images/example_script_windowless.png" style="width:90%;height:100%;border:0;" onclick="window.open(this.src,'_parent','toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, menuBar=0, width='+this.width+', height='+this.height);"/> <br><br>
+						with <i>2dseq</i> files <i></i><br>
+						<img alt="script_windowless" align="center" src="./images/example_script_windowless_2.png" style="width:90%;height:100%;border:0;" onclick="window.open(this.src,'_parent','toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, menuBar=0, width='+this.width+', height='+this.height);"/>
+						<br><br>
+					</td>
+					<td> </td>
+            		<td bgcolor="#E5C039" align="center"><br>
+						with directory containing all the PAR/REC or XML/REC files <i></i><br>
+						<img alt="script_windowless" align="center" src="./images/example_script_windowlessPhilips.png" style="width:90%;height:100%;border:0;" onclick="window.open(this.src,'_parent','toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, menuBar=0, width='+this.width+', height='+this.height);"/> <br><br>
+						<br>
+						with <i>*.REC</i> files <i></i><br>
+						<img alt="script_windowless" align="center" src="./images/example_script_windowlessPhilips_2.png" style="width:90%;height:100%;border:0;" onclick="window.open(this.src,'_parent','toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, menuBar=0, width='+this.width+', height='+this.height);"/>
+		
+					</td>
+        		</tr>
+    		</tbody>
+		</table>
 
 			
 		</li>
@@ -222,6 +255,13 @@
  -->
 			
 		<div class= "style5">
+			
+		<pre><span><b>06/09/2019 : Version 19.6.1a
+	Features added:
+	  - Philips : possibility to launch MRI File Manager by script in windowless mode (see section 'Launching of the software' in this page).
+	Bug fixed:
+	  - Philips: image order problem in some sequences 5D fixed.</b></span></pre>	
+			
 		<pre><span><b>29/08/2019 : Version 19.6.0a
 	Features added:
 	  - Bruker : possibility to launch MRI File Manager by script in windowless mode (see section 'Launching of the software' in this page).
