@@ -6,7 +6,7 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 
     06/09/2019 : Version 19.6.1a
 	Features added:
-	  - Philips : possibility to launch MRI File Manager by script in windowless mode (see section 'Launching of the software' in this page).
+	  - Philips : possibility to launch MRI File Manager by script in windowless mode (see section 'Launching of the software' in 'Installation' page).
 	Bug fixed:
 	  - Philips: image order problem in some sequences 5D fixed.
 
