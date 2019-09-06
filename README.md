@@ -4,6 +4,14 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 
 # Release history
 
+    06/09/2019 : Version 19.6.1a
+	Features added:
+	  - Philips : possibility to launch MRI File Manager by script in windowless mode (see section 'Launching of the software' in this page).
+	Bug fixed:
+	  - Philips: image order problem in some sequences 5D fixed.
+
+<p></p>
+
     29/08/2019 : Version 19.6.0a
 	Features added:
 	  - Bruker : possibility to launch MRI File Manager by script in windowless mode (see section 'Launching of the software'    in 'Installation' page).
