@@ -1,4 +1,5 @@
 [![](https://img.shields.io/badge/java-8-yellow.svg)](#)
+[![](https://img.shields.io/badge/platform-Linux%2C%20OSX%2C%20Windows-orange.svg)](#)
 
 # Documentation
 
