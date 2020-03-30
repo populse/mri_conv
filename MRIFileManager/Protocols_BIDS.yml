@@ -1,0 +1,63 @@
+listProtocols:
+
+   anat :
+      Bruker : ['*FLASH*', '*RARE*']
+      Philips : []
+      Dicom : []
+      Nifti : []
+
+   beh:
+      Bruker : []
+      Philips : []
+      Dicom : []
+      Nifti : []
+
+   dti:
+      Bruker : ['*:DtiStandard']
+      Philips : []
+      Dicom : []
+      Nifti : []
+
+   dwi:
+      Bruker : []
+      Philips : []
+      Dicom : []
+      Nifti : []
+      
+   derivatives:
+      Bruker : []
+      Philips : []
+      Dicom : []
+      Nifti : []
+
+   fmap:
+      Bruker : ['*:FieldMap']
+      Philips : []
+      Dicom : []
+      Nifti : []
+
+   func:
+      Bruker : ['*:EPI']
+      Philips : []
+      Dicom : []
+      Nifti : []
+   
+   meg:
+      Bruker : []
+      Philips : []
+      Dicom : []
+      Nifti : []
+   
+   pcasl:
+      Bruker : ['*:pCASL_EPI_PhSw7', '*:pCASL_FcFLASHv3', '*:pCASL_EPIv9']
+      Philips : []
+      Dicom : []
+      Nifti : []
+
+   tmap:
+      Bruker : ['*:MSME', '*:RAREVTR']
+      Philips : []
+      Dicom : []
+      Nifti : []
+   
+      
