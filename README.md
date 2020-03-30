@@ -7,6 +7,15 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 
 # Release history
 
+    30/03/2020 : Version 20.0.1a
+	Features added:
+	  - All : now possibility to export Bruker, Philips and Dicom in BIDS format (still in development)
+	  - Bruker : affine transformation now compatible with MRTrix
+	Bug fixed:
+	  - Nifti: problem exporting Nifti files without JSON fixed
+
+<p></p>
+
     06/09/2019 : Version 19.6.1a
 	Features added:
 	  - Philips : possibility to launch MRI File Manager by script in windowless mode (see section 'Launching of the software' in 'Installation' page).
