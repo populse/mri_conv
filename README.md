@@ -10,6 +10,7 @@ The documentation is available on mri_conv's website here: [https://populse.gith
     08/04/2020 : Version 20.0.2a
 	Features added:
 	  - Basket manager : preview window added
+	  - Export to BIDS : better compatibility with modalities
 
 <p></p>
 
