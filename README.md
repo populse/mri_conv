@@ -7,6 +7,12 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 
 # Release history
 
+    08/04/2020 : Version 20.0.2a
+	Features added:
+	  - Basket manager : preview window added
+
+<p></p>
+
     30/03/2020 : Version 20.0.1a
 	Features added:
 	  - All : now possibility to export Bruker, Philips and Dicom in BIDS format (still in development)
