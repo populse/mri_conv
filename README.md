@@ -7,6 +7,12 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 
 # Release history
 
+    08/04/2020 : Version 20.0.2b
+	Bug fixed:
+	  - Basket manager : bug under Windows when filling the basket fixed
+
+<p></p>
+
     08/04/2020 : Version 20.0.2a
 	Features added:
 	  - Basket manager : preview window added
