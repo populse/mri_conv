@@ -7,6 +7,12 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 
 # Release history
 
+    09/04/2020 : Version 20.0.3b
+	Modification:
+	  - Option export window: modification of tab "Nifti naming"
+
+<p></p>
+
     08/04/2020 : Version 20.0.2b
 	Bug fixed:
 	  - Basket manager : bug under Windows when filling the basket fixed
