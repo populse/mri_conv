@@ -3,8 +3,8 @@
 
 # Documentation
 
-The documentation is available on mri_conv's website here: [https://populse.github.io/mri_conv](https://populse.github.io/mri_conv).
-you can see in the ['devpt' branch](https://populse.github.io/mri_conv/devpt), the latest unstable software version (development version).
+The documentation is available on mri_conv's website here: [https://populse.github.io/mri_conv](https://populse.github.io/mri_conv).  
+you can see in the ['devpt' branch](https://github.com/populse/mri_conv/blob/devpt/README.md), the latest unstable software version (development version).
 
 # Release history
 
