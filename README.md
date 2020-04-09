@@ -4,7 +4,7 @@
 # Documentation
 
 The documentation is available on mri_conv's website here: [https://populse.github.io/mri_conv](https://populse.github.io/mri_conv).  
-To download the latest 'development' version, click [here](https://populse.github.io/mri_conv/archive/devt.zip) or 'Download zip'.
+To download the latest 'development' version, click [here](https://github.com/populse/mri_conv/archive/devpt.zip) or 'Download ZIP' in 'Clone or download).
 
 # Release history
 
