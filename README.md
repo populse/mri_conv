@@ -8,6 +8,16 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+    15/04/2020 : Version 20.0.4b
+	Bug fixed:
+	  - Bruker: slice thickness in Nifti header for Localizer/Tripilot sequence corrected
+	Modification:
+	  - The combobox of file history is now under the buttons "Bruker","Dicom" etc...
+	Others:
+	  - ImageJ update to 1.52v
+
+<p></p>
+
     09/04/2020 : Version 20.0.3b
 	Modification:
 	  - Option export window: modification of tab "Nifti naming"
