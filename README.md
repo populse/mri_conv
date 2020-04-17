@@ -8,6 +8,14 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+    17/04/2020 : Version 20.1.4b
+	Modification:
+	  - some graphic improvements
+	Others:
+	  - dependencies update
+
+<p></p>
+
     15/04/2020 : Version 20.0.4b
 	Bug fixed:
 	  - Bruker: slice thickness in Nifti header for Localizer/Tripilot sequence corrected
