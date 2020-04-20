@@ -1,7 +1,7 @@
 # BIDS v 1.2.1
 # protocol name : 
 #   Bruker : PV5, PV6
-#   Philips : PAR/REC v4.2, xml/REC
+#   Philips : PAR/REC v4.2, xml/REC v5
 #   DICOM : Philips, Siemens, GE
 #   Nifti : Nifti-1 with JSON_IRMaGe
 
