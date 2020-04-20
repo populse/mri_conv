@@ -27,13 +27,16 @@
 			<li><a href='../Documentation/documentation.html' target="_parent"><span>Documentation</span></a></li>
 			<li><a href='../Troubleshooting/troubleshooting.html' target="_parent"><span>Troubleshooting</span></a></li>
 			<li class='active'><a href='#'><span>MRI Dictionaries</span></a></li>
-			<li  class='last'><a href='../Irmagejson/irmagejson.html' target="_parent"><span>IRMaGe Json</span></a></li>
-		</ul>
+			<li><a href='../Irmagejson/irmagejson.html' target="_parent"><span>IRMaGe Json</span></a></li>
+			<li class='last'><a href='../Dictionaries/modalities_Bids.html'><span>Bids Modalities</span></a></li>		</ul>
 		</div>
-		<p class="style4" >	<u><a href="#introduction">Introduction</a></u> <br> <u><a href="#brukerdict">To define the Bruker MRI parameters</a></u><br> <u><a href="#dicomdict">To define the Dicom MRI parameters</a></u>&nbsp;  <br> 
-							<u><a href="#philipsdict">To define the Philips MRI parameters</a></u><br> <u><a href="#niftidict">To define the Nifti MRI parameters</a></u>&nbsp;&nbsp;&nbsp;&nbsp;<br>
-							<u><a href="#bidsdict">To define the Bids MRI parameters</a></u>&nbsp;&nbsp;&nbsp;&nbsp;</p>
-		
+		<p class="style4" >	<u><a href="#introduction">Introduction</a></u> <br>
+							<u><a href="#brukerdict">To define the Bruker MRI parameters</a></u><br>
+							<u><a href="#dicomdict">To define the Dicom MRI parameters</a></u>&nbsp;<br> 
+							<u><a href="#philipsdict">To define the Philips MRI parameters</a></u><br>
+							<u><a href="#niftidict">To define the Nifti MRI parameters</a></u>&nbsp;&nbsp;&nbsp;&nbsp;<br>
+							<u><a href="#bidsdict">To define the Bids MRI parameters</a></u>&nbsp;&nbsp;&nbsp;&nbsp;
+		</p>
 		<h2 id="introduction" class="style1">Introduction</h2>
 		<p class="style2">
 		- This page explains how to extract the MRI parameters with the <b>DictionaryMRI_System.yml</b> and <b>DictionaryMRI_User.yml</b> files which are located in MRI File Manager directory. <br><br>
@@ -47,7 +50,7 @@
 		- <b>Important : each MRI label must have a unique name, ensure that it isn't repeated several times in the 2 yaml files.</b><br><br>
 		- For each format, the setting of a MRI parameter must take the following form :
 		<div class= "style5">
-		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"><b><i>MRI label of your choice:</i><br>
+		<pre><span class="n"><b><i>MRI label of your choice:</i><br>
 	description: {info: "<i>your comment</i>"}
 			
 	whereBruker:  {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
@@ -56,16 +59,15 @@
 	whereNifti:   {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
                   
 	viewer: {category: xxx}
-	json:   {tagJson: xxx, type: xxx, format: xxx, units: xxx}
-		</b>
-		</span></pre></div></div>
+	json:   {tagJson: xxx, type: xxx, format: xxx, units: xxx}</b>
+		
+		</span></pre>
 		</div>
-		</p>
 		<p class="style2">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <b>'file'</b> specifies the file where the parameter and its value are located <b>(mandatory field)</b>. <br>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <b>'keyName'</b> indicate the parameter name of the constructor <b>(mandatory field)</b>. <br>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <b>'type'</b> indicate the value type (float, int, string) <b>(mandatory field)</b>. <br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <b>'format'</b> is reserved for time parameters (ex 'Acquisition Date') and allows to specify the date format (ex "yyyy-MM-dd HH:mm:ss"). <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <b>'format'</b> is reserved for time parameters (ex 'Acquisition Date') and allows to specify the date format (ex "yyyy-MM-dd HH:mm:ss"). <br>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <b>'units'</b> indicate the time, dimension (or other) unit of the value (s, ms, mm, cm, hz ...). <br>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <b>'category'</b> indicate where the value is to appear in the 'MRI Parameters' area of MRI File Manager. <br>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <b>'tagJason'</b> indicate the tag name that the parameter should have in the json file on the conversion into Nifti. <br>
@@ -87,7 +89,7 @@
 		</b>
 		</span></pre></div></div>
 		</div>
-		</p>
+		
 		<p class="style2">
 		- 'file' can take the following values : <b>acqp, method, reco, subject</b> or <b>visu_pars</b><br>
 		- In this example, 'keyName' seeks the value of the parameter 'Echo Time' in the 'acqp' file.
@@ -113,12 +115,12 @@
 		</b>
 		</span></pre></div></div>
 		</div>
-		</p>
+	
 		<p class="style2">
 		- 'file' can take the following values : <b>Dirfile, DicomDir </b>or <b>~</b><br>
 		- In this example, 'keyName' seeks the value of the parameter 'Echo Time' in the 'Dicom' file.
 		<a id="mouse" hover><span>
-		<img src="images/dicom_capture.PNG" align="left" width="100%" height="100%" alt="acqpfile">
+		<img src="images/dicom_capture.PNG" align="left" width="100%" height="100%" alt="dicom_capture">
 		</span> <em> <font color="green">  &nbsp;(preview)</font></em></a>
 		</p>
 		
@@ -137,15 +139,14 @@
 		</b>
 		</span></pre></div></div>
 		</div>
-		</p>
 		<p class="style2">
 		- 'file' always take the values <b>par ; xml</b><br>
 		- In this example, 'keyName' seeks the value of the parameter 'Echo Time' in the '.PAR' file 
 		<a id="mouse" hover><span>
-		<img src="images/par_capture.PNG" align="left" width="100%" height="100%" alt="acqpfile">
+		<img src="images/par_capture.PNG" align="left" width="100%" height="100%" alt="par_capture">
 		</span> <em> <font color="green">  &nbsp;(preview)</font></em></a> and '.xml'
 		<a id="mouse" hover><span>
-		<img src="images/xml_capture.PNG" align="left" width="100%" height="100%" alt="acqpfile">
+		<img src="images/xml_capture.PNG" align="left" width="300%" height="300%" alt="xml_capture">
 		</span> <em> <font color="green">  &nbsp;(preview)</font></em></a>
 		</p>
 		
@@ -164,12 +165,11 @@
 		</b>
 		</span></pre></div></div>
 		</div>
-		</p>
 		<p class="style2">
 		- 'file' can take the following values : <b>niftiheader</b> or <b>json</b><br>
 		- In this example, 'keyName' seeks the value of the parameter 'Echo Time' in the 'json' file.
 		<a id="mouse" hover><span>
-		<img src="images/nifti_capture.PNG" align="left" width="100%" height="100%" alt="acqpfile">
+		<img src="images/nifti_capture.PNG" align="left" width="100%" height="100%" alt="nifti_capture">
 		</span> <em> <font color="green">  &nbsp;(preview)</font></em></a>
 		</p>
 
