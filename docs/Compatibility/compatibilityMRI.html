@@ -5,17 +5,19 @@
 	<meta charset="utf-8"/>
 	<meta name = "author"			content = "Olivier MONTIGON"/>
 	<meta name = "description"	content = "logiciel de gestion de données IRM"/>
-
+	<link rel="stylesheet" media="screen" type="text/css" href="../styles.css">
 	<title>MRI File Manager (IRMaGe)</title>
-
+	<script src="../datemodif.js"></script>
+	<script src="../buttontop.js"></script>
   </head>
   
   <body link="#ff5500" bgcolor="#cccccc">
-  
+  <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+	  
 	<div>
   
 		<h2 align="center" style="color:blue;">FORMATS COMPATIBILITY</h2>
-		<br></br>
+		<br>
 		<table border="0">
 
 			<thead align="left">
@@ -73,13 +75,13 @@
 				</tr>
 	<!------------------- Bruker compatibility table ---------------------->
 				<tr>
-					<th align="left">Bruker<br> (PV5, PV6)</br></th>
+					<th align="left">Bruker<br> (PV5, PV6)</th>
 					<th style="background-color:#00FF00;"></th>
-					<th style="background-color:#00FF00;">registration compatible with SPM, FSL and MRTrix </th>
+					<th style="background-color:#00FF00;">(1)</th>
 					<th style="background-color:#00FF00;"></th>
 					<th style="color:#FF0000;">TODO</th>
 					<th style="background-color:#00FF00;"></th>
-					<th></th>
+					<th>(1) registration compatible with SPM, FSL and MRTrix</th>
 				</tr>
 				
 	<!------------------- end Bruker compatibility table ---------------------->
@@ -94,13 +96,14 @@
 				</tr>
 	<!------------------- Philips compatibility table ---------------------->
 				<tr>
-					<th align="left">Philips Achieva (Par/Rec v4.2) <br>(Xml/Rec v5)</br></th>
+					<th align="left">Philips Achieva (Par/Rec v4.2) <br>(Xml/Rec v5)</th>
 					<th style="background-color:#00FF00;"></th>
-					<th style="background-color:#FF9900;">(see comments)<br>registration compatible with SPM, FSL and MRTrix</br></th>
-					<th style="background-color:#FF9900;">(see comments)</th>
+					<th style="background-color:#FF9900;">(1) (2)</th>
+					<th style="background-color:#FF9900;">(2)</th>
 					<th style="color:#FF0000;">TODO</th>
 					<th style="background-color:#00FF00;"></th>
-					<th>the exports to Nifti and Birds don't yet work for multi-orientation sequences (survey ...) </th>
+					<th>(1) registration compatible with SPM, FSL and MRTrix<br>
+						(2) the exports to Nifti and Birds don't yet work for multi-orientation sequences (survey ...) </th>
 				</tr>
 
 	<!------------------- end Philips compatibility table ---------------------->
@@ -120,11 +123,12 @@
 				<tr>
 					<th align="left">Dicom Philips</th>
 					<th style="background-color:#00FF00;"></th>
-					<th style="background-color:#FF9900;">(see comments)<br>registration compatible with SPM, FSL and MRTrix</br></th>
-					<th style="background-color:#FF9900;">(see comments)</th>
+					<th style="background-color:#FF9900;">(1) (2)</th>
+					<th style="background-color:#FF9900;">(2)</th>
 					<th></th>
 					<th style="color:#FF0000;">TOTEST</th>
-					<th>the exports to Nifti and Birds don't yet work for multi-orientation sequences (survey ...) </th>
+					<th>(1) registration compatible with SPM, FSL and MRTrix<br>
+						(2) the exports to Nifti and Birds don't yet work for multi-orientation sequences (survey ...) </th>
 				</tr>
 
 	<!------------------- end Dicom Philips compatibility table ---------------------->
@@ -142,11 +146,12 @@
 				<tr>
 					<th align="left">Dicom Siemens</th>
 					<th style="background-color:#00FF00;"></th>
-					<th style="background-color:#FF9900;">(see comments)<br>registration compatible with SPM, FSL and MRTrix</br></th>
-					<th style="background-color:#FF9900;">(see comments)</th>
+					<th style="background-color:#FF9900;">(1) (2)</th>
+					<th style="background-color:#FF9900;">(2)</th>
 					<th></th>
 					<th style="color:#FF0000;">TOTEST</th>
-					<th>the exports to Nifti and Birds don't yet work for multi-orientation sequences (survey ...) </th>
+					<th>(1) registration compatible with SPM, FSL and MRTrix<br>
+						(2) the exports to Nifti and Birds don't yet work for multi-orientation sequences (survey ...) </th>
 				</tr>
 
 	<!------------------- end Dicom Siemens compatibility table ---------------------->
@@ -165,11 +170,12 @@
 				<tr>
 					<th align="left">Dicom GE</th>
 					<th style="background-color:#00FF00;"></th>
-					<th style="background-color:#FF9900;">(see comments)<br>registration compatible with SPM, FSL and MRTrix</br></th>
-					<th style="background-color:#FF9900;">(see comments)</th>
+					<th style="background-color:#FF9900;">(1) (2)</th>
+					<th style="background-color:#FF9900;">(2)</th>
 					<th></th>
 					<th style="color:#FF0000;">TOTEST</th>
-					<th>the exports to Nifti and Birds don't yet work for multi-orientation sequences (survey ...) </th>
+					<th>(1) registration compatible with SPM, FSL and MRTrix<br>
+						(2) the exports to Nifti and Birds don't yet work for multi-orientation sequences (survey ...) </th>
 				</tr>
 
 	<!------------------- end Dicom GE compatibility table ---------------------->
@@ -188,11 +194,11 @@
 				<tr>
 					<th align="left">Nifti-1</th>
 					<th style="background-color:#00FF00;"></th>
-					<th style="background-color:#00FF00;">duplication only</th>
-					<th style="background-color:#FF9900;">only works if Nifti has JSON_Irmage</th>
+					<th style="background-color:#00FF00;"></th>
+					<th style="background-color:#FF9900;">(1)</th>
 					<th></th>
 					<th></th>
-					<th></th>
+					<th>(1) only works if Nifti has JSON_Irmage<br>&nbsp</th>
 		
 				</tr>
 
@@ -216,14 +222,16 @@
 					<th></th>
 					<th></th>
 					<th></th>
-					<th></th>
+					<th><br>&nbsp</th>
 				</tr>
 
 	<!------------------- end Bids compatibility table ---------------------->
 
 			</thead>
 		</table>
-			
+
+		<br><br><br><br><br><br><br><br><br>
+		<script>document.write("This page was last modified on "+ DateModif())</script>		
 	</div>
   </body>
 </html>
