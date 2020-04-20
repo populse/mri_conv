@@ -30,12 +30,12 @@
 			<li><a href='../Irmagejson/irmagejson.html' target="_parent"><span>IRMaGe Json</span></a></li>
 			<li class='last'><a href='../Dictionaries/modalities_Bids.html'><span>Bids Modalities</span></a></li>		</ul>
 		</div>
-		<p class="style4" >	<u><a href="#introduction">Introduction</a></u> <br>
-							<u><a href="#brukerdict">To define the Bruker MRI parameters</a></u><br>
-							<u><a href="#dicomdict">To define the Dicom MRI parameters</a></u>&nbsp;<br> 
-							<u><a href="#philipsdict">To define the Philips MRI parameters</a></u><br>
-							<u><a href="#niftidict">To define the Nifti MRI parameters</a></u>&nbsp;&nbsp;&nbsp;&nbsp;<br>
-							<u><a href="#bidsdict">To define the Bids MRI parameters</a></u>&nbsp;&nbsp;&nbsp;&nbsp;
+		<p class="style4" >	<u><a href="#introduction">Introduction</a></u>
+							<u><a href="#brukerdict">To define the Bruker MRI parameters</a></u> - 
+							<u><a href="#dicomdict">To define the Dicom MRI parameters</a></u><br> 
+							<u><a href="#philipsdict">To define the Philips MRI parameters</a></u> - 
+							<u><a href="#niftidict">To define the Nifti MRI parameters</a></u><br>
+							<u><a href="#bidsdict">To define the Bids MRI parameters</a></u>
 		</p>
 		<h2 id="introduction" class="style1">Introduction</h2>
 		<p class="style2">
@@ -50,7 +50,7 @@
 		- <b>Important : each MRI label must have a unique name, ensure that it isn't repeated several times in the 2 yaml files.</b><br><br>
 		- For each format, the setting of a MRI parameter must take the following form :
 		<div class= "style5">
-		<pre><span class="n"><b><i>MRI label of your choice:</i><br>
+		<pre class="yml"><span><b><i>MRI label of your choice:</i><br>
 	description: {info: "<i>your comment</i>"}
 			
 	whereBruker:  {file: xxx, keyName: xxx, type: xxx, format: xxx, units: xxx}
@@ -79,7 +79,7 @@
 		- Edit the DictionaryMRI_User.yml<br>
 		- Example of the setting of a Bruker MRI parameter in DictionaryMRI_System.yml:
 		<div class= "style5">
-		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"><b><i>Echo Time:</i><br>
+		<div class="highlight-default notranslate"><div class="highlight"><pre class="yml"><span class="n"><b><i>Echo Time:</i><br>
 	description: {info: "Time in ms between the middle of the excitation pulse and the peak of the echo produced "}
   
 	whereBruker:  {file: acqp, keyName: $ACQ_echo_time=, type: float, format: ~, units: ms}
@@ -105,7 +105,7 @@
 		- Edit the DictionaryMRI_User.yml<br>
 		- Example of the setting of a Dicom MRI parameter in DictionaryMRI_System.yml:
 		<div class= "style5">
-		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"><b><i>Echo Time:</i><br>
+		<div class="highlight-default notranslate"><div class="highlight"><pre class="yml"><span class="n"><b><i>Echo Time:</i><br>
 	description: {info: "Time in ms between the middle of the excitation pulse and the peak of the echo produced "}
 
 	whereDicom:   {file: dirfile, keyName: Echo Time, type: float, format: ~, units: ms}
@@ -129,7 +129,7 @@
 		- Edit the DictionaryMRI_User.yml<br>
 		- Example of the setting of a Philips MRI parameter in DictionaryMRI_System.yml:
 		<div class= "style5">
-		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"><b><i>Echo Time:</i><br>
+		<div class="highlight-default notranslate"><div class="highlight"><pre class="yml"><span class="n"><b><i>Echo Time:</i><br>
 	description: {info: "Time in ms between the middle of the excitation pulse and the peak of the echo produced "}
 
 	wherePhilips: {file: PAR ; Xml, keyName: echo_time ; Echo Time, type: float ; float, format: ~, units: ms ; ms}
@@ -155,7 +155,7 @@
 		- Edit the DictionaryMRI_User.yml<br>
 		- Example of the setting of a Nifti MRI parameter in DictionaryMRI_System.yml:
 		<div class= "style5">
-		<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n"><b><i>Echo Time:</i><br>
+		<div class="highlight-default notranslate"><div class="highlight"><pre class="yml"><span class="n"><b><i>Echo Time:</i><br>
 	description: {info: "Time in ms between the middle of the excitation pulse and the peak of the echo produced "}
 
 	whereNifti:   {file: json, keyName: EchoTime, type: float, format: ~, units: ms}
