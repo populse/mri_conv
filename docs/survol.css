@@ -11,7 +11,7 @@ p a:hover span { /* définition de la balise <span> au survol */
 display: inline;
 position: absolute;
 font-size: 14px;
-background: green;
+/*background: green;*/
 text-align: center;
 color: white;
 }
