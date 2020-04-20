@@ -26,7 +26,7 @@
 html {
     margin: 0px;
     padding: 0px;
-    background: #EEE url(bg-page.png) top left repeat-x;
+    background: #F0F0F0 url(bg-page.png) top left repeat-x;
 }
 
 body {
@@ -329,6 +329,10 @@ pre.console {
     padding: 0.8em;
 	color: #eeeeee; 
     background-color: #666666;
+}
+
+pre.yml {
+	background-color: #EECC88;
 }
 
 pre {
