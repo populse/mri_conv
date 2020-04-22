@@ -1,6 +1,26 @@
 [![](https://img.shields.io/badge/java-8-yellow.svg)](https://www.java.com/fr/download/)
 [![](https://img.shields.io/badge/platform-Linux%2C%20OSX%2C%20Windows-orange.svg)](#)
 
+
+# MRI File Manager
+
+ MRI File Manager allows the reading of some raw and processed data files from MRI Spectrometers :
+
+	- Bruker Paravision PV5 & PV6 (raw data of magnitude type).
+	- Dicom from Bruker, Philips, Siemens.
+	- Philips Achieva (Par/Rec & Xml/Rec v4.2).
+	- Nifti-1 (with or without Json).
+	- BIDS - Brain Imaging Data Structure.
+
+ It also allows for converting MRI images to Nifti-1 or BIDS:
+
+	- Export MRI data in Nifti-1 or BIDS format until 5 dimensions of the image (x, y, slice, frame, temporal).
+	- Json files are created and associated with Nifti files in order to contain MRI parameters.
+	- an option of anonymization allows to hide sensitive informations about the patient (name, age, sex, weight).
+	- adaptation of orientation information in Nifti headers (tested on SPM, FSL and MRtrix).
+	- option of customizing the Nifti file names.
+	- possibility to create text files containing bvecs & bvals for MRtrix and FSL (Bruker and Philips).
+
 # Documentation
 
 The documentation is available on mri_conv's website here: [https://populse.github.io/mri_conv](https://populse.github.io/mri_conv).  
