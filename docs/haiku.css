@@ -335,6 +335,10 @@ pre.yml {
 	background-color: #EECC88;
 }
 
+pre.histy {
+	background-color: #FFFFFF;
+}
+
 pre {
     border-color: #0c3762;
     border-style: dotted;
