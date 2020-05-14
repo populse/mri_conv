@@ -28,6 +28,14 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+    14/05/2020 : Version 20.1.5b
+	Bugs fixed:
+	  - Bruker : bug when exporting to Nifti with number of slice = 1 fixed
+	  - Philips xml/REC : display bug when opening xml file fixed
+
+
+<p></p>
+
     17/04/2020 : Version 20.1.4b
 	Modification:
 	  - some graphic improvements
