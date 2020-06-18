@@ -28,6 +28,12 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+    18/06/2020 : Version 20.1.5d
+	Bugs fixed:
+	  - Dicom Philips : image order problem in some sequences 4D fixed.
+
+<p></p>
+
     12/06/2020 : Version 20.1.5c
 	Bugs fixed:
 	  - Bruker : bug with 'slice package' fixed
