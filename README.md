@@ -28,11 +28,12 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
-    18/06/2020 : Version 20.1.5d
+    19/06/2020 : Version 20.1.6a
 	Bugs fixed:
-	  - Dicom Philips : image order problem in some sequences 4D fixed.
+	  - Philips : problem reading when files had lowercase and uppercase extensions (REC/par or rec/PAR) fixed.
 
 <p></p>
+
 
     12/06/2020 : Version 20.1.5c
 	Bugs fixed:
