@@ -1,5 +1,4 @@
-[![](https://img.shields.io/badge/java-8-yellow.svg)](https://www.java.com/fr/download/)
-[![](https://img.shields.io/badge/platform-Linux%2C%20OSX%2C%20Windows-orange.svg)](#)
+[![](https://img.shields.io/badge/java-8-yellow.svg)](https://www.java.com/fr/download/)azaaaazd	zaf fgzeg
 
 # MRI File Manager
 
@@ -28,11 +27,18 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
-    19/06/2020 : Version 20.1.6a
-	Bugs fixed:
-	  - Philips : problem reading when files had lowercase and uppercase extensions (REC/par or rec/PAR) fixed.
+    24/06/2020 : Version 20.2.0a
+	Features added:
+	  - Philips : now compatible with ParRec V4 and V4.1.
+	  			  possibility to select a single directory containing Philips data.
+	Others:
+	  - ImageJ update to 1.53b
 
 <p></p>
+
+    18/06/2020 : Version 20.1.5d
+	Bugs fixed:
+	  - Dicom Philips : image order problem in some sequences 4D fixed.
 
 
     12/06/2020 : Version 20.1.5c
