@@ -1,4 +1,5 @@
-[![](https://img.shields.io/badge/java-8-yellow.svg)](https://www.java.com/fr/download/)azaaaazd	zaf fgzeg
+[![](https://img.shields.io/badge/java-8-yellow.svg)](https://www.java.com/fr/download/)
+[![](https://img.shields.io/badge/platform-Linux%2C%20OSX%2C%20Windows-orange.svg)](#)
 
 # MRI File Manager
 
@@ -27,10 +28,18 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+    01/07/2020 : Version 20.2.1a
+	Features added:
+	  - Philips : bug with the 'history' field under the buttons fixed.
+	Others:
+	  - ImageJ update to 1.53c
+
+<p></p>
+
     24/06/2020 : Version 20.2.0a
 	Features added:
 	  - Philips : now compatible with ParRec V4 and V4.1.
-	  			  possibility to select a single directory containing Philips data.
+	  	      possibility to select a single directory containing Philips data.
 	Others:
 	  - ImageJ update to 1.53b
 
