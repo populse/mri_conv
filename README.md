@@ -29,7 +29,7 @@ To download the latest 'development' version, click [here](https://github.com/po
 # Release history
 
     01/07/2020 : Version 20.2.1a
-	Features added:
+	Bugs fixed:
 	  - Philips : bug with the 'history' field under the buttons fixed.
 	Others:
 	  - ImageJ update to 1.53c
@@ -40,6 +40,8 @@ To download the latest 'development' version, click [here](https://github.com/po
 	Features added:
 	  - Philips : now compatible with ParRec V4 and V4.1.
 	  	      possibility to select a single directory containing Philips data.
+	Bugs fixed:
+	  - DICOM : problem reading some Dicom files (16 bits signed) fixed.
 	Others:
 	  - ImageJ update to 1.53b
 
