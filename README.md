@@ -28,6 +28,13 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+    03/07/2020 : Version 20.2.2a
+	Bugs fixed:
+	  - Basket manager : bug with the combobox "Nifti-1 , BIDS" fixed.
+
+
+<p></p>
+
     01/07/2020 : Version 20.2.1a
 	Bugs fixed:
 	  - Philips : bug with the 'history' field under the buttons fixed.
