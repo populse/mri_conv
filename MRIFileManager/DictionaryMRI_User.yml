@@ -168,5 +168,19 @@ dictionaryMRI:
                   whereBruker:  {file: visu_pars, keyName: $VisuStudyDescription=, type: string, format: ~, units: ~}
                    
                   viewer: {category: Test}
-                  json:   {tagJson: ~, type: ~, format: ~, units: ~}    
+                  json:   {tagJson: ~, type: ~, format: ~, units: ~}
+                  
+  RECO_offset:
+                  description: {info: ""}
+                  whereBruker:  {file: reco, keyName: $RECO_offset=, type: float, format: ~, units: ~}
+                   
+                  viewer: {category: Test}
+                  json:   {tagJson: ~, type: ~, format: ~, units: ~}
+
+  Siemens_field:
+                  description: {info: ""}
+                  whereDicom:  {file: ~, keyName: "0021,118A", type: int, format: ~, units: ~}
+                   
+                  viewer: {category: Siemens}
+                  json:   {tagJson: Siemens_order, type: int, format: ~, units: ~}
   
