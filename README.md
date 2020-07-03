@@ -1,7 +1,6 @@
 [![](https://img.shields.io/badge/java-8-yellow.svg)](https://www.java.com/fr/download/)
 [![](https://img.shields.io/badge/platform-Linux%2C%20OSX%2C%20Windows-orange.svg)](#)
 
-
 # MRI File Manager
 
  MRI File Manager allows the reading of some raw and processed data files from MRI Spectrometers :
@@ -21,12 +20,103 @@
 	- option of customizing the Nifti file names.
 	- possibility to create text files containing bvecs & bvals for MRtrix and FSL (Bruker and Philips).
 
+
 # Documentation
 
 The documentation is available on mri_conv's website here: [https://populse.github.io/mri_conv](https://populse.github.io/mri_conv).  
-you can see in the ['devpt' branch](https://github.com/populse/mri_conv/tree/devpt), the latest unstable software version (development version).
+To download the latest 'development' version, click [here](https://github.com/populse/mri_conv/archive/devpt.zip) or 'Download ZIP' in 'Clone or download'.
 
 # Release history
+
+    03/07/2020 : Version 20.2.2a
+	Bugs fixed:
+	  - Basket manager : bug with the combobox "Nifti-1 , BIDS" fixed.
+
+
+<p></p>
+
+    01/07/2020 : Version 20.2.1a
+	Bugs fixed:
+	  - Philips : bug with the 'history' field under the buttons fixed.
+	Others:
+	  - ImageJ update to 1.53c
+
+<p></p>
+
+    24/06/2020 : Version 20.2.0a
+	Features added:
+	  - Philips : now compatible with ParRec V4 and V4.1.
+	  	      possibility to select a single directory containing Philips data.
+	Bugs fixed:
+	  - DICOM : problem reading some Dicom files (16 bits signed) fixed.
+	Others:
+	  - ImageJ update to 1.53b
+
+<p></p>
+
+    18/06/2020 : Version 20.1.5d
+	Bugs fixed:
+	  - Dicom Philips : image order problem in some sequences 4D fixed.
+
+
+    12/06/2020 : Version 20.1.5c
+	Bugs fixed:
+	  - Bruker : bug with 'slice package' fixed
+
+<p></p>
+
+    14/05/2020 : Version 20.1.5b
+	Bugs fixed:
+	  - Bruker : bug when exporting to Nifti with number of slice = 1 fixed
+	  - Philips xml/REC : display bug when opening xml file fixed
+
+<p></p>
+
+    17/04/2020 : Version 20.1.4b
+	Modification:
+	  - some graphic improvements
+	Others:
+	  - dependencies update
+
+<p></p>
+
+    15/04/2020 : Version 20.0.4b
+	Bug fixed:
+	  - Bruker: slice thickness in Nifti header for Localizer/Tripilot sequence corrected
+	Modification:
+	  - The combobox of file history is now under the buttons "Bruker","Dicom" etc...
+	Others:
+	  - ImageJ update to 1.52v
+
+<p></p>
+
+    09/04/2020 : Version 20.0.3b
+	Modification:
+	  - Option export window: modification of tab "Nifti naming"
+
+<p></p>
+
+    08/04/2020 : Version 20.0.2b
+	Bug fixed:
+	  - Basket manager : bug under Windows when filling the basket fixed
+
+<p></p>
+
+    08/04/2020 : Version 20.0.2a
+	Features added:
+	  - Basket manager : preview window added
+	  - Export to BIDS : better compatibility with modalities
+
+<p></p>
+
+    30/03/2020 : Version 20.0.1a
+	Features added:
+	  - All : now possibility to export Bruker, Philips and Dicom in BIDS format (still in development)
+	  - Bruker : affine transformation now compatible with MRTrix
+	Bug fixed:
+	  - Nifti: problem exporting Nifti files without JSON fixed
+
+<p></p>
 
     06/09/2019 : Version 19.6.1a
 	Features added:
