@@ -7,7 +7,7 @@
 
 	- Bruker Paravision PV5 & PV6 (raw data of magnitude type).
 	- Dicom from Bruker, Philips, Siemens.
-	- Philips Achieva (Par/Rec & Xml/Rec v4.2).
+	- Philips Achieva (Par/Rec v4, v4.1 & v4.2, Xml/Rec v5).
 	- Nifti-1 (with or without Json).
 	- BIDS - Brain Imaging Data Structure.
 
