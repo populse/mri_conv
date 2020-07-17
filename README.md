@@ -28,6 +28,13 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+    17/07/2020 : Version 20.2.3a
+	Bugs fixed:
+	  - Bruker : bug with normalization for some parametrics 3d sequence fixed.
+
+
+<p></p>
+
     03/07/2020 : Version 20.2.2a
 	Bugs fixed:
 	  - Basket manager : bug with the combobox "Nifti-1 , BIDS" fixed.
