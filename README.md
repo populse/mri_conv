@@ -28,6 +28,15 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+    10/08/2020 : Version 20.2.3b
+    	Modification :
+    	  - Bruker : absolute path of ImageJ (instead of relative)
+	Others:
+	  - JTattoo update to 1.6.13
+
+
+<p></p>
+
     17/07/2020 : Version 20.2.3a
 	Bugs fixed:
 	  - Bruker : bug with normalization for some parametrics 3d sequence fixed.
