@@ -33,6 +33,7 @@ To download the latest 'development' version, click [here](https://github.com/po
     	  - Bruker : absolute path of ImageJ (instead of relative)
 	Others:
 	  - JTattoo update to 1.6.13
+	  - removal of some unnecessary plugins from ImageJ
 
 
 <p></p>
