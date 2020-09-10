@@ -28,6 +28,16 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+    10/09/2020 : Version 20.2.3c
+	Modification :
+	  - some graphics improvements
+	Others:
+	  - ImageJ update to 1.53d
+	  - ImageJ : 3D plug-in added
+
+
+<p></p>
+
     10/08/2020 : Version 20.2.3b
 	Modification :
 	  - ImageJ : absolute path of ImageJ (instead of relative)
