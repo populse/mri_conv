@@ -28,6 +28,13 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+    11/09/2020 : Version 20.2.4b
+	Bugs fixed:
+	  - Bruker : bug with some 3D image when nslice=1 (IRMOD) fixed.
+
+
+<p></p>
+
     10/09/2020 : Version 20.2.4a
 	Bugs fixed:
 	  - Bruker : bug with 4D image when nslice=1 fixed.
