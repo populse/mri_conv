@@ -28,17 +28,23 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+    16/09/2020 : Version 20.2.5a
+	Bugs fixed:
+	  - bug when export to Nifti in windowless mode with 'bvecs, bvals' option enabled fixed
+	Others:
+	  - bvecs and bvals can be added in json file if 'bvecs, bvals' option enabled (with field name 'bvecs' and 'bvals').
+
+<p></p>
+
     11/09/2020 : Version 20.2.4b
 	Bugs fixed:
 	  - Bruker : bug with some 3D image when nslice=1 (IRMOD) fixed.
-
 
 <p></p>
 
     10/09/2020 : Version 20.2.4a
 	Bugs fixed:
 	  - Bruker : bug with 4D image when nslice=1 fixed.
-
 
 <p></p>
 
@@ -49,7 +55,6 @@ To download the latest 'development' version, click [here](https://github.com/po
 	  - ImageJ update to 1.53d
 	  - ImageJ : 3D plug-in added
 
-
 <p></p>
 
     10/08/2020 : Version 20.2.3b
@@ -59,20 +64,17 @@ To download the latest 'development' version, click [here](https://github.com/po
 	  - JTattoo update to 1.6.13
 	  - removal of some unnecessary plugins from ImageJ
 
-
 <p></p>
 
     17/07/2020 : Version 20.2.3a
 	Bugs fixed:
 	  - Bruker : bug with normalization for some parametrics 3d sequence fixed.
 
-
 <p></p>
 
     03/07/2020 : Version 20.2.2a
 	Bugs fixed:
 	  - Basket manager : bug with the combobox "Nifti-1 , BIDS" fixed.
-
 
 <p></p>
 
@@ -99,6 +101,7 @@ To download the latest 'development' version, click [here](https://github.com/po
 	Bugs fixed:
 	  - Dicom Philips : image order problem in some sequences 4D fixed.
 
+<p></p>
 
     12/06/2020 : Version 20.1.5c
 	Bugs fixed:
