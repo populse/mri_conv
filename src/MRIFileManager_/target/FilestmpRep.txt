@@ -1,0 +1,12 @@
+[Bruker] /media/omontigon/SauvegardePC/DataIRM/Bruker/HerveM
+[Dicom] /media/omontigon/SauvegardePC/DataIRM/Dicom/DicomClement1
+[ParRec] /media/omontigon/SauvegardePC/DataIRM/Philips/DTI-PARREC_Chloe
+[NifTI] /home/omontigon/Documents/DataIRM/Nifti
+[Bids] 
+[Export] 
+[LookAndFeel] javax.swing.plaf.metal.MetalLookAndFeel
+[NamingRepNifTI] /
+[NamingFileNifTI] SeqNumber_StudyName_CreationDate_AcquisitionDate_SeqNumber
+[NamingOptionsNifTI] 10013
+[previewActived] Yes
+[SeqDetail] 1023

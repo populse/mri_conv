@@ -1,0 +1,44 @@
+long debut = System.currentTimeMillis();
+System.out.println("timer1 : "+(System.currentTimeMillis()-debut));
+	
+******************************************************************************
+			
+					
+public static void main(String[] args) {
+    Runtime rt = Runtime.getRuntime();
+    long prevTotal = 0;
+    long prevFree = rt.freeMemory();
+
+    for (int i = 0; i < 2_000_000; i++) {
+        long total = rt.totalMemory();
+        long free = rt.freeMemory();
+        if (total != prevTotal || free != prevFree) {
+            System.out.println(
+                String.format("#%s, Total: %s, Free: %s, Diff: %s",
+                    i, 
+                    total,
+                    free,
+                    prevFree - free));
+            prevTotal = total;
+            prevFree = free;
+        }
+        map.put(i, new NewObject());
+    }
+}
+
+
+******************************************************************************
+Runtime rt = Runtime.getRuntime();
+long prevTotal = 0;
+long prevFree = rt.freeMemory();
+long total = rt.totalMemory();
+long free = rt.freeMemory();
+System.out.println("avant :"+total);
+
+******************************************************************************
+java -classpath MRIManager.jar BrukerToNifti "(yourrepertory)/sub01/subject;(yourrepertory)/sub02/subject" /tmp/Nifti 
+			"PatientName/StudyName/CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime" "[ExportOptions] 00000"
+******************************************************************************
+java -classpath MRIManager.jar DicomToNifti "(yourrepertory)/sub01/dicomdir;(yourrepertory)/sub02/dirfile" /tmp/Nifti
+			"PatientName/StudyName/CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime" "[ExportOptions] 00000"
+******************************************************************************
