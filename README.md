@@ -1,5 +1,6 @@
 The 'sources' branch contains the source codes of mri_conv.
-The directories 'libraries' and 'MRIFileManager_' are ready to be used in the 'Eclipse' editor
+
+The directories 'libraries' and 'MRIFileManager_' are ready to be used in the 'Eclipse' editor.
 
 # License
 
@@ -9,4 +10,4 @@ mri_works is open source and is released under the [CeCILL-b software license](h
 
 	17/09/2020 : Version 20.2.6a
 	- 1st repository
-  - some code simplifications
+  	- some code simplifications
