@@ -28,6 +28,14 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+    14/10/2020 : Version 20.2.6a
+    	Bugs fixed:
+    	  - Dicom: Image Dicom option forced to 'ignore Rescale Slope'
+	Others:
+	  - ImageJ update to 1.53e
+
+<p></p>
+
     16/09/2020 : Version 20.2.5a
 	Bugs fixed:
 	  - bug when export to Nifti in windowless mode with 'bvecs, bvals' option enabled fixed
