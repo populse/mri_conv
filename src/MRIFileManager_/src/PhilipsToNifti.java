@@ -68,19 +68,22 @@ public class PhilipsToNifti extends PrefParam implements ParamMRI2 {
 		}
 
 		for (int i = 0; i < listFiles.length; i++) {
+			String prefixSeq = ("000000").substring(0, String.valueOf(listFiles.length).length());
+
 			String pathFile = listFiles[i];
 			String ext = pathFile.substring(pathFile.lastIndexOf(separator) + 1).toLowerCase();
 			if (new File(pathFile).exists()) {
 				if (ext.endsWith(".rec") || ext.endsWith(".xml"))
 					try {
-						new MriToNifti().convertToNifti(pathFile, nrep, String.valueOf(i), "",outRepertory);
+						new MriToNifti().convertToNifti(pathFile, nrep, (prefixSeq + i).substring(String.valueOf(i).length()), "",outRepertory);
 					} catch (Exception e) {
 						System.out.println(pathFile + " ..... no exported (probably corrupted files)");
 					}
 				else {
 					List<String> listparfile = new SearchPhilips(pathFile).getList();
+					prefixSeq = ("000000").substring(0, String.valueOf(listparfile.size()).length());
 					for (int j = 0; j < listparfile.size(); j++) {
-						new MriToNifti().convertToNifti(pathFile + listparfile.get(j), nrep, String.valueOf(j),"",
+						new MriToNifti().convertToNifti(pathFile + listparfile.get(j), nrep, (prefixSeq + j).substring(String.valueOf(j).length()),"",
 								outRepertory);
 					}
 				}

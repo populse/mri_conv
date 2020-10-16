@@ -113,7 +113,6 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 				
 			}
 		}
-		
 		answ = save(imp, repWork, repertoryExport, ".nii", seqSel, true);
 		if (!answ)
 			System.out.println("no exported (writing to " + repWork + " unauthorized ?) ");

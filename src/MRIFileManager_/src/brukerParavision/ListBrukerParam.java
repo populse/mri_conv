@@ -27,13 +27,15 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 	@Override
 	public HashMap<String, String> ListParamValueAcq(String it) throws IOException {
 		HashMap<String, String> lv = new HashMap<>();
-		String txtParam = new ConcatenatFileBruker(chem2dseq).getTxtCont();
+		ConcatenatFileBruker contFile = new ConcatenatFileBruker(chem2dseq);
+		String txtParam = contFile.getTxtCont();
 		File file2dseq = new File(chem2dseq);
 		lv.put("noSeq", seqSel);
 		lv.put("File path", file2dseq.getAbsolutePath());
 		lv.put("File Name", file2dseq.getName());
 		lv.put("File Size (Mo)", String.valueOf(file2dseq.length() / (1024 * 1024.0)));
 		lv.put("Serial Number", serialNumber);
+		lv.put("fileExists", contFile.missingFiles());
 
 		for (String sg : dictionaryMRISystem.keySet()) {
 			String tmp = new SearchParamBruker2(dictionaryMRISystem.get(sg).get("keyName"), txtParam).result();

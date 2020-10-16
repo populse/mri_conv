@@ -1,6 +1,6 @@
-[Bruker] /media/omontigon/SauvegardePC/DataIRM/Bruker/HerveM
-[Dicom] /media/omontigon/SauvegardePC/DataIRM/Dicom/DicomClement1
-[ParRec] /media/omontigon/SauvegardePC/DataIRM/Philips/DTI-PARREC_Chloe
+[Bruker] 
+[Dicom] /media/omontigon/SauvegardePC/DataIRM/Data_Jan
+[ParRec] /media/omontigon/SauvegardePC/DataIRM/Data_Jan/parrec
 [NifTI] /home/omontigon/Documents/DataIRM/Nifti
 [Bids] 
 [Export] 
@@ -8,5 +8,5 @@
 [NamingRepNifTI] /
 [NamingFileNifTI] SeqNumber_StudyName_CreationDate_AcquisitionDate_SeqNumber
 [NamingOptionsNifTI] 10013
-[previewActived] Yes
+[previewActived] No
 [SeqDetail] 1023

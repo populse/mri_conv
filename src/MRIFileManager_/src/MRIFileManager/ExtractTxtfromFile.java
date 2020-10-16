@@ -8,6 +8,7 @@ import java.io.StringWriter;
 public class ExtractTxtfromFile {
 	
 	private String filePath;
+	private boolean fileIsExists;
 	
 	public ExtractTxtfromFile(String filePath) {
 		
@@ -27,10 +28,16 @@ public class ExtractTxtfromFile {
 			out.close();
 			in.close();
 			tm=out.toString();
+			fileIsExists = true;
 		}
 	    catch (IOException e) {
+	    	fileIsExists = false;
 	    	new GetStackTrace(e);
 	    }
 		return tm;
+	}
+	
+	public boolean full() {
+		return fileIsExists;
 	}
 }

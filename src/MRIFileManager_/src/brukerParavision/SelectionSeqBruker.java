@@ -202,9 +202,6 @@ public class SelectionSeqBruker extends PrefParam implements ParamMRI2, Selectio
 
 		} catch (IOException e) {
 			new GetStackTrace(e);
-			// FileManagerFrame.getBugText().setText(
-			// FileManagerFrame.getBugText().getText() + "\n----------------\n" +
-			// GetStackTrace.getMessage());
 		}
 
 		if (fileOk) {

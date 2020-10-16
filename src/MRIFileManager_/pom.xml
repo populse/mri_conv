@@ -51,7 +51,7 @@
 	<dependency>
     	<groupId>net.imagej</groupId>
     	<artifactId>ij</artifactId>
-    	<version>1.53d</version>
+    	<version>1.53e</version>
 	</dependency>
 	<!-- https://mvnrepository.com/artifact/loci/loci_plugins -->
 

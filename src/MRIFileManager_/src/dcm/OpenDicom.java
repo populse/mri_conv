@@ -73,6 +73,8 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 		} catch (Exception e) {
 
 		}
+		
+		IJ.run("DICOM...", "ignore");
 
 		if (!note.contains("JpegLossLess")) {
 			imp = noJpegLossLess();
@@ -200,6 +202,12 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 		else
 			imptmp = convertToGray32(imptmp);
 
+//		System.out.println(this);
+//		System.out.println("RS = " + Arrays.toString(RS));
+//		System.out.println("RI = " + Arrays.toString(RI));
+//		System.out.println("SS = " + Arrays.toString(SS));
+
+		
 		if (RS.length == 1) {
 			for (int i = 0; i < imptmp.getStackSize(); i++) {
 				imptmp.setSlice(i + 1);

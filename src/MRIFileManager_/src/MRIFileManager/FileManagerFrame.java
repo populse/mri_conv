@@ -67,7 +67,7 @@ import exportFiles.ExportFilesOption;
 public class FileManagerFrame extends JFrame implements ItemListener, ComponentListener {
 
 	private static final long serialVersionUID = 1L;
-	private final String versionSoft="20.2.6a";
+	private final String versionSoft="20.2.7a";
 	
 	public static String OS = System.getProperty("os.name").toLowerCase();
 	

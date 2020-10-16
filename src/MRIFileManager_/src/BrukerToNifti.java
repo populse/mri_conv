@@ -81,17 +81,7 @@ public class BrukerToNifti extends PrefParam implements ParamMRI2 {
 		for (int i = 0; i < listFiles.length; i++) {
 			String tmpFile = listFiles[i];
 			if (new File(tmpFile).exists()) {
-//				if (tmpFile.substring(tmpFile.lastIndexOf(separator) + 1).contentEquals("subject")) {
-//					List<String> list2dseq = new BrukerToNifti().search2dseq(tmpFile);
-//					for (int j = 0; j < list2dseq.size(); j++)
-//						new MriToNifti().convertToNifti(list2dseq.get(j).replace("*", ""), nrep, String.valueOf(j),
-//								outRepertory);
-//				} else
-//					try {
-//						new MriToNifti().convertToNifti(tmpFile, nrep, String.valueOf(i), outRepertory);
-//					} catch (Exception e) {
-//						System.out.println(tmpFile + " ..... no exported (probably corrupted files)");
-//					}
+
 				String tmp2dseq, serialNumber;
 				if (tmpFile.substring(tmpFile.lastIndexOf(separator) + 1).contentEquals("2dseq")) {
 					try {
@@ -109,21 +99,22 @@ public class BrukerToNifti extends PrefParam implements ParamMRI2 {
 					tmpFile += "subject";
 					if (new File(tmpFile).exists()) {
 						List<String> list2dseq = new BrukerToNifti().search2dseq(tmpFile);
+						String prefixSeq = ("000000").substring(0, String.valueOf(list2dseq.size()).length());
+
 						for (int j = 0; j < list2dseq.size(); j++) {
 							tmp2dseq = list2dseq.get(j);
 							serialNumber=tmp2dseq.substring(0,tmp2dseq.indexOf("pdata")-1);
 							serialNumber = serialNumber.substring(serialNumber.lastIndexOf(separator)+1);
+							
 							if (tmp2dseq.contains("*"))
 								serialNumber+="-"+tmp2dseq.substring(tmp2dseq.indexOf("pdata")+6,tmp2dseq.lastIndexOf("2dseq")-1);
-							new MriToNifti().convertToNifti(tmp2dseq.replace("*", ""), nrep, String.valueOf(j),serialNumber,
+							new MriToNifti().convertToNifti(tmp2dseq.replace("*", ""), nrep, (prefixSeq + j).substring(String.valueOf(j).length()),serialNumber,
 									outRepertory);
 						}
 					} else {
 						System.out.println(tmpFile + " doesn't exist");
 					}
-
 				}
-
 			} else
 				System.out.println(tmpFile + " doesn't exist");
 		}

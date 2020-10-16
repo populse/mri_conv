@@ -16,7 +16,7 @@ public class ConvertBrukerToNifti implements ParamMRI2, convertNifti {
 
 	@Override
 	public void AffineQuaternion(String lb) {
-		String tmp="";
+		String tmp=lb;
 		if (lb.contains("[")) 
 			tmp = lb.substring(0,lb.lastIndexOf("[")).trim();
 		if (tmp.endsWith("-axial"))
