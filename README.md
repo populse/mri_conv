@@ -28,6 +28,14 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+    14/10/2020 : Version 20.2.7a
+	Bugs fixed:
+	  - Bruker : in windowless mode, export to Nifti with multiple orientation (axia, coronal, sagittal) is now possible.
+	  - Philips : in windowles mode, naming when exporting to Nifti improved.
+	  
+<p></p>
+
+
     14/10/2020 : Version 20.2.6a
 	Bugs fixed:
 	  - Dicom: Image Dicom option forced to 'ignore Rescale Slope'
