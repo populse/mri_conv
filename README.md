@@ -28,6 +28,16 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+    19/11/2020 : version 20.2.8b
+	Bugs fixed:
+	  - Nifti : bug when adding Nifti without json to basket fixed 
+	  - the 'help' menu didn't work
+	Others:
+	  - the dot character '.' is replaced by underscore '_' in the naming of files to export to Nifti
+
+<p></p>
+
+
     14/10/2020 : Version 20.2.7a
 	Bugs fixed:
 	  - Bruker : in windowless mode, export to Nifti with multiple orientation (axia, coronal, sagittal) is now possible.
