@@ -18,8 +18,17 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 	private String chemDicom;
 	private HashMap<String, String[]> hmSeqbis = new HashMap<>();
 	private HashMap<String, String> listNumberOfFrame = new HashMap<>();
+	private boolean windowLess = false;
 
+	// constructor for windowless mode
+	public ListDicomDirSequence2(String chemDicom, Boolean wl) {
+		windowLess = wl;
+		this.chemDicom = chemDicom;
+		run();
+	}
+	
 	public ListDicomDirSequence2() {
+		
 	}
 
 	public ListDicomDirSequence2(String chemDicom) {
@@ -29,8 +38,15 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 
 	@Override
 	public void run() {
+		
+		String chemDicomdir = chemDicom;
 
-		String chemDicomdir = hmData.get(chemDicom);
+		if (!windowLess)
+			chemDicomdir= hmData.get(chemDicom);
+		else
+			chemDicom = chemDicom.substring(0, chemDicom.lastIndexOf(PrefParam.separator));
+		
+		System.out.println(this+" : chemDicomdir = "+chemDicomdir);
 
 		StringBuffer headerDicom = new StringBuffer(new HeaderDicom().getHeaderDicom(chemDicomdir));
 
@@ -196,7 +212,8 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 		System.gc();
 
 		int n = 0;
-		FileManagerFrame.dlg.setVisible(true);
+		if (!windowLess)
+			FileManagerFrame.dlg.setVisible(true);
 
 		// final Set<String> listHmseq = hmSeq.keySet();
 		// Set<String> listHmseq = hmSeq.keySet().stream().collect(Collectors.toSet());
@@ -212,10 +229,12 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 
 				}
 			}
-			FileManagerFrame.dlg.setTitle("Loading : sequence " + n * 100 / hmSeq.size() + " %" + " ; " + "files ");
+			if (!windowLess)
+				FileManagerFrame.dlg.setTitle("Loading : sequence " + n * 100 / hmSeq.size() + " %" + " ; " + "files ");
 			n++;
 		}
-		FileManagerFrame.dlg.setVisible(false);
+		if (!windowLess)
+			FileManagerFrame.dlg.setVisible(false);
 	}
 
 	public void listParamDicom(String noSerial, String noSeq, boolean newhmSeq) {
@@ -288,8 +307,10 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 		String[] listSlice = null;
 //		int offAcq = 0;
 		int offCalc = 0;
+		String title = "";
 
-		String title = FileManagerFrame.dlg.getTitle();
+		if (!windowLess)
+			title = FileManagerFrame.dlg.getTitle();
 
 		if (listValuesAcq.get("Indice of Frame").contentEquals("2")) { // read 1 file multi-frame
 
@@ -299,7 +320,8 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 
 			for (int i = 0; i < list.length; i++) {
 				StringBuffer hdrtmp = new StringBuffer(list[i]);
-				FileManagerFrame.dlg.setTitle(title + i * 100 / list.length + " %");
+				if (!windowLess)
+					FileManagerFrame.dlg.setTitle(title + i * 100 / list.length + " %");
 				listSlice = new String[21];
 				listSlice[1] = searchParam(hdrtmp, "Image Number");
 
@@ -348,7 +370,8 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 		} else { // read file by file
 
 			for (int i = 0; i < hmSeq.get(noSeq).length; i++) {
-				FileManagerFrame.dlg.setTitle(title + i * 100 / hmSeq.get(noSeq).length + " %");
+				if (!windowLess)
+					FileManagerFrame.dlg.setTitle(title + i * 100 / hmSeq.get(noSeq).length + " %");
 				hdr = new StringBuffer(new HeaderDicom().getHeaderDicom(hmSeq.get(noSeq)[i]));
 				listSlice = new String[21];
 				try {

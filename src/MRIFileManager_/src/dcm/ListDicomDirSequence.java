@@ -29,7 +29,7 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 
 	@Override
 	public void run() {
-
+		
 		String chemD = hmData.get(chemDicom);
 		StringBuffer headerDicom = new StringBuffer(new HeaderDicom().getHeaderDicom(chemD));
 
@@ -247,7 +247,6 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 		String[] listSlice = null;
 		int offAcq = 0, offCalc = 0;
 		
-//		FileManagerFrame.dlg.setVisible(true);
 		String title = FileManagerFrame.dlg.getTitle();
 
 

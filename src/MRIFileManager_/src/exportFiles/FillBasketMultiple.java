@@ -403,7 +403,8 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 							}
 							HashMap<String, String> tmphmInfo = (HashMap<String, String>) hmInfo.get(jj).clone();
 							tmphmInfo.put("pathNifti", listInBaskNifti);
-							tmphmInfo.put("pathBids", listInBaskBids + "_" + protoBids[1]);
+							if (Nifticase && hasJsonKnown)
+								tmphmInfo.put("pathBids", listInBaskBids + "_" + protoBids[1]);
 							listBasket_hmInfo.put(listInBask, tmphmInfo);
 							listBasket_hmOrderImage.put(listInBask, hmOrderImage.get(jj));
 							if (format.contains("Dicom"))
@@ -412,7 +413,8 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 					} // noAll
 				}
 			}
-		}
+		} //end for
+		
 		wind.getListBasket().setModel(listinBasket);
 		wind.getListBasket().updateUI();
 		wind.getTreeBasket().setModel(new UpdateTreeBasket(listinBasket.toArray()).returnTreeModel());

@@ -119,6 +119,8 @@ public class MriToNifti extends PrefParam implements ParamMRI2 {
 				listBasket_hmInfo.put(seqSel, lv.ListParamValueAcq(""));
 				listBasket_hmOrderImage.put(seqSel, lv.ListOrderStackAcq("", ""));
 				listinBasket.add(listinBasket.size(), seqSel);
+			} else if (formatCurrent.contains("Dicom")) {
+				
 			}
 
 		} catch (IOException e) {

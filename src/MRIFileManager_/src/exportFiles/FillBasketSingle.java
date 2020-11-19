@@ -366,7 +366,8 @@ public class FillBasketSingle extends PrefParam implements ParamMRI2, Format {
 							}
 							HashMap<String, String> tmphmInfo = (HashMap<String, String>) hmInfo.get(seqSel).clone();
 							tmphmInfo.put("pathNifti", listInBaskNifti);
-							tmphmInfo.put("pathBids", listInBaskBids + "_" + protoBids[1]);
+							if (Nifticase && hasJsonKnown)
+								tmphmInfo.put("pathBids", listInBaskBids + "_" + protoBids[1]);
 							listBasket_hmInfo.put(listInBask, tmphmInfo);
 							listBasket_hmOrderImage.put(listInBask, hmOrderImage.get(seqSel));
 							if (format.contains("Dicom"))

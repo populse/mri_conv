@@ -36,9 +36,9 @@ long free = rt.freeMemory();
 System.out.println("avant :"+total);
 
 ******************************************************************************
-java -classpath MRIManager.jar BrukerToNifti "(yourrepertory)/sub01/subject;(yourrepertory)/sub02/subject" /tmp/Nifti 
+java -classpath $MRIFilePATH BrukerToNifti "(yourrepertory)/sub01/subject;(yourrepertory)/sub02/subject" /tmp/Nifti 
 			"PatientName/StudyName/CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime" "[ExportOptions] 00000"
 ******************************************************************************
-java -classpath MRIManager.jar DicomToNifti "(yourrepertory)/sub01/dicomdir;(yourrepertory)/sub02/dirfile" /tmp/Nifti
+java -classpath $MRIFilePATH DicomToNifti "(yourrepertory)/sub01/dicomdir;(yourrepertory)/sub02/dirfile" /tmp/Nifti
 			"PatientName/StudyName/CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime" "[ExportOptions] 00000"
 ******************************************************************************

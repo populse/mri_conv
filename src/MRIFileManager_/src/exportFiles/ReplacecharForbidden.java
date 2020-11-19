@@ -16,6 +16,7 @@ public class ReplacecharForbidden {
 			tmp = tmp.replace("\"", "");
 			tmp = tmp.replace("(", "");
 			tmp = tmp.replace(")", "");
+			tmp = tmp.replace('.', '_');
 			tmp = tmp.replaceAll(" +", "");
 		} catch (Exception e) {
 			tmp = "";

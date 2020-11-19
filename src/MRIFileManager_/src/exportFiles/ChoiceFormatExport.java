@@ -21,12 +21,20 @@ public class ChoiceFormatExport implements ActionListener, ParamMRI2 {
 			tmp = listinBasket.get(i);
 			tmp2 = tmp.substring(tmp.indexOf("]") + 1).trim();
 			tmp2 = tmp2.substring(0, tmp2.indexOf("[")).trim();
+			tmpf = tmp.replace(tmp2, listBasket_hmInfo.get(tmp).get("pathNifti"));
 
 			if (wind.getChoiceExport().getSelectedItem().toString().contentEquals("BIDS")) {
+				try {
 				tmpf = tmp.replace(tmp2, listBasket_hmInfo.get(tmp).get("pathBids"));
-			} else {
-				tmpf = tmp.replace(tmp2, listBasket_hmInfo.get(tmp).get("pathNifti"));
-			}
+				}
+				catch (Exception er) {
+					tmpf = tmp.replace(tmp2, listBasket_hmInfo.get(tmp).get("pathNifti"));
+					wind.getChoiceExport().setSelectedItem("Nifti-1");
+				}
+			} 
+//			else {
+//				tmpf = tmp.replace(tmp2, listBasket_hmInfo.get(tmp).get("pathNifti"));
+//			}
 			listinBasket.set(i, tmpf);
 			listBasket_hmInfo.put(tmpf, listBasket_hmInfo.get(tmp));
 			listBasket_hmOrderImage.put(tmpf, listBasket_hmOrderImage.get(tmp));

@@ -55,7 +55,8 @@ class ActionsButtonMenu extends AbstractAction implements ParamMRI2, Format {
 			comboBoxChanged();
 		}
 		if (cmd.contains("Help")) {
-			String URLHelp = System.getProperty("user.dir");
+			String URLHelp = UtilsSystem.pathOfJar();
+			URLHelp = URLHelp.substring(0, URLHelp.lastIndexOf(PrefParam.separator));
 			URLHelp = URLHelp.substring(0, URLHelp.lastIndexOf(PrefParam.separator));
 			URLHelp += PrefParam.separator + "docs" + PrefParam.separator + "index.html";
 			if (new File(URLHelp).exists())

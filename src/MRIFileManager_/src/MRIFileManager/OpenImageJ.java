@@ -16,8 +16,6 @@ public class OpenImageJ extends PrefParam {
 	public OpenImageJ() {
 
 		if (IJ.getInstance() == null) {
-//			System.getProperties().setProperty("plugins.dir",
-//					System.getProperty("user.dir") + File.separator + "dist" + File.separator);
 			System.getProperties().setProperty("plugins.dir",
 					UtilsSystem.pathOfJar() + "dist" + File.separator);
 
