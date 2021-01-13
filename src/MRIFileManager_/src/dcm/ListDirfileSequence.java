@@ -125,6 +125,9 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 		
 //		FileManagerFrame.dlg.setVisible(true);
 		String title = FileManagerFrame.dlg.getTitle()+ " ; " + "files ";
+		String bvalue_field = "0018,9087";
+		if (listValuesAcq.get("Manufacturer").contains("Philips") || listValuesCal.get("Manufacturer").contains("Philips"))
+			bvalue_field = "2001,1003";
 
 		if (IndiceofnumberOfFrame == 1) { // 1 file by slice
 
@@ -167,7 +170,7 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 				listSlice[12] = searchParam(hdrtmp, "Acquisition Time");
 				listSlice[13] = searchParam(hdrtmp, "Image Position (Patient)");
 				listSlice[14] = searchParam(hdrtmp, "Image Orientation (Patient)");
-				listSlice[15] = searchParam(hdrtmp, "0018,9087"); // Diffusion-b-value
+				listSlice[15] = searchParam(hdrtmp, bvalue_field); // Diffusion-b-value
 				String ts = searchParam(hdrtmp, "0018,0020");
 				ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
 				// int indSs = Arrays.asList(listScanSeq).indexOf(ts);
@@ -276,7 +279,7 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 					listSlice[12] = searchParam(hdrtmp, "Acquisition Time");
 					listSlice[13] = searchParam(hdrtmp, "Image Position (Patient)");
 					listSlice[14] = searchParam(hdrtmp, "Image Orientation (Patient)");
-					listSlice[15] = searchParam(hdrtmp, "0018,9087"); // diffusion
+					listSlice[15] = searchParam(hdrtmp, bvalue_field); // Diffusion-b-value
 					String ts = searchParam(hdrtmp, "0018,0020");
 					ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
 					int indSs = Arrays.asList(listScanSeq).indexOf(ts);

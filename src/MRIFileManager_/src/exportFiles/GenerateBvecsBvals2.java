@@ -21,11 +21,15 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 	private String linebasket;
 
 	public GenerateBvecsBvals2(String directory, String name, Object linebasket, String constr, String bvec_bval_txt) {
-		
+
 		this.linebasket = (String) linebasket;
-		
+
 		hmInfo_tmp = listBasket_hmInfo.get(linebasket);
 		
+//		System.out.println(this+" : "+hmInfo_tmp.get("Direction Diffusion"));
+//		System.out.println(this+" : "+hmInfo_tmp.get("B-values effective"));
+//		System.out.println(this+" : "+hmInfo_tmp.get("Diffusion Ao Images number"));
+
 		dd = hmInfo_tmp.get("Direction Diffusion").toString().split(" +");
 		bveff = hmInfo_tmp.get("B-values effective").toString().split(" +");
 		DwAoImages = Integer.parseInt(hmInfo_tmp.get("Diffusion Ao Images number").toString());
@@ -35,21 +39,21 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 		if (constr.contentEquals("Bruker") && ddtmp.length > 1) {
 			if (hmInfo_tmp.get("Slice Orientation").toString().contentEquals("coronal")
 					|| hmInfo_tmp.get("Slice Orientation").toString().contentEquals("sagittal"))
-				getTxt("-y, -x, z", bvec_bval_txt, directory, name);
+				getTxt("-y, -x, z", bvec_bval_txt, directory, name, false);
 			else
-				getTxt("x, y, z", bvec_bval_txt, directory, name);
+				getTxt("x, y, z", bvec_bval_txt, directory, name, false);
 
 		} else if (constr.contentEquals("Philips") && ddtmp.length > 1) {
-			getTxt("-z, -x, y", bvec_bval_txt, directory, name);
+			getTxt("-z, -x, y", bvec_bval_txt, directory, name, false);
 		} else if (constr.contentEquals("Dicom") && ddtmp.length > 1) {
-			getTxt("-z, -x, y", bvec_bval_txt, directory, name);
+//			getTxt("-z, -x, y", bvec_bval_txt, directory, name);
+			getTxt("x, y, z", bvec_bval_txt, directory, name, true);
 		}
 	}
 
-	private void getTxt(String order, String type, String directory, String name) {
+	private void getTxt(String order, String type, String directory, String name, boolean forDicom ) {
 
 		String txtBvecs = "", txtBvals = "", txtToReturn = "";
-
 		String[] indice = { "x", "y", "z" };
 		String[] list = order.split(",");
 		String[] sign = { "", "", "" };
@@ -68,7 +72,6 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 		String[][] bvecsV = new String[3][DwAoImages + dd.length / 3];
 		String[] bvalsV = new String[DwAoImages + dd.length / 3];
 
-
 		for (int i = 0; i < DwAoImages; i++)
 			for (int j = 0; j < 3; j++) {
 				bvecsV[j][i] = "0.0";
@@ -80,7 +83,9 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 				bvecsV[j][DwAoImages + i] = sign[j] + dd[(i * 3) + rang[j]];
 				bvalsV[DwAoImages + i] = bveff[DwAoImages + i];
 			}
-
+		
+		if (forDicom)
+			bvecsV = bvecs_dicom(bvecsV);
 
 		if (type.contentEquals("1") || type.contentEquals("3"))
 			for (int i = 0; i < bvecsV[0].length; i++)
@@ -94,11 +99,10 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 		txtBvecs = txtBvecs.replaceAll("--", "");
 		txtBvals = txtBvals.replaceAll("--", "");
 		txtToReturn = txtToReturn.replaceAll("--", "");
-		
+
 		hmInfo_tmp.put("bvecs", txtBvecs);
 		hmInfo_tmp.put("bvals", txtBvals);
 		listBasket_hmInfo.put(linebasket, hmInfo_tmp);
-
 
 		if (!txtToReturn.isEmpty())
 			try {
@@ -126,7 +130,7 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 				System.out.println("Error: impossible to create '" + directory + PrefParam.separator + name
 						+ "-bvecs-MRtrix.txt" + "'");
 			}
-		
+
 		if (!txtBvals.isEmpty())
 			try {
 				FileWriter writer = new FileWriter(directory + PrefParam.separator + name + "-bvals-MRtrix.txt");
@@ -140,9 +144,38 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 				System.out.println("Error: impossible to create '" + directory + PrefParam.separator + name
 						+ "-bvals-MRtrix.txt" + "'");
 			}
-		
 	}
 	
+	private String[][] bvecs_dicom(String[][] bvecs) {
+		
+		String[][] result = new String[bvecs.length][bvecs[0].length];
+		
+		String[] listOrientation = hmInfo_tmp.get("Image Orientation Patient").split("\\\\");
+		double[] v1 = Arrays.stream(Arrays.copyOfRange(listOrientation,0, 3)).mapToDouble(Double::parseDouble).toArray();
+		double[] v2 = Arrays.stream(Arrays.copyOfRange(listOrientation,3, 6)).mapToDouble(Double::parseDouble).toArray();
+		double[] v3 = new double[3];
+		
+		v3[0] = v1[1] * v2[2] - v1[2] * v2[1];
+		v3[1] = v1[2] * v2[0] - v1[0] * v2[2];
+		v3[2] = v1[0] * v2[1] - v1[1] * v2[0];
+		
+		
+		for (int i=0; i < bvecs[0].length; i++) {
+			result[0][i] = String.valueOf(v1[0] * Double.parseDouble(bvecs[0][i]) + 
+										  v1[1] * Double.parseDouble(bvecs[1][i]) +
+										  v1[2] * Double.parseDouble(bvecs[2][i]));
+			result[1][i] = String.valueOf(v2[0] * Double.parseDouble(bvecs[0][i]) + 
+					  					  v2[1] * Double.parseDouble(bvecs[1][i]) +
+					  					  v2[2] * Double.parseDouble(bvecs[2][i]));
+			result[2][i] = String.valueOf(v3[0] * Double.parseDouble(bvecs[0][i]) + 
+					  					  v3[1] * Double.parseDouble(bvecs[1][i]) +
+					  					  v3[2] * Double.parseDouble(bvecs[2][i]));
+			
+		}
+		
+		return result;
+	}
+
 	private String deleteDuplicate(String elements) {
 
 		String resul = "";
@@ -163,7 +196,6 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 
 		return resul.trim();
 	}
-	
 
 	public boolean fileCreated() {
 		return successfull;

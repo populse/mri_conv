@@ -106,6 +106,9 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 		FileManagerFrame.dlg.setVisible(true);
 		String title = "Loading : files ";
 //		String hdrRecorded = "";
+		String bvalue_field = "0018,9087";
+		if (listValuesAcq.get("Manufacturer").contains("Philips") || listValuesCal.get("Manufacturer").contains("Philips"))
+			bvalue_field = "2001,1003";
 
 		if (Integer.parseInt(numberFrames) == 1) { // one image by file
 
@@ -152,7 +155,7 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 						listSlice[12] = searchParam(hdrDcm, "Acquisition Time");
 						listSlice[13] = searchParam(hdrDcm, "Image Position (Patient)");
 						listSlice[14] = searchParam(hdrDcm, "Image Orientation (Patient)");
-						listSlice[15] = searchParam(hdrDcm, "0018,9087"); // Diffusion-b-value
+						listSlice[15] = searchParam(hdrDcm, bvalue_field); // Diffusion-b-value
 						ts = searchParam(hdrDcm, "0018,0020"); // type of data taken (SE, IR, GR, EP, RM)
 						ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
 						int indSs = Arrays.asList(listScanSeq).indexOf(ts);
@@ -317,7 +320,7 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 						listSlice[12] = searchParam(hdrtmp, "Acquisition Time");
 						listSlice[13] = searchParam(hdrtmp, "Image Position (Patient)");
 						listSlice[14] = searchParam(hdrtmp, "Image Orientation (Patient)");
-						listSlice[15] = searchParam(hdrtmp, "0018,9087"); // diffusion
+						listSlice[15] = searchParam(hdrtmp, bvalue_field); // Diffusion-b-value
 						String ts = searchParam(hdrtmp, "0018,0020");
 						ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
 						int indSs = Arrays.asList(listScanSeq).indexOf(ts);

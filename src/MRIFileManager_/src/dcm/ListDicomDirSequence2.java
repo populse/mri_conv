@@ -46,7 +46,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 		else
 			chemDicom = chemDicom.substring(0, chemDicom.lastIndexOf(PrefParam.separator));
 		
-		System.out.println(this+" : chemDicomdir = "+chemDicomdir);
+//		System.out.println(this+" : chemDicomdir = "+chemDicomdir);
 
 		StringBuffer headerDicom = new StringBuffer(new HeaderDicom().getHeaderDicom(chemDicomdir));
 
@@ -308,7 +308,10 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 //		int offAcq = 0;
 		int offCalc = 0;
 		String title = "";
-
+		String bvalue_field = "0018,9087";
+		if (listValuesAcq.get("Manufacturer").contains("Philips"))
+			bvalue_field = "2001,1003";
+		
 		if (!windowLess)
 			title = FileManagerFrame.dlg.getTitle();
 
@@ -351,7 +354,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 					listSlice[12] = searchParam(hdrtmp, "Acquisition Time");
 					listSlice[13] = searchParam(hdrtmp, "Image Position (Patient)");
 					listSlice[14] = searchParam(hdrtmp, "Image Orientation (Patient)");
-					listSlice[15] = searchParam(hdrtmp, "0018,9087"); // diffusion
+					listSlice[15] = searchParam(hdrtmp, bvalue_field); // diffusion
 					String ts = searchParam(hdrtmp, "0018,0020");
 					ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
 					listSlice[16] = ts; // scanning sequence
@@ -362,7 +365,6 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 					listSlice[19] = searchParam(hdrtmp, "2005,10B0") + " " + searchParam(hdrtmp, "2005,10B1") + " "
 							+ searchParam(hdrtmp, "2005,10B2") ;
 					listSlice[20] = searchParam(hdrtmp, "2005,1413"); // gradient orientation number
-
 					listAcq.add(listSlice);
 				}
 			}
@@ -410,7 +412,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 					listSlice[12] = searchParam(hdr, "Acquisition Time");
 					listSlice[13] = searchParam(hdr, "Image Position (Patient)");
 					listSlice[14] = searchParam(hdr, "Image Orientation (Patient)");
-					listSlice[15] = searchParam(hdr, "0018,9087"); // diffusion
+					listSlice[15] = searchParam(hdr, bvalue_field); // diffusion
 					listSlice[16] = searchParam(hdr, "0018,0020"); // scanning
 																	// sequence
 					listSlice[17] = searchParam(hdr, "2005,1429"); // Label Type (ASL)
@@ -420,7 +422,6 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 					listSlice[19] = searchParam(hdr, "2005,10B0") + " " + searchParam(hdr, "2005,10B1") + " "
 							+ searchParam(hdr, "2005,10B2");
 					listSlice[20] = searchParam(hdr, "2005,1413"); // gradient orientation number
-
 					listAcq.add(listSlice);
 				}
 			}
@@ -436,6 +437,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 			});
 			new ListDicomParam(noSeq, listAcq, offCalc, "");
 		}
+
 	}
 
 	private String searchParam(StringBuffer txt, String paramToFind) {

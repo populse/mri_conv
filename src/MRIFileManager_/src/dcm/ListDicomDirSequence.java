@@ -248,8 +248,10 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 		int offAcq = 0, offCalc = 0;
 		
 		String title = FileManagerFrame.dlg.getTitle();
-
-
+		String bvalue_field = "0018,9087";
+		if (listValuesAcq.get("Manufacturer").contains("Philips") || listValuesCal.get("Manufacturer").contains("Philips"))
+			bvalue_field = "2001,1003";
+		
 		if (numberOfFrame > 1) { // read 1 file multi-frame
 
 			hdr = new StringBuffer(new HeaderDicom().getHeaderDicom(hmSeq.get(noSeq)[0]));
@@ -286,7 +288,7 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 					listSlice[12] = searchParam(hdrtmp, "Acquisition Time");
 					listSlice[13] = searchParam(hdrtmp, "Image Position (Patient)");
 					listSlice[14] = searchParam(hdrtmp, "Image Orientation (Patient)");
-					listSlice[15] = searchParam(hdrtmp, "0018,9087"); // diffusion
+					listSlice[15] = searchParam(hdrtmp, bvalue_field); // diffusion
 					String ts = searchParam(hdrtmp, "0018,0020");
 					ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
 					int indSs = Arrays.asList(listScanSeq).indexOf(ts);
@@ -352,7 +354,7 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 					listSlice[12] = searchParam(hdr, "Acquisition Time");
 					listSlice[13] = searchParam(hdr, "Image Position (Patient)");
 					listSlice[14] = searchParam(hdr, "Image Orientation (Patient)");
-					listSlice[15] = searchParam(hdr, "0018,9087"); // diffusion
+					listSlice[15] = searchParam(hdr, bvalue_field); // diffusion
 					listSlice[16] = searchParam(hdr, "0018,0020"); // scanning sequence
 					listSlice[17] = searchParam(hdr, "2005,1429"); // Label Type (ASL)
 					listSlice[18] = searchParam(hdr, "2005,100E");// Scale Slope Philips

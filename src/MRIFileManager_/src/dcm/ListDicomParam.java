@@ -77,10 +77,11 @@ public class ListDicomParam implements ParamMRI2 {
 		List<String> listRS = new ArrayList<>();
 		List<String> listSS = new ArrayList<>();
 
+
 		String[] listFileDcm = new String[listA.size()];
+		String tmp;
 
 		for (int i = 0; i < listA.size(); i++) {
-			String tmp;
 			if (!listA.get(i)[1].isEmpty()) {
 				if (!listA.get(i)[5].isEmpty())
 					listTE.add(listA.get(i)[5]);
@@ -93,8 +94,10 @@ public class ListDicomParam implements ParamMRI2 {
 				listFileDcm[i] = listA.get(i)[0];
 				listSliceLocation.add(listA.get(i)[7]);
 				listTemporalPosit.add(listA.get(i)[9]);
-				listImPosit.add(listA.get(i)[13]);
-				listImOrient.add(listA.get(i)[14]);
+				if (!listA.get(i)[13].isEmpty())
+					listImPosit.add(listA.get(i)[13]);
+				if (!listA.get(i)[14].isEmpty())
+					listImOrient.add(listA.get(i)[14]);
 				listDiffusionValue.add(listA.get(i)[15]);
 				listDiffusionDirection.add(listA.get(i)[19]);
 				listLabelType.add(listA.get(i)[17]);
@@ -114,19 +117,20 @@ public class ListDicomParam implements ParamMRI2 {
 				listFileDcm[i] = lastEl[0];
 				listSliceLocation.add(lastEl[7]);
 				listTemporalPosit.add(lastEl[9]);
-				listImPosit.add(lastEl[13]);
-				listImOrient.add(lastEl[14]);
+				if (!lastEl[13].isEmpty())
+					listImPosit.add(lastEl[13]);
+				if (!lastEl[14].isEmpty())
+					listImOrient.add(lastEl[14]);
 				listDiffusionValue.add(lastEl[15]);
 				listDiffusionDirection.add(lastEl[19]);
 				listLabelType.add(lastEl[17]);
 				listRI.add(lastEl[10]);
 				listRS.add(lastEl[11]);
 				listSS.add(lastEl[18]);
-
 				tmp = lastEl[14];
 			}
 
-			// System.out.println(this+" : noSeq = "+noSeq+" , tmp = "+tmp);
+//			System.out.println(this+" : noSeq = "+noSeq+" , tmp = "+tmp);
 			try {
 				if (!tmp.isEmpty()) {
 					tmp = new DicomOrientation(tmp).getOrientationDicom();
@@ -186,7 +190,7 @@ public class ListDicomParam implements ParamMRI2 {
 		listValues.put("Scale Slope", listSlice[16]);
 		listValues.put("B-values effective", listSlice[6]);
 		try {
-			listValues.put("Direction Diffusion", deleteDuplicateBy4(listSlice[17]));
+			listValues.put("Direction Diffusion", deleteDuplicateBy3(listSlice[17]));
 		} catch (Exception e) {
 			listValues.put("Direction Diffusion", "");
 		}
@@ -235,7 +239,7 @@ public class ListDicomParam implements ParamMRI2 {
 				resul += hh + car;
 			else if ((!hh.contentEquals("0")))
 				resul += hh + car;
-
+		
 		return resul.trim();
 	}
 
@@ -252,6 +256,26 @@ public class ListDicomParam implements ParamMRI2 {
 
 			for (int i = 1; i < list.length / 4; i++) {
 				tmp = list[4 * i] + " " + list[4 * i + 1] + " " + list[4 * i + 2] + " " + list[4 * i + 3];
+				if (!resul.contains(tmp))
+					resul += " " + tmp;
+			}
+		}
+		return resul;
+	}
+	
+	private String deleteDuplicateBy3(String elements) {
+
+		String resul = "";
+
+		if (!elements.isEmpty()) {
+			String tmp = "";
+
+			String[] list = elements.split(" +");
+
+			resul = list[0] + " " + list[1] + " " + list[2];
+
+			for (int i = 1; i < list.length / 4; i++) {
+				tmp = list[3 * i] + " " + list[3 * i + 1] + " " + list[3 * i + 2];
 				if (!resul.contains(tmp))
 					resul += " " + tmp;
 			}

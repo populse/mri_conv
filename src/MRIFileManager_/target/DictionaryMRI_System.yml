@@ -85,7 +85,7 @@ dictionaryMRI:
   
                    whereBruker:  {file: method, keyName: $PVM_DwEffBval=, type: int, format: ~, units: ~}
                    wherePhilips: {file: PAR ; Xml, keyName: diffusion_b_factor ; Diffusion B Factor, type: float  ; float, format: ~, units: ~}
-                   whereDicom:   {file: ~, keyName: "0018,9087", type: float, format: ~, units: ~} 
+                   whereDicom:   {file: ~, keyName: "2001,1003", type: float, format: ~, units: ~} 
                    
                    viewer: {category: Diffusion}
                    json:   {tagJson: ~, type: ~, format: ~, units: ~}

@@ -22,6 +22,20 @@ public class ConvertToJson2 extends PrefParam implements ParamMRI2 {
 		JSONObject subobj;
 		JSONArray list, list2;
 
+		String tmp;
+		
+		if (formatCurrent.contains("[Dicom]")) {
+			HashMap<String, String> listValues = listBasket_hmInfo.get(linebasket);
+			tmp = listValues.get("Image Orientation Patient");
+			tmp = tmp.replace("\\", " ");
+			listValues.put("Image Orientation Patient", tmp);
+			listBasket_hmInfo.put((String) linebasket, listValues);
+			tmp = listValues.get("Image Position Patient");
+			tmp = tmp.replace("\\", " ");
+			listValues.put("Image Position Patient", tmp);
+			listBasket_hmInfo.put((String) linebasket, listValues);
+		}
+		
 		for (String kn : dictionaryJsonSystem.keySet()) { // kn listLabelMRI
 
 			try {
