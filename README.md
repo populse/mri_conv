@@ -28,6 +28,13 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+
+    13/01/2021 : version 21.1.0a
+	Others:
+	  - Dicom : bvec and bval extraction conforms to dcm2nii
+
+<p></p>
+
     19/11/2020 : version 20.2.8b
 	Bugs fixed:
 	  - Nifti : bug when adding Nifti without json to basket fixed 
