@@ -28,6 +28,11 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+	12/02/2021 : version 21.2.0a
+	Bugs fixed:
+		- Dicom : bvec and bval calculation errors corrected
+
+<p></p>
 
     13/01/2021 : version 21.1.0a
 	Others:
