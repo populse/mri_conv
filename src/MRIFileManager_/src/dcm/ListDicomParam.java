@@ -77,7 +77,6 @@ public class ListDicomParam implements ParamMRI2 {
 		List<String> listRS = new ArrayList<>();
 		List<String> listSS = new ArrayList<>();
 
-
 		String[] listFileDcm = new String[listA.size()];
 		String tmp;
 
@@ -188,12 +187,16 @@ public class ListDicomParam implements ParamMRI2 {
 		listValues.put("Rescale Intercept", listSlice[14]);
 		listValues.put("Rescale Slope", listSlice[15]);
 		listValues.put("Scale Slope", listSlice[16]);
+
 		listValues.put("B-values effective", listSlice[6]);
 		try {
-			listValues.put("Direction Diffusion", deleteDuplicateBy3(listSlice[17]));
+//			listValues.put("Direction Diffusion", deleteDuplicateBy3(listSlice[17]));
+			listValues.put("Direction Diffusion", reductListDiffusion(listSlice[6], listSlice[17]));
 		} catch (Exception e) {
 			listValues.put("Direction Diffusion", "");
 		}
+
+//		reductListDiffusion(listSlice[6], listSlice[17]);
 
 		File fileDcm = new File(hmSeq.get(noSeq)[0]);
 		File fileDcmEnd = new File(hmSeq.get(noSeq)[hmSeq.get(noSeq).length - 1]);
@@ -203,12 +206,12 @@ public class ListDicomParam implements ParamMRI2 {
 		lastDcm = lastDcm.substring(lastDcm.indexOf(path) + path.length() + 1);
 		if (!firstDcm.contentEquals(lastDcm))
 			try {
-				lastDcm = " - "+lastDcm ;
+				lastDcm = " - " + lastDcm;
 			} catch (Exception e) {
 				lastDcm = "";
 			}
 		else
-			lastDcm="";
+			lastDcm = "";
 
 		listValues.put("noSeq", noSeq);
 		listValues.put("File path", path);
@@ -239,7 +242,7 @@ public class ListDicomParam implements ParamMRI2 {
 				resul += hh + car;
 			else if ((!hh.contentEquals("0")))
 				resul += hh + car;
-		
+
 		return resul.trim();
 	}
 
@@ -262,7 +265,7 @@ public class ListDicomParam implements ParamMRI2 {
 		}
 		return resul;
 	}
-	
+
 	private String deleteDuplicateBy3(String elements) {
 
 		String resul = "";
@@ -271,16 +274,41 @@ public class ListDicomParam implements ParamMRI2 {
 			String tmp = "";
 
 			String[] list = elements.split(" +");
+			System.out.println(this + " : list length = " + list.length);
 
 			resul = list[0] + " " + list[1] + " " + list[2];
 
-			for (int i = 1; i < list.length / 4; i++) {
+			for (int i = 1; i < list.length / 3; i++) {
 				tmp = list[3 * i] + " " + list[3 * i + 1] + " " + list[3 * i + 2];
 				if (!resul.contains(tmp))
 					resul += " " + tmp;
 			}
 		}
 		return resul;
+	}
+
+	private String reductListDiffusion(String bvals, String diffdir) {
+		String newlistdiff = "", newlistbvals = "", tmplist = "";
+		if (!diffdir.isEmpty()) {
+			String tmp = "";
+			String[] listdiff = diffdir.split(" +");
+			String[] listbvals = bvals.split(" +");
+			newlistdiff = listdiff[0] + " " + listdiff[1] + " " + listdiff[2];
+			newlistbvals = listbvals[0];
+			tmplist = newlistdiff + " " + newlistbvals;
+
+			for (int i = 1; i < listdiff.length / 3; i++) {
+				tmp = listdiff[3 * i] + " " + listdiff[3 * i + 1] + " " + listdiff[3 * i + 2];
+//				if (!(tmp+" "+listbvals[i]).contains(tmplist)) {
+				if (!tmplist.contains(tmp+" "+listbvals[i])) {
+					newlistdiff += " " + tmp;
+					newlistbvals += " " + listbvals[i];
+					tmplist += " " + tmp + " " + listbvals[i];
+				}
+			}
+		}
+		newlistdiff = newlistdiff.replace('E', 'e');
+		return newlistdiff;
 	}
 
 	public int getArrayIndex(int[] arr, int value) {

@@ -1,5 +1,5 @@
 [Bruker] 
-[Dicom] /home/omontigon/Documents/DataIRM/Dicom/Paul/DTI
+[Dicom] /home/omontigon/Documents/DataIRM/Dicom/Veronica2
 [ParRec] 
 [NifTI] /home/omontigon/Documents/DataIRM/Nifti
 [Bids] 
@@ -7,6 +7,6 @@
 [LookAndFeel] javax.swing.plaf.metal.MetalLookAndFeel
 [NamingRepNifTI] /
 [NamingFileNifTI] PatientName_SequenceName_CreationDate_AcquisitionDate_SeqNumber_SerialNumber_Protocol
-[NamingOptionsNifTI] 10013
+[NamingOptionsNifTI] 10012
 [previewActived] No
 [SeqDetail] 1023

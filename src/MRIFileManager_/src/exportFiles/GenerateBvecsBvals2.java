@@ -25,16 +25,17 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 		this.linebasket = (String) linebasket;
 
 		hmInfo_tmp = listBasket_hmInfo.get(linebasket);
-		
-//		System.out.println(this+" : "+hmInfo_tmp.get("Direction Diffusion"));
-//		System.out.println(this+" : "+hmInfo_tmp.get("B-values effective"));
-//		System.out.println(this+" : "+hmInfo_tmp.get("Diffusion Ao Images number"));
 
 		dd = hmInfo_tmp.get("Direction Diffusion").toString().split(" +");
 		bveff = hmInfo_tmp.get("B-values effective").toString().split(" +");
 		DwAoImages = Integer.parseInt(hmInfo_tmp.get("Diffusion Ao Images number").toString());
-
-		String[] ddtmp = deleteDuplicate(hmInfo_tmp.get("Direction Diffusion").toString()).split(" +");
+		String[] ddtmp = dd;
+		
+//		String[] ddtmp = deleteDuplicate(hmInfo_tmp.get("Direction Diffusion").toString()).split(" +");
+//		System.out.println(this + " : dir. diff (" + dd.length + ") = " + hmInfo_tmp.get("Direction Diffusion"));
+//		System.out.println(this + " : B-vals eff. (" + bveff.length + ") = " + hmInfo_tmp.get("B-values effective"));
+//		System.out.println(this + " : DwAoImages = " + DwAoImages);
+//		System.out.println(this + "delete duplicate dir. diff ("+ddtmp.length+") = "+ddtmp);
 
 		if (constr.contentEquals("Bruker") && ddtmp.length > 1) {
 			if (hmInfo_tmp.get("Slice Orientation").toString().contentEquals("coronal")
@@ -51,7 +52,7 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 		}
 	}
 
-	private void getTxt(String order, String type, String directory, String name, boolean forDicom ) {
+	private void getTxt(String order, String type, String directory, String name, boolean forDicom) {
 
 		String txtBvecs = "", txtBvals = "", txtToReturn = "";
 		String[] indice = { "x", "y", "z" };
@@ -83,7 +84,7 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 				bvecsV[j][DwAoImages + i] = sign[j] + dd[(i * 3) + rang[j]];
 				bvalsV[DwAoImages + i] = bveff[DwAoImages + i];
 			}
-		
+
 		if (forDicom)
 			bvecsV = bvecs_dicom(bvecsV);
 
@@ -145,34 +146,36 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 						+ "-bvals-MRtrix.txt" + "'");
 			}
 	}
-	
+
 	private String[][] bvecs_dicom(String[][] bvecs) {
-		
+
 		String[][] result = new String[bvecs.length][bvecs[0].length];
-		
+
 		String[] listOrientation = hmInfo_tmp.get("Image Orientation Patient").split("\\\\");
-		double[] v1 = Arrays.stream(Arrays.copyOfRange(listOrientation,0, 3)).mapToDouble(Double::parseDouble).toArray();
-		double[] v2 = Arrays.stream(Arrays.copyOfRange(listOrientation,3, 6)).mapToDouble(Double::parseDouble).toArray();
+		double[] v1 = Arrays.stream(Arrays.copyOfRange(listOrientation, 0, 3)).mapToDouble(Double::parseDouble)
+				.toArray();
+		double[] v2 = Arrays.stream(Arrays.copyOfRange(listOrientation, 3, 6)).mapToDouble(Double::parseDouble)
+				.toArray();
 		double[] v3 = new double[3];
-		
+
 		v3[0] = v1[1] * v2[2] - v1[2] * v2[1];
 		v3[1] = v1[2] * v2[0] - v1[0] * v2[2];
 		v3[2] = v1[0] * v2[1] - v1[1] * v2[0];
 		
-		
-		for (int i=0; i < bvecs[0].length; i++) {
-			result[0][i] = String.valueOf(v1[0] * Double.parseDouble(bvecs[0][i]) + 
-										  v1[1] * Double.parseDouble(bvecs[1][i]) +
-										  v1[2] * Double.parseDouble(bvecs[2][i]));
-			result[1][i] = String.valueOf(v2[0] * Double.parseDouble(bvecs[0][i]) + 
-					  					  v2[1] * Double.parseDouble(bvecs[1][i]) +
-					  					  v2[2] * Double.parseDouble(bvecs[2][i]));
-			result[2][i] = String.valueOf(v3[0] * Double.parseDouble(bvecs[0][i]) + 
-					  					  v3[1] * Double.parseDouble(bvecs[1][i]) +
-					  					  v3[2] * Double.parseDouble(bvecs[2][i]));
-			
+//		System.out.println(this+" : v1 = "+v1[0]+" , "+v1[1]+" , "+v1[2]);
+//		System.out.println(this+" : v2 = "+v2[0]+" , "+v2[1]+" , "+v2[2]);
+//		System.out.println(this+" : v3 = "+v3[0]+" , "+v3[1]+" , "+v3[2]);
+
+		for (int i = 0; i < bvecs[0].length; i++) {
+			result[0][i] = String.valueOf(v1[0] * Double.parseDouble(bvecs[0][i])
+					+ v1[1] * Double.parseDouble(bvecs[1][i]) + v1[2] * Double.parseDouble(bvecs[2][i]));
+			result[1][i] = String.valueOf(v2[0] * Double.parseDouble(bvecs[0][i])
+					+ v2[1] * Double.parseDouble(bvecs[1][i]) + v2[2] * Double.parseDouble(bvecs[2][i]));
+			result[2][i] = String.valueOf(v3[0] * Double.parseDouble(bvecs[0][i])
+					+ v3[1] * Double.parseDouble(bvecs[1][i]) + v3[2] * Double.parseDouble(bvecs[2][i]));
+
 		}
-		
+
 		return result;
 	}
 

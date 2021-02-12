@@ -363,7 +363,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 					if (!listSlice[18].matches("[-+]?[0-9]*\\.?[0-9]+"))
 						listSlice[18] = "1";
 					listSlice[19] = searchParam(hdrtmp, "2005,10B0") + " " + searchParam(hdrtmp, "2005,10B1") + " "
-							+ searchParam(hdrtmp, "2005,10B2") ;
+							+ searchParam(hdrtmp, "2005,10B2");
 					listSlice[20] = searchParam(hdrtmp, "2005,1413"); // gradient orientation number
 					listAcq.add(listSlice);
 				}

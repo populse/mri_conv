@@ -11,6 +11,11 @@ mri_conv is open source and is released under the [CeCILL-b software license](ht
 
 # Release history
 
+	12/02/2021 : Version 21.2.0a
+	- see README in devt branch
+	
+<p></p>
+
 	13/01/2021 : Version 21.1.0a
 	- see README in devt branch
 	
