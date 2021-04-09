@@ -28,6 +28,15 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+	09/04/2021 : version 21.3.1a
+	Bugs fixed:
+		- Dicom : bug with some DICOM files fixed
+		- Philips : image order problem with some 5D file resolved
+	Features added:
+		- All : more information in error messages (Class)
+
+<p></p>
+
 	12/02/2021 : version 21.2.0a
 	Bugs fixed:
 		- Dicom : bvec and bval calculation errors corrected
