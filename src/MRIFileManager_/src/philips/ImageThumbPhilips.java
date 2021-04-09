@@ -67,7 +67,7 @@ public class ImageThumbPhilips extends ImageThumb implements ParamMRI2 {
 			inputStream = new ByteArrayInputStream(data);
 			data = null;
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 	
 		FileInfo fi = new FileInfo();
@@ -120,7 +120,7 @@ public class ImageThumbPhilips extends ImageThumb implements ParamMRI2 {
 			fi = null;
 
 		} catch (IOException e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		return img;

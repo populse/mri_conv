@@ -89,7 +89,7 @@ public class ImageThumbNifti extends ImageThumb implements ParamMRI2 {
 			input = new DataInputStream(filein);
 			input.skip(w * h * (nImage / 2) * bitPerPixel / 8);
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		fi.inputStream = input;

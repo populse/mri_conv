@@ -91,7 +91,7 @@ public class SelectionDataBruker extends SelectionData {
 			fileOk = true;
 
 		} catch (IOException e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 //			FileManagerFrame.getBugText().setText(
 //					FileManagerFrame.getBugText().getText() + "\n----------------\n" + GetStackTrace.getMessage());
 		}
@@ -130,7 +130,7 @@ public class SelectionDataBruker extends SelectionData {
 					}
 
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 			}
 		}
 	};

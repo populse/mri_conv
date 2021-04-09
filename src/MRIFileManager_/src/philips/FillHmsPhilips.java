@@ -58,7 +58,7 @@ public class FillHmsPhilips implements ParamMRI2 {
 			System.gc();
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 	}
 }

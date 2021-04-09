@@ -19,7 +19,7 @@ public class DicomFileView extends FileView {
 				try {
 					if (searchDicom(file)) return PrefParam.iconDicom;
 				} catch (Exception e) {
-					new GetStackTrace(e);
+					new GetStackTrace(e, this.getClass().toString());
 //					FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
 				}
 		}
@@ -32,7 +32,7 @@ public class DicomFileView extends FileView {
 			try {
 				if (searchDicom(file)) return false;
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 //				FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
 			}
 		}
@@ -60,7 +60,7 @@ public class DicomFileView extends FileView {
 		}
 		}
 		catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 //			FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
 		}
 		return find;

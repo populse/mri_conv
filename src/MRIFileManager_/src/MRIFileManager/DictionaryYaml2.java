@@ -22,7 +22,7 @@ public class DictionaryYaml2 implements Format, ParamMRI2 {
 			User user = mapper.readValue(new File(fileYml), User.class);
 			manuf = user.getDictionaryMRI();
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 	}
 

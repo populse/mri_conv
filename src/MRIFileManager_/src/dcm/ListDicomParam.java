@@ -3,6 +3,7 @@ package dcm;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -136,7 +137,7 @@ public class ListDicomParam implements ParamMRI2 {
 					listSO.add(tmp);
 				}
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 			}
 		}
 
@@ -221,6 +222,10 @@ public class ListDicomParam implements ParamMRI2 {
 		listValues = new DicomDictionaryAdjustement().valuesAdjustement(listValues);
 
 		hmInfo.put(noSeq, listValues);
+		
+//		System.out.println(this);
+//		System.out.println(Arrays.asList(listValues));
+//		System.out.println(Collections.singletonList(listValues));
 
 		new ListOrderImage(noSeq, listSlice);
 	}
@@ -274,7 +279,6 @@ public class ListDicomParam implements ParamMRI2 {
 			String tmp = "";
 
 			String[] list = elements.split(" +");
-			System.out.println(this + " : list length = " + list.length);
 
 			resul = list[0] + " " + list[1] + " " + list[2];
 

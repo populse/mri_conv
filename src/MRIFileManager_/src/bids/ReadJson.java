@@ -21,7 +21,7 @@ public class ReadJson {
 			JSONObject object = (JSONObject) obj;
 			listHighObject(object);
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 	}
 

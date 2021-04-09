@@ -29,12 +29,12 @@ public class UtilsSystem extends PrefParam {
     }
     catch (URISyntaxException e)
     {
-    	new GetStackTrace(e);
+    	new GetStackTrace(e, "Class UtilsSystem");
 //		FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
     }
     catch (UnsupportedEncodingException e)
     {
-    	new GetStackTrace(e);
+    	new GetStackTrace(e, "Class UtilsSystem");
 //		FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
     }
  

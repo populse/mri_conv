@@ -38,7 +38,7 @@ public class ListBidsParam implements ParamMRI2, ListParam2 {
 			niftiParam.readHeader();
 			headerNifti = niftiParam.getHeader();
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 //		HashMap<String, String> listObjectJson = new HashMap<>();

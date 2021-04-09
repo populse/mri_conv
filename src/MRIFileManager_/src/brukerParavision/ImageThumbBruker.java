@@ -112,7 +112,7 @@ public class ImageThumbBruker extends ImageThumb implements ParamMRI2 {
 			byte[] data = output.toByteArray();
 			inputStream = new ByteArrayInputStream(data);
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		FileInfo fi = new FileInfo();

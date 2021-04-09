@@ -62,14 +62,14 @@ public class AffineQuaternionBrukerOldOld {
 			fieldOfView = tabScaling(recoParams[3][0], chemReco).split(" "); // list of RECO_fov
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 			// FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
 		}
 
 		try {
 			listTransp = tabScaling(recoParams[4][0], chemReco).split(" ");
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 			// FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
 		}
 
@@ -160,7 +160,7 @@ public class AffineQuaternionBrukerOldOld {
 			listGradMatrix = tabScaling(acqParams[0][0], chemAcqp).split(" "); // list of ACQ_grad_matrix
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 			// FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
 		}
 
@@ -239,7 +239,7 @@ public class AffineQuaternionBrukerOldOld {
 			listAcqFov = tabScaling(acqParams[1][0], chemAcqp).split(" "); // list of ACQ_fov
 			listRecoSize = tabScaling(recoParams[1][0], chemReco).split(" "); // list of RECO_ft_size
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 			// FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
 		}
 
@@ -285,7 +285,7 @@ public class AffineQuaternionBrukerOldOld {
 			listRecOff = tabScaling(recoParams[0][0], chemReco).split(" ");// list of RECO_offsets
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 			// FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
 		}
 		resul[0][3] = Double.parseDouble(listRecOff[0]);
@@ -320,7 +320,7 @@ public class AffineQuaternionBrukerOldOld {
 //																					// method file
 //
 //		} catch (Exception e) {
-//			new GetStackTrace(e);
+//			new GetStackTrace(e, this.getClass().toString());
 //			// FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
 //		}
 //
@@ -355,7 +355,7 @@ public class AffineQuaternionBrukerOldOld {
 																					// method file
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 			// FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
 		}
 
@@ -474,7 +474,7 @@ public class AffineQuaternionBrukerOldOld {
 		try {
 			lecteurAvecBuffer = new BufferedReader(new FileReader(fichier));
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 			// FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
 		}
 		while ((ligne = lecteurAvecBuffer.readLine()) != null) {
@@ -501,7 +501,7 @@ public class AffineQuaternionBrukerOldOld {
 			resul = resul.substring(0, resul.length() - 1);
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 			// FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
 			resul = "not found";
 		}

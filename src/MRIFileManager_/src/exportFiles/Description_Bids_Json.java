@@ -31,7 +31,7 @@ public class Description_Bids_Json {
 			writer.flush();
 			writer.close();
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 			System.out.println("Error: unable to create file '" + pathJson + PrefParam.separator + "dataset_description.json" + "'");
 		}
 	}

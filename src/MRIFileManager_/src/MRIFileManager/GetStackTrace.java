@@ -7,9 +7,11 @@ public class GetStackTrace {
 
 	private static Throwable th;
 	public static int numberOfError;
+	private static String msg;
 
-	public GetStackTrace(final Throwable th) {
+	public GetStackTrace(final Throwable th, String msg) {
 		GetStackTrace.setTh(th);
+		GetStackTrace.msg = msg;
 		FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+getMessage());
 	}
 
@@ -18,7 +20,7 @@ public class GetStackTrace {
 		final PrintWriter pw = new PrintWriter(sw, true);
 		getTh().printStackTrace(pw);
 		numberOfError++;
-		return "\n Error No. " + numberOfError + "\n" + sw.getBuffer().toString();
+		return "\n Error No. " + numberOfError + "\n" + msg + "\n" + sw.getBuffer().toString();
 	}
 
 	public static Throwable getTh() {

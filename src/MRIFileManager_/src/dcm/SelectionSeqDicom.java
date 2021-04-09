@@ -41,7 +41,7 @@ public class SelectionSeqDicom extends PrefParam implements ParamMRI2, Selection
 			for (int j = 0; j < wind.getTreeInfoGeneral().getRowCount(); j++)
 				wind.getTreeInfoUser().expandRow(j);
 		} catch (Exception e1) {
-			new GetStackTrace(e1);
+			new GetStackTrace(e1, this.getClass().toString());
 		}
 
 		if (PrefParam.previewActived)
@@ -49,7 +49,7 @@ public class SelectionSeqDicom extends PrefParam implements ParamMRI2, Selection
 				new ShowImagePanel(wind, new OpenDicom(hmInfo.get(seqSelected), hmOrderImage.get(seqSelected),
 						hmSeq.get(seqSelected), seqSelected, false).getImp(), seqSelected);
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 			}
 		else
 			new ShowImagePanel(wind, null, seqSelected);
@@ -155,7 +155,7 @@ public class SelectionSeqDicom extends PrefParam implements ParamMRI2, Selection
 						hmSeq.get(seqSelected), seqSelected, true));
 				t.start();
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 			}
 		}
 		try {

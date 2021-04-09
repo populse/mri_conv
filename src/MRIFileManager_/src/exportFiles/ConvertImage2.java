@@ -341,7 +341,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 							}
 //							new GenerateBvecsBvals2(newDirectory, nameFile, lb, forCur, onetwofile);
 						} catch (Exception e) {
-							new GetStackTrace(e);
+							new GetStackTrace(e, this.getClass().toString());
 						}
 					}
 
@@ -356,7 +356,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 					logExportNifti += "Export success for " + lb + "\n";
 
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 				logExportNifti += "Export failed for " + lb + "\n";
 				logExportNifti += "      " + e.toString() + "\n";
 				error = true;
@@ -401,16 +401,16 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 				printRep.close();
 			}
 
-			catch (Exception e1) {
-				new GetStackTrace(e1);
+			catch (Exception e) {
+				new GetStackTrace(e, this.getClass().toString());
 			}
 
 			try {
 				FileWriter printRep = new FileWriter(pathLogExport + ".json");
 				printRep.write(JsonMIA);
 				printRep.close();
-			} catch (Exception e1) {
-				new GetStackTrace(e1);
+			} catch (Exception e) {
+				new GetStackTrace(e, this.getClass().toString());
 			}
 		}
 
@@ -479,7 +479,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 				return true;
 
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 				IJ.log("Nifti_Writer: " + e.getMessage());
 				return false;
 			}
@@ -546,7 +546,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 				return true;
 
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 				IJ.log("Nifti_Writer: " + e.getMessage());
 				return false;
 			}
@@ -651,7 +651,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 
 				return true;
 			} catch (IOException e) {
-				// new GetStackTrace(e);
+				// new GetStackTrace(e, this.getClass().toString());
 				// IJ.log("Nifti_Writer: " + e.getMessage());
 				return false;
 			}
@@ -674,7 +674,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 			gis.close();
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 	}
 
@@ -846,9 +846,9 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 			writeShort(output, (short) 5); // dim[0]
 			writeShort(output, (short) fi.width); // dim[1]
 			writeShort(output, (short) fi.height); // dim[2]
-			writeShort(output, (short) imp.getNChannels()); // dim[3]
-			writeShort(output, (short) imp.getNSlices()); // dim[4]
-			writeShort(output, (short) imp.getNFrames()); // dim[5]
+			writeShort(output, (short) imp.getNChannels()); // dim[5]
+			writeShort(output, (short) imp.getNSlices()); // dim[3]
+			writeShort(output, (short) imp.getNFrames()); // dim[4]
 		}
 
 		for (i = 0; i < 2; i++)

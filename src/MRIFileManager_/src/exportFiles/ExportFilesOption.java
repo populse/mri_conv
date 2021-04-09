@@ -156,8 +156,8 @@ public class ExportFilesOption extends AbstractAction {
 					panelTree.removeAll();
 					treePreview();
 
-				} catch (Exception e2) {
-					new GetStackTrace(e2);
+				} catch (Exception e1) {
+					new GetStackTrace(e1, this.getClass().toString());
 				}
 			}
 
@@ -216,8 +216,8 @@ public class ExportFilesOption extends AbstractAction {
 					panelTree.removeAll();
 					treePreview();
 
-				} catch (Exception e2) {
-					new GetStackTrace(e2);
+				} catch (Exception e1) {
+					new GetStackTrace(e1, this.getClass().toString());
 //					FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()
 //							+ "\n----------------\n" + GetStackTrace.getMessage());
 				}
@@ -531,7 +531,7 @@ public class ExportFilesOption extends AbstractAction {
 						e.consume();
 
 					} catch (Exception e1) {
-						new GetStackTrace(e1);
+						new GetStackTrace(e1, this.getClass().toString());
 //						FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()
 //								+ "\n----------------\n" + GetStackTrace.getMessage());
 					}

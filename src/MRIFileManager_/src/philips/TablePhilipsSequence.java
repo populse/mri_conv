@@ -19,6 +19,9 @@ public class TablePhilipsSequence extends PrefParam {
 
 		if (!listSeq.isEmpty()) {
 			String prefixSeq=("000000").substring(0, String.valueOf(listSeq.size()).length());
+			
+			if (prefixSeq.length() == 1)
+				prefixSeq = "00";
 
 			data = new Object[listSeq.size()][ParamMRI2.headerListSeq.length];
 			for (int i = 0; i < data[0].length; i++)

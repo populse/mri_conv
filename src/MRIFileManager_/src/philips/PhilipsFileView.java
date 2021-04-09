@@ -42,7 +42,7 @@ public Icon getIcon(File file) {
         }
         }
         catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 //			FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());	
         }
         return find;

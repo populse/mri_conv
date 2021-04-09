@@ -48,8 +48,8 @@ public class SelectionSeqNifti extends PrefParam implements ParamMRI2, Selection
 					.setModel(new TreeInfo2(listParamInfoUser, hmInfo.get(seqSelected)).getTreeInfo().getModel());
 			for (int j = 0; j < wind.getTreeInfoUser().getRowCount(); j++)
 				wind.getTreeInfoUser().expandRow(j);
-		} catch (Exception e1) {
-			new GetStackTrace(e1);
+		} catch (Exception e) {
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		if (PrefParam.previewActived)
@@ -175,7 +175,7 @@ public class SelectionSeqNifti extends PrefParam implements ParamMRI2, Selection
 				niftiHdr.readHeader();
 				tm = chemFile + "\n" + niftiHdr.getHeader();
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 			}
 		}
 		else if (keyword.contentEquals("see Json file")) {

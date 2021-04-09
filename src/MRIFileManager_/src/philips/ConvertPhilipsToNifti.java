@@ -18,7 +18,7 @@ public class ConvertPhilipsToNifti implements ParamMRI2,convertNifti {
 		try {
 			imp = new OpenPhilips4(listBasket_hmInfo.get(lb), listBasket_hmOrderImage.get(lb), false,true, lb).getImp();
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 		
 		if (imp.getNDimensions() == 5)

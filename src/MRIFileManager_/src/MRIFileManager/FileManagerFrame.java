@@ -67,7 +67,7 @@ import exportFiles.ExportFilesOption;
 public class FileManagerFrame extends JFrame implements ItemListener, ComponentListener {
 
 	private static final long serialVersionUID = 1L;
-	private final String versionSoft="21.2.0a";
+	private final String versionSoft="21.3.1a";
 	
 	public static String OS = System.getProperty("os.name").toLowerCase();
 	
@@ -192,7 +192,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 					buildAbout();
 
 				} catch (Exception e) {
-					new GetStackTrace(e);
+					new GetStackTrace(e, this.getClass().toString());
 				}
 			}
 		});
@@ -805,7 +805,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 			SwingUtilities.updateComponentTreeUI(this);
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 	}
 
@@ -992,11 +992,11 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 			PrefParam.listWidthColumn[i] = tabSeq.getColumnModel().getColumn(i).getWidth();
 
 		// getTabSeq().setEnabled(true);
-		TableModel model20;
+		TableMod model20;
 		Object[][] data = { { "", "", "", "", "", "", "", "", "", "", "", "" , "", ""} };
 		String[] columnNames = ParamMRI2.headerListSeq;
-		model20 = new TableModel(data, columnNames);
-		TableRowSorter<TableModel> sorter0 = new TableRowSorter<>(model20);
+		model20 = new TableMod(data, columnNames);
+		TableRowSorter<TableMod> sorter0 = new TableRowSorter<>(model20);
 		tabSeq.setModel(model20);
 		tabSeq.setRowSorter(sorter0);
 
@@ -1006,11 +1006,11 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 	}
 
 	public void resetTabData() {
-		TableModel model10;
+		TableMod model10;
 		Object[][] data = { { "", "", "", "", "", "", "", "" ,""} };
 		String[] columNames = ParamMRI2.headerListData;
-		model10 = new TableModel(data, columNames);
-		TableRowSorter<TableModel> sorter0 = new TableRowSorter<>(model10);
+		model10 = new TableMod(data, columNames);
+		TableRowSorter<TableMod> sorter0 = new TableRowSorter<>(model10);
 		tabData.setModel(model10);
 		tabData.setRowSorter(sorter0);
 		tabData.updateUI();

@@ -138,7 +138,7 @@ public class OpenBruker2 implements ParamMRI2 {
 				factor = scal.factorNormalize();
 				offset = scal.offsetNormalize();
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 //				FileManagerFrame.getBugText().setText(GetStackTrace.getMessage());
 			}
 
@@ -205,7 +205,7 @@ public class OpenBruker2 implements ParamMRI2 {
 				}
 
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 //				FileManagerFrame.getBugText().setText(
 //						FileManagerFrame.getBugText().getText() + "\n----------------\n" + GetStackTrace.getMessage());
 			}
@@ -419,7 +419,7 @@ public class OpenBruker2 implements ParamMRI2 {
 //				}
 //
 //			} catch (Exception e) {
-//				new GetStackTrace(e);
+//				new GetStackTrace(e, this.getClass().toString());
 //			}
 //		else if (sliceorient.equals("coronal"))
 //			try {
@@ -437,7 +437,7 @@ public class OpenBruker2 implements ParamMRI2 {
 //					}
 //				}
 //			} catch (Exception e) {
-//				new GetStackTrace(e);
+//				new GetStackTrace(e, this.getClass().toString());
 //			}
 //		else if (sliceorient.equals("sagittal"))
 //			try {
@@ -455,7 +455,7 @@ public class OpenBruker2 implements ParamMRI2 {
 //					}
 //				}
 //			} catch (Exception e) {
-//				new GetStackTrace(e);
+//				new GetStackTrace(e, this.getClass().toString());
 //			}
 //	}
 

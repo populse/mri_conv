@@ -43,7 +43,7 @@ public class NiftiFileView extends FileView {
 				i++;
 			}
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 //			FileManagerFrame.getBugText().setText(
 //					FileManagerFrame.getBugText().getText() + "\n----------------\n" + GetStackTrace.getMessage());
 		}

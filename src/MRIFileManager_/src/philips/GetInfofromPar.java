@@ -38,9 +38,9 @@ public class GetInfofromPar implements DictionParRec, ListPhilipsParamData {
 	// listImgNbr[7] = label type (ASL)
 
 	StringBuffer[] listRSI = new StringBuffer[3];
-	// listImgNbr[0] = RI
-	// listImgNbr[1] = RS
-	// listImgNbr[2] = SS
+	// listRSI[0] = RI
+	// listRSI[1] = RS
+	// listRSI[2] = SS
 
 	public GetInfofromPar(String file, boolean all) {
 		this.file = file;
@@ -87,7 +87,7 @@ public class GetInfofromPar implements DictionParRec, ListPhilipsParamData {
 					tmpj = tmpj.replaceAll("\\<(.*?)\\>", "");
 					tmpj = tmpj.replaceAll("\\?", "");
 				} catch (Exception e) {
-					new GetStackTrace(e);
+					new GetStackTrace(e, this.getClass().toString());
 					// FileManagerFrame.getBugText().setText(
 					// FileManagerFrame.getBugText().getText() +
 					// "\n----------------\n" + GetStackTrace.getMessage());
@@ -113,7 +113,7 @@ public class GetInfofromPar implements DictionParRec, ListPhilipsParamData {
 			}
 			
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		if (all) {
@@ -166,7 +166,7 @@ public class GetInfofromPar implements DictionParRec, ListPhilipsParamData {
 				columDetail = null;
 
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 			}
 
 			for (int i = 0; i < listImgNbr.length; i++) {
@@ -227,12 +227,18 @@ public class GetInfofromPar implements DictionParRec, ListPhilipsParamData {
 			}
 
 			if (ListPhilipsSequence.hasAcqImg) {
-
 				Collections.sort(listColumnAcq, new Comparator<Object[]>() {
 					@Override
 					public int compare(Object[] strings, Object[] otherStrings) {
-						return ((Integer) Integer.parseInt(strings[2].toString()))
-								.compareTo(Integer.parseInt(otherStrings[2].toString()));
+						return ((Integer) Integer.parseInt(strings[4].toString()))
+								.compareTo(Integer.parseInt(otherStrings[4].toString()));
+					}
+				});
+				Collections.sort(listColumnAcq, new Comparator<Object[]>() {
+					@Override
+					public int compare(Object[] strings, Object[] otherStrings) {
+						return ((Integer) Integer.parseInt(strings[5].toString()))
+								.compareTo(Integer.parseInt(otherStrings[5].toString()));
 					}
 				});
 				Collections.sort(listColumnAcq, new Comparator<Object[]>() {
@@ -243,20 +249,29 @@ public class GetInfofromPar implements DictionParRec, ListPhilipsParamData {
 					}
 				});
 			}
+			
+//			for (int i=0; i<listColumnAcq.size(); i++)
+//				System.out.println(Arrays.toString(listColumnAcq.get(i)));
 
 //			System.out.println(file);
 //			for (String[] kk : listColumnAcq)
 //				System.out.println(kk[0]+" , "+kk[1]+" , "+kk[2]+" , "+kk[4]+" , "+kk[5]+" , "+kk[48]);
 
 			if (ListPhilipsSequence.hasCalcImg) {
-
-				Collections.sort(listColumnAcq, new Comparator<Object[]>() {
+				Collections.sort(listColumnCal, new Comparator<Object[]>() {
 					@Override
 					public int compare(Object[] strings, Object[] otherStrings) {
-						return ((Integer) Integer.parseInt(strings[2].toString()))
-								.compareTo(Integer.parseInt(otherStrings[2].toString()));
+						return ((Integer) Integer.parseInt(strings[4].toString()))
+								.compareTo(Integer.parseInt(otherStrings[4].toString()));
 					}
 				});
+//				Collections.sort(listColumnCal, new Comparator<Object[]>() {
+//					@Override
+//					public int compare(Object[] strings, Object[] otherStrings) {
+//						return ((Integer) Integer.parseInt(strings[5].toString()))
+//								.compareTo(Integer.parseInt(otherStrings[5].toString()));
+//					}
+//				});
 				Collections.sort(listColumnCal, new Comparator<Object[]>() {
 					@Override
 					public int compare(Object[] strings, Object[] otherStrings) {
@@ -265,6 +280,9 @@ public class GetInfofromPar implements DictionParRec, ListPhilipsParamData {
 					}
 				});
 			}
+			
+//			for (int i=0; i<listColumnCal.size(); i++)
+//				System.out.println(Arrays.toString(listColumnCal.get(i)));
 
 //			System.out.println(file);
 //			for (String[] kk : listColumnCal)

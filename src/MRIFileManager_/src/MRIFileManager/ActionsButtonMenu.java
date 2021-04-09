@@ -301,7 +301,7 @@ class ActionsButtonMenu extends AbstractAction implements ParamMRI2, Format {
 						break;
 					}
 				} catch (Exception e) {
-					new GetStackTrace(e);
+					new GetStackTrace(e, this.getClass().toString());
 				}
 		} else {
 			new JOptionPane();
@@ -323,8 +323,8 @@ class ActionsButtonMenu extends AbstractAction implements ParamMRI2, Format {
 			for (int j = 0; j < wind.getTreeInfoUser().getRowCount(); j++)
 				wind.getTreeInfoUser().expandRow(j);
 
-			TableModel model = new TableModel(data, headerListData);
-			TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
+			TableMod model = new TableMod(data, headerListData);
+			TableRowSorter<TableMod> sorter = new TableRowSorter<>(model);
 
 			wind.getTabData().removeAll();
 			wind.getTabData().updateUI();

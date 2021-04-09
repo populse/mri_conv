@@ -70,7 +70,7 @@ public class SearchListRecursive implements DictionDicom {
 			FileManagerFrame.dlg.setVisible(false);
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 	}
 

@@ -41,7 +41,7 @@ public class imageThumbDicom extends ImageThumb implements ParamMRI2 {
 			String[] listOff = hmInfo.get(noSeq).get("Offsets Image").split(" +");
 			intValue = Integer.parseInt(listOff[listOff.length / 2]);
 		} catch (Exception e) {
-//			new GetStackTrace(e);
+//			new GetStackTrace(e, this.getClass().toString());
 			int nImage = Integer.parseInt(values[1]);
 //			Float f = new Float(nImage);
 //			intValue = f.intValue();
@@ -59,7 +59,7 @@ public class imageThumbDicom extends ImageThumb implements ParamMRI2 {
 					// attention with ImageJ 1.52k or more !! (ok with ImageJ 1.52j or less)
 					imp = new ImagePlus(filesrc);
 				} catch (Exception e) {
-					new GetStackTrace(e);
+					new GetStackTrace(e, this.getClass().toString());
 				}
 			}
 
@@ -85,7 +85,7 @@ public class imageThumbDicom extends ImageThumb implements ParamMRI2 {
 				imp = new ImagePlus("", stack);
 				r.close();
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 			}
 		}
 

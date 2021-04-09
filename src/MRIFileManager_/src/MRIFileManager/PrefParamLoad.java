@@ -67,7 +67,7 @@ public class PrefParamLoad extends PrefParam {
 				}
 
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 //				FileManagerFrame.getBugText().setText(GetStackTrace.getMessage());
 			}
 

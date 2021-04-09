@@ -43,7 +43,7 @@ public class ChangeSubject implements ParamMRI2 {
 				in.transferTo(0, in.size(), out);
 
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 //				FileManagerFrame.getBugText().setText(GetStackTrace.getMessage());
 
 			} finally {

@@ -50,7 +50,7 @@ public class SelectionSeqBids extends PrefParam implements ParamMRI2, SelectionS
 			for (int j = 0; j < wind.getTreeInfoUser().getRowCount(); j++)
 				wind.getTreeInfoUser().expandRow(j);
 		} catch (Exception e1) {
-			new GetStackTrace(e1);
+			new GetStackTrace(e1, this.getClass().toString());
 		}
 
 		if (PrefParam.previewActived)
@@ -168,7 +168,7 @@ public class SelectionSeqBids extends PrefParam implements ParamMRI2, SelectionS
 				niftiHdr.readHeader();
 				tm = chemFile + "\n" + niftiHdr.getHeader();
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 			}
 		} else if (keyword.contentEquals("see Json file")) {
 			String pathFile = chemFile.replace(".nii.gz", ".json");

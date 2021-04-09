@@ -34,8 +34,8 @@ public class RepSel extends PrefParam {
 				if (lectNifTI.isEmpty())
 					lectNifTI	= new JFileChooser().getCurrentDirectory().toString();
 			}
-			catch (Exception e2) {
-				new GetStackTrace(e2);
+			catch (Exception e) {
+				new GetStackTrace(e, this.getClass().toString());
 				FilestmpRep.delete();
 				lectBruker	= new JFileChooser().getCurrentDirectory().toString();
 				lectDicom 	= new JFileChooser().getCurrentDirectory().toString();

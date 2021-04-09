@@ -29,7 +29,7 @@ public class ReadJson2 {
 			}
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 	}
 

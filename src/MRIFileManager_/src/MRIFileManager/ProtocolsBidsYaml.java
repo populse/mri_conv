@@ -19,7 +19,7 @@ public class ProtocolsBidsYaml extends PrefParam{
 			User user = mapper.readValue(new File(fileYml), User.class);
 			listPro2 = user.getlistProtocols();
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 		listProtocolsForBids = String.join(",", listPro2.keySet())+".datalad";
 	}
@@ -31,7 +31,7 @@ public class ProtocolsBidsYaml extends PrefParam{
 			listPro = user.getlistProtocols();
 			
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 		
 		for (String hh : listPro.keySet()) {

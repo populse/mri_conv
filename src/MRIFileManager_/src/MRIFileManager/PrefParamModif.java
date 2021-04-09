@@ -21,7 +21,7 @@ public class PrefParamModif extends PrefParam {
 //						txt = txt.replace(tmp, key + " " + newVal);
 //				}
 //			} catch (Exception e) {
-//				new GetStackTrace(e);
+//				new GetStackTrace(e, this.getClass().toString());
 ////				FileManagerFrame.getBugText().setText(GetStackTrace.getMessage());
 //			}
 //		}
@@ -40,8 +40,8 @@ public class PrefParamModif extends PrefParam {
 			FileWriter printRep = new FileWriter(FilestmpRep);
 			printRep.write(txt);
 			printRep.close();
-		} catch (Exception e1) {
-			new GetStackTrace(e1);
+		} catch (Exception e) {
+			new GetStackTrace(e, this.getClass().toString());
 		}
 	}
 }

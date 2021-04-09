@@ -36,7 +36,7 @@ public class ListNiftiParam2 extends PrefParam implements ParamMRI2, ListParam2 
 			niftiParam.readHeader();
 			headerNifti = niftiParam.getHeader();
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		HashMap<String, HashMap<String, String>> listObjectJson = new HashMap<>();
@@ -136,7 +136,9 @@ public class ListNiftiParam2 extends PrefParam implements ParamMRI2, ListParam2 
 	@Override
 	public Object[] ListOrderStackAcq(String dim, String nImage) {
 		Object[] lv = new Object[5];
-		lv[0] = "xyczt";
+		lv[0] = "xyczt"; // (orig)
+//		lv[0] = "xyzct";
+// 		lv[0] = "xyztc";
 		lv[1] = 1;
 		lv[2] = 1;
 		lv[3] = 1;
@@ -151,6 +153,8 @@ public class ListNiftiParam2 extends PrefParam implements ParamMRI2, ListParam2 
 			lv[3] = Integer.parseInt(ldim[4]);
 		}
 		if (ldim.length == 6) {
+//			lv[0] = "xyzct"; (orig)
+			lv[0] = "xyztc";
 			lv[1] = Integer.parseInt(ldim[5]);
 			lv[2] = Integer.parseInt(ldim[3]);
 			lv[3] = Integer.parseInt(ldim[4]);

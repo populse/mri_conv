@@ -114,7 +114,7 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 				successfull = true;
 			} catch (Exception e) {
 				successfull = false;
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 				System.out.println("Error: impossible to create '" + directory + PrefParam.separator + name
 						+ "-bvecs-bvals-MRtrix.txt" + "'");
 			}
@@ -127,7 +127,7 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 				successfull = true;
 			} catch (Exception e) {
 				successfull = false;
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 				System.out.println("Error: impossible to create '" + directory + PrefParam.separator + name
 						+ "-bvecs-MRtrix.txt" + "'");
 			}
@@ -141,7 +141,7 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 				successfull = true;
 			} catch (Exception e) {
 				successfull = false;
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 				System.out.println("Error: impossible to create '" + directory + PrefParam.separator + name
 						+ "-bvals-MRtrix.txt" + "'");
 			}

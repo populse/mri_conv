@@ -30,7 +30,7 @@ public class Gzip {
 			fos.close();
 			gis.close();
 		} catch (IOException e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 	}
 

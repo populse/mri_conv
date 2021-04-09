@@ -35,7 +35,7 @@ public class TableDicomSequence extends PrefParam implements ParamMRI2 {
 			} else if (formatDicom.contains("DCM"))
 				new ListDcmSequence(repertory);
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 			hmInfo.clear();
 		}
 

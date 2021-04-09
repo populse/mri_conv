@@ -29,7 +29,7 @@ public class SearchParamNifti {
 				}
 			}
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 		return res;
 	}

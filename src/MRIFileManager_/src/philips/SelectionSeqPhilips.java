@@ -45,8 +45,8 @@ public class SelectionSeqPhilips extends PrefParam implements ParamMRI2, Selecti
 					.setModel(new TreeInfo2(listParamInfoUser, hmInfo.get(seqSelected)).getTreeInfo().getModel());
 			for (int j = 0; j < wind.getTreeInfoUser().getRowCount(); j++)
 				wind.getTreeInfoUser().expandRow(j);
-		} catch (Exception e1) {
-			new GetStackTrace(e1);
+		} catch (Exception e) {
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		if (PrefParam.previewActived)
@@ -155,7 +155,7 @@ public class SelectionSeqPhilips extends PrefParam implements ParamMRI2, Selecti
 				new OpenPhilips4(hmInfo.get(seqSelected), hmOrderImage.get(seqSelected), true, false, seqSelected);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 			}
 		}
 		FileManagerFrame.dlg.setVisible(false);
@@ -199,7 +199,7 @@ public class SelectionSeqPhilips extends PrefParam implements ParamMRI2, Selecti
 //			fileOk = true;
 //
 //		} catch (Exception e) {
-//			new GetStackTrace(e);
+//			new GetStackTrace(e, this.getClass().toString());
 //		}
 //
 //		if (fileOk) {

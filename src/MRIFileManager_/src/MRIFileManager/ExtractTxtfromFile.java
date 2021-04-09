@@ -32,7 +32,7 @@ public class ExtractTxtfromFile {
 		}
 	    catch (IOException e) {
 	    	fileIsExists = false;
-	    	new GetStackTrace(e);
+	    	new GetStackTrace(e, this.getClass().toString());
 	    }
 		return tm;
 	}

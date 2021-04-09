@@ -11,7 +11,7 @@ import javax.swing.table.TableRowSorter;
 import MRIFileManager.ChangeSeqDetail;
 import MRIFileManager.FileManagerFrame;
 import MRIFileManager.GetStackTrace;
-import MRIFileManager.TableModel;
+import MRIFileManager.TableMod;
 import MRIFileManager.ThumbnailList;
 import MRIFileManager.TreeInfo2;
 import bids.ListBidsSequence;
@@ -65,7 +65,7 @@ public abstract class SelectionData extends PrefParam implements ParamMRI2, Form
 		try {
 			wind.getTabData().getValueAt(0, 1).toString();
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 			return;
 		}
 
@@ -108,11 +108,11 @@ public abstract class SelectionData extends PrefParam implements ParamMRI2, Form
 			}
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
-		TableModel model = new TableModel(seq, ParamMRI2.headerListSeq);
-		TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
+		TableMod model = new TableMod(seq, ParamMRI2.headerListSeq);
+		TableRowSorter<TableMod> sorter = new TableRowSorter<>(model);
 		wind.getTabSeq().setModel(model);
 		wind.getTabSeq().setRowSorter(sorter);
 		wind.getTabSeq().setEnabled(true);

@@ -183,7 +183,7 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 				try {
 					listParamDicom(jj, numberOfFrame);
 				} catch (Exception e) {
-					new GetStackTrace(e);
+					new GetStackTrace(e, this.getClass().toString());
 				}
 			}
 			FileManagerFrame.dlg.setTitle("Loading : sequence " + n * 100 / hmSeq.size() + " %" + " ; " + "files ");

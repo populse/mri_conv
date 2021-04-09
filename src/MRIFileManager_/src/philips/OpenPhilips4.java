@@ -61,7 +61,7 @@ public class OpenPhilips4 implements ParamMRI2, DictionParRec {
 		try {
 			fis = new FileInputStream(file);
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 		tmp = infoIm.get("Data Type");
 

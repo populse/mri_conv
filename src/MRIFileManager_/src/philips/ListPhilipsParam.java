@@ -324,7 +324,7 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 		} catch (Exception e) {
 		}
 
-		// System.out.println("ord = " + ord + " cnt = " + cnt);
+//		 System.out.println("ord = " + ord + " cnt = " + cnt);
 
 		Object[] lv = new Object[16];
 
@@ -336,9 +336,9 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 		// "xytzc"
 
 		if (ord.contentEquals("1 0 3"))
-			lv[0] = "xytcz";
+			lv[0] = "xytcz"; // (orig)
 		else
-			lv[0] = "xyctz";
+			lv[0] = "xyctz"; // (orig)
 
 		if (s1[3].contentEquals("0"))
 			s1[3] = "1";
@@ -346,10 +346,12 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 		if (Integer.parseInt(s1[4]) > 1 && Integer.parseInt(s1[5]) > 1)
 			s1[4] = "1"; // if number of diffusion >1 and number of gradient diffusion >1
 
-		int firstDim = Integer.parseInt(s1[3]) * Integer.parseInt(s1[6]) * Integer.parseInt(s1[7]);
+		int firstDim = Integer.parseInt(s1[3]) * Integer.parseInt(s1[7]);
 		int secondDim = Integer.parseInt(s1[0]);
 		int thirdDim = Integer.parseInt(s1[1]) * Integer.parseInt(s1[2]) * Integer.parseInt(s1[4])
-				* Integer.parseInt(s1[5]);
+				* Integer.parseInt(s1[5]) * Integer.parseInt(s1[6]);
+		
+//		System.out.println(this+" : "+firstDim+" , "+secondDim+" , "+thirdDim);
 
 		lv[1] = firstDim;
 		lv[2] = secondDim;
@@ -367,7 +369,7 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 		lv[14] = listRSI[2];
 		lv[15] = offAcq;
 
-//		System.out.println("lv[] = " + lv[1] + " , " + lv[2] + " , " + lv[3] + " , " + lv[4]);
+//		System.out.println("lv[] = " + lv[0] + " , " + lv[1] + " , " + lv[2] + " , " + lv[3] + " , " + lv[4]);
 
 		return lv;
 	}
@@ -616,8 +618,9 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 
 		Object[] lv = new Object[16];
 
-		// lv[0] = "xytcz";
-		lv[0] = "xytzc";
+		 lv[0] = "xytcz";
+//		lv[0] = "xytzc";
+		 
 		// lv[0] = "xyczt";
 		// lv[0] = "xyctz";
 		// lv[0] = "xyzct";
@@ -635,6 +638,8 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 				lv[0] = "xyctz";
 		}
 
+		
+		
 		lv[1] = Integer.parseInt(s1[3]);
 		lv[2] = Integer.parseInt(s1[0]);
 		lv[3] = Integer.parseInt(s1[1]) * Integer.parseInt(s1[2]) * Integer.parseInt(s1[4]) * Integer.parseInt(s1[5]);
@@ -650,6 +655,9 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 		lv[13] = listRSI[1];
 		lv[14] = listRSI[2];
 		lv[15] = offCal;
+		
+//		System.out.println("lv[] = " + lv[0] + " , " + lv[1] + " , " + lv[2] + " , " + lv[3] + " , " + lv[4]);
+
 
 		return lv;
 	}

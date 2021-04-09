@@ -172,9 +172,9 @@ public class ActionSelectionData extends PrefParam implements MouseListener, Key
 				break;
 			}
 
-		} catch (Exception e1) {
+		} catch (Exception e) {
 			wind.setCursor(null);
-			new GetStackTrace(e1);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		if (code.contentEquals("single"))

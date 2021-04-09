@@ -135,7 +135,7 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 		try {
 			listStackParam = new StackOrderImage(chemVisupars).listStack();
 		} catch (IOException e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 //			FileManagerFrame.getBugText().setText(
 //					FileManagerFrame.getBugText().getText() + "\n----------------\n" + GetStackTrace.getMessage());
 		}
@@ -381,7 +381,7 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 		try {
 			listElements = new ListElementFrame(chemVisupars).listElement();
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 //			FileManagerFrame.getBugText().setText(GetStackTrace.getMessage());
 		}
 

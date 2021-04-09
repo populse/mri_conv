@@ -84,13 +84,13 @@ public class AffineQuaternionBruker_multiOrientation {
 			fieldOfView = tabScaling(recoParams[3][0], chemReco).split(" "); // list of RECO_fov
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		try {
 			listTransp = tabScaling(recoParams[4][0], chemReco).split(" ");
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 		
 		recoTransp = Integer.parseInt(listTransp[0 + indiceOrientation]);
@@ -213,7 +213,7 @@ public class AffineQuaternionBruker_multiOrientation {
 			listGradMatrix = tabScaling(acqParams[0][0], chemAcqp).split(" "); // list of ACQ_grad_matrix
 //			listGradMatrix = tabScaling(visuparsParams[1][0], chemVisupars).split(" ");
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 		offset = 9 * indiceOrientation;
 //		System.out.println("offset : "+offset);
@@ -278,7 +278,7 @@ public class AffineQuaternionBruker_multiOrientation {
 			listRecoSize = tabScaling(recoParams[2][0], chemReco).split(" "); // list of RECO_size ?????
 			listReco_ft_Size = listRecoSize;
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 			// FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
 		}
 
@@ -374,7 +374,7 @@ public class AffineQuaternionBruker_multiOrientation {
 																				// file
 //			listGradOrient = tabScaling(visuparsParams[1][0], chemVisupars).split(" ");
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 		offset = 9 * indiceOrientation;
 //		System.out.println("offset : "+offset);
@@ -464,7 +464,7 @@ public class AffineQuaternionBruker_multiOrientation {
 		try {
 			lecteurAvecBuffer = new BufferedReader(new FileReader(fichier));
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 		while ((ligne = lecteurAvecBuffer.readLine()) != null) {
 			if (ligne.indexOf(paramToFind) != -1) {
@@ -490,7 +490,7 @@ public class AffineQuaternionBruker_multiOrientation {
 			resul = resul.substring(0, resul.length() - 1);
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 			// FileManagerFrame.getBugText().setText(FileManagerFrame.getBugText().getText()+"\n----------------\n"+GetStackTrace.getMessage());
 			resul = "not found";
 		}

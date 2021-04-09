@@ -312,7 +312,7 @@ public class ConvertToJson2 extends PrefParam implements ParamMRI2 {
 			writer.flush();
 			writer.close();
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 
 			System.out.println(
 					"Error: impossible to create file '" + pathJson + PrefParam.separator + nameJson + ".json" + "'");

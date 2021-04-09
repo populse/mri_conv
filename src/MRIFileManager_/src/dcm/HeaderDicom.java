@@ -29,7 +29,7 @@ public class HeaderDicom {
 			dcm.close();
 		} catch (Exception e) {
 			txt = "";
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		UID = searchParam(txt, "Transfer Syntax UID");

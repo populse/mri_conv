@@ -22,7 +22,7 @@ public class FillHmsBruker implements ParamMRI2 {
 
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 	}
 }

@@ -46,8 +46,8 @@ public class SelectionSeqBruker extends PrefParam implements ParamMRI2, Selectio
 				wind.getTreeInfoUser().expandRow(j);
 		}
 
-		catch (Exception e1) {
-			new GetStackTrace(e1);
+		catch (Exception e) {
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		if (PrefParam.previewActived)
@@ -201,7 +201,7 @@ public class SelectionSeqBruker extends PrefParam implements ParamMRI2, Selectio
 			fileOk = true;
 
 		} catch (IOException e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		if (fileOk) {

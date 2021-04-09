@@ -30,7 +30,7 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 
 	public OpenDicom(HashMap<String, String> infoImage, Object[] orderImage, String[] listFile, String noSeq,
 			Boolean show) {
-
+		
 		this.noSeq = noSeq;
 		this.show = show;
 		this.infoImage = infoImage;
@@ -178,7 +178,7 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 			imptmp = new ImagePlus("", stack);
 			r.close();
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		return imptmp;

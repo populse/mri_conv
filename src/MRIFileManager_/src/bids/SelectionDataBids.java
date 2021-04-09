@@ -94,7 +94,7 @@ public class SelectionDataBids extends SelectionData {
 				tm += out.toString() + "\n";
 
 			} catch (IOException e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 				tm = tm + title + " not found\n";
 			}
 

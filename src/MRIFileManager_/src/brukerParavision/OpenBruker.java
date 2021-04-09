@@ -161,7 +161,7 @@ public class OpenBruker implements ParamMRI2 {
 				factor = scal.factorNormalize();
 				offset = scal.offsetNormalize();
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 			}
 			
 			if (scanmode.contains("2")) {
@@ -227,7 +227,7 @@ public class OpenBruker implements ParamMRI2 {
 					}
 
 				} catch (Exception e) {
-					new GetStackTrace(e);
+					new GetStackTrace(e, this.getClass().toString());
 				}
 
 				imp.updateImage();
@@ -363,7 +363,7 @@ public class OpenBruker implements ParamMRI2 {
 					}
 
 				} catch (Exception e) {
-					new GetStackTrace(e);
+					new GetStackTrace(e, this.getClass().toString());
 				}
 
 				imp.updateImage();

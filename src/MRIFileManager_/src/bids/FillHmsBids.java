@@ -28,7 +28,7 @@ public class FillHmsBids implements ParamMRI2 {
 			hmOrderImage.put(seqSel, listBidsPar.ListOrderStackAcq("", ""));
 			
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 	}
 }

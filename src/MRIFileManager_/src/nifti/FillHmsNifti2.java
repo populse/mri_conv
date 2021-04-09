@@ -12,7 +12,7 @@ public class FillHmsNifti2 implements ParamMRI2 {
 				hmInfo.put(seqSel, listNiftiPar.ListParamValueAcq(""));
 				hmOrderImage.put(seqSel, listNiftiPar.ListOrderStackAcq("",""));
 			} catch (Exception e) {
-				new GetStackTrace(e);
+				new GetStackTrace(e, this.getClass().toString());
 			}
 	}
 }

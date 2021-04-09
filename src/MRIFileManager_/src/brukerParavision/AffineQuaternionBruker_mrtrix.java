@@ -82,13 +82,13 @@ public class AffineQuaternionBruker_mrtrix {
 			fieldOfView = tabScaling(recoParams[3][0], chemReco).split(" "); // list of RECO_fov
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		try {
 			listTransp = tabScaling(recoParams[4][0], chemReco).split(" ");
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		recoTransp = Integer.parseInt(listTransp[0 + indiceOrientation]);
@@ -148,7 +148,7 @@ public class AffineQuaternionBruker_mrtrix {
 		try {
 			listGradMatrix = tabScaling(acqParams[0][0], chemAcqp).split(" "); // list of ACQ_grad_matrix
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 		offset = 9 * indiceOrientation;
 
@@ -202,7 +202,7 @@ public class AffineQuaternionBruker_mrtrix {
 			listRecoSize = tabScaling(recoParams[2][0], chemReco).split(" "); // list of RECO_size ?????
 			listReco_ft_Size = listRecoSize;
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 
 		for (int i = 0; i < dimensions.length; i++) {
@@ -230,7 +230,7 @@ public class AffineQuaternionBruker_mrtrix {
 		try {
 			listGradOrient = tabScaling(acqParams[0][0], chemAcqp).split(" "); // list of SPackArrGradOrient in method
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 		offset = 9 * indiceOrientation;
 
@@ -314,7 +314,7 @@ public class AffineQuaternionBruker_mrtrix {
 		try {
 			lecteurAvecBuffer = new BufferedReader(new FileReader(fichier));
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 		}
 		while ((ligne = lecteurAvecBuffer.readLine()) != null) {
 			if (ligne.indexOf(paramToFind) != -1) {
@@ -340,7 +340,7 @@ public class AffineQuaternionBruker_mrtrix {
 			resul = resul.substring(0, resul.length() - 1);
 
 		} catch (Exception e) {
-			new GetStackTrace(e);
+			new GetStackTrace(e, this.getClass().toString());
 			resul = "not found";
 		}
 		return resul;

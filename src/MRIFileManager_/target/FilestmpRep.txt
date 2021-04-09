@@ -1,9 +1,9 @@
 [Bruker] 
-[Dicom] /home/omontigon/Documents/DataIRM/Dicom/Veronica2
+[Dicom] /home/domicile-xubuntu/Documents/DataIRM/Dicom
 [ParRec] 
-[NifTI] /home/omontigon/Documents/DataIRM/Nifti
+[NifTI] 
 [Bids] 
-[Export] 
+[Export] /tmp
 [LookAndFeel] javax.swing.plaf.metal.MetalLookAndFeel
 [NamingRepNifTI] /
 [NamingFileNifTI] PatientName_SequenceName_CreationDate_AcquisitionDate_SeqNumber_SerialNumber_Protocol

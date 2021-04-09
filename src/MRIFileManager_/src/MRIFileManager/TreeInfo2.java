@@ -60,7 +60,7 @@ public class TreeInfo2 implements ParamMRI2 {
 
 			keyVector = keyVector.substring(0, keyVector.length());
 			valueVector = valueVector.substring(0, valueVector.length());
-			param.add(new DefaultMutableTreeNode("TABLE:" + keyVector + "�" + valueVector));
+			param.add(new DefaultMutableTreeNode("TABLE:" + keyVector + "~�~" + valueVector));
 			root.add(param);
 		}
 
@@ -119,15 +119,14 @@ class TreeRenderer2 extends DefaultTreeCellRenderer {
 			int row, boolean hasFocus) {
 		Component c = super.getTreeCellRendererComponent(tree, value, true, expanded, leaf, row, hasFocus);
 
+//		System.out.println(" value = " + value);
+//		System.out.println(" c = " + c);
+
 		if (value.toString().startsWith("TABLE:")) {
-
 			c = tables.get(value.toString());
-
 			if (c == null) {
-
 				TableModel model = createModel(value.toString());
 				TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
-
 				JTable table = new JTable(model);
 //				 table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 				// table.setForeground(Color.LIGHT_GRAY);
@@ -147,9 +146,9 @@ class TreeRenderer2 extends DefaultTreeCellRenderer {
 				c = tables.get(value.toString());
 				c.setEnabled(true);
 				c.setComponentOrientation(tree.getComponentOrientation());
-
 			}
 		}
+//		System.out.println("c = " + c);
 
 		return c;
 	}
@@ -158,7 +157,7 @@ class TreeRenderer2 extends DefaultTreeCellRenderer {
 
 		tableData = tableData.substring(6, tableData.length());
 
-		String[] colData = tableData.split("�");
+		String[] colData = tableData.split("~�~");
 		int nCol = colData.length;
 		int nRow = colData[0].split("&&").length;
 
@@ -172,7 +171,7 @@ class TreeRenderer2 extends DefaultTreeCellRenderer {
 					dat[i][j] = "";
 				}
 		}
-		MRIFileManager.TableModel model = new MRIFileManager.TableModel(dat, new String[] { "", "" });
+		MRIFileManager.TableMod model = new MRIFileManager.TableMod(dat, new String[] { "", "" });
 
 		return model;
 	}
