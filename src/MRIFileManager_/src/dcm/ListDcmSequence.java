@@ -126,7 +126,13 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 					listSlice[1] = searchParam(
 							new StringBuffer(hdrDcm.substring(hdrDcm.indexOf("Image Number: 0") + 15)), "Image Number");
 				}
-
+				
+				if (listSlice[1].isEmpty()) {
+					listSlice[1] = searchParam(
+							new StringBuffer(hdrDcm.substring(hdrDcm.indexOf("InstanceNumber"))), "InstanceNumber");
+					System.out.println(this+" Instance Image = "+listSlice[1]);
+				}
+				
 				if (listSlice[1].isEmpty())
 					listSlice[1] = String.valueOf(i);
 

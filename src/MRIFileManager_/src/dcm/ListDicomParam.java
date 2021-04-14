@@ -3,7 +3,6 @@ package dcm;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -251,45 +250,45 @@ public class ListDicomParam implements ParamMRI2 {
 		return resul.trim();
 	}
 
-	private String deleteDuplicateBy4(String elements) {
-
-		String resul = "";
-
-		if (!elements.isEmpty()) {
-			String tmp = "";
-
-			String[] list = elements.split(" +");
-
-			resul = list[0] + " " + list[1] + " " + list[2] + " " + list[3];
-
-			for (int i = 1; i < list.length / 4; i++) {
-				tmp = list[4 * i] + " " + list[4 * i + 1] + " " + list[4 * i + 2] + " " + list[4 * i + 3];
-				if (!resul.contains(tmp))
-					resul += " " + tmp;
-			}
-		}
-		return resul;
-	}
-
-	private String deleteDuplicateBy3(String elements) {
-
-		String resul = "";
-
-		if (!elements.isEmpty()) {
-			String tmp = "";
-
-			String[] list = elements.split(" +");
-
-			resul = list[0] + " " + list[1] + " " + list[2];
-
-			for (int i = 1; i < list.length / 3; i++) {
-				tmp = list[3 * i] + " " + list[3 * i + 1] + " " + list[3 * i + 2];
-				if (!resul.contains(tmp))
-					resul += " " + tmp;
-			}
-		}
-		return resul;
-	}
+//	private String deleteDuplicateBy4(String elements) {
+//
+//		String resul = "";
+//
+//		if (!elements.isEmpty()) {
+//			String tmp = "";
+//
+//			String[] list = elements.split(" +");
+//
+//			resul = list[0] + " " + list[1] + " " + list[2] + " " + list[3];
+//
+//			for (int i = 1; i < list.length / 4; i++) {
+//				tmp = list[4 * i] + " " + list[4 * i + 1] + " " + list[4 * i + 2] + " " + list[4 * i + 3];
+//				if (!resul.contains(tmp))
+//					resul += " " + tmp;
+//			}
+//		}
+//		return resul;
+//	}
+//
+//	private String deleteDuplicateBy3(String elements) {
+//
+//		String resul = "";
+//
+//		if (!elements.isEmpty()) {
+//			String tmp = "";
+//
+//			String[] list = elements.split(" +");
+//
+//			resul = list[0] + " " + list[1] + " " + list[2];
+//
+//			for (int i = 1; i < list.length / 3; i++) {
+//				tmp = list[3 * i] + " " + list[3 * i + 1] + " " + list[3 * i + 2];
+//				if (!resul.contains(tmp))
+//					resul += " " + tmp;
+//			}
+//		}
+//		return resul;
+//	}
 
 	private String reductListDiffusion(String bvals, String diffdir) {
 		String newlistdiff = "", newlistbvals = "", tmplist = "";
