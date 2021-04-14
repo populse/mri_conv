@@ -28,6 +28,13 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+
+	14/04/2021 : version 21.4.1a
+	Bugs fixed:
+		- Dicom : image order problem with some Dicom JpegLossLess fixed
+
+<p></p>
+
 	09/04/2021 : version 21.3.1a
 	Bugs fixed:
 		- Dicom : bug with some DICOM files fixed
