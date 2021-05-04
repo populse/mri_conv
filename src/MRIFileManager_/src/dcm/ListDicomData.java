@@ -11,11 +11,11 @@ import abstractClass.PrefParam;
 public class ListDicomData extends PrefParam implements ParamMRI2 {
 
 	private String[] paramListData = headerListData;
-	private String headerDicom,formatDicom;
+	private String headerDicom, formatDicom;
 	private boolean JpegLossLess;
 
 	public ListDicomData(String chemDicom) {
-		
+
 		String chemDicom_hmData;
 		headerDicom = chemDicom + separator + "DIRFILE";
 
@@ -30,16 +30,16 @@ public class ListDicomData extends PrefParam implements ParamMRI2 {
 				formatDicom = "DCM";
 			}
 		}
-		
-		chemDicom_hmData=headerDicom;
-		
+
+		chemDicom_hmData = headerDicom;
+
 		hmData.put(chemDicom, chemDicom_hmData);
 
 		if (!formatDicom.contentEquals("DCM"))
 			headerDicom = new HeaderDicom().getHeaderDicom(headerDicom);
 
 		String pathRel = "";
-		
+
 		switch (formatDicom) {
 
 		case "DIRFILE":
@@ -89,31 +89,34 @@ public class ListDicomData extends PrefParam implements ParamMRI2 {
 		}
 
 		HeaderDicom hdrdcm = new HeaderDicom();
-		
+
 		headerDicom = hdrdcm.getHeaderDicom(headerDicom);
 		JpegLossLess = hdrdcm.isJpegLossLess();
-		
+
 	}
 
 	public Object[] listParamDataDicom() throws IOException {
-		
+
 		Object[] resul = new Object[paramListData.length];
 
-		for (int i = 2; i < resul.length-1; i++)
+		for (int i = 2; i < resul.length - 1; i++)
 			resul[i] = searchParam(headerDicom, dictionaryMRISystem.get(paramListData[i]).get("keyName"));
 
-		resul[4] = new Dateformatmodif(resul[4].toString(), dictionaryMRISystem.get(paramListData[4]).get("format"),
-				dictionaryJsonSystem.get(paramListData[4]).get("format")).getNewFormatDate();
+		try {
+			resul[4] = new Dateformatmodif(resul[4].toString(), dictionaryMRISystem.get(paramListData[4]).get("format"),
+					dictionaryJsonSystem.get(paramListData[4]).get("format")).getNewFormatDate();
+		} catch (Exception e) {
+		}
 
-		resul[8]=formatDicom;
+		resul[8] = formatDicom;
 		if (JpegLossLess)
-			resul[8]+=", JpegLossLess";
+			resul[8] += ", JpegLossLess";
 
 		return resul;
 	}
 
 	private String searchParam(String txt, String paramToFind) {
- 		String resul = "";
+		String resul = "";
 		try {
 			resul = txt.substring(txt.indexOf(paramToFind));
 			resul = resul.substring(resul.indexOf(":") + 1, resul.indexOf("\n"));

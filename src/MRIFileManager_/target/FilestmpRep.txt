@@ -1,12 +1,12 @@
-[Bruker] 
-[Dicom] /home/domicile-xubuntu/Documents/DataIRM/Dicom
+[Bruker] /home/omontigon/Documents/DataIRM/Bruker
+[Dicom] /home/omontigon/Documents/DataIRM/Shanoir/CT_Harmo
 [ParRec] 
 [NifTI] 
 [Bids] 
 [Export] /tmp
-[LookAndFeel] javax.swing.plaf.metal.MetalLookAndFeel
-[NamingRepNifTI] /
+[LookAndFeel] com.jtattoo.plaf.hifi.HiFiLookAndFeel
+[NamingRepNifTI] /PatientName/
 [NamingFileNifTI] PatientName_SequenceName_CreationDate_AcquisitionDate_SeqNumber_SerialNumber_Protocol
-[NamingOptionsNifTI] 10012
+[NamingOptionsNifTI] 00011
 [previewActived] No
 [SeqDetail] 1023

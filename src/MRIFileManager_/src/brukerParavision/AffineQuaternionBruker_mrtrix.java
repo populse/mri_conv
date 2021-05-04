@@ -305,7 +305,7 @@ public class AffineQuaternionBruker_mrtrix {
 	}
 
 	private String tabScaling(String paramToFind, String fichier) throws NumberFormatException, IOException {
-		String ligne;
+		String ligne, tmpligne;
 		String resul = "";
 		BufferedReader lecteurAvecBuffer = null;
 
@@ -327,6 +327,13 @@ public class AffineQuaternionBruker_mrtrix {
 				int i = 0;
 				while (i < inc) {
 					ligne = lecteurAvecBuffer.readLine();
+					if (ligne.contains("@")) {
+						tmpligne = ligne.substring(ligne.indexOf("(") + 1, ligne.indexOf(")"));
+						for (int j = 0; j <= Integer.parseInt(txt); j++)
+							resul = resul.concat(" " + tmpligne);
+						resul = resul.trim();
+						break;
+					}
 					for (int j = 0; j < ligne.split(" ").length; j++) {
 						resul += ligne.split(" ")[j] + " ";
 					}
@@ -343,6 +350,7 @@ public class AffineQuaternionBruker_mrtrix {
 			new GetStackTrace(e, this.getClass().toString());
 			resul = "not found";
 		}
+		
 		return resul;
 	}
 

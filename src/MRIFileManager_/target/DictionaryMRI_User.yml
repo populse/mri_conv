@@ -185,3 +185,16 @@ dictionaryMRI:
                   viewer: {category: Test}
                   json:   {tagJson: ~, type: ~, format: ~, units: ~}
   
+  kVp:
+                  description: {info: ""}
+                  whereDicom:  {file: ~, keyName: kVp, type: float, format: ~, units: ~}
+                   
+                  viewer: {category: MRI parameters}
+                  json:   {tagJson: kVp, type: float, format: ~, units: ~}
+  
+  KVP:
+                  description: {info: ""}
+                  whereDicom:  {file: ~, keyName: KVP, type: float, format: ~, units: ~}
+                   
+                  viewer: {category: MRI parameters}
+                  json:   {tagJson: KVP, type: float, format: ~, units: ~}

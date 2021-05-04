@@ -56,11 +56,11 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 				wind.setEnabled(true);
 				wind.setAlwaysOnTop(true);
 				wind.setAlwaysOnTop(false);
-				
+
 				try {
 					if (wd.answUser().contentEquals("ok"))
 						fieldDeidentification = wd.getAnswer();
-					
+
 					else
 						return;
 				} catch (Exception e) {
@@ -111,7 +111,7 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 							listInBaskNifti += separator;
 						}
 					}
-				
+
 				for (String gk : dg.getListFieldTrue()) {
 					String tmp;
 					if (gk.contains("Seq Number")) {
@@ -119,15 +119,13 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 						tmp = hmInfo.get(jj).get("noSeq");
 						if (tmp == null)
 							tmp = jj;
-					}
-					else
+					} else
 						// listInBask += hmInfo.get(jj).get(gk);
 						tmp = hmInfo.get(jj).get(gk);
 
 					if (tmp == null)
 						tmp = "";
 					tmp = new ReplacecharForbidden().charReplace(tmp);
-
 
 					listInBaskNifti += tmp;
 					listInBaskNifti += dg.getSeparateChar();
@@ -139,7 +137,8 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 				 **************************************************/
 				String tmpPatient = hmInfo.get(jj).get("Patient Name"),
 						tmpSerialNb = hmInfo.get(jj).get("Serial Number"), tmpProto = hmInfo.get(jj).get("Protocol"),
-						tmpStudy = hmInfo.get(jj).get("Study Name");
+						tmpStudy = hmInfo.get(jj).get("Study Name"),
+						tmpCreationDate = hmInfo.get(jj).get("Creation Date");
 
 				tmpPatient = new ReplacecharForBids().charReplace(tmpPatient);
 				tmpSerialNb = new ReplacecharForBids().charReplace(tmpSerialNb);
@@ -147,13 +146,15 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 				tmpProto = "acq-" + tmpSerialNb + tmpProto;
 				tmpStudy = new ReplacecharForBids().charReplace(tmpStudy);
 				tmpStudy = "sub-" + tmpStudy;
+				tmpCreationDate = new ReplacecharForBids().charReplace(tmpCreationDate);
 
 				protoBids = new ProtocolsBidsYaml(UtilsSystem.pathOfJar() + "Modalities_BIDS.yml", "Bruker", tmpProto)
 						.getSetProtocol();
 
-				listInBaskBids = tmpPatient + separator + tmpStudy + separator + protoBids[0] + separator + tmpStudy
-						+ "_" + tmpProto;
-				// listInBaskBids = new ReplacecharForbidden().charReplace(listInBaskBids);
+//				listInBaskBids = tmpPatient + separator + tmpStudy + separator + protoBids[0] + separator + tmpStudy
+//						+ "_" + tmpProto;
+				listInBaskBids = "sub-" + tmpPatient + separator + "ses-" + tmpCreationDate + separator + protoBids[0]
+						+ separator + tmpStudy + "_" + tmpProto;
 
 				/**************************************************
 				 * estimation size of file after exportation
@@ -256,7 +257,8 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 								}
 								HashMap<String, String> tmphmInfo = (HashMap<String, String>) hmInfo.get(jj).clone();
 								tmphmInfo.put("pathNifti", listInBaskNifti + descr + "-" + label);
-								tmphmInfo.put("pathBids", listInBaskBids + new ReplacecharForBids().charReplace(descr) + new ReplacecharForBids().charReplace(label) + "_" + protoBids[1]);
+								tmphmInfo.put("pathBids", listInBaskBids + new ReplacecharForBids().charReplace(descr)
+										+ new ReplacecharForBids().charReplace(label) + "_" + protoBids[1]);
 								listBasket_hmInfo.put(listInBaskMult, (HashMap<String, String>) tmphmInfo);
 								listBasket_hmOrderImage.put(listInBaskMult, hmOrderImage.get(jj).clone());
 								if (format.contains("Dicom"))
@@ -308,7 +310,8 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 								HashMap<String, String> tmphmInfo = (HashMap<String, String>) hmInfo.get(jj).clone();
 
 								tmphmInfo.put("pathNifti", listInBaskNifti + "-" + label);
-								tmphmInfo.put("pathBids", listInBaskBids + new ReplacecharForBids().charReplace(label) + "_" + protoBids[1]);
+								tmphmInfo.put("pathBids", listInBaskBids + new ReplacecharForBids().charReplace(label)
+										+ "_" + protoBids[1]);
 
 								int NumberImageByOrientation = Integer.parseInt(tmphmInfo.get("Number Of Slice"))
 										/ tmphmInfo.get("Slice Orientation").split(" +").length;
@@ -413,8 +416,8 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 					} // noAll
 				}
 			}
-		} //end for
-		
+		} // end for
+
 		wind.getListBasket().setModel(listinBasket);
 		wind.getListBasket().updateUI();
 		wind.getTreeBasket().setModel(new UpdateTreeBasket(listinBasket.toArray()).returnTreeModel());

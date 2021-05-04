@@ -131,7 +131,10 @@ public class FillBasketSingle extends PrefParam implements ParamMRI2, Format {
 				 **************************************************/
 				String tmpPatient = hmInfo.get(seqSel).get("Patient Name"),
 						tmpSerialNb = hmInfo.get(seqSel).get("Serial Number"),
-						tmpProto = hmInfo.get(seqSel).get("Protocol"), tmpStudy = hmInfo.get(seqSel).get("Study Name");
+						tmpProto = hmInfo.get(seqSel).get("Protocol"), tmpStudy = hmInfo.get(seqSel).get("Study Name"),
+						tmpCreationDate = hmInfo.get(seqSel).get("Creation Date"), 
+						tmpAcquisitionDate = hmInfo.get(seqSel).get("Acquisition Date"),
+						tmpSequenceName = hmInfo.get(seqSel).get("Sequence Name");
 
 				tmpPatient = new ReplacecharForBids().charReplace(tmpPatient);
 				tmpSerialNb = new ReplacecharForBids().charReplace(tmpSerialNb);
@@ -139,12 +142,18 @@ public class FillBasketSingle extends PrefParam implements ParamMRI2, Format {
 				tmpProto = "acq-" + tmpSerialNb + tmpProto;
 				tmpStudy = new ReplacecharForBids().charReplace(tmpStudy);
 				tmpStudy = "sub-" + tmpStudy;
+				tmpCreationDate = new ReplacecharForBids().charReplace(tmpCreationDate);
+				tmpAcquisitionDate = new ReplacecharForBids().charReplace(tmpAcquisitionDate);
+				tmpSequenceName = new ReplacecharForBids().charReplace(tmpSequenceName);
+
 
 				protoBids = new ProtocolsBidsYaml(UtilsSystem.pathOfJar() + "Modalities_BIDS.yml", "Bruker", tmpProto)
 						.getSetProtocol();
 
-				listInBaskBids = tmpPatient + separator + tmpStudy + separator + protoBids[0] + separator + tmpStudy
-						+ "_" + tmpProto;
+//				listInBaskBids = tmpPatient + separator + tmpStudy + separator + protoBids[0] + separator + tmpStudy
+//						+ "_" + tmpProto;
+				listInBaskBids = "sub-" + tmpPatient + separator + "ses-" + tmpAcquisitionDate + separator + protoBids[0] + separator + 
+								 "sub-" + tmpPatient + "_" + "ses-" + tmpAcquisitionDate + "_" + tmpSequenceName;
 
 				/********************************************************
 				 * estimation size of file after exportation
@@ -216,7 +225,8 @@ public class FillBasketSingle extends PrefParam implements ParamMRI2, Format {
 
 								listinBasket.removeElement(listInBaskMult);
 								listinBasket.add(listinBasket.size(), listInBaskMult);
-								HashMap<String, String> tmphmInfo = (HashMap<String, String>) hmInfo.get(seqSel).clone();
+								HashMap<String, String> tmphmInfo = (HashMap<String, String>) hmInfo.get(seqSel)
+										.clone();
 								tmphmInfo.put("pathNifti", listInBaskNifti + descr + "-" + label);
 								tmphmInfo.put("pathBids", listInBaskBids + new ReplacecharForBids().charReplace(descr)
 										+ new ReplacecharForBids().charReplace(label) + "_" + protoBids[1]);
@@ -265,7 +275,8 @@ public class FillBasketSingle extends PrefParam implements ParamMRI2, Format {
 								listinBasket.removeElement(listInBaskMult);
 								listinBasket.add(listinBasket.size(), listInBaskMult);
 
-								HashMap<String, String> tmphmInfo = (HashMap<String, String>) hmInfo.get(seqSel).clone();
+								HashMap<String, String> tmphmInfo = (HashMap<String, String>) hmInfo.get(seqSel)
+										.clone();
 
 								tmphmInfo.put("pathNifti", listInBaskNifti + "-" + label);
 								tmphmInfo.put("pathBids", listInBaskBids + new ReplacecharForBids().charReplace(label)

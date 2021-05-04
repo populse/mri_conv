@@ -130,7 +130,7 @@ dictionaryMRI:
   
                   whereBruker:  {file: subject, keyName: $SUBJECT_date=, type: string, format: "yyyy-MM-dd'T'HH:mm:ss','SSSZZZZ or HH:mm:ss dd MMM yyyy", units: ~}
                   wherePhilips: {file: PAR ; Xml, keyName: Examination date/time ; Examination Date, type: string ; string, format: "yyyy.MM.dd / hHH:mm:ss ; yyyy.MM.dd", units: ~}
-                  whereDicom:   {file: ~, keyName: Study Date & Study Time, type: string, format: "yyyyMMdd ss", units: ~}
+                  whereDicom:   {file: ~, keyName: Creation Date, type: string, format: ~, units: ~}
                   whereNifti:   {file: json, keyName: CreationDate, type: string, format: "yyyy-MM-dd HH:mm:ss", units: ~}
 
                   viewer: {category: Equipment}

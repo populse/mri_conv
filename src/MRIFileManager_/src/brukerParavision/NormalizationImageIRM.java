@@ -32,7 +32,7 @@ public class NormalizationImageIRM extends PrefParam {
 		int inc = 0;
 		boolean find = false;
 		BufferedReader lecteurAvecBuffer = new BufferedReader(new FileReader(file));
-		String ligne;
+		String ligne, tmpligne;
 		double Max = 0, Min = 0;
 
 		while ((ligne = lecteurAvecBuffer.readLine()) != null && !find) {
@@ -42,6 +42,13 @@ public class NormalizationImageIRM extends PrefParam {
 				int i = 0;
 				while (i < inc) {
 					ligne = lecteurAvecBuffer.readLine();
+					if (ligne.contains("@")) {
+						tmpligne = ligne.substring(ligne.indexOf("(") + 1, ligne.indexOf(")"));
+						f[0] = Float.parseFloat(tmpligne);
+						Max = f[0];
+						Min = f[0];
+						break;
+					}
 					for (int j = 0; j < ligne.split(" +").length; j++) {
 						f[j + i] = Float.parseFloat(ligne.split(" +")[j]);
 						if (i + j == 0) {

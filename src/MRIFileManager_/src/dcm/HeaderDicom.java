@@ -37,6 +37,7 @@ public class HeaderDicom {
 			isJpeglossless = true;
 			txt = getHeaderDicomJpegLossLess(pathDicom);
 		}
+//		System.out.println(this + txt);
 		return txt;
 	}
 
@@ -102,6 +103,11 @@ public class HeaderDicom {
 			}
 		}
 		scan.close();
+		txtOut = txtOut.replace("PatientName", "Patient's Name");
+		txtOut = txtOut.replace("PatientSex", "Patient's Sex");
+		txtOut = txtOut.replace("PatientWeight", "Patient's Weight");
+		txtOut = txtOut.replace("PatientBirthDate", "Patient's Birth Date");
+
 		return txtOut;
 	}
 

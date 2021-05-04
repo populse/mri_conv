@@ -16,9 +16,7 @@ public class DataList implements ParamMRI2 {
 		dataList = new JTable(data, columnNames);
 		dataList.setFillsViewportHeight(true);
 
-//		dataList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		dataList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		
 		dataList.getTableHeader().setReorderingAllowed(false);
 		// for (int i=5;i<ParamMRI.headerListData.length;i++) {
 		// dataList.getColumnModel().getColumn(i).setMinWidth(0);

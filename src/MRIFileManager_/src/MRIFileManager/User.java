@@ -1,4 +1,5 @@
 package MRIFileManager;
+
 import java.util.HashMap;
 
 public class User {

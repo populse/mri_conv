@@ -41,15 +41,19 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 			String tmp = new SearchParamBruker2(dictionaryMRISystem.get(sg).get("keyName"), txtParam).result();
 			String tmp_param = dictionaryMRISystem.get(sg).get("keyName");
 			if (tmp_param.contains("(or)")) {
-				for (String hh:tmp_param.split(" \\(or\\) ")) {
+				for (String hh : tmp_param.split(" \\(or\\) ")) {
 					tmp = new SearchParamBruker2(hh.trim(), txtParam).result();
 					if (!tmp.isEmpty())
 						break;
 				}
 			}
 
-			if (dictionaryMRISystem.get(sg).get("format")!=null) 
-				tmp = new Dateformatmodif(tmp, dictionaryMRISystem.get(sg).get("format"),dictionaryJsonSystem.get(sg).get("format")).getNewFormatDate();
+			if (dictionaryMRISystem.get(sg).get("format") != null)
+				try {
+					tmp = new Dateformatmodif(tmp, dictionaryMRISystem.get(sg).get("format"),
+							dictionaryJsonSystem.get(sg).get("format")).getNewFormatDate();
+				} catch (Exception e) {
+				}
 			lv.put(sg, tmp);
 		}
 
@@ -67,7 +71,7 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 
 			lv.put("Number Of Slice", chemVisu);
 		}
-		
+
 		/************************************************
 		 * recalculate spatial resol
 		 ************************************************/
@@ -89,33 +93,33 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 
 			lv.put("Spatial Resolution", tmp);
 		}
-		
-		/********************************************* 
-		 * redefine Diffusion Ao Images number 
+
+		/*********************************************
+		 * redefine Diffusion Ao Images number
 		 ********************************************/
-		
+
 		if (lv.get("Diffusion Ao Images number").isEmpty())
 			lv.put("Diffusion Ao Images number", "0");
 
 		lv.put("MetadataRaw", txtParam);
-		
+
 		/**********************************************************
 		 * redefine Slice Thickness and Slice separation if empty
 		 **********************************************************/
-		
+
 		if (lv.get("Slice Thickness").isEmpty())
 			lv.put("Slice Thickness", "1.0");
-		
+
 		if (lv.get("Slice Separation").isEmpty())
 			lv.put("Slice Separation", lv.get("Slice Thickness"));
-		
+
 		/**********************************************************
 		 * redefine Slice Orientation if slice packages
 		 **********************************************************/
 		String listSO = lv.get("Slice Orientation");
 		listSO = Arrays.asList(listSO.split(" +")).stream().distinct().collect(Collectors.joining(" "));
 		lv.put("Slice Orientation", listSO);
-		
+
 		return lv;
 	}
 
@@ -168,17 +172,19 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 		 **************************************************************/
 		if (dim.contains("2") && !listStackParam[0][1].equals("1")) {
 //			System.out.println("orderDescDim = "+orderDescDim+" , tmp = "+tmp);
-			
+
 			if (orderDescDim == 1) {
 				if (tmp.contains("FG_SLICE")) {
 					lv[0] = "xyczt";
 					lv[1] = 1;
-					lv[2] = Integer.parseInt(listlabel[0].substring(listlabel[0].indexOf(": ") + 2, listlabel[0].length()));
+					lv[2] = Integer
+							.parseInt(listlabel[0].substring(listlabel[0].indexOf(": ") + 2, listlabel[0].length()));
 					lv[3] = 1;
 				} else {
-				lv[1] = 1;
-				lv[2] = 1;
-				lv[3] = Integer.parseInt(listlabel[0].substring(listlabel[0].indexOf(": ") + 2, listlabel[0].length()));
+					lv[1] = 1;
+					lv[2] = 1;
+					lv[3] = Integer
+							.parseInt(listlabel[0].substring(listlabel[0].indexOf(": ") + 2, listlabel[0].length()));
 				}
 			}
 
@@ -274,15 +280,14 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 						lv[3] = Integer.parseInt(
 								listlabel[1].substring(listlabel[1].indexOf(": ") + 2, listlabel[1].length()));
 					}
-				}
-				else if (tmp.contains("FG_IRMODE")) {
+				} else if (tmp.contains("FG_IRMODE")) {
 					lv[1] = 1;
 					lv[2] = 1;
-					lv[3] = Integer.parseInt(
-							listlabel[0].substring(listlabel[0].indexOf(": ") + 2, listlabel[0].length())) * 
-							Integer.parseInt(
-							listlabel[1].substring(listlabel[1].indexOf(": ") + 2, listlabel[1].length()));
-					}
+					lv[3] = Integer
+							.parseInt(listlabel[0].substring(listlabel[0].indexOf(": ") + 2, listlabel[0].length()))
+							* Integer.parseInt(
+									listlabel[1].substring(listlabel[1].indexOf(": ") + 2, listlabel[1].length()));
+				}
 			}
 
 			if (orderDescDim == 3) {
@@ -422,7 +427,7 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 				txt += "\n";
 			}
 		}
-		
+
 		lv[4] = txt;
 //		System.out.println("seq n "+seqSel);
 //		System.out.println("lv = "+lv[0]+" , "+lv[1]+" , "+lv[2]+" , "+lv[3]+" , "+lv[4]+" , ");
