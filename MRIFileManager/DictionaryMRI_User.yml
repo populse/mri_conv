@@ -495,3 +495,11 @@ dictionaryMRI:
                    
                   viewer: {category: MRI parameters}
                   json:   {tagJson: ScanTime, type: float, format: ~, units: ~}   
+
+  KVP:
+                  description: {info: ""}
+                  whereDicom:  {file: ~, keyName: KVP, type: float, format: ~, units: ~}
+                   
+                  viewer: {category: MRI parameters}
+                  json:   {tagJson: KVP, type: float, format: ~, units: ~}
+  

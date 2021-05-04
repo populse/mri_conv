@@ -28,6 +28,13 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+	04/05/2021 : version 21.5.1a
+	Features added:
+		- Bruker : now compatibility with Paravision360
+	Other:
+		- All : the export to BIDS by default is now as sub-(PatientName)/ses-(AcquisitionDate)/(BIDSmodality)/sub-(PatientName)_ses-(AcquisitionDate)_(SequenceName).nii
+
+<p></p>
 
 	14/04/2021 : version 21.4.1a
 	Bugs fixed:
