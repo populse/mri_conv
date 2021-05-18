@@ -28,6 +28,13 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+	18/05/2021 : version 21.6.1a
+	Bugs fixed:
+		- Bruker : problem of opening 32bits float type images solved (Bruker360)
+		- All : the naming of files exported to BIDS (when adding all sequences to basket) corrected
+
+<p></p>
+
 	04/05/2021 : version 21.5.1a
 	Features added:
 		- Bruker : now compatibility with Paravision360
