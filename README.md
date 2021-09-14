@@ -5,7 +5,7 @@
 
  MRI File Manager allows the reading of some raw and processed data files from MRI Spectrometers :
 
-	- Bruker Paravision PV5 & PV6 (raw data of magnitude type).
+	- Bruker Paravision PV5, PV6 & PV7 (raw data of magnitude type).
 	- Dicom from Bruker, Philips, Siemens.
 	- Philips Achieva (Par/Rec v4, v4.1 & v4.2, Xml/Rec v5).
 	- Nifti-1 (with or without Json).
@@ -18,7 +18,7 @@
 	- an option of anonymization allows to hide sensitive informations about the patient (name, age, sex, weight).
 	- adaptation of orientation information in Nifti headers (tested on SPM, FSL and MRtrix).
 	- option of customizing the Nifti file names.
-	- possibility to create text files containing bvecs & bvals for MRtrix and FSL (Bruker and Philips).
+	- possibility to create text files containing bvecs & bvals for MRtrix and FSL (Bruker, Dicom and Philips).
 
 
 # Documentation
@@ -27,6 +27,18 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 To download the latest 'development' version, click [here](https://github.com/populse/mri_conv/archive/devpt.zip) or 'Download ZIP' in 'Clone or download'.
 
 # Release history
+
+<p></p>
+
+	14/09/2021 : version 21.7.1a
+	Bugs fixed:
+		- Philips : problem with bvec, bval files fixed
+	Features added:
+		- Dicom : export to Nifti in windowless mode
+	Other:
+		- ImageJ : update to version 1.53j, some plugins removed
+
+<p></p>
 
 	18/05/2021 : version 21.6.1a
 	Bugs fixed:
