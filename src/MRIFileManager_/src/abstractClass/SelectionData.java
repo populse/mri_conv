@@ -310,7 +310,7 @@ public abstract class SelectionData extends PrefParam implements ParamMRI2, Form
 						else
 							new ListDicomDirSequence2(path);
 					} else if (formatDicom.contains("DCM"))
-						new ListDcmSequence(path);
+						new ListDcmSequence(path, false);
 				} catch (Exception e) {
 					hmInfo.clear();
 				}

@@ -16,6 +16,15 @@ import abstractClass.PrefParam;
 public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 
 	private String chemDicom;
+	private boolean windowLess = false;
+
+
+	// constructor for windowless mode
+	public ListDirfileSequence(String chemDicom, Boolean wl) {
+		windowLess = wl;
+		this.chemDicom = chemDicom;
+		run();
+	}
 
 	public ListDirfileSequence(String chemDicom) {
 		this.chemDicom = chemDicom;
@@ -25,20 +34,28 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 	public void run() {
 
 		// repertory of first dirfile
-		String chemD = hmData.get(chemDicom);
+
+		String chemD = chemDicom;
+
+		if (!windowLess)
+			chemD= hmData.get(chemDicom);
+		else
+			chemDicom = chemDicom.substring(0, chemDicom.lastIndexOf(PrefParam.separator));
+
 		StringBuffer headerDicom = new StringBuffer(new HeaderDicom().getHeaderDicom(chemD));
 
 		String[] listDirfile = headerDicom.toString().split("0004,1500");
 
 		String stb;
 
-		FileManagerFrame.dlg.setVisible(true);
+		if (!windowLess)
+			FileManagerFrame.dlg.setVisible(true);
 		String prefixSeq=("000000").substring(0, String.valueOf(listDirfile.length).length());
 
 		for (int i = 1; i < listDirfile.length; i++) {
-
-			FileManagerFrame.dlg
-					.setTitle("Loading : sequence " + i * 100 / listDirfile.length + " %");
+			if (!windowLess)
+				FileManagerFrame.dlg
+						.setTitle("Loading : sequence " + i * 100 / listDirfile.length + " %");
 			stb = listDirfile[i];
 			stb = stb.substring(stb.indexOf(": ") + 2, stb.indexOf("\n"));
 			stb = stb.replace("\\", PrefParam.separator);
@@ -48,11 +65,12 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 			// searchListParam(headerDicom, chemDicom, String.valueOf(i - 1));
 			searchListParam(headerDicom, chemDicom, chemDicom + PrefParam.separator + stb,(prefixSeq + i).substring(String.valueOf(i).length()) );
 		}
-		FileManagerFrame.dlg.setVisible(false);
+		if (!windowLess)
+			FileManagerFrame.dlg.setVisible(false);
 	}
 
 	private void searchListParam(StringBuffer hdr, String pathDicom, String pathFileDicom, String noSeq) {
-		
+
 		int IndiceofnumberOfFrame = 1;
 
 		String noSeries="";
@@ -73,7 +91,7 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 				listValuesAcq.put("Note","JpegLossLess");
 				listValuesCal.put("Note","JpegLossLess");
 			}
-				
+
 		} else {
 			hdr2 = hdr;
 			IndiceofnumberOfFrame = 2;
@@ -108,12 +126,13 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 				// dictionaryMRISystem.get(kk).get("keyName")));
 			}
 		}
-
+		
 		for (String kk : dictionaryMRIUser.keySet()) {
 			listValuesAcq.put(kk, searchParam(hdr2, dictionaryMRIUser.get(kk).get("keyName")));
 			listValuesCal.put(kk, searchParam(hdr2, dictionaryMRIUser.get(kk).get("keyName")));
 
 		}
+
 
 		ArrayList<String[]> listAcq = new ArrayList<>();
 		ArrayList<String[]> listCal = new ArrayList<>();
@@ -124,7 +143,9 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 		String[] listSlice = null;
 		
 //		FileManagerFrame.dlg.setVisible(true);
-		String title = FileManagerFrame.dlg.getTitle()+ " ; " + "files ";
+		String title = "";
+		if (! windowLess)
+			title = FileManagerFrame.dlg.getTitle()+ " ; " + "files ";
 		String bvalue_field = "0018,9087";
 		if (listValuesAcq.get("Manufacturer").contains("Philips") || listValuesCal.get("Manufacturer").contains("Philips"))
 			bvalue_field = "2001,1003";
@@ -145,7 +166,8 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 			for (int i = 1; i < listImDcm.length; i++) {
 				StringBuffer hdrtmp = new StringBuffer(listImDcm[i]); 
 				listSlice = new String[21];
-				FileManagerFrame.dlg.setTitle(title + i * 100 / listImDcm.length + " %");
+				if (!windowLess)
+					FileManagerFrame.dlg.setTitle(title + i * 100 / listImDcm.length + " %");
 				fileName = searchParam(hdrtmp, "0004,1500");
 				fileName=fileName.replace("\\", PrefParam.separator);
 				listSlice[0] = pathDicom + PrefParam.separator + getTruePath(pathDicom, fileName);
@@ -244,15 +266,14 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 
 			noSeries = searchParam(hdr2, "Series Number");
 			listValuesAcq.put("Serial Number", noSeries);
-			listValuesCal.put("Serial Number", noSeries);
-						
+			listValuesCal.put("Serial Number", noSeries);						
 			String[] list = hdr2.toString().split("0008,0008");
 
 			for (int i = 1; i < list.length; i++) {
 				StringBuffer hdrtmp = new StringBuffer(list[i]); 
 				listSlice = new String[21]; 
-
-				FileManagerFrame.dlg.setTitle(title + i * 100 / list.length + " %");
+				if (!windowLess)
+					FileManagerFrame.dlg.setTitle(title + i * 100 / list.length + " %");
 				
 				listSlice[1] = searchParam(hdrtmp, "Image Number");
 
@@ -350,8 +371,7 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 				new ListDicomParam(noSeq + "(calc)", listCal, offAcq, "");
 			}
 
-		} // end else
-		
+		} // end else		
 //		FileManagerFrame.dlg.setVisible(false);
 
 	}

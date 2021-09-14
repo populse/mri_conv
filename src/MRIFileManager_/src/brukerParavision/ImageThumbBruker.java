@@ -117,13 +117,15 @@ public class ImageThumbBruker extends ImageThumb implements ParamMRI2 {
 
 		FileInfo fi = new FileInfo();
 
-		if (type.contains("_16BIT_SGN_INT")) {
+		if (type.contains("_16BIT_SGN_INT"))
 			fi.fileType = FileInfo.GRAY16_SIGNED;
-		} else if (type.contains("_32BIT_SGN_INT")) {
+		else if (type.contains("_32BIT_SGN_INT"))
 			fi.fileType = FileInfo.GRAY32_INT;
-		} else {
+		else if  (tmp.contains("_32BIT_FLOAT"))
+			fi.fileType = FileInfo.GRAY32_FLOAT;
+		 else
 			fi.fileType = FileInfo.GRAY8;
-		}
+		
 
 		fi.inputStream = inputStream;
 		fi.fileFormat = FileInfo.RAW;

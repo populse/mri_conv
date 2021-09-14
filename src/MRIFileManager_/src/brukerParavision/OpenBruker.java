@@ -90,13 +90,14 @@ public class OpenBruker implements ParamMRI2 {
 
 			tmp = infoImage.get("Data Type");
 
-			if (tmp.contains("_16BIT_SGN_INT")) {
+			if (tmp.contains("_16BIT_SGN_INT"))
 				fi.fileType = FileInfo.GRAY16_SIGNED;
-			} else if (tmp.contains("_32BIT_SGN_INT")) {
+			else if (tmp.contains("_32BIT_SGN_INT"))
 				fi.fileType = FileInfo.GRAY32_INT;
-			} else {
+			else if  (tmp.contains("_32BIT_FLOAT"))
+				fi.fileType = FileInfo.GRAY32_FLOAT;
+			else
 				fi.fileType = FileInfo.GRAY8;
-			}
 
 			tmp = infoImage.get("File path");
 
@@ -431,6 +432,8 @@ public class OpenBruker implements ParamMRI2 {
 				fi.fileType = FileInfo.GRAY16_SIGNED;
 			else if (tmp.contains("_32BIT_SGN_INT"))
 				fi.fileType = FileInfo.GRAY32_INT;
+			else if  (tmp.contains("_32BIT_FLOAT"))
+				fi.fileType = FileInfo.GRAY32_FLOAT;
 			else
 				fi.fileType = FileInfo.GRAY8;
 

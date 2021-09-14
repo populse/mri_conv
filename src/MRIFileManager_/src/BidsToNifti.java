@@ -13,15 +13,6 @@ public class BidsToNifti extends PrefParam implements ParamMRI2 {
 
 	public static void main(String[] args) {
 
-//		args = new String[4];
-//		args[0] = "/home_ldap/omontigo/Documents/IRM/BIDS/ds001378/dataset_description.json";
-//		args[0] = "/home_ldap/omontigo/Documents/IRM/BIDS/ds001997/dataset_description.json";
-//		args[0] = "/home_ldap/omontigo/Documents/IRM/BIDS/ds001972/dataset_description.json";
-
-//		args[1] = "/tmp/Nifti/";
-//		args[2] = "PatientName/StudyName/CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime";
-//		args[3] = "[ExportOptions] 00000";
-
 		if (args.length < 4) {
 			System.out.println("not enough arguments and options (type: java -classpath MRIManager.jar Help)");
 			return;

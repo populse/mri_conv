@@ -53,13 +53,13 @@ public class SearchDicom {
 				}
 			};
 		}
-		
+
 		listDicom = new StringBuffer[files.length];
 		for (int i = 0; i < files.length; i++)
 			listDicom[i] = new StringBuffer(files[i].toString());
-		
+
 	}
-	
+
 	public StringBuffer[] listDicom() {
 		return listDicom;
 	}

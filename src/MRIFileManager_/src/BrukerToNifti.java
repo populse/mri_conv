@@ -12,17 +12,6 @@ public class BrukerToNifti extends PrefParam implements ParamMRI2 {
 
 	public static void main(String[] args) {
 
-//		args = new String[4];
-//		args[0] = "/home_ldap/omontigo/Documents/IRM/Souris_EB/20150612_083639_eb150609_1_1/1/pdata/1/2dseq;"
-//				+ "/home_ldap/omontigo/Documents/IRM/Souris_EB/20150612_083639_eb150609_1_1/4/pdata/1/2dseq";
-//		args[0] = "/home_ldap/omontigo/Documents/IRM/Souris_EB/20150612_083639_eb150609_1_1;"
-//				+ "/home_ldap/omontigo/Documents/IRM/Souris_EB/20150612_102216_eb150609_1_2";
-//		args[1] = "/home_ldap/omontigo/Documents/IRM/Nifti/testNifti/";
-//		args[2] = "PatientName/StudyName/CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime";
-//		args[3] = "[ExportOptions] 00013";
-		
-		System.out.println("BrukerToNifti");
-
 		if (args.length < 4) {
 			System.out.println("not enough arguments and options (type: java -classpath MRIManager.jar Help)");
 			return;

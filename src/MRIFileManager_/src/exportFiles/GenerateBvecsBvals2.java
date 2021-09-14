@@ -32,6 +32,7 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 		String[] ddtmp = dd;
 		
 //		String[] ddtmp = deleteDuplicate(hmInfo_tmp.get("Direction Diffusion").toString()).split(" +");
+//		System.out.println(this + "constructor = " + constr);
 //		System.out.println(this + " : dir. diff (" + dd.length + ") = " + hmInfo_tmp.get("Direction Diffusion"));
 //		System.out.println(this + " : B-vals eff. (" + bveff.length + ") = " + hmInfo_tmp.get("B-values effective"));
 //		System.out.println(this + " : DwAoImages = " + DwAoImages);
@@ -44,9 +45,9 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 			else
 				getTxt("x, y, z", bvec_bval_txt, directory, name, false);
 
-		} else if (constr.contentEquals("Philips") && ddtmp.length > 1) {
+		} else if (constr.contentEquals("Philips") && ddtmp.length > 3) {
 			getTxt("-z, -x, y", bvec_bval_txt, directory, name, false);
-		} else if (constr.contentEquals("Dicom") && ddtmp.length > 1) {
+		} else if (constr.contentEquals("Dicom") && ddtmp.length > 3) {
 //			getTxt("-z, -x, y", bvec_bval_txt, directory, name);
 			getTxt("x, y, z", bvec_bval_txt, directory, name, true);
 		}

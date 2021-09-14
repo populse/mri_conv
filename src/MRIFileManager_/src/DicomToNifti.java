@@ -4,8 +4,9 @@ import MRIFileManager.DictionaryYaml2;
 import MRIFileManager.UtilsSystem;
 import abstractClass.ParamMRI2;
 import abstractClass.PrefParam;
+import dcm.ListDcmSequence;
 import dcm.ListDicomDirSequence2;
-import dcm.SearchDicom;
+import dcm.ListDirfileSequence;
 
 public class DicomToNifti extends PrefParam implements ParamMRI2 {
 
@@ -15,9 +16,10 @@ public class DicomToNifti extends PrefParam implements ParamMRI2 {
 			System.out.println("not enough arguments and options (type: java -classpath MRIManager.jar Help)");
 			return;
 		}
-
-		for (int i = 0; i < args.length; i++)
-			System.out.println("args[" + i + "] = " + args[i]);
+		
+		hmSeq.clear();
+		hmInfo.clear();
+		hmOrderImage.clear();
 
 		String[] listFiles = args[0].split(";");
 
@@ -33,7 +35,7 @@ public class DicomToNifti extends PrefParam implements ParamMRI2 {
 			System.out.println("export repetory missing or not available");
 			return;
 		}
-//
+
 		try {
 			nrep = args[2]; // get naming option
 		} catch (Exception e) {
@@ -65,22 +67,30 @@ public class DicomToNifti extends PrefParam implements ParamMRI2 {
 		for (int i = 0; i < listFiles.length; i++) {
 			String pathFile = listFiles[i];
 			String nameFile = pathFile.substring(pathFile.lastIndexOf(separator) + 1).toLowerCase();
-			System.out.println("path file = " + pathFile);
 			if (nameFile.contentEquals("dicomdir")) {
 				try {
 					new ListDicomDirSequence2(pathFile, true);
 				} catch (Exception e) {
 					System.out.println(pathFile + " : " + e);
 				}
-			} else if (!nameFile.contentEquals("dicomdir") && !nameFile.contentEquals("firfile")) {
-				StringBuffer[] listDcm = new SearchDicom(pathFile).listDicom();
-				System.out.println("search list of Dicom files ........");
-				for (StringBuffer ll : listDcm)
-					System.out.println(ll);
 			}
-			for (String hh : hmSeq.keySet()) {
-				System.out.println(hmSeq.get(hh)[0]);
+			else if (nameFile.contentEquals("dirfile")) {
+				try {
+					new ListDirfileSequence(pathFile, true);
+				} catch (Exception e) {
+					System.out.println(pathFile + " : " + e);
+				}
 			}
+			else if (!nameFile.contentEquals("dicomdir") && !nameFile.contentEquals("dirfile")) {
+				new ListDcmSequence(pathFile, true);
+			}
+
+			
+			String prefixSeq = ("000000").substring(0, String.valueOf(hmSeq.size()).length());
+			int j = 0;
+			
+			new MriToNifti().convertToNifti(nrep, outRepertory, "Dicom");
+
 		}
 	}
 }

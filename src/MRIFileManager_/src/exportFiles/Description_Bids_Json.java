@@ -1,5 +1,6 @@
 package exportFiles;
 
+import java.io.File;
 import java.io.FileWriter;
 
 import org.json.simple.JSONArray;
@@ -24,6 +25,11 @@ public class Description_Bids_Json {
 		obj.put("Funding", "");
 		obj.put("DatasetDOI","");
 		obj.put("BIDSVersion" , "1.2.1");
+		
+		File f = new File(pathJson);
+
+		if (!f.exists())
+			f.mkdirs();
 		
 		try {
 			FileWriter writer = new FileWriter(pathJson + PrefParam.separator + "dataset_description.json");

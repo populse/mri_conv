@@ -25,7 +25,7 @@ public class DicomFileView extends FileView {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public Boolean isTraversable(File file) {
 		if (file.isDirectory()) {
@@ -38,7 +38,7 @@ public class DicomFileView extends FileView {
 		}
 		return true;
 	}
-	
+
 	public boolean searchDicom(File searchIn) throws IOException {
 		File[] listOfFiles = searchIn.listFiles();
 		

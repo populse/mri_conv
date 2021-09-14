@@ -7,6 +7,6 @@
 [LookAndFeel] com.jtattoo.plaf.hifi.HiFiLookAndFeel
 [NamingRepNifTI] /PatientName/
 [NamingFileNifTI] PatientName_SequenceName_CreationDate_AcquisitionDate_SeqNumber_SerialNumber_Protocol
-[NamingOptionsNifTI] 00011
+[NamingOptionsNifTI] 10011
 [previewActived] No
 [SeqDetail] 1023

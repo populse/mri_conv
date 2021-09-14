@@ -11,15 +11,6 @@ public class PhilipsToNifti extends PrefParam implements ParamMRI2 {
 
 	public static void main(String[] args) {
 
-//		args = new String[4];
-//		args[0] = "/media/omontigo/SauvegardePC/DataIRM/Philips/Data_patient/FOURCY_-_LONGEPIERRE^FRANCOISE^^_SO2_MSME_SENSE_6_1.REC";
-//		args[0] = "/media/omontigo/SauvegardePC/DataIRM/Philips/Data_patient/";
-//		args[0] = "/media/omontigo/SauvegardePC/DataIRM/Philips/Lyon_Stenose_2epartie/transfer_20495_files_dfecc786/OZEN^SUKRIYE_MPR TRA_4_3.REC";
-//		args[0] = "/media/omontigo/SauvegardePC/DataIRM/Philips/Lyon_Stenose_2epartie/transfer_20495_files_dfecc786/";
-//		args[1] = "/tmp/Nifti";
-//		args[2] = "PatientName/StudyName/CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime";
-//		args[3] = "[ExportOptions] 00013";
-
 		if (args.length < 4) {
 			System.out.println("not enough arguments and options (type: java -classpath MRIManager.jar Help)");
 			return;

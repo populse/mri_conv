@@ -637,8 +637,6 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 			if (order.split(" +")[0].contentEquals("0"))
 				lv[0] = "xyctz";
 		}
-
-		
 		
 		lv[1] = Integer.parseInt(s1[3]);
 		lv[2] = Integer.parseInt(s1[0]);
@@ -657,7 +655,6 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 		lv[15] = offCal;
 		
 //		System.out.println("lv[] = " + lv[0] + " , " + lv[1] + " , " + lv[2] + " , " + lv[3] + " , " + lv[4]);
-
 
 		return lv;
 	}

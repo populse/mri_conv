@@ -130,11 +130,12 @@ public class FillBasketSingle extends PrefParam implements ParamMRI2, Format {
 				 * get Structure Bids in term of Parameters IRM
 				 **************************************************/
 				String tmpPatient = hmInfo.get(seqSel).get("Patient Name"),
-						tmpSerialNb = hmInfo.get(seqSel).get("Serial Number"),
-						tmpProto = hmInfo.get(seqSel).get("Protocol"), tmpStudy = hmInfo.get(seqSel).get("Study Name"),
-						tmpCreationDate = hmInfo.get(seqSel).get("Creation Date"), 
-						tmpAcquisitionDate = hmInfo.get(seqSel).get("Acquisition Date"),
-						tmpSequenceName = hmInfo.get(seqSel).get("Sequence Name");
+					   tmpSerialNb = hmInfo.get(seqSel).get("Serial Number"),
+					   tmpProto = hmInfo.get(seqSel).get("Protocol"),
+					   tmpStudy = hmInfo.get(seqSel).get("Study Name"),
+					   tmpCreationDate = hmInfo.get(seqSel).get("Creation Date"), 
+					   tmpAcquisitionDate = hmInfo.get(seqSel).get("Acquisition Date"),
+					   tmpSequenceName = hmInfo.get(seqSel).get("Sequence Name");
 
 				tmpPatient = new ReplacecharForBids().charReplace(tmpPatient);
 				tmpSerialNb = new ReplacecharForBids().charReplace(tmpSerialNb);
@@ -199,7 +200,7 @@ public class FillBasketSingle extends PrefParam implements ParamMRI2, Format {
 
 							if (!Nifticase) {
 								listInBaskMult += new ReplacecharForBids().charReplace(descr)
-										+ new ReplacecharForBids().charReplace(label) + "_" + protoBids[1];
+										+ new ReplacecharForBids().charReplace(label); // + "_" + protoBids[1];
 							} else
 								listInBaskMult += descr + "-" + label;
 							listInBaskMult = String.format("%-15s %-" + (280 - listInBaskMult.length()) + "s %15s %n",
@@ -229,7 +230,7 @@ public class FillBasketSingle extends PrefParam implements ParamMRI2, Format {
 										.clone();
 								tmphmInfo.put("pathNifti", listInBaskNifti + descr + "-" + label);
 								tmphmInfo.put("pathBids", listInBaskBids + new ReplacecharForBids().charReplace(descr)
-										+ new ReplacecharForBids().charReplace(label) + "_" + protoBids[1]);
+										+ new ReplacecharForBids().charReplace(label)); // + "_" + protoBids[1]);
 								listBasket_hmInfo.put(listInBaskMult, (HashMap<String, String>) tmphmInfo);
 								listBasket_hmOrderImage.put(listInBaskMult, hmOrderImage.get(seqSel));
 								if (format.contains("Dicom"))
@@ -248,7 +249,7 @@ public class FillBasketSingle extends PrefParam implements ParamMRI2, Format {
 							label = listOrientation[d];
 
 							if (!Nifticase)
-								listInBaskMult += label + "_" + protoBids[1];
+								listInBaskMult += label; // + "_" + protoBids[1];
 							else
 								listInBaskMult += "-" + label;
 
@@ -279,8 +280,7 @@ public class FillBasketSingle extends PrefParam implements ParamMRI2, Format {
 										.clone();
 
 								tmphmInfo.put("pathNifti", listInBaskNifti + "-" + label);
-								tmphmInfo.put("pathBids", listInBaskBids + new ReplacecharForBids().charReplace(label)
-										+ "_" + protoBids[1]);
+								tmphmInfo.put("pathBids", listInBaskBids + new ReplacecharForBids().charReplace(label)); // + "_" + protoBids[1]);
 
 								int NumberImageByOrientation = Integer.parseInt(tmphmInfo.get("Number Of Slice"))
 										/ tmphmInfo.get("Slice Orientation").split(" +").length;
@@ -330,8 +330,8 @@ public class FillBasketSingle extends PrefParam implements ParamMRI2, Format {
 				else {
 
 					if (!noAll) {
-						if (!Nifticase)
-							listInBask += "_" + protoBids[1];
+//						if (!Nifticase)
+//							listInBask += "_" + protoBids[1];
 						listInBask = String.format("%-15s %-" + (280 - listInBask.length()) + "s %15s %n", format,
 								listInBask, "[ " + sizeFileAfterExport + " Mo ]");
 
@@ -378,7 +378,7 @@ public class FillBasketSingle extends PrefParam implements ParamMRI2, Format {
 							HashMap<String, String> tmphmInfo = (HashMap<String, String>) hmInfo.get(seqSel).clone();
 							tmphmInfo.put("pathNifti", listInBaskNifti);
 							if (Nifticase && hasJsonKnown)
-								tmphmInfo.put("pathBids", listInBaskBids + "_" + protoBids[1]);
+								tmphmInfo.put("pathBids", listInBaskBids); // + "_" + protoBids[1]);
 							listBasket_hmInfo.put(listInBask, tmphmInfo);
 							listBasket_hmOrderImage.put(listInBask, hmOrderImage.get(seqSel));
 							if (format.contains("Dicom"))

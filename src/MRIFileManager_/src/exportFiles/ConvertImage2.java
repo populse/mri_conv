@@ -61,9 +61,10 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 
 	// constructor overloading for script windowless
 	public ConvertImage2(int qform, int sform, convertNifti conv, String seqSel, String repWork,
-			String repertoryExport) {
+			String repertoryExport, String constructor) {
 
 		continuSave = true;
+
 
 		boolean answ = false;
 
@@ -92,7 +93,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 			try {
 				if (Integer.parseInt(onetwofile) > 3)
 					tmpotf = String.valueOf(Integer.parseInt(onetwofile) - 4);
-				fc = new GenerateBvecsBvals2(repWork, repertoryExport, seqSel, "Bruker", tmpotf).fileCreated();
+				fc = new GenerateBvecsBvals2(repWork, repertoryExport, seqSel, constructor, tmpotf).fileCreated();
 				if (fc && Integer.parseInt(onetwofile) > 3) {
 					qform = 1;
 					sform = 1;

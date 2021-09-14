@@ -14,20 +14,25 @@ import ij.plugin.DICOM;
 public class ListDcmSequence implements ParamMRI2, DictionDicom {
 
 	private String chemDicom;
+	private Boolean windowlessMode;
 
-	public ListDcmSequence(String chemDicom) {
+	public ListDcmSequence(String chemDicom, Boolean windowlessMode) {
 		this.chemDicom = chemDicom;
+		this.windowlessMode = windowlessMode;
 		run();
 	}
 
 	public void run() {
 
-		FileManagerFrame.dlg.setVisible(true);
-		FileManagerFrame.dlg.setTitle("Search list of Dicom ...");
+		if (!windowlessMode) {
+			FileManagerFrame.dlg.setVisible(true);
+			FileManagerFrame.dlg.setTitle("Search list of Dicom ...");
+		}
 		
 		StringBuffer[] listDicom = new SearchDicom(chemDicom).listDicom();
-		
-		FileManagerFrame.dlg.setTitle("Loading Dicom headers ...");
+
+		if (!windowlessMode)
+			FileManagerFrame.dlg.setTitle("Loading Dicom headers ...");
 
 		HashMap<String, ArrayList<String>> listFilesBySerieNumber = new HashMap<>();
 		ArrayList<String> tmpList = new ArrayList<>();
@@ -103,7 +108,8 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 		ArrayList<String> tmpCal = new ArrayList<>();
 		int offAcq = 0, offCalc = 0;
 
-		FileManagerFrame.dlg.setVisible(true);
+		if (!windowlessMode)
+			FileManagerFrame.dlg.setVisible(true);
 		String title = "Loading : files ";
 //		String hdrRecorded = "";
 		String bvalue_field = "0018,9087";
@@ -116,7 +122,8 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 			StringBuffer hdrDcm;
 
 			for (int i = 0; i < files.length; i++) {
-				FileManagerFrame.dlg.setTitle(title + (i + 1) * 100 / files.length + " %");
+				if (!windowlessMode)
+					FileManagerFrame.dlg.setTitle(title + (i + 1) * 100 / files.length + " %");
 				hdrDcm = new StringBuffer(new HeaderDicom().getHeaderDicom(files[i].toString()));
 //				hdrRecorded+=hdrDcm+"\n";
 				listSlice = new String[21];
@@ -254,7 +261,8 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 			String prefixSeq = ("000000").substring(0, String.valueOf(files.length).length());
 
 			for (int k = 0; k < files.length; k++) {
-				FileManagerFrame.dlg.setTitle(title + (k + 1) * 100 / files.length + " %");
+				if (!windowlessMode)
+					FileManagerFrame.dlg.setTitle(title + (k + 1) * 100 / files.length + " %");
 
 				noSeq = (prefixSeq + k).substring(String.valueOf(k).length());
 
