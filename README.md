@@ -30,6 +30,17 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	19/01/2022 : version 21.8.2a
+	Bugs fixed:
+		- All : wrong value displayed in 'Image in Acquisition' field fixed
+		- BIDS : export bugs to Nifti/Json fixed
+		- Dicom : some dicom file reading errors fixed		
+	Features added:
+		- Dicom & BIDS : icons displayed in the file dialog
+		- ImageJ : plugIn CEST added
+
+<p></p>
+
 	14/09/2021 : version 21.7.1a
 	Bugs fixed:
 		- Philips : problem with bvec, bval files fixed
