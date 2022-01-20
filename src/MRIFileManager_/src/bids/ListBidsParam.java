@@ -107,10 +107,20 @@ public class ListBidsParam implements ParamMRI2, ListParam2 {
 //				new GetStackTrace(e);
 			}
 		}
-
+				
 		String tmp;
+		
 		/**********************************************************
-		 * delete 'ms' in EchoTime, RepetitioTime and InversionTime
+		 * Slice Orientation by default
+		 **********************************************************/
+		try {
+			lv.get("Slice Orientation").isEmpty();
+		} catch (Exception e) {
+			lv.put("Slice Orientation", "unknow");
+		}
+		
+		/**********************************************************
+		 * delete 'ms' in EchoTime, RepetitionTime and InversionTime
 		 *********************************************************/
 		try {
 			tmp = lv.get("Echo Time");

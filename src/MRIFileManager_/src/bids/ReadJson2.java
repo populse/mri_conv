@@ -20,13 +20,14 @@ public class ReadJson2 {
 		try {
 			obj = parser.parse(new FileReader(jsonPath));
 			JSONObject object = (JSONObject) obj;
-			if (object.get("Json_Version").toString().contains("Irmage2018")) {
-				listObject(object);
-				jsonversion = true;
-			} else {
-//				listHighObject(object);
-				jsonversion = false;
-			}
+			jsonversion = false;
+//			if (object.get("Json_Version").toString().contains("Irmage2018")) {
+//				listObject(object);
+//				jsonversion = true;
+//			} else {
+////				listHighObject(object);
+//				jsonversion = false;
+//			}
 
 		} catch (Exception e) {
 			new GetStackTrace(e, this.getClass().toString());

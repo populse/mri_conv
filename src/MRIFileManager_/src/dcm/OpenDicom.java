@@ -107,7 +107,6 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 
 		if (show)
 			imp.show();
-
 	}
 
 	private ImagePlus noJpegLossLess() {

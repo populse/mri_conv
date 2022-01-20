@@ -23,6 +23,8 @@ public class SearchDicom {
 			public boolean accept(File dir, String name) {
 				if (!new File(dir + PrefParam.separator + name).isHidden())
 					try {
+						if (name.toLowerCase().contains("xx_") || name.toLowerCase().contains("ps_"))
+							return false;
 						return (DicomFileUtilities.isDicomOrAcrNemaFile(dir + PrefParam.separator + name));
 					} catch (Throwable ed) {
 					}

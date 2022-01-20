@@ -1,12 +1,12 @@
-[Bruker] /home/omontigon/Documents/DataIRM/Bruker
-[Dicom] /home/omontigon/Documents/DataIRM/Shanoir/CT_Harmo
-[ParRec] 
-[NifTI] 
-[Bids] 
-[Export] /tmp
-[LookAndFeel] com.jtattoo.plaf.hifi.HiFiLookAndFeel
-[NamingRepNifTI] /PatientName/
-[NamingFileNifTI] PatientName_SequenceName_CreationDate_AcquisitionDate_SeqNumber_SerialNumber_Protocol
-[NamingOptionsNifTI] 10011
+[Bruker] /home/omontigon/Documents/dataIRM
+[Dicom] /home/omontigon/Documents/dataIRM/Dicom/BL
+[ParRec] /home/omontigon/Documents/dataIRM
+[NifTI] /home/omontigon/Documents/dataIRM
+[Bids] /home/omontigon/Documents/dataIRM/BIDS/Openneuro
+[Export] /home/omontigon/Documents/eclipse-workspace/MRIFileManager_/target/
+[LookAndFeel] javax.swing.plaf.metal.MetalLookAndFeel
+[NamingRepNifTI] /
+[NamingFileNifTI] PatientName-StudyName-CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime
+[NamingOptionsNifTI] 00013
 [previewActived] No
 [SeqDetail] 1023

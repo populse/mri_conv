@@ -53,11 +53,13 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 			}
 			listFilesBySerieNumber.put(noSeries, tmpList);
 		}
-
+		
+		String prefixSeq = ("000000").substring(0, String.valueOf(listFilesBySerieNumber.size()).length());
+		String ind;
 		int c = 0;
-
 		for (String hh : listFilesBySerieNumber.keySet()) {
-			startList(listFilesBySerieNumber.get(hh).toArray(), String.valueOf(c));
+			ind = (prefixSeq + c).substring(String.valueOf(c).length());
+			startList(listFilesBySerieNumber.get(hh).toArray(), String.valueOf(ind));
 			c++;
 		}
 	}
@@ -258,13 +260,10 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 			// e.printStackTrace();
 			// }
 
-			String prefixSeq = ("000000").substring(0, String.valueOf(files.length).length());
 
 			for (int k = 0; k < files.length; k++) {
 				if (!windowlessMode)
 					FileManagerFrame.dlg.setTitle(title + (k + 1) * 100 / files.length + " %");
-
-				noSeq = (prefixSeq + k).substring(String.valueOf(k).length());
 
 				String currentDicomPath = files[k].toString();
 

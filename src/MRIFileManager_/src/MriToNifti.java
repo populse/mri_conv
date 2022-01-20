@@ -215,7 +215,7 @@ public class MriToNifti extends PrefParam implements ParamMRI2 {
 			else
 				System.out.println(file + " ..... no exported because number of orientations > 1");
 		}
-		
+
 
 //		} else
 //			System.out.println(file + " ..... no exported because number of orientations > 1");

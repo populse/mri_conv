@@ -17,11 +17,11 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 
 import abstractClass.ParamMRI2;
 
-public class TreeInfo2 implements ParamMRI2 {
+public class TreeInfo3 implements ParamMRI2 {
 
 	private JTree tree;
 
-	public TreeInfo2(HashMap<String, List<String>> listLabel, HashMap<String, String> listValues) {
+	public TreeInfo3(HashMap<String, List<String>> listLabel, HashMap<String, String> listValues) {
 
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("IRMaGe");
 		DefaultMutableTreeNode param = null;
@@ -73,7 +73,42 @@ public class TreeInfo2 implements ParamMRI2 {
 		tree = new JTree(root);
 		tree.setRootVisible(false);
 		tree.setShowsRootHandles(false);
-		tree.setCellRenderer(new TreeRenderer2());
+		tree.setCellRenderer(new TreeRenderer3());
+		tree.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+//				System.out.println(tree.getSelectionPath());
+//				System.out.println(tree.getLeadSelectionPath());
+//				System.out.println(tree.getSelectionRows()[0]);
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
 		// renderer.setLeafIcon(null);
@@ -112,7 +147,7 @@ public class TreeInfo2 implements ParamMRI2 {
 // }
 // }
 
-class TreeRenderer2 extends DefaultTreeCellRenderer {
+class TreeRenderer3 extends DefaultTreeCellRenderer {
 
 	private static final long serialVersionUID = 1L;
 	private Map<String, JTable> tables = new HashMap<>();

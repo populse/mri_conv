@@ -13,6 +13,7 @@ import abstractClass.ListParam2;
 import abstractClass.ParamMRI2;
 import abstractClass.PrefParam;
 
+
 public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 {
 
 	private String chem2dseq, chemVisupars, seqSel, serialNumber;
@@ -80,7 +81,7 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 
 		if (!lv.get("Scan Mode").contentEquals("1")) {
 			float x, y, z;
-			String tmp;
+			String tmp, tmp2;
 
 			x = Float.parseFloat(fov.split(" +")[0]) * 10 / Float.parseFloat(scanResol.split(" +")[0]);
 			y = Float.parseFloat(fov.split(" +")[1]) * 10 / Float.parseFloat(scanResol.split(" +")[1]);
@@ -89,6 +90,8 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 			if (fov.split(" +").length == 3) {
 				z = Float.parseFloat(fov.split(" +")[2]) * 10 / Float.parseFloat(scanResol.split(" +")[2]);
 				tmp += " " + String.valueOf(z);
+				tmp2 = lv.get("Images In Acquisition");
+				lv.put("Images In Acquisition", String.valueOf(Integer.parseInt(tmp2) * Integer.parseInt(scanResol.split(" +")[2])));
 			}
 
 			lv.put("Spatial Resolution", tmp);

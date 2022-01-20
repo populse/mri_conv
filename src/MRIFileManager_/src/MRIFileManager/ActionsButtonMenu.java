@@ -18,9 +18,11 @@ import javax.swing.table.TableRowSorter;
 import abstractClass.Format;
 import abstractClass.ParamMRI2;
 import abstractClass.PrefParam;
+import bids.BidsFileView;
 import bids.TableBidsData;
 import brukerParavision.BrukerFileView;
 import brukerParavision.TableBrukerData;
+import dcm.DicomFileView;
 import dcm.TableDicomData;
 import nifti.NiftiFileView;
 import nifti.TableNiftiData;
@@ -100,7 +102,7 @@ class ActionsButtonMenu extends AbstractAction implements ParamMRI2, Format {
 			dialogTitle = "Choose Dicom Data";
 			previouslectCurrent = PrefParam.lectCurrent;
 			PrefParam.lectCurrent = PrefParam.lectDicom;
-			// view = new DicomFileView();
+			view = new DicomFileView();
 			selectDirData(cmd);
 		}
 		if (cmd.contains("Philips Achieva")) {
@@ -125,7 +127,7 @@ class ActionsButtonMenu extends AbstractAction implements ParamMRI2, Format {
 						PrefParam.lectBids.lastIndexOf(PrefParam.separator));
 			else
 				PrefParam.lectCurrent = PrefParam.lectBids;
-//			view = new BidsFileView();
+			view = new BidsFileView();
 			selectDirData(cmd);
 		}
 
@@ -265,7 +267,7 @@ class ActionsButtonMenu extends AbstractAction implements ParamMRI2, Format {
 			String tmpa = PrefParam.formatCurrent;
 			tmpa = tmpa.replace("[", "");
 			tmpa = tmpa.replace("]", "");
-			tmpa = tmpa.replace("Bids", "Nifti");
+//			tmpa = tmpa.replace("Bids", "Nifti");
 			new DictionaryYaml2(UtilsSystem.pathOfJar() + "DictionaryMRI_System.yml", tmpa).loadDictionarySystem();
 			new DictionaryYaml2(UtilsSystem.pathOfJar() + "DictionaryMRI_User.yml", tmpa).loadDictionaryUser();
 			if (!listParamInfoSystem.isEmpty())
