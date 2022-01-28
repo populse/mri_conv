@@ -28,6 +28,15 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+
+<p></p>
+
+	28/01/2022 : version 22.1.1a
+	Bugs fixed:
+		- Basket : wrong file size
+	Others:
+		- basket : the bottom list is replaced by a table (now possibility to sort)
+
 <p></p>
 
 	19/01/2022 : version 21.8.2a
