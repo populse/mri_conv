@@ -32,7 +32,6 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -48,6 +47,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.JTree;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -67,7 +67,7 @@ import exportFiles.ExportFilesOption;
 public class FileManagerFrame extends JFrame implements ItemListener, ComponentListener {
 
 	private static final long serialVersionUID = 1L;
-	private final String versionSoft="21.8.2a";
+	private final String versionSoft="22.1.1a";
 	
 	public static String OS = System.getProperty("os.name").toLowerCase();
 	
@@ -85,7 +85,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 
 	private JComboBox<String> listPath, listChoiceExport;
 
-	private JTable tabData, tabSeq, tabDictionnaryMri;
+	private JTable tabData, tabSeq, tabBasket, tabDictionnaryMri;
 	private JTree treeParamInfoGeneral, treeParamInfoUser, treeBasket;
 
 	private JScrollPane preview, thumb, treeData;
@@ -95,7 +95,6 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 	private JSlider slidImage1, slidImage2, slidImage3;
 	private JLabel c, z, t;
 
-	private JList<String> listOfBasket;
 	private JLabel pathExportNifti, pathDictionnary;
 
 	public static JDialog dlg;
@@ -610,12 +609,21 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		treeBasket = new JTree(new DefaultTreeModel(new DefaultMutableTreeNode("(your exportation folder)")));
 		treeBasket.setExpandsSelectedPaths(false);
 		treeBasket.setSelectionModel(null);
-
-		listOfBasket = new JList<String>();
+		treeBasket.addMouseListener(new ActionSelectionBasket(this, "TreeBasket"));
 		
+		tabBasket = new JTable(new Object[5][ParamMRI2.headerListBasket.length], ParamMRI2.headerListBasket);
+		tabBasket.setFillsViewportHeight(false);
+		tabBasket.setAutoCreateColumnsFromModel(true);
+		tabBasket.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		tabBasket.getTableHeader().setReorderingAllowed(false);
+		tabBasket.setSelectionBackground(Color.ORANGE);
+		tabBasket.setEnabled(false);
+		tabBasket.addMouseListener(new ActionSelectionBasket(this, "TableBasket"));
+		tabBasket.addKeyListener(new ActionSelectionBasket(this, "TableBasket"));
+
 		JScrollPane scrollTreeBasket = new JScrollPane(treeBasket); 
 
-		JScrollPane scrollBasket = new JScrollPane(listOfBasket);
+		JScrollPane scrollBasket = new JScrollPane(tabBasket);
 		scrollBasket.setPreferredSize(new Dimension(this.getWidth() - 100, this.getHeight() - 300));
 		scrollBasket.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -625,7 +633,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		JLabel labExport = new JLabel("Exportation Folder : ");
 		panelRepNifti.add(labExport);
 		pathExportNifti = new JLabel();
-		
+
 		if (PrefParam.FilestmpExportNifit != null)
 			pathExportNifti.setText(PrefParam.FilestmpExportNifit.toString());
 		JScrollPane scrollRepNifti = new JScrollPane(pathExportNifti);
@@ -635,7 +643,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		if (PrefParam.MIA)
 			changeRepNifti.setEnabled(false);
 		panelRepNifti.add(changeRepNifti);
-		
+
 		String[] elements = {"Nifti-1","BIDS"};
 		listChoiceExport = new JComboBox<String>(elements);
 		listChoiceExport.addActionListener(new ChoiceFormatExport(this));
@@ -665,7 +673,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		panel.add(panelRepNifti, c);
 		
 		split5 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, scrollTreeBasket, scrollBasket);
-		split5.setDividerLocation(HFrame * 30 / 100);
+		split5.setDividerLocation(HFrame * 50/ 100);
 		split5.setDividerSize(5);
 		
 		split6 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, split5, panel);
@@ -870,6 +878,10 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 	public JTable getTabSeq() {
 		return tabSeq;
 	}
+	
+	public JTable getTabBasket() {
+		return tabBasket;
+	}
 
 	public JTree getTreeInfoGeneral() {
 		return treeParamInfoGeneral;
@@ -931,10 +943,6 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		return listFieldSlid;
 	}
 
-	public JList<String> getListBasket() {
-		return listOfBasket;
-	}
-	
 	public JTree getTreeBasket() {
 		return treeBasket;
 	}

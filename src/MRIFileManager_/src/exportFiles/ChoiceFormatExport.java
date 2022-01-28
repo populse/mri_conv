@@ -3,7 +3,11 @@ package exportFiles;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.table.TableRowSorter;
+
+import MRIFileManager.BasketList;
 import MRIFileManager.FileManagerFrame;
+import MRIFileManager.TableMod;
 import abstractClass.ParamMRI2;
 
 public class ChoiceFormatExport implements ActionListener, ParamMRI2 {
@@ -41,8 +45,9 @@ public class ChoiceFormatExport implements ActionListener, ParamMRI2 {
 			listBasket_hmSeq.put(tmpf, listBasket_hmSeq.get(tmp));
 
 		}
-		wind.getListBasket().setModel(listinBasket);
-		wind.getListBasket().updateUI();
+
+		new BasketList(wind);
+		
 		wind.getTreeBasket().setModel(new UpdateTreeBasket(listinBasket.toArray()).returnTreeModel());
 		for (int i = 0; i < wind.getTreeBasket().getRowCount(); i++)
 			wind.getTreeBasket().expandRow(i);

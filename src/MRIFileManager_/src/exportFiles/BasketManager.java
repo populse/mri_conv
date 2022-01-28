@@ -1,20 +1,18 @@
 package exportFiles;
 
 import java.awt.event.ActionEvent;
-import java.util.HashMap;
 import java.util.Locale;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 
+import MRIFileManager.BasketList;
 import MRIFileManager.FileManagerFrame;
 import abstractClass.ParamMRI2;
 import abstractClass.PrefParam;
 
-public class BasketManager extends AbstractAction implements ParamMRI2{
+public class BasketManager extends AbstractAction implements ParamMRI2 {
 
 	private static final long serialVersionUID = 1L;
-
-	public static HashMap<String, String[]> listBasket = new HashMap<>();
 
 	private FileManagerFrame wind;
 
@@ -27,23 +25,23 @@ public class BasketManager extends AbstractAction implements ParamMRI2{
 	public void actionPerformed(ActionEvent arg0) {
 
 		if (arg0.getActionCommand().contentEquals("remove selection")) {
-			int j = 0;
-			for (int sdg : wind.getListBasket().getSelectedIndices()) {
-				listBasket.remove(listinBasket.get(sdg - j));
-				listinBasket.remove(sdg - j);
-				j++;
+			String tmp_row;
+			for (int sdg : wind.getTabBasket().getSelectedRows()) {
+				tmp_row = wind.getTabBasket().getValueAt(sdg, 0).toString();
+				tmp_row += " " + wind.getTabBasket().getValueAt(sdg, 1).toString();
+				tmp_row += " [" + wind.getTabBasket().getValueAt(sdg, 2).toString() + "Mo]";
+				listinBasket.removeElement(tmp_row);
+				}
 			}
-		}
 
 		else if (arg0.getActionCommand().contentEquals("remove all")) {
-			listBasket = new HashMap<>();
 			listinBasket.removeAllElements();
 		}
 
 		else if ((arg0.getActionCommand().contentEquals("export to ")
 				|| arg0.getActionCommand().contentEquals("export to MIA")
 				|| arg0.getActionCommand().contentEquals("export to MP3"))
-				&& wind.getListBasket().getModel().getSize() != 0) {
+				&& wind.getTabBasket().getRowCount() != 0) {
 			new ConvertImage2(wind);
 			if (PrefParam.CloseAfterExport) {
 				if (PrefParam.ExitSystem)
@@ -70,9 +68,12 @@ public class BasketManager extends AbstractAction implements ParamMRI2{
 			}
 		}
 
-		wind.getListBasket().setModel(listinBasket);
-		wind.getListBasket().updateUI();
-		wind.getListBasket().clearSelection();
+		int tmp_length = listinBasket.size();
+		
+		if (tmp_length == 0)
+			tmp_length = 5;
+			
+		new BasketList(wind);
 
 		wind.getTreeBasket().setModel(new UpdateTreeBasket(listinBasket.toArray()).returnTreeModel());
 		for (int i = 0; i < wind.getTreeBasket().getRowCount(); i++)
@@ -88,5 +89,4 @@ public class BasketManager extends AbstractAction implements ParamMRI2{
 		}
 
 		wind.getTabbedPane().updateUI();
-	}
-}
+	}}

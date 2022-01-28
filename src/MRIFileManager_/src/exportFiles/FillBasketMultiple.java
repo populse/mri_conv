@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 
+import MRIFileManager.BasketList;
 import MRIFileManager.FileManagerFrame;
 import MRIFileManager.ProtocolsBidsYaml;
 import MRIFileManager.UtilsSystem;
@@ -165,7 +166,7 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 				 * estimation size of file after exportation
 				 **************************************************/
 
-				for (String hh : hmInfo.get(jj).get("Scan Resolution").split(" +"))
+				for (String hh : Arrays.copyOfRange(hmInfo.get(jj).get("Scan Resolution").split(" +"), 0, 2))
 					sizeFileAfterExport *= Float.parseFloat(hh);
 
 				sizeFileAfterExport *= 4 * Float.parseFloat(hmInfo.get(jj).get("Images In Acquisition"));
@@ -216,9 +217,9 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 							} else
 								listInBaskMult += descr + "-" + label;
 
-							listInBaskMult = String.format("%-15s %-" + (300 - listInBaskMult.length()) + "s %15s %n",
+							listInBaskMult = String.format("%s%s %s",
 									format, listInBaskMult,
-									"[ " + sizeFileAfterExport / (listInf.length - 1) + " Mo ]");
+									"[" + sizeFileAfterExport / (listInf.length - 1) + "Mo]");
 
 							int n = 0;
 
@@ -289,9 +290,9 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 							else
 								listInBaskMult += "-" + label;
 
-							listInBaskMult = String.format("%-15s %-" + (300 - listInBaskMult.length()) + "s %15s %n",
+							listInBaskMult = String.format("%s%s %s",
 									format, listInBaskMult,
-									"[ " + sizeFileAfterExport / (listOrientation.length - 1) + " Mo ]");
+									"[" + sizeFileAfterExport / (listOrientation.length - 1) + "Mo]");
 
 							int n = 0;
 
@@ -365,8 +366,8 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 					if (!noAll) {
 //						if (!Nifticase)
 //							listInBask += "_" + protoBids[1];
-						listInBask = String.format("%-15s %-" + (280 - listInBask.length()) + "s %15s %n", format,
-								listInBask, "[ " + sizeFileAfterExport + " Mo ]");
+						listInBask = String.format("%s%s %s", format,
+								listInBask, "[" + sizeFileAfterExport + "Mo]");
 
 						int n = 0;
 
@@ -422,8 +423,11 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 			}
 		} // end for
 
-		wind.getListBasket().setModel(listinBasket);
-		wind.getListBasket().updateUI();
+//		wind.getListBasket().setModel(listinBasket);
+//		wind.getListBasket().updateUI();
+		
+		new BasketList(wind);
+		
 		wind.getTreeBasket().setModel(new UpdateTreeBasket(listinBasket.toArray()).returnTreeModel());
 		for (int i = 0; i < wind.getTreeBasket().getRowCount(); i++)
 			wind.getTreeBasket().expandRow(i);

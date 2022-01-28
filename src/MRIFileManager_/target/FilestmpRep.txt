@@ -1,11 +1,11 @@
-[Bruker] /home/omontigon/Documents/dataIRM
+[Bruker] /home/omontigon/Documents/dataIRM/Bruker/JCD
 [Dicom] /home/omontigon/Documents/dataIRM/Dicom/BL
-[ParRec] /home/omontigon/Documents/dataIRM
-[NifTI] /home/omontigon/Documents/dataIRM
-[Bids] /home/omontigon/Documents/dataIRM/BIDS/Openneuro
-[Export] /home/omontigon/Documents/eclipse-workspace/MRIFileManager_/target/
+[ParRec] /home/omontigon/Documents/dataIRM/Philips/raw_data_cevastoc32
+[NifTI] 
+[Bids] 
+[Export] 
 [LookAndFeel] javax.swing.plaf.metal.MetalLookAndFeel
-[NamingRepNifTI] /
+[NamingRepNifTI] /StudyName/
 [NamingFileNifTI] PatientName-StudyName-CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime
 [NamingOptionsNifTI] 00013
 [previewActived] No

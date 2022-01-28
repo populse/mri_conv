@@ -15,7 +15,8 @@ public interface ParamMRI2 {
 	public final String[] headerListSeq = { "Seq. No.", "Serial Number", "Protocol", "Sequence Name",
 			"Acquisition Time", "Acquisition Date", "Creation Date", "Scan Mode", "Echo Time", "Repetition Time",
 			"Inversion Time", "Images In Acquisition", "Slice Orientation", "Flip Angle" };
-
+	public final String[] headerListBasket = {"Format", "Data", "File size (Mo)" };
+//	public final String[] headerListBasket = {"Format", "Data", "File size (Mo)", "sub", "ses", "acq", "task" };
 	/*******************************
 	 * Dictionnary MRI
 	 ****************************************************************/

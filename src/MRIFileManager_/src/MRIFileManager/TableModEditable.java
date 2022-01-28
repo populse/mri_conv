@@ -2,13 +2,14 @@ package MRIFileManager;
 
 import javax.swing.table.AbstractTableModel;
 
-public class TableMod extends AbstractTableModel{
+
+public class TableModEditable extends AbstractTableModel{
 	
 	private static final long serialVersionUID = 1L;
 	private String[] columnNames;
 	private Object[][] data;
 	
-	public TableMod(Object [][] data,String[] columNames) {
+	public TableModEditable(Object [][] data,String[] columNames) {
 		this.data = data;
 		this.columnNames = columNames;
 	}
@@ -38,4 +39,16 @@ public class TableMod extends AbstractTableModel{
         return getValueAt(0, c).getClass();
     }
 
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+    	if (columnIndex > 2)
+    		return true;
+    	return false;
+    }
+    
+    public void setValueAt(Object value, int row, int column) {
+    	if (column > 2) 
+    		data[row][column] = value;
+      }
+    
 }
