@@ -28,6 +28,12 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+<p></p>
+
+	01/02/2022 : version 22.1.2a
+	Bugs fixed:
+		- Dicom : problem reading some DICOM files fixed
+
 
 <p></p>
 
