@@ -173,9 +173,10 @@ public class ListDicomParam implements ParamMRI2 {
 			listValues.put("Inversion Time", deleteDuplicate(listSlice[2], false));
 		else
 			listSlice[2] = listValues.get("Inversion Time");
+//		System.out.println(this + "Image Position 1: " + listSlice[5]);
 		listValues.put("Slice Orientation", deleteDuplicate(listSlice[3], false));
-		listValues.put("Image Position", deleteDuplicate(listSlice[4], false));
-		listValues.put("Image Orientation", deleteDuplicate(listSlice[5], false));
+		listValues.put("Image Orientation", deleteDuplicate(listSlice[4], false));
+		listValues.put("Image Position", deleteDuplicate(listSlice[5], false));
 		listValues.put("Number Of Diffusion", deleteDuplicate(listSlice[6], true));
 		listValues.put("Image Type", deleteDuplicate(listSlice[7], false));
 		listValues.put("Slice Position", deleteDuplicate(listSlice[8], true));
@@ -187,8 +188,9 @@ public class ListDicomParam implements ParamMRI2 {
 		listValues.put("Rescale Intercept", listSlice[14]);
 		listValues.put("Rescale Slope", listSlice[15]);
 		listValues.put("Scale Slope", listSlice[16]);
-
 		listValues.put("B-values effective", listSlice[6]);
+//		System.out.println(this + "Image Position 2: " + listValues.get("Image Position"));
+
 		try {
 //			listValues.put("Direction Diffusion", deleteDuplicateBy3(listSlice[17]));
 			listValues.put("Direction Diffusion", reductListDiffusion(listSlice[6], listSlice[17]));

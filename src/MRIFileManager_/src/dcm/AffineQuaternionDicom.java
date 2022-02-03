@@ -62,6 +62,7 @@ public class AffineQuaternionDicom implements ParamMRI2 {
 			A_tot = patient_to_tal().times(R_tot_multi());
 		else
 			A_tot = patient_to_tal2().times(R_tot_single());
+//			A_tot = patient_to_tal().times(R_tot_single());
 
 		/********************* quaternion *****************************************/
 		Q_totb = rot();
@@ -327,7 +328,7 @@ public class AffineQuaternionDicom implements ParamMRI2 {
 			if (xd > 1.0) {
 				b = 0.5 * Math.sqrt(xd);
 				c = 0.25 * (o[0][1] + o[1][0]) / b;
-				d = 0.25 * (o[0][2] + o[2][0]) / b; // ?? d = 0.25 * (o[0][2]+o[2][0]) / b;
+				d = 0.25 * (o[0][2] + o[2][0]) / b; // ?? d = 0.25 * (o[0][2]+o[2][1]) / b;
 				a = 0.25 * (o[2][1] - o[1][2]) / b;
 			} else if (yd > 1.0) {
 				c = 0.5 * Math.sqrt(yd);

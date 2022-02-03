@@ -28,7 +28,7 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 			FileManagerFrame.dlg.setVisible(true);
 			FileManagerFrame.dlg.setTitle("Search list of Dicom ...");
 		}
-		
+
 		StringBuffer[] listDicom = new SearchDicom(chemDicom).listDicom();
 
 		if (!windowlessMode)
@@ -53,7 +53,7 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 			}
 			listFilesBySerieNumber.put(noSeries, tmpList);
 		}
-		
+
 		String prefixSeq = ("000000").substring(0, String.valueOf(listFilesBySerieNumber.size()).length());
 		String ind;
 		int c = 0;
@@ -115,7 +115,8 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 		String title = "Loading : files ";
 //		String hdrRecorded = "";
 		String bvalue_field = "0018,9087";
-		if (listValuesAcq.get("Manufacturer").contains("Philips") || listValuesCal.get("Manufacturer").contains("Philips"))
+		if (listValuesAcq.get("Manufacturer").contains("Philips")
+				|| listValuesCal.get("Manufacturer").contains("Philips"))
 			bvalue_field = "2001,1003";
 
 		if (Integer.parseInt(numberFrames) == 1) { // one image by file
@@ -135,12 +136,16 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 					listSlice[1] = searchParam(
 							new StringBuffer(hdrDcm.substring(hdrDcm.indexOf("Image Number: 0") + 15)), "Image Number");
 				}
-				
+
 				if (listSlice[1].isEmpty()) {
-					listSlice[1] = searchParam(
-							new StringBuffer(hdrDcm.substring(hdrDcm.indexOf("InstanceNumber"))), "InstanceNumber");
+					try {
+						listSlice[1] = searchParam(new StringBuffer(hdrDcm.substring(hdrDcm.indexOf("InstanceNumber"))),
+								"InstanceNumber");
+					} catch (Exception e) {
+
+					}
 				}
-				
+
 				if (listSlice[1].isEmpty())
 					listSlice[1] = String.valueOf(i);
 
@@ -301,7 +306,7 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 					listValuesCal.put(kk, searchParam(hdrDcm, dictionaryMRIUser.get(kk).get("keyName")));
 				}
 
-				String[] list = hdrDcm.toString().split("0008,0008");
+				String[] list = hdrDcm.toString().split("0008,9007");
 
 				String[] listSlice = null;
 
@@ -309,6 +314,8 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 					StringBuffer hdrtmp = new StringBuffer(list[i]);
 					listSlice = new String[21];
 					listSlice[1] = searchParam(hdrtmp, "Image Number");
+					if (listSlice[1].isEmpty())
+						listSlice[1] = String.valueOf(i + 1);
 					if (!listSlice[1].isEmpty() && !listSlice[1].contentEquals("0")) {
 						listSlice[0] = "";
 						listSlice[1] = listSlice[1].trim();
@@ -392,7 +399,6 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 						}
 					});
 					listValuesCal.put("Images In Acquisition", String.valueOf(listCal.size()));
-
 					hmSeq.put(noSeq + "(calc)", tmp);
 					hmInfo.put(noSeq + "(calc)", listValuesCal);
 					new ListDicomParam(noSeq + "(calc)", listCal, offAcq, numberFrames);

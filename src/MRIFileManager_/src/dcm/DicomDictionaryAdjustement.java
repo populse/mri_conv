@@ -49,7 +49,42 @@ public class DicomDictionaryAdjustement {
 //			} catch (Exception e){};
 //		}
 
-		if (listValues.get("Slice Separation").isEmpty()) {
+//		System.out.println(this + " Image Position: " + listValues.get("Image Position"));
+//		System.out.println(this + " Slice Position: " + listValues.get("Slice Position"));
+
+		if (listValues.get("Image Position") != null) {
+
+			String[] listPosImg = listValues.get("Image Position").split(" +");
+			String[] interleave = new String[2];
+
+			tmp = "1";
+			if (listPosImg.length > 1) {
+				String gg = listValues.get("Slice Orientation");
+				switch (gg) {
+				case "axial":
+					interleave[0] = listPosImg[1].split("\\\\")[2];
+					interleave[1] = listPosImg[0].split("\\\\")[2];
+					tmp = String.valueOf(Math.abs(Float.parseFloat(interleave[1]) - Float.parseFloat(interleave[0])));
+					break;
+				case "coronal":
+					interleave[0] = listPosImg[1].split("\\\\")[1];
+					interleave[1] = listPosImg[0].split("\\\\")[1];
+					tmp = String.valueOf(Math.abs(Float.parseFloat(interleave[1]) - Float.parseFloat(interleave[0])));
+					break;
+				case "sagittal":
+					interleave[0] = listPosImg[1].split("\\\\")[0];
+					interleave[1] = listPosImg[0].split("\\\\")[0];
+					tmp = String.valueOf(Math.abs(Float.parseFloat(interleave[1]) - Float.parseFloat(interleave[0])));
+					break;
+				}
+
+				if (listValues.get("Slice Separation").isEmpty())
+					listValues.put("Slice Separation", tmp);
+
+			}
+		}
+
+		if (listValues.get("Slice Separation").isEmpty() && !listValues.get("Slice Position").isEmpty()) {
 			String[] listPos = listValues.get("Slice Position").split(" +");
 			try {
 				tmp = String.valueOf(Math.abs(Float.parseFloat(listPos[1]) - Float.parseFloat(listPos[0])));
@@ -64,6 +99,11 @@ public class DicomDictionaryAdjustement {
 						String.valueOf(Math.abs(Float.parseFloat(listValues.get("Slice Separation")))));
 		} catch (Exception e) {
 		}
+
+		if (listValues.get("Slice Separation").isEmpty())
+			listValues.put("Slice Separation", listValues.get("Slice Thickness"));
+
+//		System.out.println(this + " Slice Separation: " + listValues.get("Slice Separation"));
 
 		try {
 			listValues.put("Spatial Resolution", listValues.get("Spatial Resolution").split("\\\\")[0] + " "
@@ -112,7 +152,6 @@ public class DicomDictionaryAdjustement {
 				listValues.put("Number Of Slice", listValues.get("Images In Acquisition"));
 		} catch (Exception e) {
 		}
-		
 
 		try {
 			if (!listValues.get("Echo Time").contentEquals("(simplified view mode)"))
@@ -122,7 +161,6 @@ public class DicomDictionaryAdjustement {
 
 		} catch (Exception e) {
 		}
-
 
 		try {
 			listValues.put("Number Of Repetition",

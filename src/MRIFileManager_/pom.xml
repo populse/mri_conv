@@ -48,11 +48,11 @@
     	<version>2.6</version>
 	</dependency>
 	<!-- https://mvnrepository.com/artifact/ome/pom-bio-formats -->
-	<dependency>
+	<!--<dependency>
     	<groupId>net.imagej</groupId>
     	<artifactId>ij</artifactId>
     	<version>1.53j</version>
-	</dependency>
+	</dependency>-->
 	<!-- https://mvnrepository.com/artifact/loci/loci_plugins -->
 
 	<dependency>

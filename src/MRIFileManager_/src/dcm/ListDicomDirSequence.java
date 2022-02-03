@@ -377,6 +377,9 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 							.compareTo(Integer.parseInt(otherStrings[1].toString()));
 				}
 			});
+			listValuesAcq.put("Images In Acquisition", String.valueOf(listAcq.size()));
+			hmSeq.put(noSeq, hmSeq.get(noSeq).clone());
+			hmInfo.put(noSeq, listValuesAcq);
 			new ListDicomParam(noSeq, listAcq, offCalc, "");
 		if (!listCal.isEmpty()) {
 			Collections.sort(listCal, new Comparator<Object[]>() {

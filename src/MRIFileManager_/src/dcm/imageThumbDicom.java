@@ -47,6 +47,9 @@ public class imageThumbDicom extends ImageThumb implements ParamMRI2 {
 //			intValue = f.intValue();
 			intValue = nImage / 2;
 		}
+		
+		if (intValue == 0)
+			intValue = 1;
 
 		String filesrc = hmSeq.get(noSeq)[0];
 
@@ -89,6 +92,9 @@ public class imageThumbDicom extends ImageThumb implements ParamMRI2 {
 			}
 		}
 
+        ImageProcessor ip = imp.getProcessor();
+//        ip.resetMinAndMax();
+        imp.setDisplayRange(ip.getMin(), ip.getMax());
 		imp.resetDisplayRange();
 		int w = imp.getWidth();
 		int h = imp.getHeight();
