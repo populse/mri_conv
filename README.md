@@ -30,6 +30,14 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	03/02/2022 : version 22.1.3a
+	Bug fixed:
+		- Dicom : registration problem with some DICOM files fixed (new Slice Thickness calculation method)
+	Others:
+		- ImageJ : update to version 1.53o
+
+<p></p>
+
 	01/02/2022 : version 22.1.2a
 	Bugs fixed:
 		- Dicom : problem reading some DICOM files fixed
