@@ -30,6 +30,13 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	18/02.2022 : version 22.1.4a
+	Bug fixed:
+		- Dicom : problem reading some 2D DICOM files fixed
+		- Philips : problem reading some scanning sequences fixed
+
+<p></p>
+
 	03/02/2022 : version 22.1.3a
 	Bug fixed:
 		- Dicom : registration problem with some DICOM files fixed (new Slice Thickness calculation method)
