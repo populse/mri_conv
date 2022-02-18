@@ -1,5 +1,5 @@
 [Bruker] /home/omontigon/Documents/dataIRM/Bruker/JCD
-[Dicom] /home/omontigon/Documents/dataIRM/test_unit/Dicom
+[Dicom] /home/omontigon/Documents/dataIRM/Philips/Aurelien
 [ParRec] /home/omontigon/Documents/dataIRM/Philips/raw_data_cevastoc32
 [NifTI] 
 [Bids] 
@@ -8,5 +8,5 @@
 [NamingRepNifTI] /PatientName/
 [NamingFileNifTI] PatientName-StudyName-CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime
 [NamingOptionsNifTI] 00013
-[previewActived] No
+[previewActived] Yes
 [SeqDetail] 1023

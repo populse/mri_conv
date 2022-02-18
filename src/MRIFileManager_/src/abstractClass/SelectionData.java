@@ -178,10 +178,13 @@ public abstract class SelectionData extends PrefParam implements ParamMRI2, Form
 				path = wind.getListPath().getSelectedItem().toString() + separator + direct;
 				path = path.substring(12);
 				listSeq = new Search2dseq(path).getList2dseq();
-
+				String prefixSeq = ("000000").substring(0, String.valueOf(listSeq.size()).length());
 				for (int ii = 0; ii < listSeq.size(); ii++)
 					try {
-						new ListBrukerSequence(listSeq.get(ii), String.valueOf(ii)).ListSeqBruker();
+//						new ListBrukerSequence(listSeq.get(ii), String.valueOf(ii)).ListSeqBruker();
+						new ListBrukerSequence(listSeq.get(ii), (prefixSeq + ii).substring(String.valueOf(ii).length()))
+																	.ListSeqBruker();
+
 					} catch (IOException e) {
 						hmInfo.clear();
 					}

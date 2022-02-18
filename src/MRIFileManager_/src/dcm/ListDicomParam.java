@@ -163,16 +163,16 @@ public class ListDicomParam implements ParamMRI2 {
 
 		if (!listSlice[0].isEmpty())
 			listValues.put("Echo Time", deleteDuplicate(listSlice[0], false));
-		else
-			listSlice[0] = listValues.get("Echo Time");
+		listSlice[0] = listValues.get("Echo Time");
+
 		if (!listSlice[1].isEmpty())
 			listValues.put("Repetition Time", deleteDuplicate(listSlice[1], false));
-		else
-			listSlice[1] = listValues.get("Repetition Time");
+		listSlice[1] = listValues.get("Repetition Time");
+		
 		if (!listSlice[2].isEmpty())
 			listValues.put("Inversion Time", deleteDuplicate(listSlice[2], false));
-		else
-			listSlice[2] = listValues.get("Inversion Time");
+		listSlice[2] = listValues.get("Inversion Time");
+		
 //		System.out.println(this + "Image Position 1: " + listSlice[5]);
 		listValues.put("Slice Orientation", deleteDuplicate(listSlice[3], false));
 		listValues.put("Image Orientation", deleteDuplicate(listSlice[4], false));
@@ -243,11 +243,12 @@ public class ListDicomParam implements ParamMRI2 {
 		Set<String> hs = new LinkedHashSet<>(array);
 		list = Arrays.copyOf(hs.toArray(), hs.toArray().length, String[].class);
 
-		for (String hh : list)
+		for (String hh : list) {
 			if (canZero)
 				resul += hh + car;
-			else if ((!hh.contentEquals("0")))
+			else if (!hh.contentEquals("0"))
 				resul += hh + car;
+		}
 
 		return resul.trim();
 	}

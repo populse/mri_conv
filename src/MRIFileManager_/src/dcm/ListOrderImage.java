@@ -41,6 +41,8 @@ public class ListOrderImage implements ParamMRI2 {
 			if (uniqueWords.size() > 1 || (i == 5 && uniqueWords.size() == 1))
 				cnt++;
 		}
+		
+//		System.out.println(this + " s1 : " + Arrays.toString(s1));
 
 		String ord = "";
 		try {
@@ -103,9 +105,15 @@ public class ListOrderImage implements ParamMRI2 {
 
 		int Nimage = Integer.parseInt(hmInfo.get(noSeq).get("Images In Acquisition"));
 
-		c = Integer.parseInt(s1[4]) * Integer.parseInt(s1[3]) * Integer.parseInt(s1[7]) * Integer.parseInt(s1[8]);
+//		c = Integer.parseInt(s1[4]) * Integer.parseInt(s1[3]) * Integer.parseInt(s1[7]) * Integer.parseInt(s1[8]);
+//		z = Integer.parseInt(s1[5]);
+//		t = Integer.parseInt(s1[0]) * Integer.parseInt(s1[6]) * Integer.parseInt(s1[1]) * Integer.parseInt(s1[2]);
+		
+		c = Integer.parseInt(s1[3]) * Integer.parseInt(s1[4]) * Integer.parseInt(s1[8]);
 		z = Integer.parseInt(s1[5]);
-		t = Integer.parseInt(s1[0]) * Integer.parseInt(s1[6]) * Integer.parseInt(s1[1]) * Integer.parseInt(s1[2]);
+		t = Integer.parseInt(s1[0]) * Integer.parseInt(s1[1]) * Integer.parseInt(s1[2]) * Integer.parseInt(s1[6]) ;
+		
+//		System.out.println(this + " c, z, t :" + c + ", " + z + ", " + t);
 
 //		if (Nimage > c*z*t) {
 //			int Nrepetition = Nimage/(c*z*t);
@@ -130,8 +138,8 @@ public class ListOrderImage implements ParamMRI2 {
 			if (ord.contentEquals("0 5 5") || ord.contentEquals("0 5 4"))
 				order = "xytzc";
 			else
-				order = "xyctz"; //??????
-//				order = "xytzc"; //??????
+//				order = "xyctz"; //??????
+				order = "xytzc"; //??????
 
 		if (manuf.toLowerCase().contains("siemens")) {
 			try {

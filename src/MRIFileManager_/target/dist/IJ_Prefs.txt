@@ -1,5 +1,5 @@
 #ImageJ 1.53o Preferences
-#Thu Feb 03 10:25:46 CET 2022
+#Tue Feb 15 15:31:15 CET 2022
 showcolor=\#00FFFF
 prefs.options=4210688
 div-by-zero=Infinity
@@ -28,6 +28,7 @@ pp.fontsize=14
 new.type=0
 raw.options=0
 prefs.options2=0
+.b&c.loc=775,234
 new.width=400
 roicolor=\#FFFF00
 .log.width=834

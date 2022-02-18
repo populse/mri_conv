@@ -604,8 +604,11 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 
 		// System.out.println(order);
 
-		for (int i = 4; i < 19; i++)
-			s1[3] = s1[3].replace(String.valueOf(i), "");
+//		for (int i = 4; i < 19; i++)
+//			s1[3] = s1[3].replace(String.valueOf(i), "");
+
+//		for (int i = 0; i < 4; i++)
+//			s1[3] = s1[3].replace(String.valueOf(i), "");
 
 		Set<String> uniqueWords;
 
@@ -615,6 +618,7 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 			// System.out.println(s1[i]);
 
 		}
+//		System.out.println(this + " s1[3]: " + s1[3] );
 
 		Object[] lv = new Object[16];
 
@@ -642,19 +646,23 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 		lv[2] = Integer.parseInt(s1[0]);
 		lv[3] = Integer.parseInt(s1[1]) * Integer.parseInt(s1[2]) * Integer.parseInt(s1[4]) * Integer.parseInt(s1[5]);
 		lv[4] = NImageTot;
-		lv[5] = listImgNbr[0];
-		lv[6] = listImgNbr[1];
-		lv[7] = listImgNbr[2];
-		lv[8] = listImgNbr[3];
-		lv[9] = listImgNbr[4];
-		lv[10] = listImgNbr[5];
-		lv[11] = listImgNbr[6];
+		lv[5] = listImgNbr[0]; // slice number
+		lv[6] = listImgNbr[1]; // echo number
+		lv[7] = listImgNbr[2]; // dynamic number
+		lv[8] = listImgNbr[3]; // Image Type
+		lv[9] = listImgNbr[4]; // diffusion number
+		lv[10] = listImgNbr[5]; // gradient number
+		lv[11] = listImgNbr[6]; // scanning sequence number
 		lv[12] = listRSI[0];
 		lv[13] = listRSI[1];
 		lv[14] = listRSI[2];
 		lv[15] = offCal;
 		
 //		System.out.println("lv[] = " + lv[0] + " , " + lv[1] + " , " + lv[2] + " , " + lv[3] + " , " + lv[4]);
+//		System.out.println("lv[] = " + lv[5] + " , " + lv[6] + " , " + lv[7] + " , " + lv[8] + " , " + lv[9]);
+//		System.out.println("lv[] = " + lv[10] + " , " + lv[11] + " , " + lv[12] + " , " + lv[13] + " , " + lv[14] + " , " + lv[15]);
+//		System.out.println(this + "lv[] = " + lv[8] + " , " + lv[11]);
+
 
 		return lv;
 	}
