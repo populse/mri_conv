@@ -30,7 +30,13 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
-	18/02.2022 : version 22.1.4a
+	11/03/2022 : version 22.1.5a
+	Bug fixed:
+		- Dicom : affine transformation correction (for some SPECT files) 
+
+<p></p>
+
+	18/02/2022 : version 22.1.4a
 	Bug fixed:
 		- Dicom : problem reading some 2D DICOM files fixed
 		- Philips : problem reading some scanning sequences fixed
