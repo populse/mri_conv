@@ -30,6 +30,13 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	23/03/2022 : version 22.1.6a
+	Bug fixed:
+		- Dicom : image order problem for some Philips DICOM files (SWIp) fixed
+		- ImageJ : some plugins added (Input_Output, niftijio.jar)
+
+<p></p>
+
 	11/03/2022 : version 22.1.5a
 	Bug fixed:
 		- Dicom : affine transformation correction (for some SPECT files) 
@@ -54,7 +61,6 @@ To download the latest 'development' version, click [here](https://github.com/po
 	01/02/2022 : version 22.1.2a
 	Bugs fixed:
 		- Dicom : problem reading some DICOM files fixed
-
 
 <p></p>
 
