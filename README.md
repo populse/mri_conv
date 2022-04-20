@@ -30,6 +30,13 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	20/04/2022: version 22.1.7a
+	Bug fixed:
+		-Dicom : image order problem with some Dicom files fixed
+
+
+<p></p>
+
 	23/03/2022 : version 22.1.6a
 	Bug fixed:
 		- Dicom : image order problem for some Philips DICOM files (SWIp) fixed
