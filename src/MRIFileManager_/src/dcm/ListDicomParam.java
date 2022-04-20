@@ -13,15 +13,18 @@ import abstractClass.ParamMRI2;
 
 public class ListDicomParam implements ParamMRI2 {
 
-	public ListDicomParam(String noSeq, ArrayList<String[]> listA, int off, String numberOfFrame) {
+	public ListDicomParam(String noSeq, ArrayList<String[]> listA, int off, String numberOfFrame, ArrayList<String> listOffset) {
 
 		HashMap<String, String> listValues = hmInfo.get(noSeq);
 
-		String[] listOffsetImage = new String[listA.size()];
-
-		for (int i = 0; i < listA.size(); i++) {
-			listOffsetImage[i] = listA.get(i)[1];
-		}
+//		String[] listOffsetImage = new String[listA.size()];
+//
+//		for (int i = 0; i < listA.size(); i++) {
+//			listOffsetImage[i] = listA.get(i)[1];
+//		}
+		
+		String[] listOffsetImage = new String[listOffset.size()];
+		listOffsetImage = listOffset.toArray(listOffsetImage);
 
 		int[] listOrder = Arrays.stream(listOffsetImage).mapToInt(Integer::parseInt).toArray();
 		int[] listIndex = new int[listOffsetImage.length];

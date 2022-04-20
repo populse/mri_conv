@@ -303,6 +303,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 		hmInfo.put(noSeq, listValuesAcq);
 
 		ArrayList<String[]> listAcq = new ArrayList<>();
+		ArrayList<String> offsetImageAcq = new ArrayList<>();
 
 		String[] listSlice = null;
 //		int offAcq = 0;
@@ -366,6 +367,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 							+ searchParam(hdrtmp, "2005,10B2");
 					listSlice[20] = searchParam(hdrtmp, "2005,1413"); // gradient orientation number
 					listAcq.add(listSlice);
+					offsetImageAcq.add(listSlice[1]);
 				}
 			}
 
@@ -423,6 +425,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 							+ searchParam(hdr, "2005,10B2");
 					listSlice[20] = searchParam(hdr, "2005,1413"); // gradient orientation number
 					listAcq.add(listSlice);
+					offsetImageAcq.add(listSlice[1]);
 				}
 			}
 		}
@@ -435,7 +438,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 							.compareTo(Integer.parseInt(otherStrings[1].toString()));
 				}
 			});
-			new ListDicomParam(noSeq, listAcq, offCalc, "");
+			new ListDicomParam(noSeq, listAcq, offCalc, "", offsetImageAcq);
 		}
 
 	}

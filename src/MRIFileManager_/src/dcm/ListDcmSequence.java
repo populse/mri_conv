@@ -11,6 +11,7 @@ import MRIFileManager.FileManagerFrame;
 import abstractClass.ParamMRI2;
 import ij.plugin.DICOM;
 
+
 public class ListDcmSequence implements ParamMRI2, DictionDicom {
 
 	private String chemDicom;
@@ -108,6 +109,8 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 		ArrayList<String[]> listCal = new ArrayList<>();
 		ArrayList<String> tmpAcq = new ArrayList<>();
 		ArrayList<String> tmpCal = new ArrayList<>();
+		ArrayList<String> offsetImageAcq = new ArrayList<>();
+		ArrayList<String> offsetImageCal = new ArrayList<>();
 		int offAcq = 0, offCalc = 0;
 
 		if (!windowlessMode)
@@ -187,19 +190,22 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 								+ searchParam(hdrDcm, "2005,10B2");
 						listSlice[20] = searchParam(hdrDcm, "2005,1413");
 
-						if (indTp < 6) {
+						if (indTp < Arrays.asList(listType).indexOf("OTHER")) {
 							if (indSs < 4) {
 								offCalc = listCal.size();
 								listAcq.add(listSlice);
+								offsetImageAcq.add(listSlice[1]);
 								// tmpAcq.add(listSlice[0]);
 							} else {
 								offAcq = listAcq.size();
 								listCal.add(listSlice);
+								offsetImageCal.add(listSlice[1]);
 								// tmpCal.add(listSlice[0]);
 							}
 						} else {
 							offAcq = listAcq.size();
 							listCal.add(listSlice);
+							offsetImageCal.add(listSlice[1]);
 							// tmpCal.add(listSlice[0]);
 						}
 					}
@@ -222,7 +228,7 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 				listValuesAcq.put("Images In Acquisition", String.valueOf(listAcq.size()));
 				hmSeq.put(noSeq, tmpAcq.toArray(new String[0]));
 				hmInfo.put(noSeq, listValuesAcq);
-				new ListDicomParam(noSeq, listAcq, offCalc, "");
+				new ListDicomParam(noSeq, listAcq, offCalc, "", offsetImageAcq);
 			}
 			if (!listCal.isEmpty()) {
 				Collections.sort(listCal, new Comparator<Object[]>() {
@@ -238,7 +244,7 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 				listValuesCal.put("Images In Acquisition", String.valueOf(listCal.size()));
 				hmSeq.put(noSeq + "(calc)", tmpCal.toArray(new String[0]));
 				hmInfo.put(noSeq + "(calc)", listValuesCal);
-				new ListDicomParam(noSeq + "(calc)", listCal, offAcq, "");
+				new ListDicomParam(noSeq + "(calc)", listCal, offAcq, "", offsetImageCal);
 			}
 //			hmTagDicom.put(noSeq, hdrRecorded);
 		}
@@ -277,6 +283,8 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 
 				listAcq = new ArrayList<>();
 				listCal = new ArrayList<>();
+				offsetImageAcq = new ArrayList();
+				offsetImageCal = new ArrayList();
 				tmpAcq = new ArrayList<>();
 				tmpCal = new ArrayList<>();
 
@@ -352,17 +360,20 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 								+ searchParam(hdrtmp, "2005,10B2");
 						listSlice[20] = searchParam(hdrtmp, "2005,1413");
 
-						if (indTp < 6) {
+						if (indTp < Arrays.asList(listType).indexOf("OTHER")) {
 							if (indSs < 4) {
 								offCalc = listCal.size();
 								listAcq.add(listSlice);
+								offsetImageAcq.add(listSlice[1]);
 							} else {
 								offAcq = listAcq.size();
 								listCal.add(listSlice);
+								offsetImageCal.add(listSlice[1]);
 							}
 						} else {
 							offAcq = listAcq.size();
 							listCal.add(listSlice);
+							offsetImageCal.add(listSlice[1]);
 						}
 					}
 				}
@@ -388,7 +399,7 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 					listValuesAcq.put("Images In Acquisition", String.valueOf(listAcq.size()));
 					hmSeq.put(noSeq, tmp);
 					hmInfo.put(noSeq, listValuesAcq);
-					new ListDicomParam(noSeq, listAcq, offCalc, numberFrames);
+					new ListDicomParam(noSeq, listAcq, offCalc, numberFrames, offsetImageAcq);
 				}
 				if (!listCal.isEmpty()) {
 					Collections.sort(listCal, new Comparator<Object[]>() {
@@ -401,9 +412,8 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 					listValuesCal.put("Images In Acquisition", String.valueOf(listCal.size()));
 					hmSeq.put(noSeq + "(calc)", tmp);
 					hmInfo.put(noSeq + "(calc)", listValuesCal);
-					new ListDicomParam(noSeq + "(calc)", listCal, offAcq, numberFrames);
+					new ListDicomParam(noSeq + "(calc)", listCal, offAcq, numberFrames, offsetImageCal);
 				}
-
 			}
 		}
 	}

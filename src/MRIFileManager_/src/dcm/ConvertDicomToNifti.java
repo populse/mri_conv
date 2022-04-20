@@ -17,11 +17,12 @@ public class ConvertDicomToNifti implements ParamMRI2, convertNifti {
 		
 		imp = new OpenDicom(listBasket_hmInfo.get(lb), listBasket_hmOrderImage.get(lb), listBasket_hmSeq.get(lb), noSeq,
 				false).getImp();
-
+		
 		try {
-			if (imp.getNDimensions() == 4 && imp.getNFrames() == 1)
-				imp = HyperStackConverter.toHyperStack(imp, imp.getNSlices(), imp.getNFrames(), imp.getNChannels(),
-						"xytcz", "grayscale");
+			if (imp.getNDimensions() == 4 && imp.getNFrames() == 1) {
+				imp = HyperStackConverter.toHyperStack(imp, imp.getNSlices(), imp.getNChannels(), imp.getNFrames(),
+						"xyztc", "grayscale");
+			}
 
 			if (imp.getNDimensions() == 5)
 				imp = HyperStackConverter.toHyperStack(imp, imp.getNSlices(), imp.getNFrames(), imp.getNChannels(),

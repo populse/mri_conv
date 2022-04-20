@@ -34,6 +34,7 @@ public class AffineQuaternionDicom implements ParamMRI2 {
 		dx = Double.parseDouble(InfoImage.get("Spatial Resolution").split(" +")[0]);
 		dy = Double.parseDouble(InfoImage.get("Spatial Resolution").split(" +")[1]);
 		dz = Double.parseDouble(InfoImage.get("Slice Thickness"));
+		
 
 		String positionPatient = InfoImage.get("Image Position Patient");
 		String orientationPatient = InfoImage.get("Image Orientation Patient");
@@ -167,21 +168,23 @@ public class AffineQuaternionDicom implements ParamMRI2 {
 
 		return new Matrix(r);
 	}
-
+	
 	private Matrix R_tot_single() {
 		double[][] r = new double[4][4];
+		
+		double[] Sn = Cross(Fn);
 
 		r[0][0] = Fn[0] * dx;
 		r[0][1] = Fn[3] * dy;
-		r[0][2] = 0;
+		r[0][2] = Sn[0] * dz;
 		r[0][3] = T1[0];
 		r[1][0] = Fn[1] * dx;
 		r[1][1] = Fn[4] * dy;
-		r[1][2] = 0;
+		r[1][2] = Sn[1] * dz;
 		r[1][3] = T1[1];
 		r[2][0] = Fn[2] * dx;
 		r[2][1] = Fn[5] * dy;
-		r[2][2] = -dz;
+		r[2][2] = Sn[2] * dz;
 		r[2][3] = T1[2];
 
 		r[3][0] = 0;
@@ -193,6 +196,21 @@ public class AffineQuaternionDicom implements ParamMRI2 {
 
 	}
 
+	private double[] Cross(double[] a) {
+		
+		double[] crossing = new double[3];
+		
+		crossing[0] = a[1]*a[5] - a[2]*a[4];
+		crossing[1] = a[2]*a[3] - a[0]*a[5];
+		crossing[2] = a[0]*a[4] - a[1]*a[3];
+
+//			    c = [(a[1]*b[2] - a[2]*b[1]) * dz,
+//			         (a[2]*b[0] - a[0]*b[2]) * dz,
+//			         (a[0]*b[1] - a[1]*b[0]) * dz]
+		return crossing;
+		
+	}
+	
 	private Matrix patient_to_tal() {
 		double[][] resul = { { -1., 0., 0., 0. }, { 0., -1., 0., 0. }, { 0., 0., 1., 0. }, { 0., 0., 0., 1. } };
 
@@ -200,7 +218,7 @@ public class AffineQuaternionDicom implements ParamMRI2 {
 	}
 
 	private Matrix patient_to_tal2() {
-		double[][] resul = { { -1., 0., 0., 0. }, { 0., -1., 0., 0. }, { 0., 0., -1., 0. }, { 0., 0., 0., 1. } };
+		double[][] resul = { { -1., 0., 0., 0. }, { 0., -1., 0., 0. }, { 0., 0., 1., 0. }, { 0., 0., 0., 1. } };
 
 		return new Matrix(resul);
 	}

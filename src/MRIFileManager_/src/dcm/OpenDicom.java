@@ -36,7 +36,7 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 		this.infoImage = infoImage;
 		this.orderImage = orderImage;
 		this.listFile = listFile;
-		
+	
 		if (infoImage.get("Scale Slope").trim().isEmpty())
 			Prefs.openDicomsAsFloat = true;
 		else
@@ -117,7 +117,7 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 		if (listFile.length == 1) {
 
 			String listOffsets = infoImage.get("Offsets Image");
-
+			
 			if (listOffsets.trim().contentEquals("0")) {
 				Prefs.openDicomsAsFloat = false;
 				DICOM dcm = new DICOM();

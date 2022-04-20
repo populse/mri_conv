@@ -2,7 +2,7 @@ package dcm;
 
 public interface DictionDicom {
 
-	String[] listType = { "M", "R", "I", "P", "PHASE_MAP", "PERFUSION", "OTHER", "DENSITY_MAP", "DIFFUSION_MAP",
+	String[] listType = { "M", "R", "I", "P", "PHASE_MAP", "PERFUSION", "SW_M", "SW_P", "OTHER", "DENSITY_MAP", "DIFFUSION_MAP",
 			"IMAGE_ADDITION", "MODULUS_SUBTRACT", "MPR", "PHASE_SUBTRACT", "PROJECTION_IMAGE", "T1_MAP", "T2_MAP",
 			"VELOCITY_MAP", "SUM" };
 

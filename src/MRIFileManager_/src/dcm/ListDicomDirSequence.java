@@ -243,6 +243,8 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 
 		ArrayList<String[]> listAcq = new ArrayList<>();
 		ArrayList<String[]> listCal = new ArrayList<>();
+		ArrayList<String> offsetImageAcq = new ArrayList<>();
+		ArrayList<String> offsetImageCal = new ArrayList<>();
 
 		String[] listSlice = null;
 		int offAcq = 0, offCalc = 0;
@@ -300,17 +302,20 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 					listSlice[19] = searchParam(hdrtmp, "2005,10B0")+" "+searchParam(hdrtmp, "2005,10B1")+" "+searchParam(hdrtmp, "2005,10B2");
 					listSlice[20] = searchParam(hdrtmp, "2005,1413"); // gradient orientation number
 					
-					if (indTp < 6) {
+					if (indTp < Arrays.asList(listType).indexOf("OTHER")) {
 						if (indSs < 4) {
 							offCalc = listCal.size();
 							listAcq.add(listSlice);
+							offsetImageAcq.add(listSlice[1]);
 						} else {
 							offAcq = listAcq.size();
 							listCal.add(listSlice);
+							offsetImageCal.add(listSlice[1]);
 						}
 					} else {
 						offAcq = listAcq.size();
 						listCal.add(listSlice);
+						offsetImageCal.add(listSlice[1]);
 					}
 				}
 			}
@@ -365,6 +370,7 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 
 
 					listAcq.add(listSlice);
+					offsetImageAcq.add(listSlice[1]);
 				}
 			}
 		}
@@ -380,7 +386,7 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 			listValuesAcq.put("Images In Acquisition", String.valueOf(listAcq.size()));
 			hmSeq.put(noSeq, hmSeq.get(noSeq).clone());
 			hmInfo.put(noSeq, listValuesAcq);
-			new ListDicomParam(noSeq, listAcq, offCalc, "");
+			new ListDicomParam(noSeq, listAcq, offCalc, "", offsetImageAcq);
 		if (!listCal.isEmpty()) {
 			Collections.sort(listCal, new Comparator<Object[]>() {
 				@Override
@@ -391,7 +397,7 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 			});
 			hmSeq.put(noSeq + "(calc)", hmSeq.get(noSeq).clone());
 			hmInfo.put(noSeq + "(calc)", listValuesCal);
-			new ListDicomParam(noSeq + "(calc)", listCal, offAcq, "");
+			new ListDicomParam(noSeq + "(calc)", listCal, offAcq, "", offsetImageCal);
 		}
 	}
 

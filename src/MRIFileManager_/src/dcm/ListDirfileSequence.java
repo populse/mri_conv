@@ -136,6 +136,8 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 
 		ArrayList<String[]> listAcq = new ArrayList<>();
 		ArrayList<String[]> listCal = new ArrayList<>();
+		ArrayList<String> offsetImageAcq = new ArrayList<>();
+		ArrayList<String> offsetImageCal = new ArrayList<>();
 		int offAcq = 0, offCalc = 0;
 		ArrayList<String> tmpAcq = new ArrayList<>();
 		ArrayList<String> tmpCal = new ArrayList<>();
@@ -209,10 +211,11 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 						listSlice[19] ="";
 				listSlice[20] = searchParam(hdrtmp, "2005,1413"); // gradient orientation number
 
-				if (indTp < 6) {
+				if (indTp < Arrays.asList(listType).indexOf("OTHER")) {
 					// if (indSs < 4) {
 					offCalc = listCal.size();
 					listAcq.add(listSlice);
+					offsetImageAcq.add(listSlice[1]);
 					// tmpAcq.add(listSlice[0]);
 					// } else {
 					// offAcq = listAcq.size();
@@ -222,6 +225,7 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 				} else {
 					offAcq = listAcq.size();
 					listCal.add(listSlice);
+					offsetImageCal.add(listSlice[1]);
 					// tmpCal.add(listSlice[0]);
 				}
 			}
@@ -243,7 +247,7 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 				listValuesAcq.put("Images In Acquisition",String.valueOf(listAcq.size()));
 				hmSeq.put(noSeq, tmpAcq.toArray(new String[0]));
 				hmInfo.put(noSeq, listValuesAcq);
-				new ListDicomParam(noSeq, listAcq, offCalc, "");
+				new ListDicomParam(noSeq, listAcq, offCalc, "", offsetImageAcq);
 			}
 			if (!listCal.isEmpty()) {
 				Collections.sort(listCal, new Comparator<Object[]>() {
@@ -260,7 +264,7 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 				listValuesCal.put("Images In Acquisition",String.valueOf(listValuesCal.size()));
 				hmSeq.put(noSeq + "(calc)", tmpCal.toArray(new String[0]));
 				hmInfo.put(noSeq + "(calc)", listValuesCal);
-				new ListDicomParam(noSeq + "(calc)", listCal, offAcq, "");
+				new ListDicomParam(noSeq + "(calc)", listCal, offAcq, "", offsetImageCal);
 			}
 		} else { // multislice by file
 
@@ -316,17 +320,20 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 					listSlice[20] = searchParam(hdrtmp, "2005,1413"); // gradient orientation number
 
 
-					if (indTp < 6) {
+					if (indTp < Arrays.asList(listType).indexOf("OTHER")) {
 						if (indSs < 4) {
 							offCalc = listCal.size();
 							listAcq.add(listSlice);
+							offsetImageAcq.add(listSlice[1]);
 						} else {
 							offAcq = listAcq.size();
 							listCal.add(listSlice);
+							offsetImageCal.add(listSlice[1]);
 						}
 					} else {
 						offAcq = listAcq.size();
 						listCal.add(listSlice);
+						offsetImageCal.add(listSlice[1]);
 					}
 				}
 			}
@@ -351,7 +358,7 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 				listValuesAcq.put("Images In Acquisition",String.valueOf(listAcq.size()));
 				hmSeq.put(noSeq, tmp);
 				hmInfo.put(noSeq, listValuesAcq);
-				new ListDicomParam(noSeq, listAcq, offCalc, "");
+				new ListDicomParam(noSeq, listAcq, offCalc, "", offsetImageAcq);
 			}
 			if (!listCal.isEmpty()) {
 				Collections.sort(listCal, new Comparator<Object[]>() {
@@ -368,7 +375,7 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 				listValuesCal.put("Images In Acquisition",String.valueOf(listValuesCal.size()));
 				hmSeq.put(noSeq + "(calc)", tmp);
 				hmInfo.put(noSeq + "(calc)", listValuesCal);
-				new ListDicomParam(noSeq + "(calc)", listCal, offAcq, "");
+				new ListDicomParam(noSeq + "(calc)", listCal, offAcq, "", offsetImageCal);
 			}
 
 		} // end else		

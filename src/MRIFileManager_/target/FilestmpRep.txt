@@ -1,12 +1,12 @@
-[Bruker] /home/omontigon/Documents/dataIRM/Bruker/JCD
-[Dicom] /home/omontigon/Documents/dataIRM/Philips/Aurelien
+[Bruker] /home/omontigon/Documents/dataIRM/Dicom/BL
+[Dicom] /home/omontigon/Documents/dataIRM/Dicom/tmp
 [ParRec] /home/omontigon/Documents/dataIRM/Philips/raw_data_cevastoc32
 [NifTI] 
 [Bids] 
 [Export] 
 [LookAndFeel] javax.swing.plaf.metal.MetalLookAndFeel
-[NamingRepNifTI] /PatientName/
+[NamingRepNifTI] /StudyName/
 [NamingFileNifTI] PatientName-StudyName-CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime
 [NamingOptionsNifTI] 00013
-[previewActived] Yes
+[previewActived] No
 [SeqDetail] 1023

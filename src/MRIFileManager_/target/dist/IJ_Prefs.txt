@@ -1,5 +1,5 @@
 #ImageJ 1.53o Preferences
-#Tue Feb 15 15:31:15 CET 2022
+#Thu Mar 31 12:49:21 CEST 2022
 showcolor=\#00FFFF
 prefs.options=4210688
 div-by-zero=Infinity
@@ -25,6 +25,7 @@ new.height=400
 fps=7.0
 .log.loc=760,227
 pp.fontsize=14
+dir.image=/home/omontigon/Documents/dataIRM/Nifti/GelHA_rat/20220215-ArgR10-J2/Analyze/
 new.type=0
 raw.options=0
 prefs.options2=0

@@ -10,8 +10,8 @@ public class ChangeSyntax {
 		
 		try {
 			type=type.split("\\\\")[2];
-			if (type.contains("_"))
-				type=type.substring(0,type.indexOf("_"));
+//			if (type.contains("_"))
+//				type=type.substring(0,type.indexOf("_"));
 			type=type.replace(" ", "_");
 		}
 		catch (Exception e){

@@ -31,6 +31,7 @@ public class ListOrderImage implements ParamMRI2 {
 		s1[6] = listSlice[11].toString().trim(); // Repetition
 		s1[7] = listSlice[12].toString().trim(); // Scan seq
 		s1[8] = listSlice[13].toString().trim(); // Label Type
+		
 		String[] s2 = s1.clone();
 
 		Set<String> uniqueWords;
@@ -133,13 +134,19 @@ public class ListOrderImage implements ParamMRI2 {
 		// order = "xytcz";
 		// order = "xyzct";
 		// order = "xyztc";
-
+		
 		if (manuf.toLowerCase().contains("philips"))
+
 			if (ord.contentEquals("0 5 5") || ord.contentEquals("0 5 4"))
 				order = "xytzc";
+			else if (hmInfo.get(noSeq).get("Scan Mode").contains("2"))
+				order = "xyctz"; //??????
+//				order = "xytzc"; //??????
+			else if (c > 1 && z > 1 && t > 1)
+				order = "xytzc";
 			else
-//				order = "xyctz"; //??????
-				order = "xytzc"; //??????
+				order = "xytzc";
+//				order = "xyztc";
 
 		if (manuf.toLowerCase().contains("siemens")) {
 			try {
@@ -151,7 +158,7 @@ public class ListOrderImage implements ParamMRI2 {
 
 			}
 		}
-
+		
 		Object[] listIo = new Object[4];
 
 		listIo[0] = order;
@@ -159,5 +166,6 @@ public class ListOrderImage implements ParamMRI2 {
 		listIo[2] = z;
 		listIo[3] = t;
 		hmOrderImage.put(noSeq, listIo);
+//		System.out.println(this + " order : " + Arrays.toString(listIo));
 	}
 }
