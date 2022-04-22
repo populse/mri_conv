@@ -31,13 +31,13 @@ To download the latest 'development' version, click [here](https://github.com/po
 <p></p> 
 	22/04/2022: version 22.1.7b
 	Bug fixed:
-		Dicom : image order problem with some Dicom files (with dicomdir) fixed
+		- Dicom : image order problem with some Dicom files (with dicomdir) fixed
 
 <p></p>
 
 	20/04/2022: version 22.1.7a
 	Bug fixed:
-		-Dicom : image order problem with some Dicom files fixed
+		- Dicom : image order problem with some Dicom files fixed
 
 
 <p></p>
