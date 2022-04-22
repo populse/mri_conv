@@ -1,15 +1,15 @@
 #ImageJ 1.53o Preferences
-#Tue Apr 19 09:49:35 CEST 2022
+#Fri Apr 22 14:47:00 CEST 2022
 precision=3
 fcolor=\#000000
 raw.width=240
 raw.type=2
-.threshold.raw=false
 .point.size=1
+.threshold.raw=false
 ap.options=64
 .threshold.mode=0
-.manager.loc=1586,538
 .threshold.dark=false
+.manager.loc=1586,538
 pp.width=600
 bcolor=\#FFFFFF
 pp.fontsize=14
@@ -20,8 +20,8 @@ new.type=0
 raw.options=2
 .results.loc=1920,175
 .b&c.loc=447,46
-.log.width=1866
 .results.height=905
+.log.width=1866
 pp.options=0
 raw.gap=0
 showcolor=\#00FFFF

@@ -28,6 +28,11 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+<p></p> 
+	22/04/2022: version 22.1.7b
+	Bug fixed:
+		Dicom : image order problem with some Dicom files (with dicomdir) fixed
+
 <p></p>
 
 	20/04/2022: version 22.1.7a
