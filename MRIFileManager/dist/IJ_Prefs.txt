@@ -1,5 +1,5 @@
 #ImageJ 1.53o Preferences
-#Fri Apr 22 14:47:00 CEST 2022
+#Wed May 04 09:35:17 CEST 2022
 precision=3
 fcolor=\#000000
 raw.width=240
@@ -21,7 +21,7 @@ raw.options=2
 .results.loc=1920,175
 .b&c.loc=447,46
 .results.height=905
-.log.width=1866
+.log.width=500
 pp.options=0
 raw.gap=0
 showcolor=\#00FFFF
@@ -30,7 +30,7 @@ prefs.options=4210692
 div-by-zero=Infinity
 raw.height=240
 new.fill=0
-.log.height=1053
+.log.height=400
 recent03=/home/omontigon/Documents/dataIRM/Nifti/GelHA_rat/20220215-ArgR10-J2/Analyze/analyse_rat_1,8ppm_7T.nii
 recent04=/home/omontigon/Documents/dataIRM/Dicom/BL/bug_sliceTh/AITkh_STRESS_FBP_SA001_DS.dcm
 recent01=/home/omontigon/Documents/dataIRM/Nifti/GelHA_rat/20220215-ArgR10-J21/Analyze/analyse_rat_1,8ppm_7T.nii
@@ -39,10 +39,10 @@ recent00=/home/omontigon/Documents/dataIRM/Nifti/GelHA_rat/T1_T2_map_Gel.ijm
 new.slices=1
 jpeg=75
 .point.type=0
-ij.x=1040
+ij.x=764
 .command-finder.close=false
 raw.n=2500
-ij.y=27
+ij.y=208
 pp.height=340
 measurements=18
 noise.sd=25.0

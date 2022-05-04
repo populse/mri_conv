@@ -27,8 +27,14 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 To download the latest 'development' version, click [here](https://github.com/populse/mri_conv/archive/devpt.zip) or 'Download ZIP' in 'Clone or download'.
 
 # Release history
+<p></p>
+
+	04/05/2022: version 22.1.8a
+	Bug fixed:
+		- Dicom Bruker: normalization problem fixed 
 
 <p></p> 
+
 	22/04/2022: version 22.1.7b
 	Bug fixed:
 		- Dicom : image order problem with some Dicom files (with dicomdir) fixed
