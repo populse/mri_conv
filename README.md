@@ -30,9 +30,16 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	01/02/2023: version 22.2.2a
+	Bug fixed:
+		- Bruker : problem of bvec/bval generation (when the number of diffusion experiments >1) solved
+
+<p></p>
+
 	13/09/2022: version 22.1.9a
 	Bug fixed:
 		- Dicom : normalization problem fixed 
+
 <p></p>
 
 	04/05/2022: version 22.1.8a
