@@ -28,7 +28,9 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
-<p></p> 05/04/2023: version 23.2.0a
+<p></p>
+
+	05/04/2023: version 23.2.0a
 	Features added:
 		- all : 'Directory' field added in the naming choice for exporting files to Nifti
 	Others:
