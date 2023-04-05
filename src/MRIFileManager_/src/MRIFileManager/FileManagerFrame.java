@@ -67,10 +67,10 @@ import exportFiles.ExportFilesOption;
 public class FileManagerFrame extends JFrame implements ItemListener, ComponentListener {
 
 	private static final long serialVersionUID = 1L;
-	private final String versionSoft="22.1.7a";
-	
+	private final String versionSoft="23.2.0a";
+
 	public static String OS = System.getProperty("os.name").toLowerCase();
-	
+
 	private int WScreen, HScreen;
 	private int WFrame, HFrame;
 
@@ -98,7 +98,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 	private JLabel pathExportNifti, pathDictionnary;
 
 	public static JDialog dlg;
-	
+
 	private JPopupMenu popupMenuDetailSeq;
 	private JCheckBoxMenuItem[] itemSeqDetail;
 	private JCheckBox[] ls;
@@ -413,7 +413,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		boutonBids.setIcon(PrefParam.iconBids);
 		boutonBids.setPreferredSize(new Dimension(110, 25));
 
-		boutonBruker.setToolTipText("Paravision 5 & 6");
+		boutonBruker.setToolTipText("Paravision 5, 6 & 7");
 		boutonDicom.setToolTipText("<html>" + "DICOMDIR" + "<br>" + "DIRFILE" + "<br>" + "*.dcm, *.ima" + "</html>");
 		boutonParRec.setToolTipText("<html>" + "Par/Rec V4, V4.1, V4.2" + "<br>" + "Xml/Rec V5" + "</html>");
 		boutonNifTI.setToolTipText("Nifti-1");
@@ -675,11 +675,11 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		split5 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, scrollTreeBasket, scrollBasket);
 		split5.setDividerLocation(HFrame * 50/ 100);
 		split5.setDividerSize(5);
-		
+
 		split6 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, split5, panel);
 		split6.setDividerLocation(HFrame * 75 / 100);
 		split6.setDividerSize(5);
-		
+
 		tabPrincipal.add("Basket (Empty)", split6);
 	}
 

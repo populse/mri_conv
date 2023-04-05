@@ -38,6 +38,7 @@ import ij.ImageStack;
 import ij.io.FileInfo;
 import ij.io.ImageWriter;
 import ij.measure.Calibration;
+import ij.plugin.Duplicator;
 import ij.process.ColorProcessor;
 import philips.ConvertPhilipsToNifti;
 
@@ -65,7 +66,6 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 
 		continuSave = true;
 
-
 		boolean answ = false;
 
 		for (int j = 0; j < 5; j++)
@@ -83,7 +83,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 
 //		answ = save(imp, repWork, repertoryExport, ".nii", seqSel, true);
 
-		System.out.println("exported to " + repWork + separator + repertoryExport + suffix);
+		System.out.print("export to ..... " + repWork + separator + repertoryExport + suffix + '\n');
 		String tmp = namingOptionsNiftiExport;
 		boolean bool = (tmp.substring(3, 4).contentEquals("0")) ? false : true;
 		String onetwofile = tmp.substring(4, 5);
@@ -111,12 +111,11 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				
 			}
 		}
 		answ = save(imp, repWork, repertoryExport, ".nii", seqSel, true);
 		if (!answ)
-			System.out.println("no exported (writing to " + repWork + " unauthorized ?) ");
+			System.out.println("not exported (" + repWork + " doesn't exist or unauthorized ?) ");
 
 		imp.close();
 		imp = null;
@@ -309,6 +308,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 				}
 
 				else {
+					
 					imp = conv.convertToNifti((String) lb);
 					conv.AffineQuaternion((String) lb);
 					quaterns = conv.quaterns();
@@ -346,6 +346,21 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 						}
 					}
 
+					if (lb.toString().contains("Bruker") && lb.toString().contains("cineASL")) {
+						
+						ImagePlus imp1 = new Duplicator().run(imp, 1, imp.getNChannels()/2, 1, 1, 1, imp.getNFrames());
+						ImagePlus imp2 = new Duplicator().run(imp, 1 + imp.getNChannels()/2, imp.getNChannels(), 1, 1, 1, imp.getNFrames());
+						answ = save(imp1, newDirectory, nameFile + "_control", suffix, lb, true);
+						if (answ) {
+							logExportNifti += "Export success for " + lb +  "(control)\n";
+							JsonMIA += new LogJsonMIA(directory, lb, nameFile + "_control", error).getJson() + ",";
+						}
+						answ = save(imp2, newDirectory, nameFile + "_marquage", suffix, lb, true);
+						if (answ) {
+							logExportNifti += "Export success for " + lb +  "(marquage)\n";
+							JsonMIA += new LogJsonMIA(directory, lb, nameFile + "_marquage", error).getJson() + ",";
+						}
+					}
 					answ = save(imp, newDirectory, nameFile, suffix, lb, true);
 
 					imp.close();
@@ -785,7 +800,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 		output.writeByte('r'); // regular
 		output.writeByte(0); // hkey_un dim_info
 
-//		 System.out.println("dimension");
+//		 System.out.println(this + " : dimension");
 //		 System.out.println("NDimensions = "+imp.getNDimensions());
 //		 System.out.println("NSlices = "+imp.getNSlices());
 //		 System.out.println("NChannels = "+imp.getNChannels());

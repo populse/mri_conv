@@ -21,7 +21,7 @@ import philips.ListPhilipsSequence;
 public class MriToNifti extends PrefParam implements ParamMRI2 {
 
 	public MriToNifti() {
-		
+
 		listinBasket.removeAllElements();
 		listBasket_hmInfo.clear();
 		listBasket_hmOrderImage.clear();
@@ -29,19 +29,20 @@ public class MriToNifti extends PrefParam implements ParamMRI2 {
 	}
 
 	public void convertToNifti(String naming, String repWork, String constr) {
-		
+
 		for (String seq : hmSeq.keySet()) {
 			listBasket_hmSeq.put(seq, hmSeq.get(seq));
 			listBasket_hmInfo.put(seq, hmInfo.get(seq));
 			listBasket_hmOrderImage.put(seq, hmOrderImage.get(seq));
 			listinBasket.add(listinBasket.size(), seq);
 		}
-		
+
 		convertNifti conv = null;
 		String tmprepWork = "", repertoryExport = "";
 		String[] lm = null;
 		conv = new ConvertDicomToNifti();
 		for (String seq : listBasket_hmSeq.keySet()) {
+			System.out.print('\n' + listBasket_hmSeq.get(seq)[0] + '\n');
 			if (listBasket_hmInfo.get(seq).get("Slice Orientation").split(" +").length == 1) {
 			repertoryExport = replaceFieldNameNifti(naming, seq);
 			lm = createRepertories(repWork, repertoryExport);
@@ -51,16 +52,18 @@ public class MriToNifti extends PrefParam implements ParamMRI2 {
 			new ConvertImage2(0, 2, conv, seq, tmprepWork, repertoryExport, constr);
 			}
 			else
-				System.out.println(listBasket_hmSeq.get(seq)[0] + " ..... no exported because number of orientations > 1");
+				System.out.println(" ..... not exported because number of orientations > 1");
 		}
 		conv = null;
 	}
-	
+
 	public void convertToNifti(String file, String naming, String seqSel, String serialNumber, String repWork) {
 		
 		ListParam2 lv = null;
 		String dim, nImage, repertoryExport = "", seqSel2 = "";
 		boolean secondExport = false, multiOrientation = false;
+		
+		System.out.print('\n' + file + '\n');
 
 //		listinBasket.removeAllElements();
 //		listBasket_hmInfo.clear();
@@ -69,7 +72,15 @@ public class MriToNifti extends PrefParam implements ParamMRI2 {
 
 		try {
 			if (formatCurrent.contains("Bruker")) {
-				lv = new ListBrukerParam(file, seqSel, serialNumber);
+				String directory;
+				String[] field_file;
+				if (file.endsWith("2dseq")) {
+					field_file = file.split(PrefParam.separator);
+					directory = field_file[field_file.length-5];
+				}
+				else
+					directory = file.substring(file.lastIndexOf(PrefParam.separator)+1);
+				lv = new ListBrukerParam(directory, file, seqSel, serialNumber);
 				listBasket_hmInfo.put(seqSel, lv.ListParamValueAcq(""));
 				dim = listBasket_hmInfo.get(seqSel).get("Scan Mode");
 				if (dim.contains("3"))
@@ -152,8 +163,10 @@ public class MriToNifti extends PrefParam implements ParamMRI2 {
 				listBasket_hmInfo.put(seqSel, lv.ListParamValueAcq(""));
 				listBasket_hmOrderImage.put(seqSel, lv.ListOrderStackAcq("", ""));
 				listinBasket.add(listinBasket.size(), seqSel);
-				
-			} 
+
+			} else if (formatCurrent.contains("Dicom")) {
+				System.out.println("dicom to nifti");
+			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -161,7 +174,7 @@ public class MriToNifti extends PrefParam implements ParamMRI2 {
 
 //		if (listBasket_hmInfo.get(seqSel).get("Slice Orientation").split(" +").length == 1) {
 		String tmprepWork = "";
-		System.out.print(file + " ..... ");
+//		System.out.print(file + " ..... ");
 		if (!multiOrientation) {
 			repertoryExport = replaceFieldNameNifti(naming, seqSel);
 			String[] lm = createRepertories(repWork, repertoryExport);
@@ -206,7 +219,6 @@ public class MriToNifti extends PrefParam implements ParamMRI2 {
 				conv = null;
 			} else
 				System.out.println(file + " ..... no exported because number of orientations > 1");
-
 		}
 
 		else if (formatCurrent.contains("Bids")) {
@@ -215,7 +227,6 @@ public class MriToNifti extends PrefParam implements ParamMRI2 {
 			else
 				System.out.println(file + " ..... no exported because number of orientations > 1");
 		}
-
 
 //		} else
 //			System.out.println(file + " ..... no exported because number of orientations > 1");

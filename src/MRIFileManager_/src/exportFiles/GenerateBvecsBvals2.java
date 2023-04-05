@@ -16,6 +16,7 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 	private boolean successfull = false;
 	private String[] dd;
 	private String[] bveff;
+	private String[] dgo;
 	private int DwAoImages;
 	private HashMap<String, String> hmInfo_tmp;
 	private String linebasket;
@@ -29,21 +30,29 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 		dd = hmInfo_tmp.get("Direction Diffusion").toString().split(" +");
 		bveff = hmInfo_tmp.get("B-values effective").toString().split(" +");
 		DwAoImages = Integer.parseInt(hmInfo_tmp.get("Diffusion Ao Images number").toString());
+		dgo = hmInfo_tmp.get("Diffusion Gradient Orientation").toString().split(" +");
 		String[] ddtmp = dd;
-		
+
 //		String[] ddtmp = deleteDuplicate(hmInfo_tmp.get("Direction Diffusion").toString()).split(" +");
 //		System.out.println(this + "constructor = " + constr);
 //		System.out.println(this + " : dir. diff (" + dd.length + ") = " + hmInfo_tmp.get("Direction Diffusion"));
 //		System.out.println(this + " : B-vals eff. (" + bveff.length + ") = " + hmInfo_tmp.get("B-values effective"));
 //		System.out.println(this + " : DwAoImages = " + DwAoImages);
-//		System.out.println(this + "delete duplicate dir. diff ("+ddtmp.length+") = "+ddtmp);
+//		System.out.println(this + " : dir. grad. orient. (" + dgo.length + ") = " + hmInfo_tmp.get("Diffusion Gradient Orientation"));
+//		System.out.println(this + "delete duplicate dir. diff ("+ddtmp.length+") = " + Arrays.toString(ddtmp));
 
 		if (constr.contentEquals("Bruker") && ddtmp.length > 1) {
 			if (hmInfo_tmp.get("Slice Orientation").toString().contentEquals("coronal")
 					|| hmInfo_tmp.get("Slice Orientation").toString().contentEquals("sagittal"))
-				getTxt("-y, -x, z", bvec_bval_txt, directory, name, false);
+				if (dgo.length > 1)
+					getTxt_Bruker("-y, -x, z", bvec_bval_txt, directory, name, false);
+				else
+					getTxt("-y, -x, z", bvec_bval_txt, directory, name, false);
 			else
-				getTxt("x, y, z", bvec_bval_txt, directory, name, false);
+				if (dgo.length > 1)
+					getTxt_Bruker("x, y, z", bvec_bval_txt, directory, name, false);
+				else
+					getTxt("x, y, z", bvec_bval_txt, directory, name, false);
 
 		} else if (constr.contentEquals("Philips") && ddtmp.length > 3) {
 			getTxt("-z, -x, y", bvec_bval_txt, directory, name, false);
@@ -85,9 +94,116 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 				bvecsV[j][DwAoImages + i] = sign[j] + dd[(i * 3) + rang[j]];
 				bvalsV[DwAoImages + i] = bveff[DwAoImages + i];
 			}
+			
 
 		if (forDicom)
 			bvecsV = bvecs_dicom(bvecsV);
+
+		if (type.contentEquals("1") || type.contentEquals("3"))
+			for (int i = 0; i < bvecsV[0].length; i++)
+				txtToReturn += String.join(" ", bvecsV[0][i], bvecsV[1][i], bvecsV[2][i], bvalsV[i]) + "\n";
+		if (type.contentEquals("2") || type.contentEquals("3")) {
+			txtBvecs = String.join("\n", String.join(" ", bvecsV[0]), String.join(" ", bvecsV[1]),
+					String.join(" ", bvecsV[2]));
+			txtBvals = String.join(" ", bvalsV);
+		}
+
+		txtBvecs = txtBvecs.replaceAll("--", "");
+		txtBvals = txtBvals.replaceAll("--", "");
+		txtToReturn = txtToReturn.replaceAll("--", "");
+
+		hmInfo_tmp.put("bvecs", txtBvecs);
+		hmInfo_tmp.put("bvals", txtBvals);
+		listBasket_hmInfo.put(linebasket, hmInfo_tmp);
+
+		if (!txtToReturn.isEmpty())
+			try {
+				FileWriter writer = new FileWriter(directory + PrefParam.separator + name + "-bvecs-bvals-MRtrix.txt");
+				writer.write(txtToReturn);
+				writer.flush();
+				writer.close();
+				successfull = true;
+			} catch (Exception e) {
+				successfull = false;
+				new GetStackTrace(e, this.getClass().toString());
+				System.out.println("Error: impossible to create '" + directory + PrefParam.separator + name
+						+ "-bvecs-bvals-MRtrix.txt" + "'");
+			}
+		if (!txtBvecs.isEmpty())
+			try {
+				FileWriter writer = new FileWriter(directory + PrefParam.separator + name + "-bvecs-MRtrix.txt");
+				writer.write(txtBvecs);
+				writer.flush();
+				writer.close();
+				successfull = true;
+			} catch (Exception e) {
+				successfull = false;
+				new GetStackTrace(e, this.getClass().toString());
+				System.out.println("Error: impossible to create '" + directory + PrefParam.separator + name
+						+ "-bvecs-MRtrix.txt" + "'");
+			}
+
+		if (!txtBvals.isEmpty())
+			try {
+				FileWriter writer = new FileWriter(directory + PrefParam.separator + name + "-bvals-MRtrix.txt");
+				writer.write(txtBvals);
+				writer.flush();
+				writer.close();
+				successfull = true;
+			} catch (Exception e) {
+				successfull = false;
+				new GetStackTrace(e, this.getClass().toString());
+				System.out.println("Error: impossible to create '" + directory + PrefParam.separator + name
+						+ "-bvals-MRtrix.txt" + "'");
+			}
+	}
+	
+	
+	private void getTxt_Bruker(String order, String type, String directory, String name, boolean forDicom) {
+
+		String txtBvecs = "", txtBvals = "", txtToReturn = "";
+		String[] indice = { "x", "y", "z" };
+		String[] list = order.split(",");
+		String[] sign = { "", "", "" };
+		int[] rang = { 0, 1, 2 };
+		String tmp = "";
+
+		for (int i = 0; i < list.length; i++) {
+			tmp = list[i].trim();
+			if (tmp.contains("-")) {
+				sign[i] = "-";
+				tmp = tmp.replace("-", "");
+			}
+			rang[i] = Arrays.asList(indice).indexOf(tmp);
+		}
+
+		String[][] bvecsV = new String[3][dgo.length / 3];
+		String[] bvalsV = new String[dgo.length / 3];
+
+//		for (int i = 0; i < DwAoImages; i++)
+//			for (int j = 0; j < 3; j++) {
+//				bvecsV[j][i] = "0.0";
+//				bvalsV[i] = bveff[i];
+//			}
+
+		for (int i = 0; i < dgo.length / 3; i++) {
+			boolean zero = false;
+			for (int j = 0; j < 3; j++) {
+				if (Float.valueOf(dgo[(i * 3) + rang[j]]) == 0.0) {
+					bvecsV[j][i] = "0.0";
+					zero = true;
+				}
+				else {	
+					bvecsV[j][i] = sign[j] + dgo[(i * 3) + rang[j]];
+					zero = false;
+				}
+			}
+			if (zero)
+				bvalsV[i] = "0.0";
+			else
+				bvalsV[i] = bveff[i];
+		}
+
 
 		if (type.contentEquals("1") || type.contentEquals("3"))
 			for (int i = 0; i < bvecsV[0].length; i++)

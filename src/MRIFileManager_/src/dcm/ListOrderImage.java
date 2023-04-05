@@ -9,7 +9,7 @@ import abstractClass.ParamMRI2;
 public class ListOrderImage implements ParamMRI2 {
 
 	public ListOrderImage(String noSeq, String[] listSlice) {
-
+		
 //		 System.out.println(noSeq);
 //		 System.out.println("list TE : "+ listSlice[0].substring(0, listSlice[0].length()));
 //		 System.out.println("list TR : "+ listSlice[1].substring(0, listSlice[1].length()));
@@ -134,19 +134,30 @@ public class ListOrderImage implements ParamMRI2 {
 		// order = "xytcz";
 		// order = "xyzct";
 		// order = "xyztc";
-		
-		if (manuf.toLowerCase().contains("philips"))
 
-			if (ord.contentEquals("0 5 5") || ord.contentEquals("0 5 4"))
+		if (manuf.toLowerCase().contains("philips"))
+			if (ord.contentEquals("0 5 5") || ord.contentEquals("0 5 4")) {
+//				System.out.println("cas 1");
 				order = "xytzc";
-			else if (hmInfo.get(noSeq).get("Scan Mode").contains("2"))
+			}
+			else if (hmInfo.get(noSeq).get("Scan Mode").contains("2")) {
+//				System.out.println("cas 2");
 				order = "xyctz"; //??????
 //				order = "xytzc"; //??????
-			else if (c > 1 && z > 1 && t > 1)
+			}
+			else if (c > 1 && z > 1 && t > 1 && !ord.isEmpty()) {
+//				System.out.println("cas 3 : " + ord);
 				order = "xytzc";
-			else
+			}
+			else if (c > 1 && z > 1 && t > 1 && ord.isEmpty()) {
+//				System.out.println("cas 4 : " + ord);
+				order = "xyctz";
+			}
+			else {
+//				System.out.println("cas 5");
 				order = "xytzc";
 //				order = "xyztc";
+			}
 
 		if (manuf.toLowerCase().contains("siemens")) {
 			try {

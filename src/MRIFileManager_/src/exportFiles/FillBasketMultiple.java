@@ -246,7 +246,7 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 										// new ListDicomDirSequence().listParamDicom(jj,
 										// Integer.parseInt(hmInfo.get(jj).get("Indice of Frame")));
 										new ListDicomDirSequence2().listParamDicom(hmInfo.get(jj).get("Serial Number"),
-												jj, false);
+												jj, false, hmInfo.get(jj).get("Directory"));
 										FileManagerFrame.dlg.setVisible(false);
 										if (deidentify) {
 											HashMap<String, String> tmpHas = hmInfo.get(jj);
@@ -394,7 +394,7 @@ public class FillBasketMultiple extends PrefParam implements ParamMRI2, Format {
 //									new ListDicomDirSequence().listParamDicom(jj,
 //											Integer.parseInt(hmInfo.get(jj).get("Indice of Frame")));
 									new ListDicomDirSequence2().listParamDicom(hmInfo.get(jj).get("Serial Number"),
-											jj, false);
+											jj, false, hmInfo.get(jj).get("Directory"));
 									FileManagerFrame.dlg.setVisible(false);
 									if (deidentify) {
 										HashMap<String, String> tmpHas = hmInfo.get(jj);

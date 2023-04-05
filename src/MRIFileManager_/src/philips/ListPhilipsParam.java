@@ -26,7 +26,7 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 	public ListPhilipsParam(String pathPhilips) {
 
 		this.pathPhilips = pathPhilips;
-
+		
 //		pathPhilips2 = pathPhilips.replace(".REC", ".PAR");
 //		pathPhilips2 = pathPhilips2.replace(".rec", ".par");
 //		ind = 0;
@@ -94,12 +94,15 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 			acq = "0" + acq;
 		if (rec.length() == 1)
 			rec = "0" + rec;
-
+		
+//		System.out.println("acq-rec : " + acq + "-" + rec);
+		
 		File filePhilips = new File(pathPhilips);
 
 		lv.put("Serial Number", acq + "-" + rec + sufx);
 		lv.put("File path", filePhilips.getAbsolutePath());
 		lv.put("File Name", filePhilips.getName());
+		lv.put("Directory", filePhilips.getParentFile().getName());
 		lv.put("File Size (Mo)", String.valueOf(filePhilips.length() / (1024 * 1024.0)));
 		lv.put("noSeq", it);
 
@@ -334,11 +337,15 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 		// "xyztc"
 		// "xytcz"
 		// "xytzc"
+		
+//		System.out.println("ord = " + ord);
 
 		if (ord.contentEquals("1 0 3"))
 			lv[0] = "xytcz"; // (orig)
 		else
 			lv[0] = "xyctz"; // (orig)
+		
+//		System.out.println("order = " + lv[0]);
 
 		if (s1[3].contentEquals("0"))
 			s1[3] = "1";
@@ -350,6 +357,12 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 		int secondDim = Integer.parseInt(s1[0]);
 		int thirdDim = Integer.parseInt(s1[1]) * Integer.parseInt(s1[2]) * Integer.parseInt(s1[4])
 				* Integer.parseInt(s1[5]) * Integer.parseInt(s1[6]);
+		
+		if (thirdDim == 1 && firstDim > 1) {
+			thirdDim = firstDim;
+			firstDim = 1;
+			lv[0] = "xyctz";
+		}
 		
 //		System.out.println(this+" : "+firstDim+" , "+secondDim+" , "+thirdDim);
 
@@ -642,9 +655,20 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 				lv[0] = "xyctz";
 		}
 		
-		lv[1] = Integer.parseInt(s1[3]);
-		lv[2] = Integer.parseInt(s1[0]);
-		lv[3] = Integer.parseInt(s1[1]) * Integer.parseInt(s1[2]) * Integer.parseInt(s1[4]) * Integer.parseInt(s1[5]);
+		int firstDim = Integer.parseInt(s1[3]);
+		int secondDim = Integer.parseInt(s1[0]);
+		int thirdDim = Integer.parseInt(s1[1]) * Integer.parseInt(s1[2]) * Integer.parseInt(s1[4])
+				* Integer.parseInt(s1[5]);
+		
+		if (thirdDim == 1 && firstDim > 1) {
+			thirdDim = firstDim;
+			firstDim = 1;
+			lv[0] = "xyctz";
+		}
+		
+		lv[1] = firstDim;
+		lv[2] = secondDim;
+		lv[3] = thirdDim;
 		lv[4] = NImageTot;
 		lv[5] = listImgNbr[0]; // slice number
 		lv[6] = listImgNbr[1]; // echo number

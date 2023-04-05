@@ -20,7 +20,7 @@ public class FillHmsPhilips implements ParamMRI2 {
 				String prefixSeq=("000000").substring(0, iter.length());
 				iter2=(prefixSeq + (Integer.parseInt(iter)+1)).substring(String.valueOf(Integer.parseInt(iter)+1).length());
 			}
-			
+
 			if (ListPhilipsSequence.hasAcqImg) {
 				listParam = listPhilipsPar.ListParamValueAcq(iter);
 				listOrderStack = listPhilipsPar.ListOrderStackAcq("", "");

@@ -45,7 +45,7 @@ public class OpenNifti implements ParamMRI2 {
 		c = (int) hmOrderImage.get(noSeq)[1];
 		z = (int) hmOrderImage.get(noSeq)[2];
 		t = (int) hmOrderImage.get(noSeq)[3];
-		
+
 //		System.out.println("c , z , t : "+c+" , "+z+" , "+t);
 
 
@@ -102,7 +102,8 @@ public class OpenNifti implements ParamMRI2 {
 			if (w > h) {
 				h *= pxh / pxw;
 				pxh = pxw;
-			} else {
+			} 
+			else {
 				w *= pxw / pxh;
 				pxw = pxh;
 			}

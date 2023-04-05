@@ -15,7 +15,7 @@ import abstractClass.PrefParam;
 
 public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 
-	private String chemDicom;
+	private String chemDicom, directory;
 	private boolean windowLess = false;
 
 
@@ -82,6 +82,10 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 		pathImDcm = pathImDcm.replace("\\", PrefParam.separator);
 		pathImDcm = getTruePath(pathDicom, pathImDcm);
 		StringBuffer hdr2 = null;
+		
+		directory = chemDicom.substring(chemDicom.lastIndexOf(PrefParam.separator) + 1);
+		listValuesAcq.put("Directory",directory);
+		listValuesCal.put("Directory",directory);
 
 		if (!pathImDcm.isEmpty()) {
 			pathImDcm = getTruePath(pathDicom, pathImDcm);
@@ -186,23 +190,25 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 				listSlice[8] = tp;
 				listSlice[9] = searchParam(hdrtmp, "Temporal Position");
 				listSlice[10] = searchParam(hdrtmp, "Rescale Intercept");
-				if (!listSlice[10].matches("[-+]?[0-9]*\\.?[0-9]+"))
+				if (!listSlice[10].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 					listSlice[10]="0";
 				listSlice[11] = searchParam(hdrtmp, "Rescale Slope");
-				if (!listSlice[11].matches("[-+]?[0-9]*\\.?[0-9]+"))
+				if (!listSlice[11].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 					listSlice[11]="1";
 				listSlice[12] = searchParam(hdrtmp, "Acquisition Time");
 				listSlice[13] = searchParam(hdrtmp, "Image Position (Patient)");
 				listSlice[14] = searchParam(hdrtmp, "Image Orientation (Patient)");
-				listSlice[15] = searchParam(hdrtmp, bvalue_field); // Diffusion-b-value
+				listSlice[15] = searchParam(hdrtmp, "0018,9087"); // diffusion
+				if (listSlice[15].isEmpty())
+					listSlice[15] = searchParam(hdrtmp, "2001,1003"); // diffusion
 				String ts = searchParam(hdrtmp, "0018,0020");
 				ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
 				// int indSs = Arrays.asList(listScanSeq).indexOf(ts);
 				listSlice[16] = ts; // scanning sequence
 				listSlice[17] = searchParam(hdrtmp, "2005,1429");//Label Type (ASL)
 				listSlice[18] = searchParam(hdrtmp, "2005,100E");//Scale Slope Philips
-				if (!listSlice[18].matches("[-+]?[0-9]*\\.?[0-9]+"))
-					listSlice[18]="1";
+				if (!listSlice[18].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
+					listSlice[18]="";
 //				System.out.println(this);
 //				System.out.println("diffusion alors = "+listSlice[15]);
 				if (!listSlice[15].isEmpty() )
@@ -296,23 +302,25 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 					listSlice[8] = tp;
 					listSlice[9] = searchParam(hdrtmp, "Temporal Position");
 					listSlice[10] = searchParam(hdrtmp, "Rescale Intercept");
-					if (!listSlice[10].matches("[-+]?[0-9]*\\.?[0-9]+"))
+					if (!listSlice[10].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 						listSlice[10]="0";
 					listSlice[11] = searchParam(hdrtmp, "Rescale Slope");
-					if (!listSlice[11].matches("[-+]?[0-9]*\\.?[0-9]+"))
+					if (!listSlice[11].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 						listSlice[11]="1";
 					listSlice[12] = searchParam(hdrtmp, "Acquisition Time");
 					listSlice[13] = searchParam(hdrtmp, "Image Position (Patient)");
 					listSlice[14] = searchParam(hdrtmp, "Image Orientation (Patient)");
-					listSlice[15] = searchParam(hdrtmp, bvalue_field); // Diffusion-b-value
+					listSlice[15] = searchParam(hdrtmp, "0018,9087"); // diffusion
+					if (listSlice[15].isEmpty())
+						listSlice[15] = searchParam(hdrtmp, "2001,1003"); // diffusion
 					String ts = searchParam(hdrtmp, "0018,0020");
 					ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
 					int indSs = Arrays.asList(listScanSeq).indexOf(ts);
 					listSlice[16] = ts; // scanning sequence
 					listSlice[17] = searchParam(hdrtmp, "2005,1429");//Label Type (ASL)
 					listSlice[18] = searchParam(hdrtmp, "2005,100E");//Scale Slope Philips
-					if (!listSlice[18].matches("[-+]?[0-9]*\\.?[0-9]+"))
-						listSlice[18]="1";
+					if (!listSlice[18].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
+						listSlice[18]="";
 					if (!listSlice[15].isEmpty() )
 						listSlice[19] = searchParam(hdrtmp, "2005,10B0")+" "+searchParam(hdrtmp, "2005,10B1")+" "+searchParam(hdrtmp, "2005,10B2");
 					else

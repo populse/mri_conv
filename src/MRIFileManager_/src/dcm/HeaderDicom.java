@@ -12,11 +12,13 @@ import com.pixelmed.dicom.DicomInputStream;
 import MRIFileManager.GetStackTrace;
 import abstractClass.ParamMRI2;
 
+
 public class HeaderDicom {
 
 	private boolean isJpeglossless;
 
 	public HeaderDicom() {
+
 	}
 
 	public String getHeaderDicom(String pathDicom) {
@@ -40,6 +42,23 @@ public class HeaderDicom {
 //		System.out.println(this + txt);
 		return txt;
 	}
+
+//	public String getHeaderDicom2(String pathDicom) {
+//		DebugTools.enableLogging("OFF");
+//
+//		String txt = null;
+//
+//		AttributeList list = new AttributeList();
+//		DicomInputStream dis;
+//		try {
+//			dis = new DicomInputStream(new File(pathDicom));
+//			list.read(dis);
+//		} catch (Exception e1) {
+//			txt = "";
+//		}
+//		txt = redoTxt(list.toString());
+//		return txt;
+//	}
 
 	public boolean isJpegLossLess() {
 		return isJpeglossless;

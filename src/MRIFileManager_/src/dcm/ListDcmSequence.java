@@ -9,12 +9,13 @@ import java.util.HashMap;
 import MRIFileManager.Dateformatmodif;
 import MRIFileManager.FileManagerFrame;
 import abstractClass.ParamMRI2;
+import abstractClass.PrefParam;
 import ij.plugin.DICOM;
 
 
 public class ListDcmSequence implements ParamMRI2, DictionDicom {
 
-	private String chemDicom;
+	private String chemDicom, directory;
 	private Boolean windowlessMode;
 
 	public ListDcmSequence(String chemDicom, Boolean windowlessMode) {
@@ -66,6 +67,8 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 	}
 
 	public void startList(Object[] files, String nos) {
+		
+		Arrays.sort(files);
 
 		String numberFrames;
 		HashMap<String, String> listValuesAcq = new HashMap<>();
@@ -76,6 +79,10 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 		HeaderDicom hdrdcm = new HeaderDicom();
 
 		hdr = new StringBuffer(hdrdcm.getHeaderDicom(files[0].toString()));
+		
+		directory = chemDicom.substring(chemDicom.lastIndexOf(PrefParam.separator) + 1);
+		listValuesAcq.put("Directory",directory);
+		listValuesCal.put("Directory",directory);
 
 		if (hdrdcm.isJpegLossLess()) {
 			listValuesAcq.put("Note", "JpegLossLess");
@@ -145,7 +152,6 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 						listSlice[1] = searchParam(new StringBuffer(hdrDcm.substring(hdrDcm.indexOf("InstanceNumber"))),
 								"InstanceNumber");
 					} catch (Exception e) {
-
 					}
 				}
 
@@ -169,23 +175,23 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 						listSlice[8] = tp;
 						listSlice[9] = searchParam(hdrDcm, "Temporal Position");
 						listSlice[10] = searchParam(hdrDcm, "Rescale Intercept");
-						if (!listSlice[10].matches("[-+]?[0-9]*\\.?[0-9]+"))
+						if (!listSlice[10].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 							listSlice[10] = "0";
 						listSlice[11] = searchParam(hdrDcm, "Rescale Slope");
-						if (!listSlice[11].matches("[-+]?[0-9]*\\.?[0-9]+"))
+						if (!listSlice[11].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 							listSlice[11] = "1";
 						listSlice[12] = searchParam(hdrDcm, "Acquisition Time");
 						listSlice[13] = searchParam(hdrDcm, "Image Position (Patient)");
 						listSlice[14] = searchParam(hdrDcm, "Image Orientation (Patient)");
-						listSlice[15] = searchParam(hdrDcm, bvalue_field); // Diffusion-b-value
+						listSlice[15] = searchParam(hdrDcm, bvalue_field); // diffusion
 						ts = searchParam(hdrDcm, "0018,0020"); // type of data taken (SE, IR, GR, EP, RM)
 						ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
 						int indSs = Arrays.asList(listScanSeq).indexOf(ts);
 						listSlice[16] = ts; // scanning sequence
 						listSlice[17] = searchParam(hdrDcm, "2005,1429");// Label Type (ASL)
 						listSlice[18] = searchParam(hdrDcm, "2005,100E");// Scale Slope Philips
-						if (!listSlice[18].matches("[-+]?[0-9]*\\.?[0-9]+"))
-							listSlice[18] = "1";
+						if (!listSlice[18].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
+							listSlice[18] = "";
 						listSlice[19] = searchParam(hdrDcm, "2005,10B0") + " " + searchParam(hdrDcm, "2005,10B1") + " "
 								+ searchParam(hdrDcm, "2005,10B2");
 						listSlice[20] = searchParam(hdrDcm, "2005,1413");
@@ -283,8 +289,8 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 
 				listAcq = new ArrayList<>();
 				listCal = new ArrayList<>();
-				offsetImageAcq = new ArrayList();
-				offsetImageCal = new ArrayList();
+				offsetImageAcq = new ArrayList<String>();
+				offsetImageCal = new ArrayList<String>();
 				tmpAcq = new ArrayList<>();
 				tmpCal = new ArrayList<>();
 
@@ -296,6 +302,9 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 				dcm.close();
 				numberFrames = searchParam(hdrDcm, "Number of Frames");
 				noSeries = searchParam(hdrDcm, "Series Number");
+				
+				listValuesAcq.put("Directory",directory);
+				listValuesCal.put("Directory",directory);
 
 				listValuesAcq.put("Serial Number", noSeries);
 				listValuesCal.put("Serial Number", noSeries);
@@ -323,7 +332,7 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 					listSlice = new String[21];
 					listSlice[1] = searchParam(hdrtmp, "Image Number");
 					if (listSlice[1].isEmpty())
-						listSlice[1] = String.valueOf(i + 1);
+						listSlice[1] = String.valueOf(i);
 					if (!listSlice[1].isEmpty() && !listSlice[1].contentEquals("0")) {
 						listSlice[0] = "";
 						listSlice[1] = listSlice[1].trim();
@@ -347,17 +356,18 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 						listSlice[12] = searchParam(hdrtmp, "Acquisition Time");
 						listSlice[13] = searchParam(hdrtmp, "Image Position (Patient)");
 						listSlice[14] = searchParam(hdrtmp, "Image Orientation (Patient)");
-						listSlice[15] = searchParam(hdrtmp, bvalue_field); // Diffusion-b-value
+						listSlice[15] = searchParam(hdrtmp, bvalue_field); // diffusion
 						String ts = searchParam(hdrtmp, "0018,0020");
 						ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
 						int indSs = Arrays.asList(listScanSeq).indexOf(ts);
 						listSlice[16] = ts; // scanning sequence
 						listSlice[17] = searchParam(hdrtmp, "2005,1429");// Label Type (ASL)
 						listSlice[18] = searchParam(hdrtmp, "2005,100E");// Scale Slope Philips
-						if (!listSlice[18].matches("[-+]?[0-9]*\\.?[0-9]+"))
-							listSlice[18] = "1";
+						if (!listSlice[18].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
+							listSlice[18] = "";
 						listSlice[19] = searchParam(hdrtmp, "2005,10B0") + " " + searchParam(hdrtmp, "2005,10B1") + " "
 								+ searchParam(hdrtmp, "2005,10B2");
+//						System.out.println(this + "  2 : " + searchParam(hdrtmp, "0018,9117"));
 						listSlice[20] = searchParam(hdrtmp, "2005,1413");
 
 						if (indTp < Arrays.asList(listType).indexOf("OTHER")) {
@@ -396,6 +406,10 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 									.compareTo(Integer.parseInt(otherStrings[1].toString()));
 						}
 					});
+					
+//					for (String[] hh : listAcq)
+//						System.out.println(this + " : " + hh[10] + ", " + hh[11] + ", " + hh[18]);
+
 					listValuesAcq.put("Images In Acquisition", String.valueOf(listAcq.size()));
 					hmSeq.put(noSeq, tmp);
 					hmInfo.put(noSeq, listValuesAcq);

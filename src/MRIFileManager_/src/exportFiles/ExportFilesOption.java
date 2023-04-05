@@ -42,7 +42,7 @@ public class ExportFilesOption extends AbstractAction {
 	private JFrame frameOptionExport;
 	private JPanel panelL, panelR, panelTree, panelOutFormat, panelOther;
 	private JTextField nFieldRep, nFieldFile, replaceCharForbidden;
-	private String[] listField = {"PatientName", "StudyName", "CreationDate", "AcquisitionDate",
+	private String[] listField = {"Directory", "PatientName", "StudyName", "CreationDate", "AcquisitionDate",
 								  "SeqNumber", "SerialNumber", "Protocol", "SequenceName",
 								  "AcquisitionTime" };
 	private String[] listFieldChooseinFile = null, listFieldChooseinRep = null;
@@ -143,8 +143,8 @@ public class ExportFilesOption extends AbstractAction {
 				try {
 					if (!Pattern.matches("^\\d*$", nFieldRep.getText()))
 						nFieldRep.setText("0");
-					if (Integer.parseInt(nFieldRep.getText()) > 9)
-						nFieldRep.setText("9");
+					if (Integer.parseInt(nFieldRep.getText()) > 10)
+						nFieldRep.setText("10");
 					if (Integer.parseInt(nFieldRep.getText()) < 0)
 						nFieldRep.setText("0");
 					listFieldChooseinRep = listnull;
@@ -203,8 +203,8 @@ public class ExportFilesOption extends AbstractAction {
 				try {
 					if (!Pattern.matches("^\\d*$", nFieldFile.getText()))
 						nFieldFile.setText("1");
-					if (Integer.parseInt(nFieldFile.getText()) > 9)
-						nFieldFile.setText("9");
+					if (Integer.parseInt(nFieldFile.getText()) > 10)
+						nFieldFile.setText("10");
 					if (Integer.parseInt(nFieldFile.getText()) <= 0)
 						nFieldFile.setText("1");
 					listFieldChooseinFile = listnull;

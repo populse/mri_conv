@@ -61,6 +61,7 @@ public class ActionSelectionSeq extends PrefParam implements Format, MouseListen
 
 		if (wind.getTabSeq().getSelectedRow() >= 0 && e.getClickCount() == 2)
 			openImage();
+		
 	}
 
 	@Override

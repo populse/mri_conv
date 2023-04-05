@@ -7,9 +7,9 @@ import java.util.regex.Pattern;
 public class GetListFieldFromFilestmpRep {
 
 	private String txt, separateChar;
-	private String[] listField = { "PatientName", "StudyName", "CreationDate", "AcquisitionDate", "SeqNumber", "SerialNumber", "Protocol", "SequenceName",
+	private String[] listField = { "Directory", "PatientName", "StudyName", "CreationDate", "AcquisitionDate", "SeqNumber", "SerialNumber", "Protocol", "SequenceName",
 	"AcquisitionTime" };
-	private String[] listFieldTrue = { "Patient Name", "Study Name", "Creation Date", "Acquisition Date", "Seq Number", "Serial Number", "Protocol",
+	private String[] listFieldTrue = { "Directory", "Patient Name", "Study Name", "Creation Date", "Acquisition Date", "Seq Number", "Serial Number", "Protocol",
 			"Sequence Name", "Acquisition Time" };
 	private HashMap<String, String> dict = new HashMap<>();
 

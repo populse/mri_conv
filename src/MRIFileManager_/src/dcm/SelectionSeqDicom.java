@@ -143,7 +143,7 @@ public class SelectionSeqDicom extends PrefParam implements ParamMRI2, Selection
 //				FileManagerFrame.dlg.setVisible(true);
 //				FileManagerFrame.dlg.setTitle("Loading : file ");
 					new ListDicomDirSequence2().listParamDicom(hmInfo.get(seqSelected).get("Serial Number"),
-							seqSelected, false);
+							seqSelected, false, hmInfo.get(seqSelected).get("Directory"));
 //				FileManagerFrame.dlg.setVisible(false);
 				}
 			} catch (Exception e) {

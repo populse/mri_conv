@@ -16,7 +16,7 @@ import abstractClass.PrefParam;
 
 public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 
-	private String chemDicom;
+	private String chemDicom, directory;
 //	private HashMap<String, String[]> hmSeqbis = new HashMap<>();
 	
 	public ListDicomDirSequence() {
@@ -213,6 +213,11 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 		HashMap<String, String> listValuesAcq = new HashMap<>();
 		HashMap<String, String> listValuesCal = new HashMap<>();
 		
+		directory = chemDicom.substring(chemDicom.lastIndexOf(PrefParam.separator) + 1);
+
+		listValuesAcq.put("Directory",directory);
+		listValuesCal.put("Directory",directory);
+		
 		listValuesAcq.put("TypeOfView","elaborate");
 		listValuesCal.put("TypeOfView","elaborate");
 		
@@ -250,9 +255,9 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 		int offAcq = 0, offCalc = 0;
 		
 		String title = FileManagerFrame.dlg.getTitle();
-		String bvalue_field = "0018,9087";
-		if (listValuesAcq.get("Manufacturer").contains("Philips") || listValuesCal.get("Manufacturer").contains("Philips"))
-			bvalue_field = "2001,1003";
+//		String bvalue_field = "0018,9087";
+//		if (listValuesAcq.get("Manufacturer").contains("Philips") || listValuesCal.get("Manufacturer").contains("Philips"))
+//			bvalue_field = "2001,1003";
 		
 		if (numberOfFrame > 1) { // read 1 file multi-frame
 
@@ -282,23 +287,25 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 					listSlice[8] = tp;
 					listSlice[9] = searchParam(hdrtmp, "Temporal Position");
 					listSlice[10] = searchParam(hdrtmp, "Rescale Intercept");
-					if (!listSlice[10].matches("[-+]?[0-9]*\\.?[0-9]+"))
+					if (!listSlice[10].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 						listSlice[10]="0";
 					listSlice[11] = searchParam(hdrtmp, "Rescale Slope");
-					if (!listSlice[11].matches("[-+]?[0-9]*\\.?[0-9]+"))
+					if (!listSlice[11].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 						listSlice[11]="1";
 					listSlice[12] = searchParam(hdrtmp, "Acquisition Time");
 					listSlice[13] = searchParam(hdrtmp, "Image Position (Patient)");
 					listSlice[14] = searchParam(hdrtmp, "Image Orientation (Patient)");
-					listSlice[15] = searchParam(hdrtmp, bvalue_field); // diffusion
+					listSlice[15] = searchParam(hdrtmp, "0018,9087"); // diffusion
+					if (listSlice[15].isEmpty())
+						listSlice[15] = searchParam(hdrtmp, "2001,1003"); // diffusion
 					String ts = searchParam(hdrtmp, "0018,0020");
 					ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
 					int indSs = Arrays.asList(listScanSeq).indexOf(ts);
 					listSlice[16] = ts; // scanning sequence
 					listSlice[17] = searchParam(hdrtmp, "2005,1429");// Label Type (ASL)
 					listSlice[18] = searchParam(hdrtmp, "2005,100E");// Scale Slope Philips
-					if (!listSlice[18].matches("[-+]?[0-9]*\\.?[0-9]+"))
-						listSlice[18]="1";
+					if (!listSlice[18].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
+						listSlice[18]="";
 					listSlice[19] = searchParam(hdrtmp, "2005,10B0")+" "+searchParam(hdrtmp, "2005,10B1")+" "+searchParam(hdrtmp, "2005,10B2");
 					listSlice[20] = searchParam(hdrtmp, "2005,1413"); // gradient orientation number
 					
@@ -351,20 +358,22 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 					listSlice[8] = new ChangeSyntax().NewSyntaxType(listSlice[8]);
 					listSlice[9] = searchParam(hdr, "Temporal Position");
 					listSlice[10] = searchParam(hdr, "Rescale Intercept");
-					if (!listSlice[10].matches("[-+]?[0-9]*\\.?[0-9]+"))
+					if (!listSlice[10].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 						listSlice[10]="0";
 					listSlice[11] = searchParam(hdr, "Rescale Slope");
-					if (!listSlice[11].matches("[-+]?[0-9]*\\.?[0-9]+"))
+					if (!listSlice[11].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 						listSlice[11]="1";
 					listSlice[12] = searchParam(hdr, "Acquisition Time");
 					listSlice[13] = searchParam(hdr, "Image Position (Patient)");
 					listSlice[14] = searchParam(hdr, "Image Orientation (Patient)");
-					listSlice[15] = searchParam(hdr, bvalue_field); // diffusion
+					listSlice[15] = searchParam(hdr, "0018,9087"); // diffusion
+					if (listSlice[15].isEmpty())
+						listSlice[15] = searchParam(hdr, "2001,1003"); // diffusion
 					listSlice[16] = searchParam(hdr, "0018,0020"); // scanning sequence
 					listSlice[17] = searchParam(hdr, "2005,1429"); // Label Type (ASL)
 					listSlice[18] = searchParam(hdr, "2005,100E");// Scale Slope Philips
-					if (!listSlice[18].matches("[-+]?[0-9]*\\.?[0-9]+"))
-						listSlice[18]="1";
+					if (!listSlice[18].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
+						listSlice[18]="";
 					listSlice[19] = searchParam(hdr, "2005,10B0")+" "+searchParam(hdr, "2005,10B1")+" "+searchParam(hdr, "2005,10B2");
 					listSlice[20] = searchParam(hdr, "2005,1413"); // gradient orientation number
 

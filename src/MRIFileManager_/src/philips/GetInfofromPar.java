@@ -227,6 +227,7 @@ public class GetInfofromPar implements DictionParRec, ListPhilipsParamData {
 			}
 
 			if (ListPhilipsSequence.hasAcqImg) {
+
 				Collections.sort(listColumnAcq, new Comparator<Object[]>() {
 					@Override
 					public int compare(Object[] strings, Object[] otherStrings) {
@@ -237,8 +238,8 @@ public class GetInfofromPar implements DictionParRec, ListPhilipsParamData {
 				Collections.sort(listColumnAcq, new Comparator<Object[]>() {
 					@Override
 					public int compare(Object[] strings, Object[] otherStrings) {
-						return ((Integer) Integer.parseInt(strings[5].toString()))
-								.compareTo(Integer.parseInt(otherStrings[5].toString()));
+						return ((Integer) Integer.parseInt(strings[3].toString()))
+								.compareTo(Integer.parseInt(otherStrings[3].toString()));
 					}
 				});
 				Collections.sort(listColumnAcq, new Comparator<Object[]>() {

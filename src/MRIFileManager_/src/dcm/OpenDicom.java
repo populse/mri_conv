@@ -2,6 +2,7 @@ package dcm;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 import MRIFileManager.GetStackTrace;
 import abstractClass.ParamMRI2;
@@ -30,13 +31,13 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 
 	public OpenDicom(HashMap<String, String> infoImage, Object[] orderImage, String[] listFile, String noSeq,
 			Boolean show) {
-		
+
 		this.noSeq = noSeq;
 		this.show = show;
 		this.infoImage = infoImage;
 		this.orderImage = orderImage;
 		this.listFile = listFile;
-	
+
 		if (infoImage.get("Scale Slope").trim().isEmpty())
 			Prefs.openDicomsAsFloat = true;
 		else
@@ -73,25 +74,34 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 		} catch (Exception e) {
 
 		}
-		
-		IJ.run("DICOM...", "ignore");
+
+		IJ.run("DICOM...", " ");
 
 		if (!note.contains("JpegLossLess")) {
-			imp = noJpegLossLess();
-			if (cal != null)
-				imp.setCalibration(cal);
-			if (!Prefs.openDicomsAsFloat)
+			if (!infoImage.get("Manufacturer").contains("Bruker")) {
+				IJ.run("DICOM...", "ignore");
+				imp = noJpegLossLess();
+				if (cal != null)
+					imp.setCalibration(cal);
 				imp = normalizationDicom(imp);
-
+			}
+			else {
+				imp = noJpegLossLess();
+				if (cal != null)
+					imp.setCalibration(cal);
+			}
+//			imp.show();
 		} else {
 			imp = JpegLossLess();
 			if (cal != null)
 				imp.setCalibration(cal);
+			IJ.run("DICOM...", "ignore");
 			if (infoImage.get("Modality").trim().contentEquals("CT"))
 				imp = normalizationCT(imp);
 			else
 				imp = normalizationDicom(imp);
 		}
+
 
 		try {
 			imp = HyperStackConverter.toHyperStack(imp, c, z, t, order, "grayscale");
@@ -113,11 +123,10 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 
 		ImagePlus imptmp;
 		ImageStack ims;
+		String listOffsets = infoImage.get("Offsets Image");
 
 		if (listFile.length == 1) {
 
-			String listOffsets = infoImage.get("Offsets Image");
-			
 			if (listOffsets.trim().contentEquals("0")) {
 				Prefs.openDicomsAsFloat = false;
 				DICOM dcm = new DICOM();
@@ -141,13 +150,28 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 			imptmp = new ImagePlus(listFile[0]);
 			ims = new ImageStack(imptmp.getWidth(), imptmp.getHeight());
 			DICOM dcm;
-
-			for (String kk : listFile) {
-				dcm = new DICOM();
-				dcm.open(kk);
-				imptmp = new ImagePlus(noSeq, dcm.getImageStack());
-				ims.addSlice(imptmp.getChannelProcessor());
-				dcm.close();
+			if (listOffsets.trim().contentEquals("0"))
+				for (String kk : listFile) {
+					dcm = new DICOM();
+					dcm.open(kk);
+					imptmp = new ImagePlus(noSeq, dcm.getImageStack());
+					ims.addSlice(imptmp.getChannelProcessor());
+					dcm.close();
+				}
+			else {
+//				String[] strArr = listOffsets.split(" +");
+				for (String kk : listFile) {
+//					System.out.println(this + " : " + kk);
+					dcm = new DICOM();
+					try {
+						dcm.open(kk);
+						imptmp = new ImagePlus(noSeq, dcm.getImageStack());
+						ims.addSlice(imptmp.getChannelProcessor());
+					}
+					catch(Exception err) {
+					}
+					dcm.close();
+				}
 			}
 
 			imptmp = new ImagePlus(noSeq, ims);
@@ -190,23 +214,19 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 		slope = infoImage.get("Scale Slope");
 		double[] RS = Arrays.asList(reslope.split(" +")).stream().mapToDouble(Double::parseDouble).toArray();
 		double[] RI = Arrays.asList(reintercept.split(" +")).stream().mapToDouble(Double::parseDouble).toArray();
-		// Float[] SS = Arrays.stream(slope.split("
-		// +")).map(Float::valueOf).toArray(Float[]::new);
 		double[] SS = null;
 		if (!slope.trim().isEmpty())
 			SS = Arrays.asList(slope.split(" +")).stream().mapToDouble(Double::parseDouble).toArray();
+
+//		System.out.println(this + "RS:" + Arrays.toString(RS));
+//		System.out.println(this + "RI:" + Arrays.toString(RI));
+//		System.out.println(this + "SS:" + Arrays.toString(SS));
 
 		if (infoImage.get("Pixel Representation").trim().contentEquals("1"))
 			imptmp.getCalibration().setSigned16BitCalibration();
 		else
 			imptmp = convertToGray32(imptmp);
 
-//		System.out.println(this);
-//		System.out.println("RS = " + Arrays.toString(RS));
-//		System.out.println("RI = " + Arrays.toString(RI));
-//		System.out.println("SS = " + Arrays.toString(SS));
-
-		
 		if (RS.length == 1) {
 			for (int i = 0; i < imptmp.getStackSize(); i++) {
 				imptmp.setSlice(i + 1);
@@ -221,12 +241,16 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 		} else
 			for (int i = 0; i < imptmp.getStackSize(); i++) {
 				imptmp.setSlice(i + 1);
-				if (RS[i] != 1.0)
+				if (RS[i] != 1.0) {
 					imptmp.getProcessor().multiply(RS[i]);
-				if (RI[i] != 0.0)
+				}
+				if (RI[i] != 0.0) {
 					imptmp.getProcessor().add(RI[i]);
-				if (!slope.trim().isEmpty())
+				}
+				if (!slope.trim().isEmpty()) {
 					imptmp.getProcessor().multiply(1 / (RS[i] * SS[i]));
+				}
+
 			}
 		return imptmp;
 	}

@@ -10,6 +10,12 @@ The directories 'libraries' and 'MRIFileManager_' are ready to be used in the 'E
 mri_conv is open source and is released under the [CeCILL-b software license](https://cecill.info/licences/Licence_CeCILL_V2.1-en.html).
 
 # Release history
+<p></p>
+
+	05/04/2023 : version 23.2.0a
+	- see README in devt branch 
+
+<p></p>
 
 	20/04/20022 : version 22.1.7a
 	- see README in devt branch

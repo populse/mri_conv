@@ -57,14 +57,13 @@ dictionaryMRI:
 
   Acquisition Time:
                   description: {info: "The time the acquisition of data that resulted in this image started"}
-                  
+
                   whereBruker:  {file: visu_pars, keyName: $VisuAcqScanTime=, type: string, format: "HH:mm:ss.SSS or SSS", units: ~}
                   wherePhilips: {file: PAR ; Xml, keyName: Scan Duration ; Scan Duration, type: string ; float, format: "ss ; ~", units: ~}
                   whereDicom:   {file: ~, keyName: Acquisition Time, type:  string, format: "SSS", units: s}
                   whereNifti:   {file: json, keyName: AcquisitionTime, type: string, format: "HH:mm:ss.SSS", units: ~}
                   whereBids:    {file: json, keyName: AcquisitionTime, type: string, format: "HH:mm:ss.SSS", units: ~}
 
-                  
                   viewer: {category: Equipment}
                   json:   {tagJson: AcquisitionTime, type: string, format: "HH:mm:ss.SSS", units: ~}
                   
@@ -72,26 +71,26 @@ dictionaryMRI:
                   description: {info: "Angulation Image (Philips only)"}
   
                   wherePhilips: {file: PAR ; Xml, keyName: image angulation ; Angulation AP (Image_Info), type: float  ; float, format: ~, units: ~} # && Angulation FH && Angulation RL for Xml
-                  
+
                   viewer: {category: Angulation-Position}
                   json:   {tagJson: ~, type: ~, format: ~, units: ~}
-                  
+
   Angulation Midslice:
                   description: {info: "Angulation Midslice (Philips only)"}
-                  
+
                   wherePhilips: {file: PAR ; Xml, keyName: Angulation midslice ; Angulation AP, type: float  ; float, format: ~, units: ~} # && Angulation FH && Angulation RL for Xml
-                  
+
                   viewer: {category: Angulation-Position}
                   json:   {tagJson: ~, type: ~, format: ~, units: ~}
 
   B-values effective:
                    description: {info: "Bval for MRtrix and FSL"}
-  
+
                    whereBruker:  {file: method, keyName: $PVM_DwEffBval=, type: int, format: ~, units: ~}
                    wherePhilips: {file: PAR ; Xml, keyName: diffusion_b_factor ; Diffusion B Factor, type: float  ; float, format: ~, units: ~}
                    whereDicom:   {file: ~, keyName: "2001,1003", type: float, format: ~, units: ~}
                    whereBids:    {file: json, keyName: DiffusionBFactor, type: string, format: ~, units: ~}
-                   
+
                    viewer: {category: Diffusion}
                    json:   {tagJson: ~, type: ~, format: ~, units: ~}
 
@@ -101,7 +100,7 @@ dictionaryMRI:
                   whereBruker:  {file: acqp, keyName: $SW_h=, type: float, format: ~, units: MHz}
                   whereNifti:   {file: json, keyName: BandWidth, type: float, format: ~, units: MHz}
                   whereBids:   {file: json, keyName: BandWidth, type: float, format: ~, units: MHz}                  
-                  
+
                   viewer: {category: MRI parameters}
                   json:   {tagJson: BandWidth, type: float, format: ~, units: MHz}
 
@@ -165,6 +164,14 @@ dictionaryMRI:
                   viewer: {category: Diffusion}
                   json:   {tagJson: ~, type: ~, format: ~, units: ~}
 
+  Diffusion ExpEach number:
+                  description: {info: ""}
+                  
+                  whereBruker: {file: method, keyName: $PVM_DwNDiffExpEach=, type: int, format: ~, units: ~}
+
+                  viewer: {category: Diffusion}
+                  json:   {tagJson: ~, type: ~, format: ~, units: ~}
+  
   Direction Diffusion:
                   description: {info: "Bvec for MRtrix and FSL"}
                     
@@ -174,6 +181,13 @@ dictionaryMRI:
 
                   viewer: {category: Diffusion}
                   json:   {tagJson: DirectionDiffusion, type: float, format: ~, units: ~}
+
+  Diffusion Gradient Orientation:
+                  description: {info: "Bvec for MRtrix and FSL"}
+                    
+                  whereBruker:  {file: visu_pars, keyName: $VisuAcqDiffusionGradOrient=, type: float, format: ~, units: ~}
+                  viewer: {category: Diffusion}
+                  json:   {tagJson: DirectionGradientOrientation, type: float, format: ~, units: ~}
 
   Echo Time:
                   description: {info: "Time in ms between the middle of the excitation pulse and the peak of the echo produced "}

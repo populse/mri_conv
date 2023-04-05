@@ -16,9 +16,10 @@ import abstractClass.PrefParam;
 
 public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 {
 
-	private String chem2dseq, chemVisupars, seqSel, serialNumber;
+	private String directory, chem2dseq, chemVisupars, seqSel, serialNumber;
 
-	public ListBrukerParam(String chem2dseq, String seqSel, String serialNumber) {
+	public ListBrukerParam(String directory, String chem2dseq, String seqSel, String serialNumber) {
+		this.directory = directory;
 		this.chem2dseq = chem2dseq;
 		this.seqSel = seqSel;
 		this.serialNumber = serialNumber;
@@ -31,6 +32,7 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 		ConcatenatFileBruker contFile = new ConcatenatFileBruker(chem2dseq);
 		String txtParam = contFile.getTxtCont();
 		File file2dseq = new File(chem2dseq);
+		lv.put("Directory", directory);
 		lv.put("noSeq", seqSel);
 		lv.put("File path", file2dseq.getAbsolutePath());
 		lv.put("File Name", file2dseq.getName());
@@ -69,7 +71,6 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 			chemVisu = new ExtractTxtfromFile(chemVisu).getTxt();
 			chemVisu = chemVisu.substring(chemVisu.indexOf("$VisuCorePosition="));
 			chemVisu = chemVisu.substring(chemVisu.indexOf("( ") + 2, chemVisu.indexOf(","));
-
 			lv.put("Number Of Slice", chemVisu);
 		}
 
@@ -163,6 +164,9 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 		if (listStackParam[1][1] != "")
 			orderDescDim = Integer.parseInt(listStackParam[1][1]);
 		String tmp = listStackParam[2][1];
+		
+//		for (String hh : listlabel)
+//			System.out.println(this + " hh = " + hh);
 
 		// System.out.println(seqSel+" : "+dim+" , "+orderDescDim + " , " +
 		// tmp);
@@ -230,6 +234,7 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 						lv[3] = Integer.parseInt(
 								listlabel[0].substring(listlabel[0].indexOf(": ") + 2, listlabel[0].length()));
 					}
+
 					if (listlabel[1].contains("FG_CYCLE")) {
 						lv[0] = "xyctz";
 						lv[2] = Integer.parseInt(
@@ -239,6 +244,22 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 						lv[3] = Integer.parseInt(
 								listlabel[1].substring(listlabel[1].indexOf(": ") + 2, listlabel[1].length()));
 					}
+					
+					if (listlabel[0].contains("FG_MOVIE") && listlabel[1].contains("FG_CYCLE")) {
+//						lv[0] = "xyctz";
+//						lv[0] = "xyczt";
+//						lv[0] = "xytcz";
+						lv[0] = "xytzc"; // good ?
+//						lv[0] = "xyztc";
+//						lv[0] = "xyzct";
+						lv[1] = Integer.parseInt(
+								listlabel[0].substring(listlabel[0].indexOf(": ") + 2, listlabel[0].length()));
+						lv[2] = 1;
+						lv[3] = Integer.parseInt(
+								listlabel[1].substring(listlabel[1].indexOf(": ") + 2, listlabel[1].length()));
+						
+					}
+ 
 				}
 
 				else if (tmp.contains("FG_ECHO")) {

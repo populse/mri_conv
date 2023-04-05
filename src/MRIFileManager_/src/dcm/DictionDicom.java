@@ -31,4 +31,4 @@ public interface DictionDicom {
 //ORIGINAL\PRIMARY\M_B1\M\B1	            |										|
 //ORIGINAL\PRIMARY\PHASE MAP\P\B1           |										|	
 //ORIGINAL\PRIMARY\T1\MIXED					|										|
-//ORIGINAL\PRIMARY\VELOCITY MAP\P\PCA		|										|	
+//ORIGINAL\PRIMARY\VELOCITY MAP\P\PCA		|										|

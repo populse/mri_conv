@@ -52,6 +52,9 @@ public class OpenBruker implements ParamMRI2 {
 			w = Integer.parseInt(tmp.split(" +")[0]);
 			h = Integer.parseInt(tmp.split(" +")[1]);
 
+//			System.out.println("w, h = " + w + " , " + h);
+//			System.out.println(infoImage.get("Spatial Resolution"));
+
 			pxw = Float.parseFloat(infoImage.get("Spatial Resolution").split(" +")[0]);
 			pxh = Float.parseFloat(infoImage.get("Spatial Resolution").split(" +")[1]);
 
@@ -74,13 +77,17 @@ public class OpenBruker implements ParamMRI2 {
 				pxw = pxh;
 				pxh = ee;
 			}
+			
+//			System.out.println("pxw, pxh :" + pxw + " , " + pxh);
+//			System.out.println("fovX, fovY :" + fovX + " , " + fovY);
+//			System.out.println("w, h :" +  w + " , " + h);
 
 			order = orderImage[0].toString();
 			c = (int) orderImage[1];
 			z = (int) orderImage[2];
 			t = (int) orderImage[3];
 
-//			System.out.println("c , z , t : "+c+" , "+z+" , "+t);
+//			System.out.println(this + ", order, c , z , t : "+order+", "+c+" , "+z+" , "+t);
 
 			if (orderImage[4] != null)
 				logParametric = orderImage[4].toString();
@@ -252,12 +259,13 @@ public class OpenBruker implements ParamMRI2 {
 					if (w > h) {
 						h *= pxh / pxw;
 						pxh = pxw;
-					} else {
+					} 
+					else {
 						w *= pxw / pxh;
 						pxw = pxh;
 					}
 				}
-
+				
 				ImageStack stack = new ImageStack(w, h);
 				Calibration cal = imp.getCalibration();
 				cal.pixelWidth = pxw;
@@ -269,6 +277,7 @@ public class OpenBruker implements ParamMRI2 {
 				imp = new ImagePlus("", stack);
 				imp.setCalibration(cal);
 			}
+
 			imp.resetDisplayRange();
 
 			/******************************************************

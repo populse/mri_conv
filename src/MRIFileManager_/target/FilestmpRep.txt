@@ -1,12 +1,12 @@
-[Bruker] /home/omontigon/Documents/dataIRM/Dicom/BL
-[Dicom] /home/omontigon/Documents/dataIRM/Dicom/tmp
-[ParRec] /home/omontigon/Documents/dataIRM/Philips/raw_data_cevastoc32
+[Bruker] /home/omontigon/Documents/dataIRM/Toff_diffusion
+[Dicom] /home/omontigon/Documents/dataIRM/test_unit/Dicom/raw
+[ParRec] 
 [NifTI] 
 [Bids] 
 [Export] 
-[LookAndFeel] javax.swing.plaf.metal.MetalLookAndFeel
-[NamingRepNifTI] /StudyName/
-[NamingFileNifTI] PatientName-StudyName-CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime
+[LookAndFeel] com.jtattoo.plaf.hifi.HiFiLookAndFeel
+[NamingRepNifTI] /Directory/
+[NamingFileNifTI] Directory-PatientName-StudyName-CreationDate-AcquisitionDate-SeqNumber
 [NamingOptionsNifTI] 00013
 [previewActived] No
 [SeqDetail] 1023

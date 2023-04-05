@@ -15,7 +15,7 @@ import abstractClass.PrefParam;
 
 public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable {
 
-	private String chemDicom;
+	private String chemDicom, directory;
 	private HashMap<String, String[]> hmSeqbis = new HashMap<>();
 	private HashMap<String, String> listNumberOfFrame = new HashMap<>();
 	private boolean windowLess = false;
@@ -166,7 +166,10 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 
 				for (int h = 0; h < listPathDicom.size(); h++) {
 
+//					System.out.println(this);
+//					System.out.println("old tp : " + Arrays.asList(listPathDicom.get(h)).toString());
 					String tp = new ChangeSyntax().NewSyntaxType(listPathDicom.get(h)[2]);
+//					System.out.println("new tp : " + tp);
 					int indTp = Arrays.asList(listType).indexOf(tp);
 					String ts = new ChangeSyntax().NewSyntaxScanSeq(listPathDicom.get(h)[9]);
 					int indSs = Arrays.asList(listScanSeq).indexOf(ts);
@@ -219,12 +222,15 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 		// Set<String> listHmseq = hmSeq.keySet().stream().collect(Collectors.toSet());
 		String[] listHmseq = hmSeqbis.keySet().toArray(new String[hmSeqbis.keySet().size()]);
 		String prefixSeq = ("000000").substring(0, String.valueOf(listHmseq.length).length());
+		
+		directory = chemDicom.substring(chemDicom.lastIndexOf(PrefParam.separator) + 1);
+
 
 		for (String jj : listHmseq) {
 			// System.out.println(this+" : jj = "+jj);
 			if (!jj.isEmpty() && !jj.contentEquals("0")) {
 				try {
-					listParamDicom(jj, (prefixSeq + n).substring(String.valueOf(n).length()), true);
+					listParamDicom(jj, (prefixSeq + n).substring(String.valueOf(n).length()), true, directory);
 				} catch (Exception e) {
 
 				}
@@ -237,7 +243,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 			FileManagerFrame.dlg.setVisible(false);
 	}
 
-	public void listParamDicom(String noSerial, String noSeq, boolean newhmSeq) {
+	public void listParamDicom(String noSerial, String noSeq, boolean newhmSeq, String directory) {
 
 		if (newhmSeq)
 			hmSeq.put(noSeq, hmSeqbis.get(noSerial));
@@ -256,8 +262,8 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 
 		HashMap<String, String> listValuesAcq = new HashMap<>();
 
+		listValuesAcq.put("Directory", directory);
 		listValuesAcq.put("TypeOfView", "elaborate");
-
 		listValuesAcq.put("Serial Number", noSerial);
 
 		if (hdrdcm.isJpegLossLess()) {
@@ -309,9 +315,9 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 //		int offAcq = 0;
 		int offCalc = 0;
 		String title = "";
-		String bvalue_field = "0018,9087";
-		if (listValuesAcq.get("Manufacturer").contains("Philips"))
-			bvalue_field = "2001,1003";
+//		String bvalue_field = "0018,9087";
+//		if (listValuesAcq.get("Manufacturer").contains("Philips"))
+//			bvalue_field = "2001,1003";
 		
 		if (!windowLess)
 			title = FileManagerFrame.dlg.getTitle();
@@ -345,24 +351,26 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 					listSlice[10] = searchParam(hdrtmp, "Rescale Intercept");
 					if (listSlice[10].isEmpty())
 						listSlice[10] = searchParam(hdrtmp, "Real World Value Intercept");
-					if (!listSlice[10].matches("[-+]?[0-9]*\\.?[0-9]+"))
+					if (!listSlice[10].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 						listSlice[10] = "0";
 					listSlice[11] = searchParam(hdrtmp, "Rescale Slope");
 					if (listSlice[11].isEmpty())
 						listSlice[11] = searchParam(hdrtmp, "Real World Value Slope");
-					if (!listSlice[11].matches("[-+]?[0-9]*\\.?[0-9]+"))
+					if (!listSlice[11].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 						listSlice[11] = "1";
 					listSlice[12] = searchParam(hdrtmp, "Acquisition Time");
 					listSlice[13] = searchParam(hdrtmp, "Image Position (Patient)");
 					listSlice[14] = searchParam(hdrtmp, "Image Orientation (Patient)");
-					listSlice[15] = searchParam(hdrtmp, bvalue_field); // diffusion
+					listSlice[15] = searchParam(hdrtmp, "0018,9087"); // diffusion
+					if (listSlice[15].isEmpty())
+						listSlice[15] = searchParam(hdrtmp, "2001,1003"); // diffusion
 					String ts = searchParam(hdrtmp, "0018,0020");
 					ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
 					listSlice[16] = ts; // scanning sequence
 					listSlice[17] = searchParam(hdrtmp, "2005,1429");// Label Type (ASL)
 					listSlice[18] = searchParam(hdrtmp, "2005,100E");// Scale Slope Philips
-					if (!listSlice[18].matches("[-+]?[0-9]*\\.?[0-9]+"))
-						listSlice[18] = "1";
+					if (!listSlice[18].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
+						listSlice[18] = "";
 					listSlice[19] = searchParam(hdrtmp, "2005,10B0") + " " + searchParam(hdrtmp, "2005,10B1") + " "
 							+ searchParam(hdrtmp, "2005,10B2");
 					listSlice[20] = searchParam(hdrtmp, "2005,1413"); // gradient orientation number
@@ -404,23 +412,25 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 					listSlice[10] = searchParam(hdr, "Rescale Intercept");
 					if (listSlice[10].isEmpty())
 						listSlice[10] = searchParam(hdr, "Real World Value Intercept");
-					if (!listSlice[10].matches("[-+]?[0-9]*\\.?[0-9]+"))
+					if (!listSlice[10].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 						listSlice[10] = "0";
 					listSlice[11] = searchParam(hdr, "Rescale Slope");
 					if (listSlice[11].isEmpty())
 						listSlice[11] = searchParam(hdr, "Real World Value Slope");
-					if (!listSlice[11].matches("[-+]?[0-9]*\\.?[0-9]+"))
+					if (!listSlice[11].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 						listSlice[11] = "1";
 					listSlice[12] = searchParam(hdr, "Acquisition Time");
 					listSlice[13] = searchParam(hdr, "Image Position (Patient)");
 					listSlice[14] = searchParam(hdr, "Image Orientation (Patient)");
-					listSlice[15] = searchParam(hdr, bvalue_field); // diffusion
+					listSlice[15] = searchParam(hdr, "0018,9087"); // diffusion
+					if (listSlice[15].isEmpty())
+						listSlice[15] = searchParam(hdr, "2001,1003"); // diffusion
 					listSlice[16] = searchParam(hdr, "0018,0020"); // scanning
 																	// sequence
 					listSlice[17] = searchParam(hdr, "2005,1429"); // Label Type (ASL)
 					listSlice[18] = searchParam(hdr, "2005,100E");// Scale Slope Philips
-					if (!listSlice[18].matches("[-+]?[0-9]*\\.?[0-9]+"))
-						listSlice[18] = "1";
+					if (!listSlice[18].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
+						listSlice[18] = "";
 					listSlice[19] = searchParam(hdr, "2005,10B0") + " " + searchParam(hdr, "2005,10B1") + " "
 							+ searchParam(hdr, "2005,10B2");
 					listSlice[20] = searchParam(hdr, "2005,1413"); // gradient orientation number
@@ -431,6 +441,9 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 		}
 
 		if ((!listAcq.isEmpty())) {
+//			for (String[] kk : listAcq)
+//				System.out.println(Arrays.toString(kk));
+
 			Collections.sort(listAcq, new Comparator<Object[]>() {
 				@Override
 				public int compare(Object[] strings, Object[] otherStrings) {
@@ -438,6 +451,8 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 							.compareTo(Integer.parseInt(otherStrings[1].toString()));
 				}
 			});
+//			for (String[] kk : listAcq)
+//				System.out.println(Arrays.toString(kk));
 			new ListDicomParam(noSeq, listAcq, offCalc, "", offsetImageAcq);
 		}
 

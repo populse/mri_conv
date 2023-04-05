@@ -70,7 +70,7 @@ public class AffineQuaternionBruker_mrtrix {
 			indiceOrientation = 0;
 			NumberImageByOrientation = ImageInAcquisition / NumberOfOrientation;
 		}
-		
+
 		File fileReco = new File(chemReco);
 
 		if (!fileReco.exists()) {

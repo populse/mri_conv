@@ -358,7 +358,7 @@ public class FillBasketSingle extends PrefParam implements ParamMRI2, Format {
 									// new ListDicomDirSequence().listParamDicom(seqSel,
 									// Integer.parseInt(hmInfo.get(seqSel).get("Indice of Frame")));
 									new ListDicomDirSequence2().listParamDicom(hmInfo.get(seqSel).get("Serial Number"),
-											seqSel, false);
+											seqSel, false, hmInfo.get(seqSel).get("Directory"));
 									if (deidentify) {
 										HashMap<String, String> tmpHas = hmInfo.get(seqSel);
 										tmpHas.put("Patient Name", fieldDeidentification[0]);

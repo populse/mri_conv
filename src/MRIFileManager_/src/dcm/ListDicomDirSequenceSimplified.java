@@ -15,7 +15,7 @@ import abstractClass.PrefParam;
 
 public class ListDicomDirSequenceSimplified implements ParamMRI2, DictionDicom, Runnable {
 
-	private String chemDicom;
+	private String chemDicom, directory;
 	private HashMap<String, String[]> hmSeqbis = new HashMap<>();
 	private HashMap<String, String> listNumberOfFrame = new HashMap<>();
 
@@ -236,6 +236,11 @@ public class ListDicomDirSequenceSimplified implements ParamMRI2, DictionDicom, 
 
 		HashMap<String, String> listValuesAcq = new HashMap<>();
 		HashMap<String, String> listValuesCal = new HashMap<>();
+		
+		directory = chemDicom.substring(chemDicom.lastIndexOf(PrefParam.separator) + 1);
+
+		listValuesAcq.put("Directory", directory);
+		listValuesCal.put("Directory", directory);
 
 		listValuesAcq.put("TypeOfView", "simplified");
 		listValuesCal.put("TypeOfView", "simplified");

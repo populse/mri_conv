@@ -9,9 +9,10 @@ import abstractClass.PrefParam;
 public class ListBrukerSequence extends PrefParam implements ParamMRI2 {
 
 	private String[] listParamSeq = headerListSeq;
-	private String chemSeq, noSeq;
+	private String chemSeq, noSeq, directory;
 
-	public ListBrukerSequence(String chemSeq, String noSeq) {
+	public ListBrukerSequence(String directory, String chemSeq, String noSeq) {
+		this.directory = directory;
 		this.chemSeq = chemSeq;
 		this.noSeq = noSeq;
 	}
@@ -41,7 +42,7 @@ public class ListBrukerSequence extends PrefParam implements ParamMRI2 {
 		 *******************************************************/
 
 		hmSeq.put(noSeq, hmValue);
-		new FillHmsBruker(noSeq, resul[1].toString());
+		new FillHmsBruker(directory, noSeq, resul[1].toString());
 
 		if (!hmInfo.get(noSeq).get("fileExists").isEmpty()) {
 			resul[2] = hmInfo.get(noSeq).get("fileExists");

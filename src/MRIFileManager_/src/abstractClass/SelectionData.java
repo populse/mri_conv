@@ -182,7 +182,7 @@ public abstract class SelectionData extends PrefParam implements ParamMRI2, Form
 				for (int ii = 0; ii < listSeq.size(); ii++)
 					try {
 //						new ListBrukerSequence(listSeq.get(ii), String.valueOf(ii)).ListSeqBruker();
-						new ListBrukerSequence(listSeq.get(ii), (prefixSeq + ii).substring(String.valueOf(ii).length()))
+						new ListBrukerSequence(direct, listSeq.get(ii), (prefixSeq + ii).substring(String.valueOf(ii).length()))
 																	.ListSeqBruker();
 
 					} catch (IOException e) {

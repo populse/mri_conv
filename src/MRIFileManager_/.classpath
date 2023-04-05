@@ -4,16 +4,12 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
 			<attribute name="module" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/libraries/jama-1.0.3.jar"/>
 	<classpathentry kind="lib" path="/libraries/json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="/libraries/jdom-2.0.6.jar"/>
-	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="/libraries/ImageJ_3D_Viewer.jar"/>
 	<classpathentry kind="lib" path="/libraries/jmi.jar"/>
 	<classpathentry kind="lib" path="/libraries/jlfgr-1_0.jar"/>
@@ -23,5 +19,10 @@
 	<classpathentry kind="lib" path="/libraries/pixelmed_imageio.jar"/>
 	<classpathentry kind="lib" path="/libraries/JTattoo-1.6.13.jar"/>
 	<classpathentry kind="lib" path="/libraries/ij.jar"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

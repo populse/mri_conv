@@ -13,13 +13,13 @@ public class BrukerToNifti extends PrefParam implements ParamMRI2 {
 	public static void main(String[] args) {
 
 		if (args.length < 4) {
-			System.out.println("not enough arguments and options (type: java -classpath MRIManager.jar Help)");
+			System.out.println("not enough arguments and options (type: java -cp MRIManager.jar --help)");
 			return;
 		}
 
-		for (int i=0; i<args.length; i++)
-			System.out.println("args["+i+"] = "+args[i]);
-		
+//		for (int i=0; i<args.length; i++)
+//			System.out.println("args["+i+"] = "+args[i]);
+
 		hmSeq.clear();
 		hmInfo.clear();
 		hmOrderImage.clear();

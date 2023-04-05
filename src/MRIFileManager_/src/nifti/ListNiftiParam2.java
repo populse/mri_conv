@@ -26,12 +26,13 @@ public class ListNiftiParam2 extends PrefParam implements ParamMRI2, ListParam2 
 		lv.put("noSeq", seqSel);
 		lv.put("File path", fileNifti.getAbsolutePath());
 		lv.put("File Name", fileNifti.getName());
+		lv.put("Directory", fileNifti.getParentFile().getName());
 		lv.put("File Size (Mo)", String.valueOf(fileNifti.length() / (1024 * 1024.0)));
 
 		String headerNifti = "";
 		Nifti1Dataset niftiParam;
 		niftiParam = new Nifti1Dataset(chemNifti);
-		
+
 		try {
 			niftiParam.readHeader();
 			headerNifti = niftiParam.getHeader();
@@ -76,8 +77,7 @@ public class ListNiftiParam2 extends PrefParam implements ParamMRI2, ListParam2 
 			} catch (Exception e) {
 			}
 		}
-		
-		
+
 		lv.put("Offset data blob", new SearchParamNifti("File offset to data blob", headerNifti).result());
 
 		for (String sh : dictionaryMRIUser.keySet()) {
@@ -130,6 +130,7 @@ public class ListNiftiParam2 extends PrefParam implements ParamMRI2, ListParam2 
 			lv.put("Images In Acquisition",
 					String.valueOf(Integer.parseInt(ldim[3]) * Integer.parseInt(ldim[4]) * Integer.parseInt(ldim[5])));
 		}
+	
 		return lv;
 	}
 
@@ -153,8 +154,12 @@ public class ListNiftiParam2 extends PrefParam implements ParamMRI2, ListParam2 
 			lv[3] = Integer.parseInt(ldim[4]);
 		}
 		if (ldim.length == 6) {
+			if (ldim[3].contentEquals("1"))
+				lv[0] = "xyzct";
+			else {
 //			lv[0] = "xyzct"; (orig)
-			lv[0] = "xyztc";
+				lv[0] = "xyztc";
+			}
 			lv[1] = Integer.parseInt(ldim[5]);
 			lv[2] = Integer.parseInt(ldim[3]);
 			lv[3] = Integer.parseInt(ldim[4]);
