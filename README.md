@@ -30,6 +30,14 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	26/06/2023: version 23.3.0a
+	Bug fixed:
+		- Dicom : problem with bvec/bval for some Dicom solved
+	Others:
+		- some fields added in DictionaryMRI_System.yml : Slice_Gap, Slice Thickness In Acq. 
+
+<p></p>
+
 	05/04/2023: version 23.2.0a
 	Features added:
 		- all : 'Directory' field added in the naming choice for exporting files to Nifti
