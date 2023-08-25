@@ -64,10 +64,11 @@ import exportFiles.BasketManager;
 import exportFiles.ChoiceFormatExport;
 import exportFiles.ExportFilesOption;
 
+
 public class FileManagerFrame extends JFrame implements ItemListener, ComponentListener {
 
 	private static final long serialVersionUID = 1L;
-	private final String versionSoft="23.2.0a";
+	private final String versionSoft="23.4.0a";
 
 	public static String OS = System.getProperty("os.name").toLowerCase();
 
@@ -583,7 +584,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		split2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, tabInfoParam, preview);
 		split2.setDividerLocation(HFrame * 60 / 100);
 		split2.setDividerSize(5);
-		
+
 		split3 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, split1, split2);
 		split3.setDividerLocation(WFrame * 70 / 100);
 		split3.setDividerSize(5);
@@ -605,12 +606,12 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
-		
+
 		treeBasket = new JTree(new DefaultTreeModel(new DefaultMutableTreeNode("(your exportation folder)")));
 		treeBasket.setExpandsSelectedPaths(false);
 		treeBasket.setSelectionModel(null);
 		treeBasket.addMouseListener(new ActionSelectionBasket(this, "TreeBasket"));
-		
+
 		tabBasket = new JTable(new Object[5][ParamMRI2.headerListBasket.length], ParamMRI2.headerListBasket);
 		tabBasket.setFillsViewportHeight(false);
 		tabBasket.setAutoCreateColumnsFromModel(true);
@@ -653,12 +654,14 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		JButton exportNifti = new JButton(new BasketManager(this, PrefParam.labelButtonExport));
 		JButton remove = new JButton(new BasketManager(this, "remove selection"));
 		JButton removeAll = new JButton(new BasketManager(this, "remove all"));
+//		JCheckBox dcm2niix = new JCheckBox(new BasketManager(this, "use dcm2niix"));
 
 		buttonBasket.add(exportNifti);
 		buttonBasket.add(listChoiceExport);
+//		buttonBasket.add(dcm2niix);
 		buttonBasket.add(remove);
 		buttonBasket.add(removeAll);
-		
+
 		GridBagConstraints c = new GridBagConstraints();
 
 		c.fill = GridBagConstraints.HORIZONTAL;

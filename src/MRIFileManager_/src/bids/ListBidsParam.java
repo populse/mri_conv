@@ -3,6 +3,9 @@ package bids;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
 
 import MRIFileManager.GetStackTrace;
 import abstractClass.ListParam2;
@@ -43,38 +46,78 @@ public class ListBidsParam implements ParamMRI2, ListParam2 {
 
 //		HashMap<String, String> listObjectJson = new HashMap<>();
 		HashMap<String, HashMap<String, String>> listObjectJson = new HashMap<>();
+		HashMap<String, String> listObjectJson2 = new HashMap<>();
 		File JsonFile = new File(chemNifti.replace(".nii.gz", ".json"));
+
+		if (!JsonFile.exists()) {
+			String[] extensions = new String[] { "json"};
+			List<File> files = (List<File>) FileUtils.listFiles(JsonFile.getParentFile().getAbsoluteFile(), extensions, true);
+			JsonFile = files.get(0);
+		}
 
 		ReadJson2 readjson = null;
 
 		if (JsonFile.exists()) {
+
 			readjson = new ReadJson2(JsonFile.getAbsolutePath());
-			listObjectJson = readjson.getlistObject();
+			if (readjson.isGoodJsonVersion())
+				listObjectJson = readjson.getlistObject();
+			else
+				listObjectJson2 = readjson.getlistObject2();
 		}
+
 		lv.put("JsonVersion", "ko");
 
-		for (String sg : dictionaryMRISystem.keySet()) {
-			try {
-				if (dictionaryMRISystem.get(sg).get("file").contains("niftiheader"))
-					lv.put(sg, new SearchParamNifti(dictionaryMRISystem.get(sg).get("keyName"), headerNifti).result());
-				else {
-					String tmp;
-					tmp = listObjectJson.get(dictionaryMRISystem.get(sg).get("keyName")).get("value");
-					if (tmp == null)
-						tmp = "";
+		if (readjson.isGoodJsonVersion())
+
+			for (String sg : dictionaryMRISystem.keySet()) {
+				try {
+					if (dictionaryMRISystem.get(sg).get("file").contains("niftiheader"))
+						lv.put(sg, new SearchParamNifti(dictionaryMRISystem.get(sg).get("keyName"), headerNifti).result());
 					else {
-						tmp = tmp.replace("[", "");
-						tmp = tmp.replace("]", "");
-						tmp = tmp.replace("\"", "");
-						tmp = tmp.replace(",", " ");
-//						tmp = tmp.replace("ms","");
-//						tmp = tmp.replace("�", "");
+						String tmp;
+						tmp = listObjectJson.get(dictionaryMRISystem.get(sg).get("keyName")).get("value");
+						if (tmp == null)
+							tmp = "";
+						else {
+							tmp = tmp.replace("[", "");
+							tmp = tmp.replace("]", "");
+							tmp = tmp.replace("\"", "");
+							tmp = tmp.replace(",", " ");
+	//						tmp = tmp.replace("ms","");
+	//						tmp = tmp.replace("�", "");
+						}
+						lv.put(sg, tmp);
 					}
-					lv.put(sg, tmp);
+				} catch (Exception e) {
 				}
-			} catch (Exception e) {
+			}
+
+		else {
+			for (String sg : dictionaryMRISystem.keySet()) {
+				try {
+					if (dictionaryMRISystem.get(sg).get("file").contains("niftiheader"))
+						lv.put(sg, new SearchParamNifti(dictionaryMRISystem.get(sg).get("keyName"), headerNifti).result());
+					else {
+						String tmp;
+						tmp = listObjectJson2.get(dictionaryMRISystem.get(sg).get("keyName"));
+						if (tmp == null)
+							tmp = "";
+						else {
+							tmp = tmp.replace("[", "");
+							tmp = tmp.replace("]", "");
+							tmp = tmp.replace("\"", "");
+							tmp = tmp.replace(",", " ");
+	//						tmp = tmp.replace("ms","");
+	//						tmp = tmp.replace("�", "");
+						}
+						lv.put(sg, tmp);
+					}
+				} catch (Exception e) {
+				}
 			}
 		}
+
 		lv.put("Patient Name", hmSeq.get(seqSel)[1]);
 		lv.put("Study Name", hmSeq.get(seqSel)[2]);
 		lv.put("Creation Date", "");

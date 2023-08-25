@@ -42,6 +42,7 @@ import ij.plugin.Duplicator;
 import ij.process.ColorProcessor;
 import philips.ConvertPhilipsToNifti;
 
+
 public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 
 	public static final int ANALYZE_7_5 = 0;
@@ -123,7 +124,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 
 	}
 
-	// constructor overloading for Bids reading
+	// constructor overloading for Bids reading (windowless mode)
 	public ConvertImage2(String seqSel, String repWork, String repertoryExport) {
 		continuSave = true;
 		boolean answ = false;
@@ -304,7 +305,18 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 
 				else if (forCur.contentEquals("Bids")) {
 					String fileOrigin = listBasket_hmInfo.get(lb).get("File path");
+//					System.out.println(this + ": fileOrigin= " + fileOrigin);
+//					System.out.println(this + ": newDirectory= " + newDirectory);
+//					System.out.println(this + ": nameFile= " + nameFile);
 					answ = recordBidsUnzip(fileOrigin, newDirectory, nameFile, lb);
+					File fileBvec = new File(fileOrigin.replace(".nii.gz", ".bvec"));
+					File fileBval = new File(fileOrigin.replace(".nii.gz", ".bval"));
+
+					if (fileBvec.exists())
+						Files.copy(fileBvec.toPath(), new File(newDirectory + separator + nameFile + ".bvec").toPath(), StandardCopyOption.REPLACE_EXISTING);
+					if (fileBval.exists())
+						Files.copy(fileBval.toPath(), new File(newDirectory + separator + nameFile + ".bval").toPath(), StandardCopyOption.REPLACE_EXISTING);
+				
 				}
 
 				else {
@@ -1110,9 +1122,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 					else
 						imgpl.getProcessor().putPixelValue(row, col,
 								imgpl.getProcessor().getPixelValue(row, col) + 32768);
-			;
 		}
-
 		return imgpl;
 	}
 }

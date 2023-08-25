@@ -15,6 +15,10 @@ public class ListDicomParam implements ParamMRI2 {
 
 	public ListDicomParam(String noSeq, ArrayList<String[]> listA, int off, String numberOfFrame, ArrayList<String> listOffset) {
 
+//		System.out.println(this + "listA length :" + listA.size());
+//		System.out.println(this + "numberOfFrame :" + numberOfFrame);
+//		System.out.println(this + "listOffset :" + listOffset);
+		
 		HashMap<String, String> listValues = hmInfo.get(noSeq);
 	
 		String[] listOffsetImage = new String[listOffset.size()];
@@ -31,10 +35,15 @@ public class ListDicomParam implements ParamMRI2 {
 		for (int j = 0; j < listIndex.length; j++) {
 			listOff += String.valueOf(listIndex[j] + off) + " ";
 		}
-
+//		System.out.println(this +" listOff : " + listOff);
 		listValues.put("Offsets Image", listOff);
+		
 
 		String[] listSlice = new String[18];
+		
+		if (!numberOfFrame.isEmpty())
+			if (Integer.valueOf(numberOfFrame) > listA.size())
+				listValues.put("Images In Acquisition", numberOfFrame);
 
 //		if (listA.size() > 1)
 //			listValues.put("Images In Acquisition", String.valueOf(listA.size()));
@@ -186,7 +195,7 @@ public class ListDicomParam implements ParamMRI2 {
 		listValues.put("Rescale Slope", listSlice[15]);
 		listValues.put("Scale Slope", listSlice[16]);
 		listValues.put("B-values effective", listSlice[6]);
-//		System.out.println(this + "Image Position 2: " + listValues.get("Image Position"));
+//		System.out.println(this + "Bval: " + listValues.get("B-values effective"));
 
 		try {
 //			listValues.put("Direction Diffusion", deleteDuplicateBy3(listSlice[17]));

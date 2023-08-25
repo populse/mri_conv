@@ -8,11 +8,13 @@ import org.json.simple.parser.JSONParser;
 
 import MRIFileManager.GetStackTrace;
 
+
 public class ReadJson2 {
 
 	private JSONParser parser = new JSONParser();
 	private Object obj;
 	private HashMap<String, HashMap<String, String>> listObject = new HashMap<>();
+	private HashMap<String, String> listObject2 = new HashMap<>();
 	private boolean jsonversion;
 
 	public ReadJson2(String jsonPath) {
@@ -21,13 +23,17 @@ public class ReadJson2 {
 			obj = parser.parse(new FileReader(jsonPath));
 			JSONObject object = (JSONObject) obj;
 			jsonversion = false;
-//			if (object.get("Json_Version").toString().contains("Irmage2018")) {
-//				listObject(object);
-//				jsonversion = true;
-//			} else {
-////				listHighObject(object);
-//				jsonversion = false;
-//			}
+
+			if (object.get("Json_Version") != null) {
+				if (object.get("Json_Version").toString().contains("Irmage2018")) {
+					listObject(object);
+					jsonversion = true;
+				}
+			}
+			else {
+				listHighObject(object);
+				jsonversion = false;
+			}
 
 		} catch (Exception e) {
 			new GetStackTrace(e, this.getClass().toString());
@@ -55,18 +61,23 @@ public class ReadJson2 {
 		listObject.put(key, listField);
 	}
 
-//	private void listHighObject(JSONObject obj) {
-//		HashMap<String, String> listField = new HashMap<>();
-//		for (Object sw : obj.keySet().toArray()) {
-//			listObject.put(sw.toString(), obj.get(sw).toString());
-//		}
-//	}
+	private void listHighObject(JSONObject obj) {
+		HashMap<String, String> listField = new HashMap<>();
+		for (Object sw : obj.keySet().toArray()) {
+			listObject2.put(sw.toString(), obj.get(sw).toString());
+		}
+	}
 
 	public HashMap<String, HashMap<String, String>> getlistObject() {
 		return listObject;
 	}
 
+	public HashMap<String, String> getlistObject2() {
+		return listObject2;
+	}
+
 	public boolean isGoodJsonVersion() {
 		return jsonversion;
 	}
+	
 }

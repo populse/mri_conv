@@ -277,7 +277,7 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 			// e.printStackTrace();
 			// }
 
-
+		
 			for (int k = 0; k < files.length; k++) {
 				if (!windowlessMode)
 					FileManagerFrame.dlg.setTitle(title + (k + 1) * 100 / files.length + " %");
@@ -303,6 +303,9 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 				numberFrames = searchParam(hdrDcm, "Number of Frames");
 				noSeries = searchParam(hdrDcm, "Series Number");
 				
+				System.out.println(this + " number of Frames " + numberFrames);
+
+				
 				listValuesAcq.put("Directory",directory);
 				listValuesCal.put("Directory",directory);
 
@@ -324,69 +327,69 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 				}
 
 				String[] list = hdrDcm.toString().split("0008,9007");
-
 				String[] listSlice = null;
-
-				for (int i = 0; i < list.length; i++) {
-					StringBuffer hdrtmp = new StringBuffer(list[i]);
-					listSlice = new String[21];
-					listSlice[1] = searchParam(hdrtmp, "Image Number");
-					if (listSlice[1].isEmpty())
-						listSlice[1] = String.valueOf(i);
-					if (!listSlice[1].isEmpty() && !listSlice[1].contentEquals("0")) {
-						listSlice[0] = "";
-						listSlice[1] = listSlice[1].trim();
-						listSlice[2] = searchParam(hdrtmp, "Echo Numbers(s)");
-						listSlice[3] = searchParam(hdrtmp, "Slice Number");
-						listSlice[4] = searchParam(hdrtmp, "Repetition Time");
-						listSlice[5] = searchParam(hdrtmp, "Echo Time");
-						listSlice[6] = searchParam(hdrtmp, "Inversion Time");
-						listSlice[7] = searchParam(hdrtmp, "Slice Location");
-						String tp = searchParam(hdrtmp, "Image Type");
-						tp = new ChangeSyntax().NewSyntaxType(tp);
-						int indTp = Arrays.asList(listType).indexOf(tp);
-						listSlice[8] = tp;
-						listSlice[9] = searchParam(hdrtmp, "Temporal Position");
-						listSlice[10] = searchParam(hdrtmp, "Rescale Intercept");
-						if (!listSlice[10].matches("[-+]?[0-9]*\\.?[0-9]+"))
-							listSlice[10] = "0";
-						listSlice[11] = searchParam(hdrtmp, "Rescale Slope");
-						if (!listSlice[11].matches("[-+]?[0-9]*\\.?[0-9]+"))
-							listSlice[11] = "1";
-						listSlice[12] = searchParam(hdrtmp, "Acquisition Time");
-						listSlice[13] = searchParam(hdrtmp, "Image Position (Patient)");
-						listSlice[14] = searchParam(hdrtmp, "Image Orientation (Patient)");
-						listSlice[15] = searchParam(hdrtmp, bvalue_field); // diffusion
-						String ts = searchParam(hdrtmp, "0018,0020");
-						ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
-						int indSs = Arrays.asList(listScanSeq).indexOf(ts);
-						listSlice[16] = ts; // scanning sequence
-						listSlice[17] = searchParam(hdrtmp, "2005,1429");// Label Type (ASL)
-						listSlice[18] = searchParam(hdrtmp, "2005,100E");// Scale Slope Philips
-						if (!listSlice[18].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
-							listSlice[18] = "";
-						listSlice[19] = searchParam(hdrtmp, "2005,10B0") + " " + searchParam(hdrtmp, "2005,10B1") + " "
-								+ searchParam(hdrtmp, "2005,10B2");
-//						System.out.println(this + "  2 : " + searchParam(hdrtmp, "0018,9117"));
-						listSlice[20] = searchParam(hdrtmp, "2005,1413");
-
-						if (indTp < Arrays.asList(listType).indexOf("OTHER")) {
-							if (indSs < 4) {
-								offCalc = listCal.size();
-								listAcq.add(listSlice);
-								offsetImageAcq.add(listSlice[1]);
+				System.out.println(this + " list length : " + list.length);
+				if (list.length > 2)
+					for (int i = 0; i < list.length; i++) {
+						StringBuffer hdrtmp = new StringBuffer(list[i]);
+						listSlice = new String[21];
+						listSlice[1] = searchParam(hdrtmp, "Image Number");
+						if (listSlice[1].isEmpty())
+							listSlice[1] = String.valueOf(i);
+						if (!listSlice[1].isEmpty() && !listSlice[1].contentEquals("0")) {
+							listSlice[0] = "";
+							listSlice[1] = listSlice[1].trim();
+							listSlice[2] = searchParam(hdrtmp, "Echo Numbers(s)");
+							listSlice[3] = searchParam(hdrtmp, "Slice Number");
+							listSlice[4] = searchParam(hdrtmp, "Repetition Time");
+							listSlice[5] = searchParam(hdrtmp, "Echo Time");
+							listSlice[6] = searchParam(hdrtmp, "Inversion Time");
+							listSlice[7] = searchParam(hdrtmp, "Slice Location");
+							String tp = searchParam(hdrtmp, "Image Type");
+							tp = new ChangeSyntax().NewSyntaxType(tp);
+							int indTp = Arrays.asList(listType).indexOf(tp);
+							listSlice[8] = tp;
+							listSlice[9] = searchParam(hdrtmp, "Temporal Position");
+							listSlice[10] = searchParam(hdrtmp, "Rescale Intercept");
+							if (!listSlice[10].matches("[-+]?[0-9]*\\.?[0-9]+"))
+								listSlice[10] = "0";
+							listSlice[11] = searchParam(hdrtmp, "Rescale Slope");
+							if (!listSlice[11].matches("[-+]?[0-9]*\\.?[0-9]+"))
+								listSlice[11] = "1";
+							listSlice[12] = searchParam(hdrtmp, "Acquisition Time");
+							listSlice[13] = searchParam(hdrtmp, "Image Position (Patient)");
+							listSlice[14] = searchParam(hdrtmp, "Image Orientation (Patient)");
+							listSlice[15] = searchParam(hdrtmp, bvalue_field); // diffusion
+							String ts = searchParam(hdrtmp, "0018,0020");
+							ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
+							int indSs = Arrays.asList(listScanSeq).indexOf(ts);
+							listSlice[16] = ts; // scanning sequence
+							listSlice[17] = searchParam(hdrtmp, "2005,1429");// Label Type (ASL)
+							listSlice[18] = searchParam(hdrtmp, "2005,100E");// Scale Slope Philips
+							if (!listSlice[18].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
+								listSlice[18] = "";
+							listSlice[19] = searchParam(hdrtmp, "2005,10B0") + " " + searchParam(hdrtmp, "2005,10B1") + " "
+									+ searchParam(hdrtmp, "2005,10B2");
+	//						System.out.println(this + "  2 : " + searchParam(hdrtmp, "0018,9117"));
+							listSlice[20] = searchParam(hdrtmp, "2005,1413");
+	
+							if (indTp < Arrays.asList(listType).indexOf("OTHER")) {
+								if (indSs < 4) {
+									offCalc = listCal.size();
+									listAcq.add(listSlice);
+									offsetImageAcq.add(listSlice[1]);
+								} else {
+									offAcq = listAcq.size();
+									listCal.add(listSlice);
+									offsetImageCal.add(listSlice[1]);
+								}
 							} else {
 								offAcq = listAcq.size();
 								listCal.add(listSlice);
 								offsetImageCal.add(listSlice[1]);
 							}
-						} else {
-							offAcq = listAcq.size();
-							listCal.add(listSlice);
-							offsetImageCal.add(listSlice[1]);
 						}
 					}
-				}
 
 //				for (String[] kk : listAcq) {
 //					tmpAcq.add(kk[0]);

@@ -1,12 +1,12 @@
-[Bruker] /home/omontigon/Documents/dataIRM/Toff_diffusion
-[Dicom] /home/omontigon/Documents/dataIRM/test_unit/Dicom/raw
+[Bruker] 
+[Dicom] 
 [ParRec] 
 [NifTI] 
-[Bids] 
+[Bids] /home/omontigon/dataIRM/test_Bids
 [Export] 
 [LookAndFeel] com.jtattoo.plaf.hifi.HiFiLookAndFeel
-[NamingRepNifTI] /Directory/
-[NamingFileNifTI] Directory-PatientName-StudyName-CreationDate-AcquisitionDate-SeqNumber
+[NamingRepNifTI] /PatientName/
+[NamingFileNifTI] PatientName-StudyName-SequenceName-Protocol-AcquisitionDate-SeqNumber
 [NamingOptionsNifTI] 00013
 [previewActived] No
 [SeqDetail] 1023

@@ -30,7 +30,7 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 		dd = hmInfo_tmp.get("Direction Diffusion").toString().split(" +");
 		bveff = hmInfo_tmp.get("B-values effective").toString().split(" +");
 		DwAoImages = Integer.parseInt(hmInfo_tmp.get("Diffusion Ao Images number").toString());
-		dgo = hmInfo_tmp.get("Diffusion Gradient Orientation").toString().split(" +");
+//		dgo = hmInfo_tmp.get("Diffusion Gradient Orientation").toString().split(" +");
 		String[] ddtmp = dd;
 
 //		String[] ddtmp = deleteDuplicate(hmInfo_tmp.get("Direction Diffusion").toString()).split(" +");
@@ -42,6 +42,7 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 //		System.out.println(this + "delete duplicate dir. diff ("+ddtmp.length+") = " + Arrays.toString(ddtmp));
 
 		if (constr.contentEquals("Bruker") && ddtmp.length > 1) {
+			dgo = hmInfo_tmp.get("Diffusion Gradient Orientation").toString().split(" +");
 			if (hmInfo_tmp.get("Slice Orientation").toString().contentEquals("coronal")
 					|| hmInfo_tmp.get("Slice Orientation").toString().contentEquals("sagittal"))
 				if (dgo.length > 1)

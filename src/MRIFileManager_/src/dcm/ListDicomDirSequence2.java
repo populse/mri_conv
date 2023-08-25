@@ -327,6 +327,16 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 			hdr = new StringBuffer(new HeaderDicom().getHeaderDicom(hmSeq.get(noSeq)[0]));
 			String[] list = hdr.toString().split("0008,0008");
 //			String[] list = hdr.toString().split("0004,1430");
+			
+			String[] listHdr = hdr.toString().split("0018,9087");
+			String[] listDiff = new String[listHdr.length - 1];
+			for (int j = 0 ; j < listDiff.length; j++) {
+				StringBuffer hdrtmp = new StringBuffer(listHdr[j+1]);
+				listDiff[j] = searchParam(hdrtmp, "0018,9087"); // diffusion
+				if (listDiff[j].isEmpty())
+					listDiff[j] = searchParam(hdrtmp, "2001,1003"); // diffusion
+			}
+			int inc = 0;
 
 			for (int i = 0; i < list.length; i++) {
 				StringBuffer hdrtmp = new StringBuffer(list[i]);
@@ -334,7 +344,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 					FileManagerFrame.dlg.setTitle(title + i * 100 / list.length + " %");
 				listSlice = new String[21];
 				listSlice[1] = searchParam(hdrtmp, "Image Number");
-
+				
 				if (!listSlice[1].isEmpty() && !listSlice[1].trim().contentEquals("0")) {
 					listSlice[0] = "";
 					listSlice[1] = listSlice[1].trim();
@@ -361,9 +371,11 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 					listSlice[12] = searchParam(hdrtmp, "Acquisition Time");
 					listSlice[13] = searchParam(hdrtmp, "Image Position (Patient)");
 					listSlice[14] = searchParam(hdrtmp, "Image Orientation (Patient)");
-					listSlice[15] = searchParam(hdrtmp, "0018,9087"); // diffusion
-					if (listSlice[15].isEmpty())
-						listSlice[15] = searchParam(hdrtmp, "2001,1003"); // diffusion
+					listSlice[15] = listDiff[inc];
+					inc++;
+//					listSlice[15] = searchParam(hdrtmp, "0018,9087"); // diffusion
+//					if (listSlice[15].isEmpty())
+//						listSlice[15] = searchParam(hdrtmp, "2001,1003"); // diffusion
 					String ts = searchParam(hdrtmp, "0018,0020");
 					ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
 					listSlice[16] = ts; // scanning sequence
@@ -425,6 +437,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 					listSlice[15] = searchParam(hdr, "0018,9087"); // diffusion
 					if (listSlice[15].isEmpty())
 						listSlice[15] = searchParam(hdr, "2001,1003"); // diffusion
+//					System.out.print(listSlice[1] + ": " + listSlice[15] + ", ");
 					listSlice[16] = searchParam(hdr, "0018,0020"); // scanning
 																	// sequence
 					listSlice[17] = searchParam(hdr, "2005,1429"); // Label Type (ASL)

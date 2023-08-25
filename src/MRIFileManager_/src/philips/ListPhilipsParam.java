@@ -238,14 +238,14 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 		/************************************************
 		 * convert Label ASL : 1 to 'CONTROL', 2 to 'LABEL'
 		 ************************************************/
-	
+
 		try {
 			lvtmp = lv.get("Label Type (ASL)");
 			lvtmp = lvtmp.replace("1", "CONTROL");
 			lvtmp = lvtmp.replace("2", "LABEL");
 			lv.put("Label Type (ASL)", lvtmp);
 		} catch (Exception e) {
-		
+
 		}
 
 		/****************************************************************************

@@ -1,5 +1,5 @@
 #ImageJ 1.54d Preferences
-#Wed Apr 05 08:49:57 CEST 2023
+#Wed Aug 16 15:43:53 CEST 2023
 showcolor=\#00FFFF
 prefs.options=4210688
 div-by-zero=Infinity
@@ -9,15 +9,15 @@ fcolor=\#FFFFFF
 raw.height=190
 raw.width=153
 new.fill=0
-.log.height=1080
+.log.height=1053
 raw.type=2
 .point.size=1
 new.slices=1
 .point.type=0
 jpeg=75
-ij.x=1201
+ij.x=1040
 raw.n=882
-ij.y=89
+ij.y=27
 ap.options=64
 pp.height=340
 measurements=19
@@ -27,7 +27,7 @@ pp.width=600
 bcolor=\#000000
 new.height=400
 fps=7.0
-.log.loc=1920,0
+.log.loc=0,27
 pp.fontsize=14
 dir.image=/tmp/Braveheart_C04/
 new.type=0
@@ -38,7 +38,7 @@ prefs.options2=0
 .b&c.loc=1426,238
 new.width=400
 roicolor=\#FFFF00
-.log.width=1920
+.log.width=1858
 .results.height=255
 menu.size=15
 .gui.scale=1.0

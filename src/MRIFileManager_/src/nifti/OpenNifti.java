@@ -14,6 +14,7 @@ import ij.measure.Calibration;
 import ij.plugin.HyperStackConverter;
 import ij.process.ImageProcessor;
 
+
 public class OpenNifti implements ParamMRI2 {
 
 	private ImagePlus imp;
@@ -47,7 +48,6 @@ public class OpenNifti implements ParamMRI2 {
 		t = (int) hmOrderImage.get(noSeq)[3];
 
 //		System.out.println("c , z , t : "+c+" , "+z+" , "+t);
-
 
 		FileInfo fi = new FileInfo();
 
