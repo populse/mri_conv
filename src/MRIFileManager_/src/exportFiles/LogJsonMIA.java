@@ -10,7 +10,7 @@ public class LogJsonMIA extends PrefParam implements ParamMRI2 {
 
 	private JSONObject obj = new JSONObject();
 
-	public LogJsonMIA(String pathLog, Object linebasket, String nameFile, boolean error) {
+	public LogJsonMIA(String pathLog, Object linebasket, String nameFile, boolean error, boolean bvecbval) {
 
 		String status;
 		String[] listLabel = { "Patient Name", "Study Name", "Creation Date", "noSeq", "Sequence Name", "Protocol" };
@@ -42,6 +42,10 @@ public class LogJsonMIA extends PrefParam implements ParamMRI2 {
 		}
 		obj.put("StatusExport", status);
 		obj.put("NameFile", nameFile);
+		if (bvecbval)
+			obj.put("Bvec_bval", "yes");
+		else
+			obj.put("Bvec_bval", "no");
 	}
 
 	public String getJson() {

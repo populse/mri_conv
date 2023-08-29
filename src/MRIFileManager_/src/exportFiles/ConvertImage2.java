@@ -59,12 +59,13 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 	private double[] quaterns = new double[5];
 	private double[][] srow = new double[3][4];
 	private int qform, sform;
+	private Boolean bvec_bval = false;
 	private Boolean continuSave = false, noAll = false;
 
 	// constructor overloading for script windowless
 	public ConvertImage2(int qform, int sform, convertNifti conv, String seqSel, String repWork,
 			String repertoryExport, String constructor) {
-
+		bvec_bval = false;
 		continuSave = true;
 
 		boolean answ = false;
@@ -95,6 +96,10 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 				if (Integer.parseInt(onetwofile) > 3)
 					tmpotf = String.valueOf(Integer.parseInt(onetwofile) - 4);
 				fc = new GenerateBvecsBvals2(repWork, repertoryExport, seqSel, constructor, tmpotf).fileCreated();
+
+				if (fc)
+					bvec_bval = true;
+
 				if (fc && Integer.parseInt(onetwofile) > 3) {
 					qform = 1;
 					sform = 1;
@@ -204,6 +209,8 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 		choiceExport = wind.getChoiceExport().getSelectedItem().toString();
 
 		for (int i = 0; i < listinBasket.size(); i++) {
+			
+			bvec_bval = false;
 
 			error = false;
 			answ = false;
@@ -312,8 +319,10 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 					File fileBvec = new File(fileOrigin.replace(".nii.gz", ".bvec"));
 					File fileBval = new File(fileOrigin.replace(".nii.gz", ".bval"));
 
-					if (fileBvec.exists())
+					if (fileBvec.exists()) {
+						bvec_bval = true;
 						Files.copy(fileBvec.toPath(), new File(newDirectory + separator + nameFile + ".bvec").toPath(), StandardCopyOption.REPLACE_EXISTING);
+					}
 					if (fileBval.exists())
 						Files.copy(fileBval.toPath(), new File(newDirectory + separator + nameFile + ".bval").toPath(), StandardCopyOption.REPLACE_EXISTING);
 				
@@ -336,6 +345,9 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 								tmpotf = String.valueOf(Integer.parseInt(onetwofile) - 4);
 							boolean fc = new GenerateBvecsBvals2(newDirectory, nameFile, lb, forCur, tmpotf)
 									.fileCreated();
+							if (fc)
+								bvec_bval = true;
+
 							if (fc && Integer.parseInt(onetwofile) > 3) {
 								onetwofile = String.valueOf(Integer.parseInt(onetwofile) - 4);
 								qform = 1;
@@ -365,12 +377,12 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 						answ = save(imp1, newDirectory, nameFile + "_control", suffix, lb, true);
 						if (answ) {
 							logExportNifti += "Export success for " + lb +  "(control)\n";
-							JsonMIA += new LogJsonMIA(directory, lb, nameFile + "_control", error).getJson() + ",";
+							JsonMIA += new LogJsonMIA(directory, lb, nameFile + "_control", error, bvec_bval).getJson() + ",";
 						}
 						answ = save(imp2, newDirectory, nameFile + "_marquage", suffix, lb, true);
 						if (answ) {
 							logExportNifti += "Export success for " + lb +  "(marquage)\n";
-							JsonMIA += new LogJsonMIA(directory, lb, nameFile + "_marquage", error).getJson() + ",";
+							JsonMIA += new LogJsonMIA(directory, lb, nameFile + "_marquage", error, bvec_bval).getJson() + ",";
 						}
 					}
 					answ = save(imp, newDirectory, nameFile, suffix, lb, true);
@@ -389,7 +401,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 				logExportNifti += "      " + e.toString() + "\n";
 				error = true;
 			}
-			JsonMIA += new LogJsonMIA(directory, lb, nameFile, error).getJson() + ",";
+			JsonMIA += new LogJsonMIA(directory, lb, nameFile, error, bvec_bval).getJson() + ",";
 		} // end for
 
 		JsonMIA = JsonMIA.substring(0, JsonMIA.lastIndexOf(","));

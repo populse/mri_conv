@@ -2,11 +2,11 @@
 [Dicom] 
 [ParRec] 
 [NifTI] 
-[Bids] /home/omontigon/dataIRM/test_Bids
+[Bids] 
 [Export] 
 [LookAndFeel] com.jtattoo.plaf.hifi.HiFiLookAndFeel
 [NamingRepNifTI] /PatientName/
 [NamingFileNifTI] PatientName-StudyName-SequenceName-Protocol-AcquisitionDate-SeqNumber
-[NamingOptionsNifTI] 00013
+[NamingOptionsNifTI] 00010
 [previewActived] No
 [SeqDetail] 1023

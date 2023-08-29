@@ -242,7 +242,7 @@ public class ExportFilesOption extends AbstractAction {
 //		outFormat0.setBounds(50,30,400,25);
 //		bool = (tmpOptionsNifti.substring(0,1).contentEquals("0"))?false:true;
 //		outFormat0.setSelected(bool);
-
+		
 		outFormat1 = new JCheckBox("Separate parametric images (Bruker only)");
 		outFormat1.setBounds(50, 50, 400, 25);
 		bool = (tmpOptionsNifti.substring(0, 1).contentEquals("0")) ? false : true;
@@ -285,7 +285,7 @@ public class ExportFilesOption extends AbstractAction {
 		});
 
 		String bin = tmpOptionsNifti.substring(4, 5);
-
+		
 		choice1 = new JCheckBox("save bvecs & bvals in 1 file");
 		choice1.setBounds(100, 75, 400, 25);
 		choice2 = new JCheckBox("save bvecs & bvals in 2 files");
@@ -309,12 +309,18 @@ public class ExportFilesOption extends AbstractAction {
 //		}
 
 		String n = Integer.toBinaryString(Integer.parseInt(bin));
+	
 		if (n.length() >= 1)
 			choice1.setSelected(String.valueOf((n.charAt(0))).contentEquals("1"));
-		if (n.length() >= 2)
+		if (n.length() >= 2) {
+			choice1.setSelected(String.valueOf((n.charAt(1))).contentEquals("1"));
+			choice2.setSelected(String.valueOf((n.charAt(0))).contentEquals("1"));
+		}
+		if (n.length() >= 3) {
+			choice1.setSelected(String.valueOf((n.charAt(2))).contentEquals("1"));
 			choice2.setSelected(String.valueOf((n.charAt(1))).contentEquals("1"));
-		if (n.length() >= 3)
-			choice3.setSelected(String.valueOf((n.charAt(2))).contentEquals("1"));
+			choice3.setSelected(String.valueOf((n.charAt(0))).contentEquals("1"));
+		}
 
 
 		choice1.addActionListener(new ActionListener() {
