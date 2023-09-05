@@ -132,7 +132,7 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 			}
 		if (!txtBvecs.isEmpty())
 			try {
-				FileWriter writer = new FileWriter(directory + PrefParam.separator + name + "-bvecs-MRtrix.txt");
+				FileWriter writer = new FileWriter(directory + PrefParam.separator + name + ".bvec");
 				writer.write(txtBvecs);
 				writer.flush();
 				writer.close();
@@ -141,12 +141,12 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 				successfull = false;
 				new GetStackTrace(e, this.getClass().toString());
 				System.out.println("Error: impossible to create '" + directory + PrefParam.separator + name
-						+ "-bvecs-MRtrix.txt" + "'");
+						+ ".bvec" + "'");
 			}
 
 		if (!txtBvals.isEmpty())
 			try {
-				FileWriter writer = new FileWriter(directory + PrefParam.separator + name + "-bvals-MRtrix.txt");
+				FileWriter writer = new FileWriter(directory + PrefParam.separator + name + ".bval");
 				writer.write(txtBvals);
 				writer.flush();
 				writer.close();
@@ -155,7 +155,7 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 				successfull = false;
 				new GetStackTrace(e, this.getClass().toString());
 				System.out.println("Error: impossible to create '" + directory + PrefParam.separator + name
-						+ "-bvals-MRtrix.txt" + "'");
+						+ ".bval" + "'");
 			}
 	}
 	
@@ -238,7 +238,8 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 			}
 		if (!txtBvecs.isEmpty())
 			try {
-				FileWriter writer = new FileWriter(directory + PrefParam.separator + name + "-bvecs-MRtrix.txt");
+//				FileWriter writer = new FileWriter(directory + PrefParam.separator + name + "-bvecs-MRtrix.txt");
+				FileWriter writer = new FileWriter(directory + PrefParam.separator + name + ".bvec");
 				writer.write(txtBvecs);
 				writer.flush();
 				writer.close();
@@ -247,12 +248,13 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 				successfull = false;
 				new GetStackTrace(e, this.getClass().toString());
 				System.out.println("Error: impossible to create '" + directory + PrefParam.separator + name
-						+ "-bvecs-MRtrix.txt" + "'");
+						+ ".bvec" + "'");
 			}
 
 		if (!txtBvals.isEmpty())
 			try {
-				FileWriter writer = new FileWriter(directory + PrefParam.separator + name + "-bvals-MRtrix.txt");
+//				FileWriter writer = new FileWriter(directory + PrefParam.separator + name + "-bvals-MRtrix.txt");
+				FileWriter writer = new FileWriter(directory + PrefParam.separator + name + ".bval");
 				writer.write(txtBvals);
 				writer.flush();
 				writer.close();
@@ -261,7 +263,7 @@ public class GenerateBvecsBvals2 extends PrefParam implements ParamMRI2 {
 				successfull = false;
 				new GetStackTrace(e, this.getClass().toString());
 				System.out.println("Error: impossible to create '" + directory + PrefParam.separator + name
-						+ "-bvals-MRtrix.txt" + "'");
+						+ ".bval" + "'");
 			}
 	}
 
