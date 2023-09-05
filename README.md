@@ -30,6 +30,12 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	05/09/2023: version 23.4.2a
+	Features modified:
+		- bvec, bval : now bvec and bval files have .bvec and .bval extensions (FSL format). The Mrtrix format stay as before (.txt) 
+
+<p></p>
+
 	29/08/2023: version 23.4.1a
 	Features added:
 		- Bids : when exporting to Nifti, a 'bvec_bval' tag is added to the LogExport. Its value is 'yes' if bvec/bval files have been copied.
