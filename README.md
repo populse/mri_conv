@@ -30,9 +30,15 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	16/02/2024: version 24.1.1a
+	Features modified:
+		- bvec, bval : now works for Philips (fsl and MRtrix)
+
+<p></p>
+
 	01/02/2024: version 24.1.0a
 	Features modified:
-		- bvec, bval : for fsl format, bvec is now convert to image reference plane (for Bruker, Dicom and Philips). for MRTrix format, bvec is based on scanner reference system.		
+		- bvec, bval : for fsl format, bvec is now convert to image reference plane (for Bruker, Dicom and Philips). for MRtrix format, bvec is based on scanner reference system.		
 
 
 <p></p>
