@@ -28,6 +28,15 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+
+<p></p>
+
+	20/03/2024: version 24.2.1a
+	Features modified:
+		- Bruker : export to Nifti/Json modified, now the axes refer to RAS orientation
+	Bug fixed:
+		- Bruker : 5D image order problem (in the case of multi Repetition and multi Echo) fixed
+
 <p></p>
 
 	16/02/2024: version 24.1.1a
