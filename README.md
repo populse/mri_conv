@@ -31,6 +31,12 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	12/04/2024: version 24.3.0a
+	Bug fixed:
+		- Dicom : conversion bug for some Dicoms resolved
+
+<p></p>
+
 	20/03/2024: version 24.2.1a
 	Features modified:
 		- Bruker : export to Nifti/Json modified, now the axes refer to RAS orientation
