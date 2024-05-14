@@ -402,11 +402,11 @@ dictionaryMRI:
                   description: {info: ""}
   
                   whereBruker:  {file: visu_pars, keyName: $VisuCorePosition=, type: int, format: ~, units: ~}
-                  wherePhilips: {file: PAR ; Xml, keyName: Max. number of slices/locations  ; Max No Slices, type: int   ; int, format: ~, units: ~}
+                  wherePhilips: {file: PAR ; Xml, keyName: Max. number of slices/locations ; Max No Slices, type: int ; int, format: ~, units: ~}
                   whereDicom:   {file: ~, keyName: Image Position Patient, type: int, format: ~, units: ~} #Slice Location
                   
                   viewer: {category: Dimensions}
-                  json:   {tagJson: ~, type: ~, format: ~, units: ~}
+                  json:   {tagJson: MaxNumOfSlices, type: int, format: ~, units: ~}
 
   Patient BirthDate:
                   description: {info: "Birth date of the patient"}
@@ -649,6 +649,14 @@ dictionaryMRI:
 
                   viewer: {category: Dimensions}
                   json:   {tagJson: ~, type: ~, format: ~, units: ~}
+
+  Acqu Scan Resolution:
+                  description: {info: ""}
+
+                  wherePhilips: {file: PAR ; Xml, keyName: Scan resolution, type: int, format: ~, units: mm} # && Resolution Y
+
+                  viewer: {category: Dimensions}
+                  json:   {tagJson: ScanResolution, type: int, format: ~, units: mm}
 
   Scanning Sequence:
                   description: {info: "Description of the type of data taken(Spin Echo, Inversion Recovery,..."}
