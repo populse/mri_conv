@@ -55,6 +55,14 @@ dictionaryMRI:
                   viewer: {category: Equipment}
                   json:   {tagJson: AcquisitionDate, type: string, format: "yyyy-MM-dd HH:mm:ss", units: ~}
 
+  Acquisition Number:
+                  description: {info: "Acquisition number"}
+
+                  wherePhilips: {file: PAR ; Xml, keyName: Acquisition nr, type: int, format: ~, units: ~}
+
+                  viewer: {category: Miscellaneous}
+                  json:   {tagJson: AcquisitionNumber, type: int, format: ~, units: ~}
+
   Acquisition Time:
                   description: {info: "The time the acquisition of data that resulted in this image started"}
 
@@ -394,11 +402,11 @@ dictionaryMRI:
                   description: {info: ""}
   
                   whereBruker:  {file: visu_pars, keyName: $VisuCorePosition=, type: int, format: ~, units: ~}
-                  wherePhilips: {file: PAR ; Xml, keyName: Max. number of slices/locations  ; Max No Slices, type: int   ; int, format: ~, units: ~}
+                  wherePhilips: {file: PAR ; Xml, keyName: Max. number of slices/locations ; Max No Slices, type: int ; int, format: ~, units: ~}
                   whereDicom:   {file: ~, keyName: Image Position Patient, type: int, format: ~, units: ~} #Slice Location
                   
                   viewer: {category: Dimensions}
-                  json:   {tagJson: ~, type: ~, format: ~, units: ~}
+                  json:   {tagJson: MaxNumOfSlices, type: int, format: ~, units: ~}
 
   Patient BirthDate:
                   description: {info: "Birth date of the patient"}
@@ -555,7 +563,7 @@ dictionaryMRI:
 
   Repetition Time:
                   description: {info: "The period of time in msec between the beginning of a pulse sequence and the beginning of the succeeding pulse sequence"}
-  
+
                   whereBruker:  {file: acqp, keyName: $ACQ_repetition_time=, type: float, format: ~, units: ms}
                   wherePhilips: {file: PAR ; Xml, keyName: Repetition time  ; Repetition Times, type: float  ; float, format: ~, units: ~}
                   whereDicom:   {file: ~, keyName: Repetition Time, type: float, format: ~, units: ms}
@@ -608,7 +616,15 @@ dictionaryMRI:
                   whereBids:   {file: niftiheader, keyName: Scaling slope and intercept, type: string, format: ~, units: ~}               
                   
                   viewer: {category: MRI parameters}
-                  json:   {tagJson: ~, type: ~, format: ~, units: ~}  
+                  json:   {tagJson: ~, type: ~, format: ~, units: ~}
+
+  Scan Duration:
+                  description: {info: "Experiment duration"}
+
+                  wherePhilips: {file: PAR ; Xml, keyName: Scan Duration, type: int, format: ~, units: s}
+
+                  viewer: {category: Miscellaneous}
+                  json:   {tagJson: ScanDuration, type: int, format: ~, units: s}
 
   Scan Mode:
                   description: {info: ""}
@@ -633,6 +649,14 @@ dictionaryMRI:
 
                   viewer: {category: Dimensions}
                   json:   {tagJson: ~, type: ~, format: ~, units: ~}
+
+  Acqu Scan Resolution:
+                  description: {info: ""}
+
+                  wherePhilips: {file: PAR ; Xml, keyName: Scan resolution, type: int, format: ~, units: mm} # && Resolution Y
+
+                  viewer: {category: Dimensions}
+                  json:   {tagJson: ScanResolution, type: int, format: ~, units: mm}
 
   Scanning Sequence:
                   description: {info: "Description of the type of data taken(Spin Echo, Inversion Recovery,..."}
