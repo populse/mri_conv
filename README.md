@@ -31,6 +31,16 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	25/07/2024: version 24.3.1b
+	Bug fixed:
+		- Bruker: Nifti conversion bug for Paravision 360 resolved
+	Features modified:
+		- BIDS: for export to Nifti/Json, RepetitionTime, EchoTime and InversionTime are converted to ms
+	Features added:
+		- All: for 4D and 5D images, Repetition Time value is added in the Nifti header (4th value of Grid spacings)
+
+<p></p>
+
 	12/04/2024: version 24.3.0a
 	Bug fixed:
 		- Dicom : conversion bug for some Dicoms resolved
