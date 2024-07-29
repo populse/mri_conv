@@ -223,6 +223,14 @@ dictionaryMRI:
 
                   viewer: {category: MRI parameters}
                   json:   {tagJson: FOV, type: float, format: ~, units: mm}
+  
+  Gradient Orientation:
+                  description: {info: "Gradient Orientation for the calculation MRTrix3 bvecs "}
+                  
+                  whereBruker: {file: method, keyName: "$PVM_SPackArrGradOrient", type: float, format: ~, units: ~}
+                  
+                  viewer: {category: Diffusion}
+                  json:   {tagJson: ~, type: ~, format: ~, units: ~}
                   
   Gradient Orientation Number:
                   description: {info: ""}
@@ -231,7 +239,15 @@ dictionaryMRI:
                   
                   viewer: {category: Diffusion}
                   json:   {tagJson: ~, type: ~, format: ~, units: ~}
-                         
+           
+  Gradient Vectors:
+                  description: {info: "Gradient Vectors for the calculation MRTrix3 bvecs "}
+                  
+                  whereBruker: {file: method, keyName: "$PVM_DwGradVec", type: float, format: ~, units: ~}
+                  
+                  viewer: {category: Diffusion}
+                  json:   {tagJson: ~, type: ~, format: ~, units: ~}
+                        
   Images In Acquisition:
                   description: {info: "Number of images that resulted from this acquisition of data"}
   

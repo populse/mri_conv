@@ -33,7 +33,7 @@ public class AffineQuaternionBruker_mrtrix {
 
 	private String[][] methodParams = { { "##$PVM_SPackArrReadOffset=", "2" }, { "##$PVM_SPackArrPhase1Offset=", "2" },
 			{ "##$PVM_SPackArrSliceOffset=", "2" }, { "##$PVM_SPackArrGradOrient=", "2" }, // see for quaternion !!
-			{ "##$PVM_SliceGeo=", "2" }, { "$PVM_SPackArrSliceOrient=", "2" } };
+			{ "##$PVM_SliceGeo=", "2" }, { "$PVM_SPackArrSliceOrient=", "2" } , {"$PVM_SPackArrReadOrient=", "2"} };
 
 	private String[][] recoParams = { { "##$RECO_offset=", "2" }, { "##$RECO_ft_size=", "2" }, { "##$RECO_size=", "2" },
 			{ "##$RECO_fov=", "2" }, { "##$RECO_transposition=", "2" } };
@@ -92,6 +92,8 @@ public class AffineQuaternionBruker_mrtrix {
 		}
 
 		recoTransp = Integer.parseInt(listTransp[0 + indiceOrientation]);
+		
+//		System.out.println(this + "recoTransp mrtrix = " + recoTransp);
 
 		dim = new float[3];
 		fov = new float[3];
@@ -112,6 +114,9 @@ public class AffineQuaternionBruker_mrtrix {
 			// sl_sepn=sl_thick;
 		}
 		
+		if (sl_sepn == 0.0)
+			sl_sepn = sl_thick;
+
 		if (!orientation.isEmpty() && NumberImageByOrientation == 1)
 			sl_sepn = sl_thick;
 
@@ -126,17 +131,27 @@ public class AffineQuaternionBruker_mrtrix {
 			sl_sepn = vox[2];
 			sl_thick = sl_sepn;
 		}
+		
+//		System.out.println(chem2dseq);
+//		for (int i=0;i<3;i++) {
+//		 	System.out.println(dim[i]+" , "+fov[i]+" , "+vox[i]);
+//		 }
+
+//		System.out.println(this + "sl_thick = " + sl_thick + ", sl_sepn =" + sl_sepn);
 
 		quatern = orient2();
 		quatern = quatern.transpose();
 		quatern = quatern.times(start2());
 		quatern = quatern.transpose();
-		
+
 		affine = rotn();
 		affine = affine.times(trans());
 		affine = affine.times(swaps());
 		affine = affine.times(ft2mm());
 		affine = affine.times(start());
+		affine = affine.transpose();
+		affine = affine.times(orient_RAS());
+		affine = affine.transpose();
 
 	}
 
@@ -180,8 +195,16 @@ public class AffineQuaternionBruker_mrtrix {
 	}
 
 	private Matrix swaps() {
+		
+//		String direct = searchParam(methodParams[6][0], chemMethod, methodParams[6][1]);
+//		
+//		if (orient.isEmpty())
+//			orient = searchParam(methodParams[5][0], chemMethod, methodParams[5][1]);
+//		
+//		System.out.println(direct + ", " + orient);
+		
+		double[][] resul = { { -1., 0., 0., 0. }, { 0., -1., 0., 0. }, { 0., 0., 1., 0. }, { 0., 0., 0., 1. } }; // origin
 
-		double[][] resul = { { -1., 0., 0., 0. }, { 0., -1., 0., 0. }, { 0., 0., 1., 0. }, { 0., 0., 0., 1. } };
 		if (determ < 0)
 			resul[2][2]=-1;
 
@@ -259,7 +282,7 @@ public class AffineQuaternionBruker_mrtrix {
 			resul[1][0] = 1;
 			resul[1][1] = 0;
 		}
-		
+
 		return new Matrix(resul);
 	}
 
@@ -271,6 +294,24 @@ public class AffineQuaternionBruker_mrtrix {
 			resul[1][0] = 1;
 			resul[1][1] = 0;
 		}
+		return new Matrix(resul);
+	}
+
+	private Matrix orient_RAS() {
+		double[][] resul = { { 1., 0., 0., 0. }, { 0., 0., -1., 0. }, { 0., 1., 0., 0. }, { 0., 0., 0., 1. } }; // if good mode in Paravision
+//		double[][] resul = { { -1., 0., 0., 0. }, { 0., 0., 1., 0. }, { 0., 1., 0., 0. }, { 0., 0., 0., 1. } }; // Head_(prone/supine)
+//		double[][] resul = { { 1., 0., 0., 0. }, { 0., 0., 1., 0. }, { 0., -1., 0., 0. }, { 0., 0., 0., 1. } }; // (Head/tail)_supine
+//		double[][] resul = { { -1., 0., 0., 0. }, { 0., 0., -1., 0. }, { 0., -1., 0., 0. }, { 0., 0., 0., 1. } }; // tail_prone
+//		double[][] resul = { { 1., 0., 0., 0. }, { 0., 1., 0., 0. }, { 0., 0., 1., 0. }, { 0., 0., 0., 1. } }; // debout
+
+		
+//		double[][] resul = { { -1., 0., 0., 0. }, { 0., -1., 0., 0. }, { 0., 0., 1., 0. }, { 0., 0., 0., 1. } }; // no
+//		double[][] resul = { { -1., 0., 0., 0. }, { 0., 1., 0., 0. }, { 0., 0., 1., 0. }, { 0., 0., 0., 1. } }; // no
+//		double[][] resul = { { 1., 0., 0., 0. }, { 0., 0., -1., 0. }, { 0., -1., 0., 0. }, { 0., 0., 0., 1. } }; // no
+//		double[][] resul = { { 1., 0., 0., 0. }, { 0., 0., 1., 0. }, { 0., 1., 0., 0. }, { 0., 0., 0., 1. } }; // no
+//		double[][] resul = { { -1., 0., 0., 0. }, { 0., 0., 1., 0. }, { 0., -1., 0., 0. }, { 0., 0., 0., 1. } }; // no
+//		double[][] resul = { { -1., 0., 0., 0. }, { 0., 0., -1., 0. }, { 0., 1., 0., 0. }, { 0., 0., 0., 1. } }; // no
+
 		return new Matrix(resul);
 	}
 

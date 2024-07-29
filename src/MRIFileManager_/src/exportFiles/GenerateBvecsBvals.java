@@ -12,6 +12,8 @@ public class GenerateBvecsBvals implements ParamMRI2 {
 
 	public GenerateBvecsBvals(String directory, String name, Object linebasket, String constr, String oneOrTwoFiles) {
 
+		System.out.println(this + " : " + oneOrTwoFiles);
+		
 		String txt = "";
 		String[] dd = listBasket_hmInfo.get(linebasket).get("Direction Diffusion").toString().split(" +");
 		String[] bveff = listBasket_hmInfo.get(linebasket).get("B-values effective").toString().split(" +");

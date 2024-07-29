@@ -1,12 +1,12 @@
-[Bruker] 
-[Dicom] 
+[Bruker] /home/olivier/Documents/dataIRM/Bruker/Sophie_IRM/minihtt
+[Dicom] /home/olivier/Documents/dataIRM/test_unit_2/Dicom/raw
 [ParRec] 
-[NifTI] 
+[NifTI] /tmp
 [Bids] 
 [Export] 
 [LookAndFeel] com.jtattoo.plaf.hifi.HiFiLookAndFeel
-[NamingRepNifTI] /PatientName/
-[NamingFileNifTI] PatientName-StudyName-SequenceName-Protocol-AcquisitionDate-SeqNumber
-[NamingOptionsNifTI] 00010
+[NamingRepNifTI] /StudyName/
+[NamingFileNifTI] StudyName-SerialNumber-Protocol
+[NamingOptionsNifTI] 00013
 [previewActived] No
 [SeqDetail] 1023

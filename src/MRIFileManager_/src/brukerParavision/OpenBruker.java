@@ -37,12 +37,18 @@ public class OpenBruker implements ParamMRI2 {
 		this.title = title;
 		String tmp = null, scanmode = "";
 		int w, h;
-		float pxw, pxh;
+		float pxw, pxh, TR;
 		float fovX, fovY;
 
 //		float scaleX = 1, scaleY = 1;
 
 		scanmode = infoImage.get("Scan Mode");
+		try {
+			TR = Float.parseFloat(infoImage.get("Repetition Time"));
+		} 
+		 catch (Exception e) {
+			TR = (float) 0.0;
+		 }
 
 		if (!scanmode.contains("1")) {
 			/*****************************************************
@@ -150,6 +156,7 @@ public class OpenBruker implements ParamMRI2 {
 						/ Float.parseFloat(infoImage.get("Scan Resolution").split(" +")[2]);
 
 			fi.pixelDepth = resolZ;
+			fi.frameInterval = TR / 1000.0;
 
 			FileOpener fo = new FileOpener(fi);
 
@@ -265,7 +272,7 @@ public class OpenBruker implements ParamMRI2 {
 						pxw = pxh;
 					}
 				}
-				
+
 				ImageStack stack = new ImageStack(w, h);
 				Calibration cal = imp.getCalibration();
 				cal.pixelWidth = pxw;
@@ -278,23 +285,24 @@ public class OpenBruker implements ParamMRI2 {
 				imp.setCalibration(cal);
 			}
 
-			imp.resetDisplayRange();
-
 			/******************************************************
 			 * hyperstack ?
 			 *****************************************************/
-			try {
+//			else
+				try {
+	
+					if (c != 1 && t != 1 && z != 1)
+						imp = HyperStackConverter.toHyperStack(imp, z, c, t, order, "grayscale");
+					else if ((c != 1 || t != 1) && z != 1)
+						imp = HyperStackConverter.toHyperStack(imp, c, z, t, order, "grayscale");
+					else
+						imp = HyperStackConverter.toHyperStack(imp, c, z, t, order, "grayscale");
+	
+				} catch (Exception e) {
+				}
 
-				if (c != 1 && t != 1 && z != 1)
-					imp = HyperStackConverter.toHyperStack(imp, z, c, t, order, "grayscale");
-				else if ((c != 1 || t != 1) && z != 1)
-					imp = HyperStackConverter.toHyperStack(imp, c, z, t, order, "grayscale");
-				else
-					imp = HyperStackConverter.toHyperStack(imp, c, z, t, order, "grayscale");
-
-			} catch (Exception e) {
-			}
-
+			imp.resetDisplayRange();
+			
 			if (scanmode.contains("3")) {
 
 				try {

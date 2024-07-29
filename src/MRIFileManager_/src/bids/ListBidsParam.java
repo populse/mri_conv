@@ -168,6 +168,7 @@ public class ListBidsParam implements ParamMRI2, ListParam2 {
 		try {
 			tmp = lv.get("Echo Time");
 			tmp = tmp.replace("ms", "").trim();
+			tmp = String.valueOf(Double.parseDouble(tmp) * 1000.0);
 			lv.put("Echo Time", tmp);
 		} catch (Exception e) {
 		}
@@ -175,6 +176,7 @@ public class ListBidsParam implements ParamMRI2, ListParam2 {
 		try {
 			tmp = lv.get("Repetition Time");
 			tmp = tmp.replace("ms", "").trim();
+			tmp = String.valueOf(Double.parseDouble(tmp) * 1000.0);
 			lv.put("Repetition Time", tmp);
 		} catch (Exception e) {
 		}
@@ -182,6 +184,7 @@ public class ListBidsParam implements ParamMRI2, ListParam2 {
 		try {
 			tmp = lv.get("Inversion Time");
 			tmp = tmp.replace("ms", "").trim();
+			tmp = String.valueOf(Double.parseDouble(tmp) * 1000.0);
 			lv.put("Inversion Time", tmp);
 		} catch (Exception e) {
 		}

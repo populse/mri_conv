@@ -36,7 +36,7 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 		this.infoImage = infoImage;
 		this.orderImage = orderImage;
 		this.listFile = listFile;
-
+		
 		if (infoImage.get("Scale Slope").trim().isEmpty())
 			Prefs.openDicomsAsFloat = true;
 		else
@@ -51,6 +51,8 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 
 		int c, z, t;
 
+//		System.out.println(this + " : " + orderImage);
+		
 		c = Integer.parseInt(orderImage[1].toString());
 		z = Integer.parseInt(orderImage[2].toString());
 		t = Integer.parseInt(orderImage[3].toString());
@@ -71,11 +73,16 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 			cal.setUnit("mm");
 			cal.pixelHeight = Double.parseDouble(infoImage.get("Spatial Resolution").split(" +")[1]);
 			cal.pixelWidth = Double.parseDouble(infoImage.get("Spatial Resolution").split(" +")[0]);
-
 		} catch (Exception e) {
-
 		}
 
+		try {
+			cal.frameInterval = Double.parseDouble(infoImage.get("Repetition Time")) / 1000.0;
+		} catch (Exception e) {
+		}
+		
+		
+		
 		IJ.run("DICOM...", " ");
 
 		if (!note.contains("JpegLossLess")) {
@@ -125,7 +132,6 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 		ImagePlus imptmp;
 		ImageStack ims;
 		String listOffsets = infoImage.get("Offsets Image");
-//		System.out.println(this + " listOffsets :" + listOffsets);
 
 		if (listFile.length == 1) {
 
@@ -163,23 +169,11 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 				}
 			}
 			else {
-				String[] strArr = listOffsets.split(" +");
-				for (int kk=0; kk<strArr.length; kk++) {
-					dcm = new DICOM();
-					try {
-						dcm.open(listFile[Integer.valueOf(strArr[kk])]);
-						imptmp = new ImagePlus(noSeq, dcm.getImageStack());
-						ims.addSlice(imptmp.getChannelProcessor());
-					}
-					catch(Exception err) {
-					}
-					dcm.close();
-				}
-
-//				for (String kk : listFile) {
+//				String[] strArr = listOffsets.split(" +");
+//				for (int kk=0; kk<strArr.length; kk++) {
 //					dcm = new DICOM();
 //					try {
-//						dcm.open(kk);
+//						dcm.open(listFile[Integer.valueOf(strArr[kk])]);
 //						imptmp = new ImagePlus(noSeq, dcm.getImageStack());
 //						ims.addSlice(imptmp.getChannelProcessor());
 //					}
@@ -187,6 +181,18 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 //					}
 //					dcm.close();
 //				}
+
+				for (String kk : listFile) {
+					dcm = new DICOM();
+					try {
+						dcm.open(kk);
+						imptmp = new ImagePlus(noSeq, dcm.getImageStack());
+						ims.addSlice(imptmp.getChannelProcessor());
+					}
+					catch(Exception err) {
+					}
+					dcm.close();
+				}
 			}
 
 			imptmp = new ImagePlus(noSeq, ims);

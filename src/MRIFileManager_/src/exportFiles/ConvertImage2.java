@@ -91,6 +91,11 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 		String onetwofile = tmp.substring(4, 5);
 		String tmpotf = onetwofile;
 		boolean fc;
+
+		answ = save(imp, repWork, repertoryExport, ".nii", seqSel, true);
+		if (!answ)
+			System.out.println("not exported (" + repWork + " doesn't exist or unauthorized ?) ");
+
 		if (bool) {
 			try {
 				if (Integer.parseInt(onetwofile) > 3)
@@ -119,9 +124,9 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 				e.printStackTrace();
 			}
 		}
-		answ = save(imp, repWork, repertoryExport, ".nii", seqSel, true);
-		if (!answ)
-			System.out.println("not exported (" + repWork + " doesn't exist or unauthorized ?) ");
+//		answ = save(imp, repWork, repertoryExport, ".nii", seqSel, true);
+//		if (!answ)
+//			System.out.println("not exported (" + repWork + " doesn't exist or unauthorized ?) ");
 
 		imp.close();
 		imp = null;
@@ -339,6 +344,53 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 					boolean bool = (tmp.substring(3, 4).contentEquals("0")) ? false : true;
 					String onetwofile = tmp.substring(4, 5);
 					String tmpotf = onetwofile;
+//					if (bool) {
+//						try {
+//							if (Integer.parseInt(onetwofile) > 3)
+//								tmpotf = String.valueOf(Integer.parseInt(onetwofile) - 4);
+//							boolean fc = new GenerateBvecsBvals2(newDirectory, nameFile, lb, forCur, tmpotf)
+//									.fileCreated();
+//							if (fc)
+//								bvec_bval = true;
+//
+//							if (fc && Integer.parseInt(onetwofile) > 3) {
+//								onetwofile = String.valueOf(Integer.parseInt(onetwofile) - 4);
+//								qform = 1;
+//								sform = 1;
+//								FileInfo fi = imp.getFileInfo();
+//								for (int j = 0; j < 5; j++)
+//									quaterns[j] = 0.0; // initialization
+//								for (int j = 0; j < 3; j++)
+//									for (int k = 0; k < 4; k++)
+//										srow[j][k] = 0.0; // initialization
+//								srow[0][0] = fi.pixelWidth;
+//								srow[1][1] = fi.pixelHeight;
+//								srow[2][2] = fi.pixelDepth;
+//								srow[3][3] = 1;
+//								answ = save(imp, newDirectory, nameFile + "-zero_transform", suffix, lb, false);
+//							}
+////							new GenerateBvecsBvals2(newDirectory, nameFile, lb, forCur, onetwofile);
+//						} catch (Exception e) {
+//							new GetStackTrace(e, this.getClass().toString());
+//						}
+//					}
+					if (lb.toString().contains("Bruker") && lb.toString().contains("cineASL")) {
+						
+						ImagePlus imp1 = new Duplicator().run(imp, 1, imp.getNChannels()/2, 1, 1, 1, imp.getNFrames());
+						ImagePlus imp2 = new Duplicator().run(imp, 1 + imp.getNChannels()/2, imp.getNChannels(), 1, 1, 1, imp.getNFrames());
+						answ = save(imp1, newDirectory, nameFile + "_control", suffix, lb, true);
+						if (answ) {
+							logExportNifti += "Export success for " + lb +  "(control)\n";
+							JsonMIA += new LogJsonMIA(directory, lb, nameFile + "_control", error, bvec_bval).getJson() + ",";
+						}
+						answ = save(imp2, newDirectory, nameFile + "_marquage", suffix, lb, true);
+						if (answ) {
+							logExportNifti += "Export success for " + lb +  "(marquage)\n";
+							JsonMIA += new LogJsonMIA(directory, lb, nameFile + "_marquage", error, bvec_bval).getJson() + ",";
+						}
+					}
+					answ = save(imp, newDirectory, nameFile, suffix, lb, true);
+
 					if (bool) {
 						try {
 							if (Integer.parseInt(onetwofile) > 3)
@@ -369,24 +421,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 							new GetStackTrace(e, this.getClass().toString());
 						}
 					}
-
-					if (lb.toString().contains("Bruker") && lb.toString().contains("cineASL")) {
-						
-						ImagePlus imp1 = new Duplicator().run(imp, 1, imp.getNChannels()/2, 1, 1, 1, imp.getNFrames());
-						ImagePlus imp2 = new Duplicator().run(imp, 1 + imp.getNChannels()/2, imp.getNChannels(), 1, 1, 1, imp.getNFrames());
-						answ = save(imp1, newDirectory, nameFile + "_control", suffix, lb, true);
-						if (answ) {
-							logExportNifti += "Export success for " + lb +  "(control)\n";
-							JsonMIA += new LogJsonMIA(directory, lb, nameFile + "_control", error, bvec_bval).getJson() + ",";
-						}
-						answ = save(imp2, newDirectory, nameFile + "_marquage", suffix, lb, true);
-						if (answ) {
-							logExportNifti += "Export success for " + lb +  "(marquage)\n";
-							JsonMIA += new LogJsonMIA(directory, lb, nameFile + "_marquage", error, bvec_bval).getJson() + ",";
-						}
-					}
-					answ = save(imp, newDirectory, nameFile, suffix, lb, true);
-
+					
 					imp.close();
 					imp = null;
 					System.gc();

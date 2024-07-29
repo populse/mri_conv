@@ -85,6 +85,13 @@ public class AffineQuaternionPhilips implements ParamMRI2 {
 
 		double[][] r3 = { { Math.cos(angFH), -Math.sin(angFH), 0, 0 }, { Math.sin(angFH), Math.cos(angFH), 0, 0 },
 				{ 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
+		
+		Matrix mt = new Matrix(r1).times(new Matrix(r2)).times(new Matrix(r3));
+			
+//		System.out.println(this);
+//		for(int i=0;i<4;i++)
+//		    for(int j=0;j<4;j++)
+//		    	System.out.println(mt.get(i, j));
 
 		return new Matrix(r1).times(new Matrix(r2)).times(new Matrix(r3));
 	}

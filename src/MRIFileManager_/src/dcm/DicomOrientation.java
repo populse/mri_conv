@@ -5,21 +5,21 @@ package dcm;
  */
 
 public class DicomOrientation {
-	
+
 	private static final double obliquityThresholdCosineValue = 0.8;
 	public String orientationFound;
-	
+
 	public DicomOrientation(String imageOrientation) {
-		
+
 		String[] listOrientation = imageOrientation.split("\\\\"); 
 		Double[] coord = new Double[6];
-		
+
 		for (int i=0;i<6;i++){
 			coord[i]=Double.parseDouble(listOrientation[i]);
 		}
 		orientationFound = makeImageOrientationLabelFromImageOrientationPatient(coord[0],coord[1],coord[2],coord[3],coord[4],coord[5]);
 	}
-	
+
 	/**
 	 * <p>Get a label describing the axial, coronal or sagittal plane from row and column unit vectors (direction cosines) as found in ImageOrientationPatient.</p>
 	 *
@@ -89,8 +89,8 @@ public class DicomOrientation {
 		}
 		return axis;
 	}
-	
-	
+
+
 	/**
 	 * 
 	 * @return	return calculated orientation 

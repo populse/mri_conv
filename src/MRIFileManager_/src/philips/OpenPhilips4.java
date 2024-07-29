@@ -29,7 +29,7 @@ public class OpenPhilips4 implements ParamMRI2, DictionParRec {
 
 		String tmp = null, order;
 		int w, h;
-		float pxw, pxh, pxz;
+		float pxw, pxh, pxz, TR;
 		int nimages;
 
 		/****************************************************
@@ -42,6 +42,13 @@ public class OpenPhilips4 implements ParamMRI2, DictionParRec {
 		pxw = Float.parseFloat(infoIm.get("Spatial Resolution").split(" +")[0]);
 		pxh = Float.parseFloat(infoIm.get("Spatial Resolution").split(" +")[1]);
 		pxz = Float.parseFloat(infoIm.get("Slice Thickness"));
+		
+		try {
+			TR = Float.parseFloat(infoIm.get("Repetition Time"));
+		} 
+		 catch (Exception e) {
+			TR = (float) 0.0;
+		 }
 
 		order = orderIm[0].toString();
 		c = (int) orderIm[1];
@@ -89,6 +96,7 @@ public class OpenPhilips4 implements ParamMRI2, DictionParRec {
 		fi.pixelWidth = pxw;
 		fi.pixelHeight = pxh;
 		fi.pixelDepth = pxz;
+		fi.frameInterval = TR / 1000.0;
 
 		imp = new FileOpener(fi).open(false);
 

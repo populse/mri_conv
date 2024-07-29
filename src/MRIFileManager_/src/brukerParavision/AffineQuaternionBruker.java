@@ -67,7 +67,10 @@ public class AffineQuaternionBruker {
 			new GetStackTrace(e, this.getClass().toString());
 		}
 
+		
 		recoTransp = Integer.parseInt(listTransp[0]);
+		
+		System.out.println(this + "recoTransp norm = " + recoTransp);
 
 		dim = new float[3];
 		fov = new float[3];
@@ -113,10 +116,10 @@ public class AffineQuaternionBruker {
 			sl_thick = sl_sepn;
 		}
 
-		// for (int i=0;i<3;i++) {
-		// System.out.println(chem2dseq);
-		// System.out.println(dim[i]+" , "+fov[i]+" , "+vox[i]);
-		// }
+//		 System.out.println(chem2dseq);
+//		 for (int i=0;i<3;i++) {
+//		 	System.out.println(dim[i]+" , "+fov[i]+" , "+vox[i]);
+//		 }
 
 		// String affichRecoTransp = "";
 		// for (String st:listTransp)

@@ -336,9 +336,11 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 				if (listDiff[j].isEmpty())
 					listDiff[j] = searchParam(hdrtmp, "2001,1003"); // diffusion
 			}
+			
 			int inc = 0;
 
 			for (int i = 0; i < list.length; i++) {
+
 				StringBuffer hdrtmp = new StringBuffer(list[i]);
 				if (!windowLess)
 					FileManagerFrame.dlg.setTitle(title + i * 100 / list.length + " %");
@@ -368,14 +370,20 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 						listSlice[11] = searchParam(hdrtmp, "Real World Value Slope");
 					if (!listSlice[11].matches("-?\\d+(\\.\\d+)?(E-?\\d+)?(E\\+?\\d+)?(E?\\d+)?(e-?\\d+)?(e\\+?\\d+)?(e?\\d+)?"))
 						listSlice[11] = "1";
+
 					listSlice[12] = searchParam(hdrtmp, "Acquisition Time");
 					listSlice[13] = searchParam(hdrtmp, "Image Position (Patient)");
 					listSlice[14] = searchParam(hdrtmp, "Image Orientation (Patient)");
-					listSlice[15] = listDiff[inc];
-					inc++;
+					if (listDiff.length > 0) {
+						listSlice[15] = listDiff[inc];
+						inc++;
+					}
+					else
+						listSlice[15] = "0";
 //					listSlice[15] = searchParam(hdrtmp, "0018,9087"); // diffusion
 //					if (listSlice[15].isEmpty())
 //						listSlice[15] = searchParam(hdrtmp, "2001,1003"); // diffusion
+
 					String ts = searchParam(hdrtmp, "0018,0020");
 					ts = new ChangeSyntax().NewSyntaxScanSeq(ts);
 					listSlice[16] = ts; // scanning sequence

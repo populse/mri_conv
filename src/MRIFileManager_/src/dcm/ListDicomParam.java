@@ -195,6 +195,8 @@ public class ListDicomParam implements ParamMRI2 {
 		listValues.put("Rescale Slope", listSlice[15]);
 		listValues.put("Scale Slope", listSlice[16]);
 		listValues.put("B-values effective", listSlice[6]);
+		
+//		System.out.println(listSlice[14] + ", " + listSlice[15] + "," + listSlice[16]);
 //		System.out.println(this + "Bval: " + listValues.get("B-values effective"));
 
 		try {

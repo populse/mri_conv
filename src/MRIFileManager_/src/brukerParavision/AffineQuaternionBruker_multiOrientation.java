@@ -140,10 +140,10 @@ public class AffineQuaternionBruker_multiOrientation {
 			sl_thick = sl_sepn;
 		}
 
-		// for (int i=0;i<3;i++) {
-		// System.out.println(chem2dseq);
-		// System.out.println(dim[i]+" , "+fov[i]+" , "+vox[i]);
-		// }
+//		 System.out.println(chem2dseq);
+//		 for (int i=0;i<3;i++) {
+//		 	System.out.println(dim[i]+" , "+fov[i]+" , "+vox[i]);
+//		 }
 
 		// String affichRecoTransp = "";
 		// for (String st:listTransp)

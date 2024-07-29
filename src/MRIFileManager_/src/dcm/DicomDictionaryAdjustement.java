@@ -100,6 +100,10 @@ public class DicomDictionaryAdjustement {
 		} catch (Exception e) {
 		}
 
+		if (listValues.get("Slice Thickness").isEmpty())
+			listValues.put("Slice Thickness", "1.0");
+			
+		
 		if (listValues.get("Slice Separation").isEmpty())
 			listValues.put("Slice Separation", listValues.get("Slice Thickness"));
 
