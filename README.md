@@ -31,6 +31,12 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	17/10/2024: version 24.4.0b
+	Features added:
+		- Nifti: Nifti/Json from Dcm2niix or 'handmade' can now be exported to Irmage Nifti/Json.
+
+<p></p>
+
 	25/07/2024: version 24.3.1b
 	Bug fixed:
 		- Bruker: Nifti conversion bug for Paravision 360 resolved
