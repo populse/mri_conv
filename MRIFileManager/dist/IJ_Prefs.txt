@@ -1,5 +1,5 @@
 #ImageJ 1.54f Preferences
-#Wed Oct 16 14:33:16 CEST 2024
+#Thu Dec 19 11:27:55 CET 2024
 fcolor=\#FFFF00
 .VolumeViewer.xloc=1920
 raw.type=2
@@ -19,7 +19,7 @@ showcolor=\#00FFFF
 .results.width=1309
 raw.height=128
 new.fill=0
-.log.height=713
+.log.height=1053
 recent03=/home/olivier/Documents/dataIRM/Nifti/CEST/Modif_Rachel/Macro_Rat8.ijm
 recent04=/home/olivier/Documents/dataIRM/Nifti/CEST/Modif_Rachel/Macro_Rat9.ijm
 recent01=/home/olivier/Documents/dataIRM/Nifti/CEST/Modif_Rachel/Rat8_modif.jpg
@@ -35,7 +35,7 @@ measurements=19
 .VolumeViewer.showTF=true
 .VolumeViewer.useLight=false
 .VolumeViewer.yloc=0
-.log.loc=2081,254
+.log.loc=0,27
 recent09=/tmp/-06-1-MGE-(E6)-02.nii.gz
 recent07=/home/olivier/Documents/dataIRM/Nifti/CEST/20221004-ArgMR8-J10/20221004-ArgMR8-J10-06-T1map_RARE.nii
 recent08=/tmp/-04-1-1_T2_RARE_80x80x200_85sl-(E4).nii
@@ -73,7 +73,7 @@ dir.image=/home/olivier/Documents/dataIRM/Nifti/CEST/Modif_Rachel/
 new.type=0
 raw.options=2
 .results.loc=58,586
-.log.width=875
+.log.width=1868
 .VolumeViewer.lightRed=255
 pp.options=0
 raw.gap=0
@@ -85,8 +85,8 @@ div-by-zero=Infinity
 new.slices=1
 .VolumeViewer.lutNr=0
 .editor.case-sensitive=true
-ij.x=567
-ij.y=45
+ij.x=891
+ij.y=73
 pp.height=340
 .VolumeViewer.alphaMode=0
 noise.sd=25.0

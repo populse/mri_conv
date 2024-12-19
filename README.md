@@ -31,6 +31,17 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	19/12/2024: version 24.4.1a
+	Features added:
+		- Bids: for export to Nifti/Json:
+				 - tag SliceGap added in mri_conv json (= SpacingBetweenSlices - SliceThickness)
+				 - AcquisitionDuration added in mri_conv json
+				 - ProtocoleName and SequenceName corrected
+				 - tag Institution added in mri_conv json (concatenated with InstitutionDepartmentName)
+				 - tag ManufacturerModel added in mri_conv json
+
+<p></p>
+
 	17/10/2024: version 24.4.0b
 	Features added:
 		- Nifti: Nifti/Json from Dcm2niix or 'handmade' can now be exported to Irmage Nifti/Json.
