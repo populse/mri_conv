@@ -68,7 +68,7 @@ import exportFiles.ExportFilesOption;
 public class FileManagerFrame extends JFrame implements ItemListener, ComponentListener {
 
 	private static final long serialVersionUID = 1L;
-	private final String versionSoft="24.3.1b";
+	private final String versionSoft="24.4.1a";
 
 	public static String OS = System.getProperty("os.name").toLowerCase();
 
@@ -85,7 +85,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 	private JTabbedPane tabInfoParam = new JTabbedPane();
 
 	private JComboBox<String> listPath, listChoiceExport;
-	
+
 	private JTable tabData, tabSeq, tabBasket, tabDictionnaryMri;
 	private JTree treeParamInfoGeneral, treeParamInfoUser, treeBasket;
 

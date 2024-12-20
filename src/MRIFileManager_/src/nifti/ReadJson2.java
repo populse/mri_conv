@@ -1,14 +1,16 @@
 package nifti;
 
 import java.io.FileReader;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import MRIFileManager.GetStackTrace;
+import abstractClass.ParamMRI2;
 
-public class ReadJson2 {
+public class ReadJson2 implements ParamMRI2 {
 
 	private JSONParser parser = new JSONParser();
 	private Object obj;
@@ -20,16 +22,53 @@ public class ReadJson2 {
 		try {
 			obj = parser.parse(new FileReader(jsonPath));
 			JSONObject object = (JSONObject) obj;
-			if (object.get("Json_Version").toString().contains("Irmage2018")) {
-				listObject(object);
-				jsonversion = true;
-			} else {
-//				listHighObject(object);
+			jsonversion = true;
+			if (object.containsKey("Json_Version")) {
+				if (object.get("Json_Version").toString().contains("Irmage2018")) {
+					listObject(object);
+				}
+			}
+			else if (object.containsKey("ConversionSoftware")) {
+				if (object.get("ConversionSoftware").toString().contentEquals("dcm2niix")) {
+					listObject_dcm2niix(object, true);
+				}
+				else if (object.get("ConversionSoftware").toString().contentEquals("handmade")){
+					listObject_dcm2niix(object, false);
+				}
+			}
+			else {
 				jsonversion = false;
 			}
 
 		} catch (Exception e) {
 			new GetStackTrace(e, this.getClass().toString());
+		}
+	}
+
+	private void listObject_dcm2niix(JSONObject object, Boolean timefactor) {
+		HashMap<String, String> listField;
+		for (Object sw : object.keySet().toArray()) {
+			listField = new HashMap<String, String>() {
+				private static final long serialVersionUID = 1L;
+			{
+				put("format", "");
+				put("description", "");
+				put("units", "");
+				put("type", "");
+			}};
+
+			try {
+				if (Arrays.asList("RepetitionTime","EchoTime","InversionTime").contains(sw.toString()) && timefactor) {
+					float val = Float.valueOf(object.get(sw).toString());
+					val *= 1000.0;
+					listField.put("value", String.valueOf(val));
+				}
+				else
+					listField.put("value", object.get(sw).toString());
+				listObject.put(sw.toString(), listField);
+			} catch (Exception e) {
+				new GetStackTrace(e, this.getClass().toString());
+			}
 		}
 	}
 
@@ -53,13 +92,6 @@ public class ReadJson2 {
 		}
 		listObject.put(key, listField);
 	}
-
-//	private void listHighObject(JSONObject obj) {
-//		HashMap<String, String> listField = new HashMap<>();
-//		for (Object sw : obj.keySet().toArray()) {
-//			listObject.put(sw.toString(), obj.get(sw).toString());
-//		}
-//	}
 
 	public HashMap<String, HashMap<String, String>> getlistObject() {
 		return listObject;

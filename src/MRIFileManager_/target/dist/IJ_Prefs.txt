@@ -1,9 +1,9 @@
 #ImageJ 1.54f Preferences
-#Thu Jul 25 14:13:30 CEST 2024
+#Thu Dec 19 11:14:12 CET 2024
 new.fill=0
-.log.height=1053
+.log.height=1080
 pp.options=0
-.log.loc=0,27
+.log.loc=1920,0
 bcolor=\#000000
 .results.height=255
 noise.sd=25.0
@@ -12,7 +12,7 @@ fcolor=\#FFFFFF
 raw.width=153
 pp.fontsize=14
 .gui.scale=1.0
-.log.width=1868
+.log.width=1920
 .manager.loc=326,248
 prefs.options=4210688
 new.height=400

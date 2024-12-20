@@ -67,6 +67,8 @@ public class ListBidsParam implements ParamMRI2, ListParam2 {
 		}
 
 		lv.put("JsonVersion", "ko");
+		lv.put("Protocol", fileNifti.getParent().substring(fileNifti.getParent().lastIndexOf(PrefParam.separator) + 1));
+		lv.put("Sequence Name", fileNifti.getName().substring(0, fileNifti.getName().indexOf(".nii.gz")));
 
 		if (readjson.isGoodJsonVersion())
 
@@ -124,9 +126,6 @@ public class ListBidsParam implements ParamMRI2, ListParam2 {
 		lv.put("Patient Sex", "");
 		lv.put("Patient Weight", "");
 		lv.put("Patient BirthDate", "");
-		lv.put("Protocol", fileNifti.getParent().substring(fileNifti.getParent().lastIndexOf(PrefParam.separator) + 1));
-		lv.put("Sequence Name", fileNifti.getName().substring(0, fileNifti.getName().indexOf(".nii.gz")));
-
 		lv.put("Offset data blob", new SearchParamNifti("File offset to data blob", headerNifti).result());
 
 		for (String sh : dictionaryMRIUser.keySet()) {
@@ -150,9 +149,9 @@ public class ListBidsParam implements ParamMRI2, ListParam2 {
 //				new GetStackTrace(e);
 			}
 		}
-				
+
 		String tmp;
-		
+
 		/**********************************************************
 		 * Slice Orientation by default
 		 **********************************************************/
@@ -161,7 +160,7 @@ public class ListBidsParam implements ParamMRI2, ListParam2 {
 		} catch (Exception e) {
 			lv.put("Slice Orientation", "unknow");
 		}
-		
+
 		/**********************************************************
 		 * delete 'ms' in EchoTime, RepetitionTime and InversionTime
 		 *********************************************************/
@@ -228,6 +227,28 @@ public class ListBidsParam implements ParamMRI2, ListParam2 {
 			lv.put("Images In Acquisition",
 					String.valueOf(Integer.parseInt(ldim[3]) * Integer.parseInt(ldim[4]) * Integer.parseInt(ldim[5])));
 		}
+
+		/******************************************************************
+		 * get Slice Gap = SpacingBetweenSlices - SliceThickness
+		 *****************************************************************/
+
+		String sliceGap = lv.get("Slice Gap");
+		tmp = lv.get("Slice Thickness");
+		if (!sliceGap.isEmpty()) {
+			sliceGap = String.valueOf(Float.parseFloat(sliceGap) - Float.parseFloat(tmp));
+			lv.put("Slice Gap", sliceGap);}
+		
+		/******************************************************************
+		 * Institution = InstitutionName concatenated with InstitutionalDepartmentName
+		 *****************************************************************/
+		
+		tmp = lv.get("Institution Department");
+		if (!tmp.isEmpty()) {
+			String instit = lv.get("Institution");
+			instit = instit.concat(", " + lv.get("Institution Department"));
+			lv.put("Institution", instit);
+		}
+
 		return lv;
 	}
 

@@ -256,7 +256,6 @@ class ActionsButtonMenu extends AbstractAction implements ParamMRI2, Format {
 		String tmp = PrefParam.formatCurrent;
 		tmp = tmp.substring(tmp.indexOf("[") + 1, tmp.indexOf("]"));
 		PrefParam.formatCurrentInt = format.valueOf(tmp).toInt();
-		
 
 //		System.out.println(this+" repselected 3 = "+repselected);
 

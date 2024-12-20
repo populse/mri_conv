@@ -536,7 +536,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 						StandardCopyOption.REPLACE_EXISTING);
 				fileOrigin = fileOrigin.replace(".nii", ".json");
 
-				if (new File(fileOrigin).exists()) {
+				if (new File(fileOrigin).exists() && !listBasket_hmInfo.get(title).containsKey("Conversion Software")) {
 					name = name.replace(".nii", "");
 					if (listBasket_hmInfo.get(title).get("DataAnonymized").contentEquals("yes")) {
 						System.out.println(this + " : " + "create new Json because of anonymization");

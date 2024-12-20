@@ -1,7 +1,7 @@
 [Bruker] /home/olivier/Documents/dataIRM/Bruker/Sophie_IRM/minihtt
 [Dicom] /home/olivier/Documents/dataIRM/test_unit_2/Dicom/raw
 [ParRec] 
-[NifTI] /tmp
+[NifTI] /home/olivier/Documents/dataIRM/Nifti
 [Bids] 
 [Export] 
 [LookAndFeel] com.jtattoo.plaf.hifi.HiFiLookAndFeel
