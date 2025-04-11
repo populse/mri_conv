@@ -629,6 +629,13 @@ dictionaryMRI:
                   viewer: {category: MRI parameters}
                   json:   {tagJson: MinEchoTime, type: float, format: ~, units: ~}
 
+  RefPower:
+                  description: {info: ""}
+                  whereBruker:  {file: method, keyName: $PVM_RefPowCh1=, type: string, format: ~, units: ms}
+                   
+                  viewer: {category: MRI parameters}
+                  json:   {tagJson: RefPower, type: string, format: ~, units: ms}
+
   RefPulse1:
                   description: {info: ""}
                   whereBruker:  {file: method, keyName: $RefPulse1=(, type: string, format: ~, units: ms}

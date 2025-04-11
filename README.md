@@ -28,6 +28,14 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 # Release history
 
+<p></p>
+
+	11/04/2025: version 24.5.1a
+	Bug fixed:
+		- Bruker: bugs with Paravision360 fixed
+	Features modified:
+		- DictionnaryMRI_system.yml: some improved tags
+		- ImageJ: update to 1.54p
 
 <p></p>
 
