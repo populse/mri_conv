@@ -30,6 +30,12 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+        09/09/2025: version 25.1.0
+        Features modified:
+                - only for MP3 software : exporting Bruker data to nifti format doesn't refer to RAS orientation.
+
+<p></p>
+
 	11/04/2025: version 24.5.1a
 	Bug fixed:
 		- Bruker: bugs with Paravision360 fixed

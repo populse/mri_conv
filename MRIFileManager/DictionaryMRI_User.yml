@@ -153,6 +153,22 @@ dictionaryMRI:
                    viewer: {category: cineASL}
                    json:   {tagJson: PVM_SPackArrSliceOrient, type: string, format: ~, units: ~}
 
+  Reception_Gain:
+                   description: {info: ""}
+
+                   whereBruker:  {file: acqp, keyName: $RG=, type: int, format: ~, units: ~}
+
+                   viewer: {category: MRI parameters}
+                   json:   {tagJson: ~, type: ~, format: ~, units: ~}
+
+  Reception_Gain_Calibrated:
+                   description: {info: ""}
+
+                   whereBruker:  {file: acqp, keyName: $ACQ_CalibratedRG=, type: int, format: ~, units: ~}
+
+                   viewer: {category: MRI parameters}
+                   json:   {tagJson: ~, type: ~, format: ~, units: ~}
+
   RECO_offset:
                    description: {info: ""}
   
