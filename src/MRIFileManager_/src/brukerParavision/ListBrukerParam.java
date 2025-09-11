@@ -430,15 +430,26 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 		ch1 = listElements[0][1];
 		ch2 = listElements[1][1];
 		String txt = null;
+		String[] listchb;
+
+//		System.out.println(this + ": " + seqSel + " : " + chb + " , " + ch1 + " , " + ch2);
 
 		if (ch1 != null && ch2 != null) {
 			if (tmp.contains("FG_ISA")) {
+				listchb = chb.split("\\) \\(");
+				for (String hh:listchb) {
+					if (hh.contains("FG_ISA")){
+						chb = hh;
+						chb = chb.replaceAll("\\(", "");
+						chb = chb.replaceAll("\\)", "");
+						break;
+					}
+				}
 				tmp = tmp.substring(tmp.indexOf("FG_ISA, ") + 8);
 				tmp = tmp.substring(0, tmp.indexOf(","));
 				txt = tmp + " :\n";
-
-				for (int i = 0; i < Integer.parseInt(chb.substring(chb.indexOf("(") + 1, chb.indexOf(","))); i++) {
-					txt += "t:" + (i + 1) + "/" + chb.substring(chb.indexOf("(") + 1, chb.indexOf(",")) + " - "
+				for (int i = 0; i < Integer.parseInt(chb.substring(0, chb.indexOf(","))); i++) {
+					txt += "t:" + (i + 1) + "/" + chb.substring(0, chb.indexOf(",")) + " - "
 							+ ch2.substring(ch2.indexOf("<") + 1, ch2.indexOf(">")) + " " + "["
 							+ ch1.substring(ch1.indexOf("<") + 1, ch1.indexOf(">")) + "] \n";
 					ch1 = ch1.substring(ch1.indexOf(">") + 1);
@@ -447,12 +458,21 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 				txt += "\n";
 			}
 			if (tmp.contains("FG_DTI")) {
+				listchb = chb.split("\\) \\(");
+				for (String hh:listchb) {
+					if (hh.contains("FG_DTI")){
+						chb = hh;
+						chb = chb.replaceAll("\\(", "");
+						chb = chb.replaceAll("\\)", "");
+						break;
+					}
+				}
 				tmp = tmp.substring(tmp.indexOf("FG_DTI, ") + 8);
 				tmp = tmp.substring(0, tmp.indexOf(","));
 				txt = tmp + " :\n";
 
-				for (int i = 0; i < Integer.parseInt(chb.substring(chb.indexOf("(") + 1, chb.indexOf(","))); i++) {
-					txt += "t:" + (i + 1) + "/" + chb.substring(chb.indexOf("(") + 1, chb.indexOf(",")) + " - "
+				for (int i = 0; i < Integer.parseInt(chb.substring(0, chb.indexOf(","))); i++) {
+					txt += "t:" + (i + 1) + "/" + chb.substring(0, chb.indexOf(",")) + " - "
 							+ ch2.substring(ch2.indexOf("<") + 1, ch2.indexOf(">")) + " " + "["
 							+ ch1.substring(ch1.indexOf("<") + 1, ch1.indexOf(">")) + "] \n";
 					ch1 = ch1.substring(ch1.indexOf(">") + 1);
@@ -463,8 +483,7 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 		}
 
 		lv[4] = txt;
-//		System.out.println("seq n "+seqSel);
-//		System.out.println("lv = "+lv[0]+" , "+lv[1]+" , "+lv[2]+" , "+lv[3]+" , "+lv[4]+" , ");
+//		System.out.println(this + ": " + "seq n " + seqSel + " , lv = "+lv[0]+" , "+lv[1]+" , "+lv[2]+" , "+lv[3]+" , "+lv[4]);
 
 		return lv;
 	}

@@ -14,9 +14,9 @@ public class TableBrukerSequence implements ParamMRI2 {
 	public TableBrukerSequence(String repertory) throws IOException {
 
 		List<String> list2dseq = new Search2dseq(repertory).getList2dseq();
-		
+
 		String directory = repertory.substring(repertory.lastIndexOf(PrefParam.separator)+1);
-		
+
 		if (!list2dseq.isEmpty()) {
 			String prefixSeq = ("000000").substring(0, String.valueOf(list2dseq.size()).length());
 

@@ -46,7 +46,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 		else
 			chemDicom = chemDicom.substring(0, chemDicom.lastIndexOf(PrefParam.separator));
 		
-//		System.out.println(this+" : chemDicomdir = "+chemDicomdir);
+//		System.out.println(this+" : chemDicomdir no simplified= "+chemDicomdir);
 
 		StringBuffer headerDicom = new StringBuffer(new HeaderDicom().getHeaderDicom(chemDicomdir));
 
@@ -58,8 +58,11 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 		/****************************************************************************************************************/
 
 		listImDcm = headerDicom.toString().split("0020,0011"); // Series Number
+		
 
 		for (int i = 0; i < listImDcm.length; i++) {
+
+//			System.out.println(this+" : listImDcm = " + listImDcm[i]);
 
 			// get series number
 			noSerial = listImDcm[i].substring(listImDcm[i].indexOf(": ") + 2, listImDcm[i].indexOf("\n"));
@@ -323,7 +326,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 			title = FileManagerFrame.dlg.getTitle();
 
 		if (listValuesAcq.get("Indice of Frame").contentEquals("2")) { // read 1 file multi-frame
-
+			
 			hdr = new StringBuffer(new HeaderDicom().getHeaderDicom(hmSeq.get(noSeq)[0]));
 			String[] list = hdr.toString().split("0008,0008");
 //			String[] list = hdr.toString().split("0004,1430");

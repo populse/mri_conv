@@ -16,6 +16,7 @@ import Jama.Matrix;
 import MRIFileManager.GetStackTrace;
 import abstractClass.PrefParam;
 
+
 public class AffineQuaternionBruker_mrtrix {
 
 	private String chemAcqp, chemMethod, chemReco, chemVisupars;
@@ -149,9 +150,12 @@ public class AffineQuaternionBruker_mrtrix {
 		affine = affine.times(swaps());
 		affine = affine.times(ft2mm());
 		affine = affine.times(start());
-		affine = affine.transpose();
-		affine = affine.times(orient_RAS());
-		affine = affine.transpose();
+		
+		if (!PrefParam.labelButtonExport.contains("MP3") && !PrefParam.labelButtonExport.contains("MIA")) {
+			affine = affine.transpose();
+			affine = affine.times(orient_RAS());
+			affine = affine.transpose();
+		}
 
 	}
 

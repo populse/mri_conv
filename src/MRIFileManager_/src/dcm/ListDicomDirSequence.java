@@ -32,6 +32,8 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 		
 		String chemD = hmData.get(chemDicom);
 		StringBuffer headerDicom = new StringBuffer(new HeaderDicom().getHeaderDicom(chemD));
+		
+//		System.out.println(this+" : chemDicomdir = " + this.chemDicom);
 
 		int numberOfFrame = 1;
 

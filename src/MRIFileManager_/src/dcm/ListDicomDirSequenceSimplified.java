@@ -30,6 +30,8 @@ public class ListDicomDirSequenceSimplified implements ParamMRI2, DictionDicom, 
 		String chemDicomdir = hmData.get(chemDicom);
 
 		StringBuffer headerDicom = new StringBuffer(new HeaderDicom().getHeaderDicom(chemDicomdir));
+		
+//		System.out.println(this+" : chemDicomdir simplified= " + this.chemDicom);
 
 		String[] listImDcm;
 		String noSerial = null;

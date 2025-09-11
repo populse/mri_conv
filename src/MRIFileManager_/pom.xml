@@ -69,7 +69,7 @@
 	<dependency>
     <groupId>net.imagej</groupId>
     <artifactId>ij</artifactId>
-    <version>1.54f</version>
+    <version>1.54p</version>
     </dependency>
 
     </dependencies>

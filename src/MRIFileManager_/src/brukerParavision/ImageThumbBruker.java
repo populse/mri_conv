@@ -80,11 +80,11 @@ public class ImageThumbBruker extends ImageThumb implements ParamMRI2 {
 		else
 			nImage = Integer.parseInt(values[1]);
 		
-		int intValue = nImage / 2;
+		int intValue = (nImage / 2);
 		
 		type = values[3];
 		int dt;
-
+		
 		if (type.contains("_16BIT_")) {
 			dt = 16;
 		} else if (type.contains("_32BIT_")) {
@@ -121,11 +121,10 @@ public class ImageThumbBruker extends ImageThumb implements ParamMRI2 {
 			fi.fileType = FileInfo.GRAY16_SIGNED;
 		else if (type.contains("_32BIT_SGN_INT"))
 			fi.fileType = FileInfo.GRAY32_INT;
-		else if  (tmp.contains("_32BIT_FLOAT"))
+		else if (type.contains("_32BIT_FLOAT"))
 			fi.fileType = FileInfo.GRAY32_FLOAT;
-		 else
+		else
 			fi.fileType = FileInfo.GRAY8;
-		
 
 		fi.inputStream = inputStream;
 		fi.fileFormat = FileInfo.RAW;
@@ -145,6 +144,8 @@ public class ImageThumbBruker extends ImageThumb implements ParamMRI2 {
 
 		imp = fo.open(false);
 		imp.resetDisplayRange();
+//		imp.getProcessor().setMinAndMax(0, 255);
+//		imp.updateAndDraw();
 
 		int scalX = 150, scalY = 150;
 
@@ -171,9 +172,10 @@ public class ImageThumbBruker extends ImageThumb implements ParamMRI2 {
 	}
 
 	private Image getScaledImage(Image srcImg, int w, int h) {
-		BufferedImage resizedImg = new BufferedImage(150, h, BufferedImage.TYPE_INT_ARGB);
+//		BufferedImage resizedImg = new BufferedImage(150, h, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage resizedImg = new BufferedImage(150, h, BufferedImage.TYPE_BYTE_GRAY);
 		Graphics2D g2 = resizedImg.createGraphics();
-
+		
 		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 //		g2.setComposite(AlphaComposite.SrcOut);
 		g2.drawImage(srcImg, 75-w/2, 0, w, h, null);

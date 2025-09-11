@@ -59,9 +59,19 @@ dictionaryMRI:
                   description: {info: ""}
 
                   whereBids:    {file: json, keyName: AcquisitionDuration, type: float, format: ~, units: s}
+                  wherePhilips: {file: PAR ; Xml, keyName: Scan Duration  ; Scan Duration, type: float ; float, format: ~, units: "s ; ~"}
 
                   viewer: {category: ~}
                   json:   {tagJson: AcquisitionDuration, type: float, format: ~, units: s}
+
+  Acquisition Number:
+                  description: {info: "Acquisition number"}
+
+                  whereBids:    {file: json, keyName: SerieNumber, type: int, format: ~, units: ~}
+                  wherePhilips: {file: PAR ; Xml, keyName: Acquisition nr, type: int, format: ~, units: ~}
+               
+                  viewer: {category: ~}
+                  json:   {tagJson: AcquisitionNumber, type: int, format: ~, units: ~}
 
   Acquisition Time:
                   description: {info: "The time the acquisition of data that resulted in this image started"}
@@ -447,7 +457,7 @@ dictionaryMRI:
                   whereDicom:   {file: ~, keyName: Image Position Patient, type: int, format: ~, units: ~} #Slice Location
 
                   viewer: {category: Dimensions}
-                  json:   {tagJson: ~, type: ~, format: ~, units: ~}
+                  json:   {tagJson: NumberOfSlice, type: int, format: ~, units: ~}
 
   Patient BirthDate:
                   description: {info: "Birth date of the patient"}
@@ -680,7 +690,7 @@ dictionaryMRI:
                   whereBids:    {file: niftiheader, keyName: Dataset dimensions, type: int, format: ~, units: ~}
 
                   viewer: {category: Dimensions}
-                  json:   {tagJson: ~, type: ~, format: ~, units: ~}
+                  json:   {tagJson: ScanResolution, type: int, format: ~, units: ~}
 
   Scanning Sequence:
                   description: {info: "Description of the type of data taken(Spin Echo, Inversion Recovery,..."}
