@@ -30,6 +30,75 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	09/09/2025: version 25.1.0
+	Features modified:
+		- for MP3 and MIA softwares : exporting Bruker data to nifti format doesn't refer to RAS orientation.
+
+<p></p>
+
+	11/04/2025: version 24.5.1a
+	Bug fixed:
+		- Bruker: bugs with Paravision360 fixed
+	Features modified:
+		- DictionnaryMRI_system.yml: some improved tags
+		- ImageJ: update to 1.54p
+
+<p></p>
+
+	19/12/2024: version 24.4.1a
+	Features added:
+		- Bids: for export to Nifti/Json:
+				 - tag SliceGap added in mri_conv json (= SpacingBetweenSlices - SliceThickness)
+				 - AcquisitionDuration added in mri_conv json
+				 - ProtocoleName and SequenceName corrected
+				 - tag Institution added in mri_conv json (concatenated with InstitutionDepartmentName)
+				 - tag ManufacturerModel added in mri_conv json
+
+<p></p>
+
+	17/10/2024: version 24.4.0b
+	Features added:
+		- Nifti: Nifti/Json from Dcm2niix or 'handmade' can now be exported to Irmage Nifti/Json.
+
+<p></p>
+
+	25/07/2024: version 24.3.1b
+	Bug fixed:
+		- Bruker: Nifti conversion bug for Paravision 360 resolved
+	Features modified:
+		- BIDS: for export to Nifti/Json, RepetitionTime, EchoTime and InversionTime are converted to ms
+	Features added:
+		- All: for 4D and 5D images, Repetition Time value is added in the Nifti header (4th value of Grid spacings)
+
+<p></p>
+
+	12/04/2024: version 24.3.0a
+	Bug fixed:
+		- Dicom : conversion bug for some Dicoms resolved
+
+<p></p>
+
+	20/03/2024: version 24.2.1a
+	Features modified:
+		- Bruker : export to Nifti/Json modified, now the axes refer to RAS orientation
+	Bug fixed:
+		- Bruker : 5D image order problem (in the case of multi Repetition and multi Echo) fixed
+
+<p></p>
+
+	16/02/2024: version 24.1.1a
+	Features modified:
+		- bvec, bval : now works for Philips (fsl and MRtrix)
+
+<p></p>
+
+	01/02/2024: version 24.1.0a
+	Features modified:
+		- bvec, bval : for fsl format, bvec is now convert to image reference plane (for Bruker, Dicom and Philips). for MRtrix format, bvec is based on scanner reference system.		
+
+
+<p></p>
+
 	05/09/2023: version 23.4.2a
 	Features modified:
 		- bvec, bval : now bvec and bval files have .bvec and .bval extensions (FSL format). The Mrtrix format stay as before (.txt) 
