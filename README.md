@@ -30,7 +30,7 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
-	09/09/2025: version 25.1.0
+	09/09/2025: version 25.1.0a
 	Features modified:
 		- for MP3 and MIA softwares : exporting Bruker data to nifti format doesn't refer to RAS orientation.
 
