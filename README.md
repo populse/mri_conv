@@ -31,14 +31,14 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
-        21/10/2025: version 25.2.1a
-        Bug fixed:
-                - bug with software update fixed
+	21/10/2025: version 25.2.1a
+	Bug fixed:
+		- bug with software update fixed
 
 <p></p>
 
-        20/10/2025: version 25.2.0a
-        Features modified:
+	20/10/2025: version 25.2.0a
+	Features modified:
 		- Software update function added in 'Tools' menu.
 
 <p></p>
