@@ -68,7 +68,7 @@ import exportFiles.ExportFilesOption;
 public class FileManagerFrame extends JFrame implements ItemListener, ComponentListener {
 
 	private static final long serialVersionUID = 1L;
-	private final String versionSoft="25.1.0a";
+	private final String versionSoft="25.2.1a";
 
 	public static String OS = System.getProperty("os.name").toLowerCase();
 
@@ -109,13 +109,13 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 	}
 
 	public void run(final String[] arg) {
-		
+
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
 
-				PrefParam.FilestmpExportNifit = null;
+				PrefParam.FilestmpExportNifti = null;
 				PrefParam.MIA = false;
 				PrefParam.CloseAfterExport = false;
 				PrefParam.LogExport = true;
@@ -127,13 +127,14 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 				PrefParam.namingOptionsNiftiExportMIA = "00000";
 				PrefParam.labelButtonExport="export to ";
 				PrefParam.returnCodeExit=100;
+				PrefParam.versionSoft=versionSoft;
 				
 				for (String jj : arg) {
 					String tm;
 					if (jj.contains("[ExportNifti]")) {
 						tm = jj.substring(jj.indexOf("]") + 1);
 						tm = tm.trim();
-						PrefParam.FilestmpExportNifit = new File(tm);
+						PrefParam.FilestmpExportNifti = new File(tm);
 						tm = "";
 					} else if (jj.contains("ExportToMIA")) {
 						PrefParam.MIA = true;
@@ -354,8 +355,9 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 				PrefParam.simplifiedViewDicom=simplifiedDicom.getState();
 			}
 		});
-		
+
 		JMenuItem openImagej = new JMenuItem(new ActionsButtonMenu(this, "Open ImageJ"));
+		JMenuItem updateMRIFileManager = new JMenuItem(new ActionsButtonMenu(this, "Check for Update"));
 
 		file.add(openf);
 		file.addSeparator();
@@ -377,6 +379,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		if (PrefParam.OptionLookAndFeel)
 			option.add(lookAfeel);
 		tools.add(openImagej);
+		tools.add(updateMRIFileManager);
 
 		menu_bar1.add(file);
 		menu_bar1.add(inform);
@@ -635,8 +638,8 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		panelRepNifti.add(labExport);
 		pathExportNifti = new JLabel();
 
-		if (PrefParam.FilestmpExportNifit != null)
-			pathExportNifti.setText(PrefParam.FilestmpExportNifit.toString());
+		if (PrefParam.FilestmpExportNifti != null)
+			pathExportNifti.setText(PrefParam.FilestmpExportNifti.toString());
 		JScrollPane scrollRepNifti = new JScrollPane(pathExportNifti);
 		scrollRepNifti.setPreferredSize(new Dimension(40 * WScreen / 100, 5 * HScreen / 100));
 		panelRepNifti.add(scrollRepNifti);
@@ -1072,7 +1075,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 			}
 
 			new PrefParamModif();
-			JOptionPane.showMessageDialog(this, "Please restart MRI Files Manager manually");
+			JOptionPane.showMessageDialog(this, "Please close and restart MRI Files Manager");
 		}
 	}
 

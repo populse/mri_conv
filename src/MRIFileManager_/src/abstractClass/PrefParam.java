@@ -24,7 +24,7 @@ public class PrefParam {
 //			"com.jtattoo.plaf.smart.SmartLookAndFeel", // Smart
 	};
 
-	public static String separator, LookFeelCurrent,
+	public static String separator, LookFeelCurrent, versionSoft,
 						lectBruker, lectDicom, lectParRec, lectNifTI, lectBids, outExport,
 						formatCurrent, namingFileNiftiExport, namingRepNiftiExport, namingFileNiftiExportMIA,
 						namingOptionsNiftiExport, namingOptionsNiftiExportMIA, projectsDir, formatPhilips,
@@ -34,7 +34,7 @@ public class PrefParam {
 
 	public static ImageIcon iconBruker, iconDicom, iconNifTI, iconPhilips, iconBids;
 
-	public static File FilestmpRep, FilestmpExportNifit;
+	public static File FilestmpRep, FilestmpExportNifti;
 
 	public static boolean MIA, hasMultiOrientationScanMode, is1d, hasJsonKnown, CloseAfterExport, LogExport,
 			OptionLookAndFeel, ExitSystem, previewActived, simplifiedViewDicom, deidentify;

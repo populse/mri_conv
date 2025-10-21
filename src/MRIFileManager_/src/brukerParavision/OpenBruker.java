@@ -83,7 +83,7 @@ public class OpenBruker implements ParamMRI2 {
 				pxw = pxh;
 				pxh = ee;
 			}
-			
+
 //			System.out.println("pxw, pxh :" + pxw + " , " + pxh);
 //			System.out.println("fovX, fovY :" + fovX + " , " + fovY);
 //			System.out.println("w, h :" +  w + " , " + h);

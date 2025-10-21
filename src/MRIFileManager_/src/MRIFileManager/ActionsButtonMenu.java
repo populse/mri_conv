@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.Locale;
 
 import javax.swing.AbstractAction;
@@ -14,6 +15,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileView;
 import javax.swing.table.TableRowSorter;
+
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.InvalidRemoteException;
+import org.eclipse.jgit.api.errors.TransportException;
 
 import abstractClass.Format;
 import abstractClass.ParamMRI2;
@@ -90,6 +95,14 @@ class ActionsButtonMenu extends AbstractAction implements ParamMRI2, Format {
 
 		if (cmd.contains("Open ImageJ"))
 			new OpenImageJ();
+		
+		if (cmd.contains("Check for Update"))
+			try {
+				new UpdateMRIFileManager(wind);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		if (cmd.contains("Bruker")) {
 			dialogTitle = "Choose Bruker Data";

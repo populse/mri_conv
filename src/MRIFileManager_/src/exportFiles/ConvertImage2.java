@@ -152,7 +152,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 
 		Boolean ok = true;
 
-		if (FilestmpExportNifit == null) {
+		if (FilestmpExportNifti == null) {
 			final JFileChooser rep = new JFileChooser();
 			rep.setAcceptAllFileFilterUsed(false);
 			rep.setCurrentDirectory(new File(outExport));
@@ -165,7 +165,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 			switch (rep.showOpenDialog(null)) {
 			case JFileChooser.APPROVE_OPTION:
 				directory = rep.getSelectedFile().getPath();
-				FilestmpExportNifit = rep.getSelectedFile();
+				FilestmpExportNifti = rep.getSelectedFile();
 				wind.getpathExportNifti().setText(directory);
 				ok = true;
 				break;
@@ -177,7 +177,7 @@ public class ConvertImage2 extends PrefParam implements ParamMRI2 {
 		}
 
 		else {
-			directory = FilestmpExportNifit.toString();
+			directory = FilestmpExportNifti.toString();
 			File f = new File(directory);
 			if (!f.exists())
 				f.mkdirs();

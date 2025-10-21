@@ -54,7 +54,7 @@ public class BasketManager extends AbstractAction implements ParamMRI2 {
 		else if (arg0.getActionCommand().contentEquals("Change")) {
 			final JFileChooser rep = new JFileChooser();
 			rep.setAcceptAllFileFilterUsed(false);
-			rep.setCurrentDirectory(PrefParam.FilestmpExportNifit);
+			rep.setCurrentDirectory(PrefParam.FilestmpExportNifti);
 			rep.setApproveButtonText("Select this directory");
 			rep.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			rep.setLocale(Locale.ENGLISH);
@@ -63,7 +63,7 @@ public class BasketManager extends AbstractAction implements ParamMRI2 {
 			switch (rep.showOpenDialog(null)) {
 			case JFileChooser.APPROVE_OPTION:
 				wind.getpathExportNifti().setText(rep.getSelectedFile().getPath());
-				PrefParam.FilestmpExportNifit = rep.getSelectedFile();
+				PrefParam.FilestmpExportNifti = rep.getSelectedFile();
 				break;
 			}
 		}
