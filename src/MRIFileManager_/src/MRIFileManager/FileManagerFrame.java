@@ -68,7 +68,7 @@ import exportFiles.ExportFilesOption;
 public class FileManagerFrame extends JFrame implements ItemListener, ComponentListener {
 
 	private static final long serialVersionUID = 1L;
-	private final String versionSoft="25.2.1a";
+	private final String versionSoft="25.2.3a";
 
 	public static String OS = System.getProperty("os.name").toLowerCase();
 
@@ -104,8 +104,12 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 	private JCheckBoxMenuItem[] itemSeqDetail;
 	private JCheckBox[] ls;
 
-	public static void main(String[] args) {
-		new FileManagerFrame().run(args);
+	public static void main(String[] args) throws InterruptedException {
+
+		FileManagerFrame starthere = new FileManagerFrame();
+		SplashScreenApp splash = new SplashScreenApp(starthere);
+		splash.displayTime(3000);
+		starthere.run(args);
 	}
 
 	public void run(final String[] arg) {
@@ -236,6 +240,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		}
 		new ProtocolsBidsYaml(UtilsSystem.pathOfJar() + "Modalities_BIDS.yml"); 
 	}
+	
 
 	private void buildBug() {
 
@@ -259,7 +264,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 	}
 
 	private void MriFilesWindow() {
-
+		
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setLocationRelativeTo(null);
 		// setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -776,14 +781,23 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		JPanel panelTop = new JPanel();
 		JPanel panelBottom = new JPanel();
 		
-		JPanel left = new JPanel();
-		left.setLayout(new BoxLayout(left, BoxLayout.Y_AXIS));
-		URL URLLogoIrmage = getClass().getResource("/LogoM.jpg");
-		ImageIcon shIrmage = new ImageIcon(new ImageIcon(URLLogoIrmage).getImage().getScaledInstance(WScreen / 8, HScreen / 4, Image.SCALE_DEFAULT));
+		JPanel logoSoft = new JPanel();
+		logoSoft.setLayout(new BoxLayout(logoSoft, BoxLayout.Y_AXIS));
+		URL URLLogoSoft = getClass().getResource("/mri_conv.png");
+		ImageIcon shSoft = new ImageIcon(new ImageIcon(URLLogoSoft).getImage().getScaledInstance(WScreen / 8, HScreen / 4, Image.SCALE_DEFAULT));
 
-		JLabel shImg = new JLabel();
-		shImg.setIcon(shIrmage);
-		left.add(shImg);
+		JPanel logoIrmage = new JPanel();
+		logoIrmage.setLayout(new BoxLayout(logoIrmage, BoxLayout.Y_AXIS));
+		URL URLLogoIrmage = getClass().getResource("/LogoM.jpg");
+		ImageIcon shIrmage = new ImageIcon(new ImageIcon(URLLogoIrmage).getImage().getScaledInstance(WScreen / 12, HScreen / 8, Image.SCALE_DEFAULT));
+
+		JLabel shSft = new JLabel();
+		shSft.setIcon(shSoft);
+		logoSoft.add(shSft);
+		
+		JLabel shIrm = new JLabel();
+		shIrm.setIcon(shIrmage);
+		logoIrmage.add(shIrm);
 
 		JPanel right = new JPanel();
 		JTextPane txtpane = new JTextPane();
@@ -795,7 +809,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		scrp.setPreferredSize(new Dimension(WScreen / 4, HScreen / 4));
 		right.add(new JScrollPane(scrp));
 				
-		panelTop.add(left);
+		panelTop.add(logoSoft);
 		panelTop.add(right);
 		
 		JTextPane txtLink = new JTextPane();
@@ -804,6 +818,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		txtLink.setOpaque(true);
 		txtLink.setText(linkText);
 		
+		panelBottom.add(logoIrmage);
 		panelBottom.add(txtLink);
 		
 		panelAbout.add(panelTop);

@@ -6,10 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
+import java.net.URLConnection;
 import java.util.Scanner;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -23,24 +21,43 @@ import abstractClass.PrefParam;
 
 public class UpdateMRIFileManager extends PrefParam {
 
-	private Scanner sc;
-
 	public UpdateMRIFileManager(FileManagerFrame wind) throws Exception {
 
-	    String MFMcurrent = this.getClass().getClassLoader().getResource("").getPath();
-	    System.out.println("Working Directory = " + MFMcurrent);
+//	    String MFMcurrent = this.getClass().getClassLoader().getResource("").getPath();
+	    Path MFMcurrent = Paths.get(this.getClass().getClassLoader().getResource("").toURI());
+	    System.out.println("MRIFileManager Directory = " + MFMcurrent);
 
-		String urlstr = "https://github.com/populse/mri_conv/archive/refs/heads/devpt.zip";
+	    String urlstr = "https://github.com/populse/mri_conv/archive/refs/heads/devpt.zip";
 		String urlReadme = "https://raw.githubusercontent.com/populse/mri_conv/refs/heads/devpt/README.md";
 		String destDir = System.getProperty("java.io.tmpdir");
+	    System.out.println("Temporary Directory = " + destDir);
+
 		String fileZip = destDir + PrefParam.separator + "devpt.zip";
         byte[] buffer = new byte[1024];
         Boolean unzipState = false;
 
 		URL urlRM = new URL(urlReadme);
-		BufferedInputStream bisRM = new BufferedInputStream(urlRM.openStream());
-		sc = new Scanner(bisRM);
-		String versionMFM =  sc.nextLine();
+        Scanner sc = null;
+        String versionMFM = null;
+        try {
+            URLConnection connection = urlRM.openConnection();
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
+
+            BufferedInputStream bisRM = new BufferedInputStream(connection.getInputStream());
+            sc = new Scanner(bisRM);
+            versionMFM = sc.nextLine();
+            System.out.println("Version MFM : " + versionMFM);
+
+        } catch (IOException e) {
+            System.err.println("Error : " + e.getMessage());
+            return;
+        } finally {
+            if (sc != null) sc.close();
+            System.out.println("finally");
+        }
+		
+//		BufferedInputStream bisRM = new BufferedInputStream(urlRM.openStream());
 		versionMFM = versionMFM.substring(versionMFM.indexOf("(") + 1, versionMFM.lastIndexOf(")"));
 
         UIManager.put("OptionPane.yesButtonText", "Yes");
@@ -98,13 +115,30 @@ public class UpdateMRIFileManager extends PrefParam {
         }
 
         if (unzipState == true) {
-        	String LibrSrc = destDir + separator + "mri_conv-devpt" + separator + "MRIFileManager" + separator + "MRIManager_lib";
-        	String SoftSrc = destDir + separator + "mri_conv-devpt" + separator + "MRIFileManager" + separator + "MRIManager.jar";
-        	String dest = MFMcurrent + separator + "MRIManager_lib";
-        	String destSoft = MFMcurrent + separator + "MRIManager.jar";
-        	CopyFiles(LibrSrc, dest);
-        	CopyFiles(SoftSrc, destSoft);
-        	JOptionPane.showMessageDialog(wind, "Please close and restart MRI Files Manager");
+        	
+        	String TempSrc = destDir;
+        	String OS = System.getProperty("os.name");
+        	ProcessBuilder processBuilder;
+        	try {
+        		if (!OS.toLowerCase().contains("windows"))
+        				processBuilder = new ProcessBuilder("sh", "-c", "java -jar Updater.jar " + TempSrc + "&");
+        		else
+        			    processBuilder = new ProcessBuilder("cmd", "/c", "start", "java", "-jar", "Updater.jar", TempSrc); 
+	    	 // Optional: redirect standard output and errors to the current console
+	            processBuilder.inheritIO();
+	    	    System.out.println("Launch Updater.jar");
+	    	    processBuilder.start();
+//	    	    Thread.sleep(500); // 0,5 seconde
+	            System.exit(0);
+
+//	    	    Process process = processBuilder.start();
+//	    	    System.exit(0);
+//	    	    int exitCode = process.waitFor();
+//	    	    System.out.println("Process finished with code : " + exitCode);
+	
+	    	} catch (IOException e) {
+	    	    e.printStackTrace();
+	    	}
         }
 	}
 
@@ -128,69 +162,4 @@ public class UpdateMRIFileManager extends PrefParam {
 	            }
 	        }
 	    }
-
-	public void CopyFiles(String src, String dest) {
-
-		Path source = Paths.get(src);
-		Path destination = Paths.get(dest);
-
-		List<String> extensionsAuthorized = Arrays.asList(".jar");
-
-        try {
-            // remove destination repertory if exists
-        	if (Files.exists(destination)) {
-                removeRepertory(destination);
-
-	            // copy repertory with filter
-	            Files.walkFileTree(source, new SimpleFileVisitor<Path>() {
-	                @Override
-	                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-	                    Path destinationPath = destination.resolve(source.relativize(dir));
-	                    Files.createDirectories(destinationPath);
-	                    return FileVisitResult.CONTINUE;
-	                }
-	
-	                @Override
-	                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-	                    String fileName = file.getFileName().toString().toLowerCase();
-	                    boolean extensionValide = extensionsAuthorized.stream()
-	                            .anyMatch(fileName::endsWith);
-	
-	                    if (extensionValide) {
-	                        Path destinationPath = destination.resolve(source.relativize(file));
-	                        Files.copy(file, destinationPath, StandardCopyOption.REPLACE_EXISTING);
-	                        System.out.println("File copied : " + file);
-	                    } else {
-	                        System.out.println("File ignored (extension no authorized) : " + file);
-	                    }
-	
-	                    return FileVisitResult.CONTINUE;
-	                }
-	            });
-	
-	            System.out.println("✅ copy finished !");
-        	}
-        	else {
-        		System.out.println("error ! Destination not found");
-        	}
-        } catch (IOException e) {
-            System.err.println("Error : " + e.getMessage());
-        }
-	}
-
-    public static void removeRepertory(Path chemin) throws IOException {
-        Files.walkFileTree(chemin, new SimpleFileVisitor<Path>() {
-            @Override
-            public FileVisitResult visitFile(Path fichier, BasicFileAttributes attrs) throws IOException {
-                Files.delete(fichier);
-                return FileVisitResult.CONTINUE;
-            }
-
-            @Override
-            public FileVisitResult postVisitDirectory(Path dossier, IOException exc) throws IOException {
-                Files.delete(dossier);
-                return FileVisitResult.CONTINUE;
-            }
-        });
-    }
 }
