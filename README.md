@@ -31,7 +31,7 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
-	22/10/2025: version 25.2.2a
+	23/10/2025: version 25.2.3a
 	Bugs fixed:
 		- bug with software update under Windows
 		- bug with software update when no internet
