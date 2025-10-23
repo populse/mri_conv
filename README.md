@@ -1,4 +1,4 @@
-<!-- (25.2.2a) -->
+<!-- (25.2.3a) -->
 [![](https://img.shields.io/badge/java-8-yellow.svg)](https://www.java.com/fr/download/)
 [![](https://img.shields.io/badge/platform-Linux%2C%20OSX%2C%20Windows-orange.svg)](#)
 
@@ -28,6 +28,13 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 To download the latest 'development' version, click [here](https://github.com/populse/mri_conv/archive/devpt.zip) or 'Download ZIP' in 'Clone or download'.
 
 # Release history
+
+<p></p>
+
+	22/10/2025: version 25.2.2a
+	Bugs fixed:
+		- bug with software update under Windows
+		- bug with software update when no internet
 
 <p></p>
 
