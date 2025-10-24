@@ -47,14 +47,12 @@ public class UpdateMRIFileManager extends PrefParam {
             BufferedInputStream bisRM = new BufferedInputStream(connection.getInputStream());
             sc = new Scanner(bisRM);
             versionMFM = sc.nextLine();
-            System.out.println("Version MFM : " + versionMFM);
 
         } catch (IOException e) {
             System.err.println("Error : " + e.getMessage());
             return;
         } finally {
             if (sc != null) sc.close();
-            System.out.println("finally");
         }
 		
 //		BufferedInputStream bisRM = new BufferedInputStream(urlRM.openStream());
@@ -118,24 +116,19 @@ public class UpdateMRIFileManager extends PrefParam {
         	
         	String TempSrc = destDir;
         	String OS = System.getProperty("os.name");
+        	String pathUpdater = MFMcurrent + separator + "Updater.jar";
         	ProcessBuilder processBuilder;
         	try {
         		if (!OS.toLowerCase().contains("windows"))
-        				processBuilder = new ProcessBuilder("sh", "-c", "java -jar Updater.jar " + TempSrc + "&");
+//        				processBuilder = new ProcessBuilder("sh", "-c", "java -jar " + pathUpdater + " " + TempSrc + "&");
+        			processBuilder = new ProcessBuilder("nohup", "java", "-jar", pathUpdater, TempSrc, "&");
         		else
-        			    processBuilder = new ProcessBuilder("cmd", "/c", "start", "java", "-jar", "Updater.jar", TempSrc); 
+        			processBuilder = new ProcessBuilder("cmd", "/c", "start", "java", "-jar", pathUpdater, TempSrc); 
 	    	 // Optional: redirect standard output and errors to the current console
 	            processBuilder.inheritIO();
-	    	    System.out.println("Launch Updater.jar");
 	    	    processBuilder.start();
-//	    	    Thread.sleep(500); // 0,5 seconde
 	            System.exit(0);
 
-//	    	    Process process = processBuilder.start();
-//	    	    System.exit(0);
-//	    	    int exitCode = process.waitFor();
-//	    	    System.out.println("Process finished with code : " + exitCode);
-	
 	    	} catch (IOException e) {
 	    	    e.printStackTrace();
 	    	}
