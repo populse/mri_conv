@@ -75,7 +75,7 @@ public class UpdateMRIFileManager extends PrefParam {
 			BufferedInputStream bis = new BufferedInputStream(url.openStream());
 			FileOutputStream fis = new FileOutputStream(fileZip);
 
-	        ProgressDialog dialog = new ProgressDialog(wind, "Download in progress...", true, true);
+	        ProgressDialog dialog = new ProgressDialog(wind, "MRIFileManager update", true, true);
 
 	        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
 	            @Override
@@ -113,21 +113,27 @@ public class UpdateMRIFileManager extends PrefParam {
         }
 
         if (unzipState == true) {
-        	
+
         	String TempSrc = destDir;
         	String OS = System.getProperty("os.name");
         	String pathUpdater = MFMcurrent + separator + "Updater.jar";
         	ProcessBuilder processBuilder;
         	try {
         		if (!OS.toLowerCase().contains("windows"))
-//        				processBuilder = new ProcessBuilder("sh", "-c", "java -jar " + pathUpdater + " " + TempSrc + "&");
+//        			processBuilder = new ProcessBuilder("sh", "-c", "java -jar " + pathUpdater + " " + TempSrc + "&");
+//        			ProcessBuilder processBuilder = new ProcessBuilder("gnome-terminal", "--", "bash", "-c","java -jar " + jarPath + "; read -p 'Appuyez sur Entrée pour fermer...'");
         			processBuilder = new ProcessBuilder("nohup", "java", "-jar", pathUpdater, TempSrc, "&");
         		else
-        			processBuilder = new ProcessBuilder("cmd", "/c", "start", "java", "-jar", pathUpdater, TempSrc); 
+        			processBuilder = new ProcessBuilder("cmd", "/c", "start", "java", "-jar", pathUpdater, TempSrc);
+//        			ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/K", "java", "-jar", pathUpdater, TempSrc);
 	    	 // Optional: redirect standard output and errors to the current console
 	            processBuilder.inheritIO();
 	    	    processBuilder.start();
-	            System.exit(0);
+
+	    	    if (!PrefParam.labelButtonExport.contains("MP3"))
+	    	    	System.exit(0);
+	    	    else
+	    	    	wind.dispose();
 
 	    	} catch (IOException e) {
 	    	    e.printStackTrace();
