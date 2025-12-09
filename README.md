@@ -31,9 +31,9 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
-        09/12/2025: version 25.2.4a
-        Bugs fixed:
-                - Dicom: Read bug on some DICOM files resolved
+	09/12/2025: version 25.2.4a
+	Bugs fixed:
+        	- Dicom: Read bug on some DICOM files resolved
 
 <p></p>
 
