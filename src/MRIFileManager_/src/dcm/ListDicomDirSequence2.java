@@ -45,7 +45,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 			chemDicomdir= hmData.get(chemDicom);
 		else
 			chemDicom = chemDicom.substring(0, chemDicom.lastIndexOf(PrefParam.separator));
-		
+
 //		System.out.println(this+" : chemDicomdir no simplified= "+chemDicomdir);
 
 		StringBuffer headerDicom = new StringBuffer(new HeaderDicom().getHeaderDicom(chemDicomdir));
@@ -58,7 +58,6 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 		/****************************************************************************************************************/
 
 		listImDcm = headerDicom.toString().split("0020,0011"); // Series Number
-		
 
 		for (int i = 0; i < listImDcm.length; i++) {
 
@@ -324,10 +323,13 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 		
 		if (!windowLess)
 			title = FileManagerFrame.dlg.getTitle();
-
+		
 		if (listValuesAcq.get("Indice of Frame").contentEquals("2")) { // read 1 file multi-frame
 			
-			hdr = new StringBuffer(new HeaderDicom().getHeaderDicom(hmSeq.get(noSeq)[0]));
+			String headDic = new HeaderDicom().getHeaderDicom(hmSeq.get(noSeq)[0]);
+			headDic = headDic.substring(hdr.indexOf("5200,9229"));
+
+			hdr = new StringBuffer(headDic);
 			String[] list = hdr.toString().split("0008,0008");
 //			String[] list = hdr.toString().split("0004,1430");
 			
@@ -339,7 +341,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 				if (listDiff[j].isEmpty())
 					listDiff[j] = searchParam(hdrtmp, "2001,1003"); // diffusion
 			}
-			
+
 			int inc = 0;
 
 			for (int i = 0; i < list.length; i++) {
@@ -348,8 +350,23 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 				if (!windowLess)
 					FileManagerFrame.dlg.setTitle(title + i * 100 / list.length + " %");
 				listSlice = new String[21];
-				listSlice[1] = searchParam(hdrtmp, "Image Number");
 				
+				listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString()), "Image Number: 0 ");
+				if (!listSlice[1].isEmpty())
+					listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString().split("Image Number: 0 ")[1]), "Image Number");
+				if (listSlice[1].isEmpty()) {
+					listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString()), "Instance Number: 0 ");
+					if (!listSlice[1].isEmpty())
+						listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString().split("Instance Number: 0 ")[1]), "Instance Number");
+					else {
+						listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString()), "Image Number").trim();
+						if (listSlice[1].isEmpty())
+							listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString()), "Instance Number").trim();
+//						if (listSlice[1].isEmpty())
+//							listSlice[1] = String.valueOf(i+1);
+					}
+				}
+
 				if (!listSlice[1].isEmpty() && !listSlice[1].trim().contentEquals("0")) {
 					listSlice[0] = "";
 					listSlice[1] = listSlice[1].trim();
@@ -408,13 +425,23 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 				if (!windowLess)
 					FileManagerFrame.dlg.setTitle(title + i * 100 / hmSeq.get(noSeq).length + " %");
 				hdr = new StringBuffer(new HeaderDicom().getHeaderDicom(hmSeq.get(noSeq)[i]));
+//				System.out.println(this + "header : \n" + hdr);
 				listSlice = new String[21];
-				try {
-					listSlice[1] = searchParam(new StringBuffer(hdr.toString().split("Image Number: 0 ")[1]),
-							"Image Number");
-				} catch (Exception e) {
-					listSlice[1] = searchParam(new StringBuffer(hdr.toString()), "Image Number");
+			
+				listSlice[1] = searchParam(new StringBuffer(hdr.toString()), "Image Number: 0 ");
+				if (!listSlice[1].isEmpty())
+					listSlice[1] = searchParam(new StringBuffer(hdr.toString().split("Image Number: 0 ")[1]), "Image Number");
+				if (listSlice[1].isEmpty()) {
+					listSlice[1] = searchParam(new StringBuffer(hdr.toString()), "Instance Number: 0 ");
+					if (!listSlice[1].isEmpty())
+						listSlice[1] = searchParam(new StringBuffer(hdr.toString().split("Instance Number: 0 ")[1]), "Instance Number");
+					else {
+						listSlice[1] = searchParam(new StringBuffer(hdr.toString()), "Image Number").trim();
+						if (listSlice[1].isEmpty())
+							listSlice[1] = searchParam(new StringBuffer(hdr.toString()), "Instance Number").trim();
+					}
 				}
+			
 //				listSlice[1] = searchParam(new StringBuffer(hdr.toString()),"Image Number");
 //				System.out.println(this+" : listSlice[1] = "+listSlice[1]);
 //				if (!listSlice[1].isEmpty() && !listSlice[1].contentEquals("0")) {
@@ -466,7 +493,7 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 
 		if ((!listAcq.isEmpty())) {
 //			for (String[] kk : listAcq)
-//				System.out.println(Arrays.toString(kk));
+//				System.out.println(kk + ":" + Arrays.toString(kk));
 
 			Collections.sort(listAcq, new Comparator<Object[]>() {
 				@Override
@@ -499,7 +526,6 @@ public class ListDicomDirSequence2 implements ParamMRI2, DictionDicom, Runnable 
 		// txt = new StringBuffer(txt.substring(txt.indexOf("Image Number: 0")+15));
 		// resul = searchParam(txt, "Image Number");
 		// }
-
 //		System.out.println(this+" paramToFind = "+paramToFind+", result = "+resul);
 
 		return resul.trim();

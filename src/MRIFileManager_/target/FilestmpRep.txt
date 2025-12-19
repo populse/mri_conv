@@ -1,12 +1,12 @@
-[Bruker] /home/olivier/Documents/dataIRM/Bruker/PV360
-[Dicom] /home/olivier/Documents/dataIRM/test_unit_2/Dicom/raw
-[ParRec] 
-[NifTI] /tmp
-[Bids] 
-[Export] 
-[LookAndFeel] com.jtattoo.plaf.hifi.HiFiLookAndFeel
-[NamingRepNifTI] /PatientName/
-[NamingFileNifTI] StudyName-SerialNumber-Protocol
-[NamingOptionsNifTI] 00013
-[previewActived] Yes
-[SeqDetail] 1023
+[Bruker] /home/olivier/Documents/dataIRM/Bruker/Angio_Vasile
+[Dicom] 
+[ParRec] /home/olivier/Documents/eclipse-workspace/MRIFileManager_/target/
+[NifTI] /home/olivier/Documents/eclipse-workspace/MRIFileManager_/target/
+[Bids] /home/olivier/Documents/eclipse-workspace/MRIFileManager_/target/
+[Export] /home/olivier/Documents/eclipse-workspace/MRIFileManager_/target/
+[LookAndFeel] javax.swing.plaf.metal.MetalLookAndFeel
+[NamingRepNifTI] /
+[NamingFileNifTI] PatientName-StudyName-CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime
+[NamingOptionsNifTI] 00000
+[previewActived] No
+[SeqDetail] 111111111111111111111

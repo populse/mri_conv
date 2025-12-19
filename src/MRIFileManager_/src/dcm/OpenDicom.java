@@ -50,8 +50,6 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 	public void run() {
 
 		int c, z, t;
-
-//		System.out.println(this + " : " + orderImage);
 		
 		c = Integer.parseInt(orderImage[1].toString());
 		z = Integer.parseInt(orderImage[2].toString());
@@ -237,7 +235,7 @@ public class OpenDicom extends Thread implements ParamMRI2 {
 		double[] RI = Arrays.asList(reintercept.split(" +")).stream().mapToDouble(Double::parseDouble).toArray();
 		double[] SS = null;
 		if (!slope.trim().isEmpty())
-			SS = Arrays.asList(slope.split(" +")).stream().mapToDouble(Double::parseDouble).toArray();
+			SS = Arrays.asList(slope.trim().split(" +")).stream().mapToDouble(Double::parseDouble).toArray();
 
 //		System.out.println(this + "RS:" + Arrays.toString(RS));
 //		System.out.println(this + "RI:" + Arrays.toString(RI));

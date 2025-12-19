@@ -137,13 +137,13 @@ public class AffineQuaternionBruker_mp3 {
 		quatern = quatern.transpose();
 		quatern = quatern.times(start2());
 		quatern = quatern.transpose();
-		
+
 		affine = rotn();
 		affine = affine.times(trans());
 		affine = affine.times(swaps());
 		affine = affine.times(ft2mm());
 		affine = affine.times(start());
-		
+
 		try {
 			MatlabControl mc = new MatlabControl();
 			mc.eval(new String("transformBruker({'" + Arrays.deepToString(getMat()) + "'})"));

@@ -24,13 +24,13 @@ public class PrefParam {
 //			"com.jtattoo.plaf.smart.SmartLookAndFeel", // Smart
 	};
 
-	public static String separator, LookFeelCurrent, versionSoft,
+	public static String separator, LookFeelCurrent, versionSoft, SeqDetail,
 						lectBruker, lectDicom, lectParRec, lectNifTI, lectBids, outExport,
 						formatCurrent, namingFileNiftiExport, namingRepNiftiExport, namingFileNiftiExportMIA,
 						namingOptionsNiftiExport, namingOptionsNiftiExportMIA, projectsDir, formatPhilips,
 						lectCurrent, labelButtonExport, pathDictionaryUser, listProtocolsForBids, DirectoryDataOnly;
 
-	public static int widthScreen, heightScreen, formatCurrentInt, SeqDetail, returnCodeExit;
+	public static int widthScreen, heightScreen, formatCurrentInt, returnCodeExit;
 
 	public static ImageIcon iconBruker, iconDicom, iconNifTI, iconPhilips, iconBids;
 

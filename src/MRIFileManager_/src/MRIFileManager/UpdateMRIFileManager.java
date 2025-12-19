@@ -106,7 +106,7 @@ public class UpdateMRIFileManager extends PrefParam {
 	        try {
 	        	unzip(fileZip, destDir);
 	        	unzipState = true;
-	        	
+
 			} catch (Exception e) {
 				// TODO: handle exception
 			}

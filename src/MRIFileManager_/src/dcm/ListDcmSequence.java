@@ -129,8 +129,8 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 				|| listValuesCal.get("Manufacturer").contains("Philips"))
 			bvalue_field = "2001,1003";
 
-		if (Integer.parseInt(numberFrames) == 1) { // one image by file
-
+		if (Integer.parseInt(numberFrames) == 1) { // single frame by file
+			
 			String[] listSlice;
 			StringBuffer hdrDcm;
 
@@ -140,25 +140,39 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 				hdrDcm = new StringBuffer(new HeaderDicom().getHeaderDicom(files[i].toString()));
 //				hdrRecorded+=hdrDcm+"\n";
 				listSlice = new String[21];
-				listSlice[1] = searchParam(hdrDcm, "Image Number").trim();
-
-				if (listSlice[1].contentEquals("0")) {
-					listSlice[1] = searchParam(
-							new StringBuffer(hdrDcm.substring(hdrDcm.indexOf("Image Number: 0") + 15)), "Image Number");
-				}
-
+				
+				listSlice[1] = searchParam(new StringBuffer(hdrDcm.toString()), "Image Number: 0 ");
+				if (!listSlice[1].isEmpty())
+					listSlice[1] = searchParam(new StringBuffer(hdrDcm.toString().split("Image Number: 0 ")[1]), "Image Number");
 				if (listSlice[1].isEmpty()) {
-					try {
-						listSlice[1] = searchParam(new StringBuffer(hdrDcm.substring(hdrDcm.indexOf("InstanceNumber"))),
-								"InstanceNumber");
-					} catch (Exception e) {
+					listSlice[1] = searchParam(new StringBuffer(hdrDcm.toString()), "Instance Number: 0 ");
+					if (!listSlice[1].isEmpty())
+						listSlice[1] = searchParam(new StringBuffer(hdrDcm.toString().split("Instance Number: 0 ")[1]), "Instance Number");
+					else {
+						listSlice[1] = searchParam(new StringBuffer(hdrDcm.toString()), "Image Number").trim();
+						if (listSlice[1].isEmpty())
+							listSlice[1] = searchParam(new StringBuffer(hdrDcm.toString()), "Instance Number").trim();
 					}
 				}
+
+//				listSlice[1] = searchParam(hdrDcm, "Image Number").trim();
+//				if (listSlice[1].contentEquals("0")) {
+//					listSlice[1] = searchParam(
+//							new StringBuffer(hdrDcm.substring(hdrDcm.indexOf("Image Number: 0") + 15)), "Image Number");
+//				}
+//
+//				if (listSlice[1].isEmpty()) {
+//					try {
+//						listSlice[1] = searchParam(new StringBuffer(hdrDcm.substring(hdrDcm.indexOf("InstanceNumber"))),
+//								"InstanceNumber");
+//					} catch (Exception e) {
+//					}
+//				}
 
 				if (listSlice[1].isEmpty())
 					listSlice[1] = String.valueOf(i);
 
-				if (listSlice[1] != null)
+				if (!listSlice[1].isEmpty())
 					if (!listSlice[1].isEmpty()) {
 						String tp, ts;
 						listSlice[0] = files[i].toString();
@@ -222,6 +236,9 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 			listValuesCal.put("Serial Number", noSeries);
 
 			if ((!listAcq.isEmpty())) {
+//				for (String[] kk : listAcq)
+//				System.out.println(kk + ":" + Arrays.toString(kk));
+				
 				Collections.sort(listAcq, new Comparator<Object[]>() {
 					@Override
 					public int compare(Object[] strings, Object[] otherStrings) {
@@ -246,6 +263,9 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 			}
 
 			if (!listCal.isEmpty()) {
+//				for (String[] kk : listCal)
+//				System.out.println(kk + ":" + Arrays.toString(kk));
+
 				Collections.sort(listCal, new Comparator<Object[]>() {
 					@Override
 					public int compare(Object[] strings, Object[] otherStrings) {
@@ -260,9 +280,9 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 //								.compareTo(Float.parseFloat(otherStrings[21].toString()));
 //					}
 //				});
-//				for (String[] ll : listCal) {
-//					tmpCal.add(ll[0]);
-//				}
+				for (String[] ll : listCal) {
+					tmpCal.add(ll[0]);
+				}
 				listValuesCal.put("Images In Acquisition", String.valueOf(listCal.size()));
 				hmSeq.put(noSeq + "(calc)", tmpCal.toArray(new String[0]));
 				hmInfo.put(noSeq + "(calc)", listValuesCal);
@@ -292,7 +312,7 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 			// } catch (Exception e) {
 			// e.printStackTrace();
 			// }
-
+			
 			for (int k = 0; k < files.length; k++) {
 				if (!windowlessMode)
 					FileManagerFrame.dlg.setTitle(title + (k + 1) * 100 / files.length + " %");
@@ -342,7 +362,6 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 
 				String[] list = hdrDcm.toString().split("0008,9007");
 				String[] listSlice = null;
-//				System.out.println(this + " list length : " + list.length);
 				if (list.length > 2)
 					for (int i = 0; i < list.length; i++) {
 						StringBuffer hdrtmp = new StringBuffer(list[i]);
@@ -407,12 +426,14 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 
 				else {
 //					System.out.println("start here :" + list[0].toString());
-					StringBuffer hdrtmp = new StringBuffer(list[0].toString());
+					StringBuffer hdrtmp = new StringBuffer(list[1].toString());
+//					System.out.println(this + ": hdr =" + hdrtmp);
 					listSlice = new String[21];
 					listSlice[1] = searchParam(hdrtmp, "Image Number");
 					if (listSlice[1].isEmpty())
-						listSlice[1] = String.valueOf(0);
+						listSlice[1] = String.valueOf(k+1);
 					if (!listSlice[1].isEmpty() && !listSlice[1].contentEquals("0")) {
+//					if (!listSlice[1].isEmpty()) {
 						listSlice[0] = "";
 						listSlice[1] = listSlice[1].trim();
 						listSlice[2] = searchParam(hdrtmp, "Echo Numbers(s)");
@@ -448,7 +469,7 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 								+ searchParam(hdrtmp, "2005,10B2");
 //						System.out.println(this + "  2 : " + searchParam(hdrtmp, "0018,9117"));
 						listSlice[20] = searchParam(hdrtmp, "2005,1413");
-
+						
 						if (indTp < Arrays.asList(listType).indexOf("OTHER")) {
 							if (indSs < 4) {
 								offCalc = listCal.size();
@@ -465,6 +486,9 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 							offsetImageCal.add(listSlice[1]);
 						}
 					}
+					else {
+						
+					}
 				}
 					
 
@@ -479,6 +503,9 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 				tmp[0] = currentDicomPath;
 
 				if ((!listAcq.isEmpty())) {
+//					for (String[] kk : listAcq)
+//					System.out.println(kk + ":" + Arrays.toString(kk));
+
 					Collections.sort(listAcq, new Comparator<Object[]>() {
 						@Override
 						public int compare(Object[] strings, Object[] otherStrings) {
@@ -523,6 +550,7 @@ public class ListDcmSequence implements ParamMRI2, DictionDicom {
 		} catch (Exception e) {
 			resul = "";
 		}
+//		System.out.println(this + ": " + paramToFind + ", " + resul);
 		return resul.trim();
 	}
 }

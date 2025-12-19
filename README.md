@@ -1,4 +1,4 @@
-<!-- (25.2.1a) -->
+<!-- (25.3.0c) -->
 [![](https://img.shields.io/badge/java-8-yellow.svg)](https://www.java.com/fr/download/)
 [![](https://img.shields.io/badge/platform-Linux%2C%20OSX%2C%20Windows-orange.svg)](#)
 
@@ -11,6 +11,11 @@ The directories 'libraries' and 'MRIFileManager_' are ready to be used in the 'E
 mri_conv is open source and is released under the [CeCILL-b software license](https://cecill.info/licences/Licence_CeCILL_V2.1-en.html).
 
 # Release history
+
+<p></p>
+
+	19/12/2025 : version 25.3.0c
+	- see README in devt branch
 
 <p></p>
 

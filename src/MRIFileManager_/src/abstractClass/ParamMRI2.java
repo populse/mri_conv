@@ -14,7 +14,8 @@ public interface ParamMRI2 {
 			"Patient Sex", "Patient Weight", "Patient BirthDate", "Note" };
 	public final String[] headerListSeq = { "Seq. No.", "Serial Number", "Protocol", "Sequence Name",
 			"Acquisition Time", "Acquisition Date", "Creation Date", "Scan Mode", "Echo Time", "Repetition Time",
-			"Inversion Time", "Images In Acquisition", "Slice Orientation", "Flip Angle" };
+			"Inversion Time", "Images In Acquisition", "Slice Orientation", "Flip Angle", "Station Name", "Number Of Averages",
+			"Slice Thickness", "Slice Separation", "FOV", "File path", "Session", "Scan Resolution"};
 	public final String[] headerListBasket = {"Format", "Data", "File size (Mo)" };
 //	public final String[] headerListBasket = {"Format", "Data", "File size (Mo)", "sub", "ses", "acq", "task" };
 	/*******************************

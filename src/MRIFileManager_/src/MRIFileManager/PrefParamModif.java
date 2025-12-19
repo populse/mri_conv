@@ -27,14 +27,14 @@ public class PrefParamModif extends PrefParam {
 //		}
 //
 //		else {
-			
+
 			txt = "[Bruker] " + lectBruker + "\n" + "[Dicom] " + lectDicom + "\n" + "[ParRec] " + lectParRec + "\n"
 					+ "[NifTI] " + lectNifTI + "\n" + "[Bids] "+ lectBids + "\n" + "[Export] " + outExport + "\n" + "[LookAndFeel] "
 					+ LookFeelCurrent + "\n" + "[NamingRepNifTI] " + namingRepNiftiExport + "\n" + "[NamingFileNifTI] "
 					+ namingFileNiftiExport + "\n"
-					+ "[NamingOptionsNifTI] " + namingOptionsNiftiExport+ "\n" 
-					+ "[previewActived] " + ((previewActived)?"Yes":"No")+ "\n"
-					+ "[SeqDetail] " + "1023" + "\n";
+					+ "[NamingOptionsNifTI] " + namingOptionsNiftiExport + "\n" 
+					+ "[previewActived] " + ((previewActived)?"Yes":"No") + "\n"
+					+ "[SeqDetail] " + SeqDetail + "\n";
 //		}
 		try {
 			FileWriter printRep = new FileWriter(FilestmpRep);

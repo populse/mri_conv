@@ -430,7 +430,7 @@ public class ListDicomDirSequence implements ParamMRI2, DictionDicom, Runnable {
 		// resul = searchParam(txt, "Image Number");
 		// }
 		
-//		System.out.println(this+" paramToFind = "+paramToFind+", result = "+resul);
+		System.out.println(this+" paramToFind = "+paramToFind+", result = "+resul);
 
 		return resul.trim();
 	}

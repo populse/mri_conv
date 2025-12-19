@@ -68,7 +68,7 @@ import exportFiles.ExportFilesOption;
 public class FileManagerFrame extends JFrame implements ItemListener, ComponentListener {
 
 	private static final long serialVersionUID = 1L;
-	private final String versionSoft="25.2.3a";
+	private final String versionSoft="25.3.0c";
 
 	public static String OS = System.getProperty("os.name").toLowerCase();
 
@@ -132,6 +132,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 				PrefParam.labelButtonExport="export to ";
 				PrefParam.returnCodeExit=100;
 				PrefParam.versionSoft=versionSoft;
+				PrefParam.SeqDetail="111111111111100000000";
 				
 				for (String jj : arg) {
 					String tm;
@@ -839,16 +840,19 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 	}
 
 	private void buildDetailDisplaySeq() {
-
+		
 		popupMenuDetailSeq = new JPopupMenu();
 
 		itemSeqDetail = new JCheckBoxMenuItem[ParamMRI2.headerListSeq.length];
+		boolean nbin = true;
 
 		for (int i = 0; i < 5; i++) {
 			itemSeqDetail[i] = new JCheckBoxMenuItem(ParamMRI2.headerListSeq[i]);
 			if (i == 0)
 				itemSeqDetail[i].setEnabled(false);
-			itemSeqDetail[i].setSelected(true);
+			else
+				nbin = PrefParam.SeqDetail.substring(i-1, i).equals("1");
+			itemSeqDetail[i].setSelected(nbin);
 			itemSeqDetail[i].addActionListener(new ChangeSeqDetail(this, ""));
 			popupMenuDetailSeq.add(itemSeqDetail[i]);
 		}
@@ -879,14 +883,18 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 					ls[i].setSelected(false);
 			if (i == 0)
 				ls[i].setEnabled(false);
-			else
-				ls[i].setSelected(true);
+			else {
+				nbin = PrefParam.SeqDetail.substring(i-1, i).equals("1");
+				ls[i].setSelected(nbin);
+			}
 			ls[i].addItemListener(new ChangeSeqDetail(this, ""));
 			p.add(ls[i]);
 		}
 
 		JScrollPane scrollpane = new JScrollPane(p);
 		frameDetailSeq.getContentPane().add(scrollpane, BorderLayout.CENTER);
+		
+		new ChangeSeqDetail(this);
 
 	}
 
@@ -1022,7 +1030,11 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 
 		// getTabSeq().setEnabled(true);
 		TableMod model20;
-		Object[][] data = { { "", "", "", "", "", "", "", "", "", "", "", "" , "", ""} };
+//		Object[][] data = { { "", "", "", "", "", "", "", "", "", "", "", "" , "", ""} };
+		Object[][] data = new String[1][ParamMRI2.headerListSeq.length];
+		for (int i = 0; i < data[0].length; i++)
+			data[0][i] = "";
+		
 		String[] columnNames = ParamMRI2.headerListSeq;
 		model20 = new TableMod(data, columnNames);
 		TableRowSorter<TableMod> sorter0 = new TableRowSorter<>(model20);

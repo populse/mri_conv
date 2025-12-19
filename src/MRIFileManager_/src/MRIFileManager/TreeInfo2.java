@@ -2,8 +2,6 @@ package MRIFileManager;
 
 import java.awt.Component;
 import java.awt.Font;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

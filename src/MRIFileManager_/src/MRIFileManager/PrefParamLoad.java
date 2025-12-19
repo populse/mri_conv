@@ -21,7 +21,7 @@ public class PrefParamLoad extends PrefParam {
 		namingFileNiftiExport = "PatientName-StudyName-CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime";
 		namingOptionsNiftiExport = "00000";
 		previewActived = false;
-		SeqDetail = 1023;
+		SeqDetail = "111111111111100000000";
 //		deidentify = false;
 
 		new UtilsSystem();
@@ -62,8 +62,12 @@ public class PrefParamLoad extends PrefParam {
 						LookFeelCurrent = tmp.substring(14);
 					if (tmp.contains("[previewActived]"))
 						previewActived = (tmp.substring(17).contentEquals("No")) ? false : true;
-					if (tmp.contains("[SeqDetail]"))
-						SeqDetail = Integer.parseInt(tmp.substring(12));
+					if (tmp.contains("[SeqDetail]")) {
+						SeqDetail = tmp.substring(12);
+						if (SeqDetail.length() != 21)
+							SeqDetail = "111111111111100000000";
+					}
+					
 				}
 
 			} catch (Exception e) {
@@ -90,8 +94,8 @@ public class PrefParamLoad extends PrefParam {
 					+ "[NifTI] " + lectNifTI + "\n" + "[Bids] " + lectBids + "\n" + "[Export] " + outExport + "\n" + "[LookAndFeel] "
 					+ LookFeelCurrent + "\n" + "[NamingRepNifTI] " + separator + "\n" + "[NamingFileNifTI] "
 					+ "PatientName-StudyName-CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime" + "\n"
-					+ "[NamingOptionsNifTI] " + "00000" + "\n" + "[previewActived] " + "No" + "\n" + "[SeqDetail] "
-					+ "1023" + "\n";
+					+ "[NamingOptionsNifTI] " + "00000" + "\n" + "[previewActived] " + "No" + "\n"
+					+ "[SeqDetail] " + SeqDetail + "\n";
 
 			namingRepNiftiExport = separator;
 			namingFileNiftiExport = "PatientName-StudyName-CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime";

@@ -175,9 +175,25 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 				if (!windowLess)
 					FileManagerFrame.dlg.setTitle(title + i * 100 / listImDcm.length + " %");
 				fileName = searchParam(hdrtmp, "0004,1500");
-				fileName=fileName.replace("\\", PrefParam.separator);
+				fileName = fileName.replace("\\", PrefParam.separator);
 				listSlice[0] = pathDicom + PrefParam.separator + getTruePath(pathDicom, fileName);
-				listSlice[1] = searchParam(hdrtmp, "Image Number").trim();
+				
+//				listSlice[1] = searchParam(hdrtmp, "Image Number").trim();
+				listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString()), "Image Number: 0 ");
+				if (!listSlice[1].isEmpty())
+					listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString().split("Image Number: 0 ")[1]), "Image Number");
+				if (listSlice[1].isEmpty()) {
+					listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString()), "Instance Number: 0 ");
+					if (!listSlice[1].isEmpty())
+						listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString().split("Instance Number: 0 ")[1]), "Instance Number");
+					else {
+						listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString()), "Image Number").trim();
+						if (listSlice[1].isEmpty())
+							listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString()), "Instance Number").trim();
+					}
+				}
+				
+//				System.out.println(this + " : " + fileName + ", " + listSlice[1]);
 				listSlice[2] = searchParam(hdrtmp, "Echo Numbers(s)");
 				listSlice[3] = searchParam(hdrtmp, "Slice Number");
 				listSlice[4] = searchParam(hdrtmp, "Repetition Time");
@@ -285,7 +301,21 @@ public class ListDirfileSequence implements ParamMRI2, DictionDicom {
 				if (!windowLess)
 					FileManagerFrame.dlg.setTitle(title + i * 100 / list.length + " %");
 				
-				listSlice[1] = searchParam(hdrtmp, "Image Number");
+//				listSlice[1] = searchParam(hdrtmp, "Image Number");
+
+				listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString()), "Image Number: 0 ");
+				if (!listSlice[1].isEmpty())
+					listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString().split("Image Number: 0 ")[1]), "Image Number");
+				if (listSlice[1].isEmpty()) {
+					listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString()), "Instance Number: 0 ");
+					if (!listSlice[1].isEmpty())
+						listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString().split("Instance Number: 0 ")[1]), "Instance Number");
+					else {
+						listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString()), "Image Number").trim();
+						if (listSlice[1].isEmpty())
+							listSlice[1] = searchParam(new StringBuffer(hdrtmp.toString()), "Instance Number").trim();
+					}
+				}
 
 				if (!listSlice[1].isEmpty() && !listSlice[1].contentEquals("0")) {
 					listSlice[0] = "";
