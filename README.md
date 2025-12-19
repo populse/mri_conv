@@ -1,4 +1,4 @@
-<!-- (25.3.04a) -->
+<!-- (25.3.0b) -->
 [![](https://img.shields.io/badge/java-8-yellow.svg)](https://www.java.com/fr/download/)
 [![](https://img.shields.io/badge/platform-Linux%2C%20OSX%2C%20Windows-orange.svg)](#)
 
@@ -31,7 +31,7 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
-	19/12/2025: version 25.3.0a
+	19/12/2025: version 25.3.0b
 	Features modified:
 		- Sequence Table : tags have been added
 
