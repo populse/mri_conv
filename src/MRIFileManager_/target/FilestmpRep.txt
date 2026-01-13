@@ -1,12 +1,12 @@
 [Bruker] /home/olivier/Documents/dataIRM/Bruker/Angio_Vasile
-[Dicom] 
-[ParRec] /home/olivier/Documents/eclipse-workspace/MRIFileManager_/target/
+[Dicom] /home/olivier/Documents/dataIRM/test_unit_3/Dicom/raw
+[ParRec] /home/olivier/Documents/dataIRM/test_unit_3/Philips/raw/Data_patient
 [NifTI] /home/olivier/Documents/eclipse-workspace/MRIFileManager_/target/
-[Bids] /home/olivier/Documents/eclipse-workspace/MRIFileManager_/target/
+[Bids] /home/olivier/Documents/dataIRM/Bids/subject1
 [Export] /home/olivier/Documents/eclipse-workspace/MRIFileManager_/target/
 [LookAndFeel] javax.swing.plaf.metal.MetalLookAndFeel
 [NamingRepNifTI] /
 [NamingFileNifTI] PatientName-StudyName-CreationDate-SeqNumber-Protocol-SequenceName-AcquisitionTime
 [NamingOptionsNifTI] 00000
 [previewActived] No
-[SeqDetail] 111111111111111111111
+[SeqDetail] 111111111111100000000

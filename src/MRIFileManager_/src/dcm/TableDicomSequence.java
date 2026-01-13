@@ -45,7 +45,10 @@ public class TableDicomSequence extends PrefParam implements ParamMRI2 {
 			for (String jj : hmInfo.keySet()) {
 				data[k][0] = jj;
 				for (int i = 1; i < listParamSeq.length; i++) {
-					data[k][i] = hmInfo.get(jj).get(listParamSeq[i]);
+					if (hmInfo.get(jj).get(listParamSeq[i]) == null)
+						data[k][i] = "";
+					else
+						data[k][i] = hmInfo.get(jj).get(listParamSeq[i]);
 				}
 				k++;
 			}

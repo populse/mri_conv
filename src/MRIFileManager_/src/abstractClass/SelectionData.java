@@ -111,6 +111,7 @@ public abstract class SelectionData extends PrefParam implements ParamMRI2, Form
 			new GetStackTrace(e, this.getClass().toString());
 		}
 
+		
 		TableMod model = new TableMod(seq, ParamMRI2.headerListSeq);
 		TableRowSorter<TableMod> sorter = new TableRowSorter<>(model);
 		wind.getTabSeq().setModel(model);

@@ -9,16 +9,16 @@ import abstractClass.ParamMRI2;
 import abstractClass.PrefParam;
 
 public class ChangeSeqDetail implements ActionListener,ItemListener {
-	
+
 	private FileManagerFrame wind;
 	private String command;
-	
+
 	public ChangeSeqDetail(FileManagerFrame wind,String command) {
 		this.wind=wind;
 		this.command=command;
 
 	}
-	
+
 	public ChangeSeqDetail(FileManagerFrame wind) {
 		this.wind=wind;
 		adddeletecolumn();

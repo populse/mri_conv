@@ -68,7 +68,7 @@ import exportFiles.ExportFilesOption;
 public class FileManagerFrame extends JFrame implements ItemListener, ComponentListener {
 
 	private static final long serialVersionUID = 1L;
-	private final String versionSoft="25.3.0c";
+	private final String versionSoft="26.1.1a";
 
 	public static String OS = System.getProperty("os.name").toLowerCase();
 
@@ -893,7 +893,7 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 
 		JScrollPane scrollpane = new JScrollPane(p);
 		frameDetailSeq.getContentPane().add(scrollpane, BorderLayout.CENTER);
-		
+
 		new ChangeSeqDetail(this);
 
 	}

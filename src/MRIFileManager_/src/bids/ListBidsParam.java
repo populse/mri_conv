@@ -234,21 +234,28 @@ public class ListBidsParam implements ParamMRI2, ListParam2 {
 
 		String sliceGap = lv.get("Slice Gap");
 		tmp = lv.get("Slice Thickness");
-		if (!sliceGap.isEmpty()) {
-			sliceGap = String.valueOf(Float.parseFloat(sliceGap) - Float.parseFloat(tmp));
-			lv.put("Slice Gap", sliceGap);}
-		
+		if (sliceGap != null) {
+			if (!sliceGap.isEmpty()) {
+				sliceGap = String.valueOf(Float.parseFloat(sliceGap) - Float.parseFloat(tmp));
+				lv.put("Slice Gap", sliceGap);
+			}
+		}
+		else
+			sliceGap="";
 		/******************************************************************
 		 * Institution = InstitutionName concatenated with InstitutionalDepartmentName
 		 *****************************************************************/
-		
-		tmp = lv.get("Institution Department");
-		if (!tmp.isEmpty()) {
-			String instit = lv.get("Institution");
-			instit = instit.concat(", " + lv.get("Institution Department"));
-			lv.put("Institution", instit);
-		}
 
+		tmp = lv.get("Institution Department");
+		if (tmp != null) {
+			if (!tmp.isEmpty()) {
+				String instit = lv.get("Institution");
+				instit = instit.concat(", " + lv.get("Institution Department"));
+				lv.put("Institution", instit);
+				}
+			}
+		else
+			lv.put("Institution", "");
 		return lv;
 	}
 
