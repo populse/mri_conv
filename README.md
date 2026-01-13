@@ -31,6 +31,12 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	13/01/2026: version 26.1.1a
+	Bug:
+		- BIDS : read bug on some BIDS files resolved
+
+<p></p>
+
 	12/01/2026: version 26.1.0a
 	Bug:
 		- DICOM : bug during DICOM reading resolved
