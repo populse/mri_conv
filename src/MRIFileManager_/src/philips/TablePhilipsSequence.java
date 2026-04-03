@@ -13,7 +13,7 @@ public class TablePhilipsSequence extends PrefParam {
 	private Object[][] data;
 
 	public TablePhilipsSequence(String repertory) throws IOException {
-
+		
 		List<String> listSeq = new SearchPhilips(repertory).getList();
 		ArrayList<Object[]> listData = new ArrayList<>();
 

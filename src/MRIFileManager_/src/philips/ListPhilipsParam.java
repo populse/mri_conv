@@ -113,6 +113,7 @@ public class ListPhilipsParam extends PrefParam implements ParamMRI2, ListParam2
 				tmp = new Dateformatmodif(tmp, dictionaryMRISystem.get(sg).get("format").split(";")[ind].trim(),
 						dictionaryJsonSystem.get(sg).get("format")).getNewFormatDate();
 			lv.put(sg, tmp);
+//			System.out.println(this + ": sg:" + sg + "=" + tmp);
 		}
 
 		for (String sg : dictionaryMRIUser.keySet()) {

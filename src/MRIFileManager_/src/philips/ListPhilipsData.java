@@ -2,6 +2,7 @@ package philips;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import MRIFileManager.Dateformatmodif;
 import abstractClass.ParamMRI2;
@@ -81,7 +82,6 @@ public class ListPhilipsData extends PrefParam implements ParamMRI2 {
 			if (resul[i] == null)
 				resul[i] = "nc";
 		}
-
 		resul[4] = new Dateformatmodif(resul[4].toString(),
 				dictionaryMRISystem.get(paramListData[4]).get("format").split(";")[ind].trim(),
 				dictionaryJsonSystem.get(paramListData[4]).get("format")).getNewFormatDate();
@@ -98,7 +98,7 @@ public class ListPhilipsData extends PrefParam implements ParamMRI2 {
 
 		if (resul[2].toString().contentEquals("nc"))
 			resul[0] = "No Philips V4.2 found";
-
+		
 		return resul;
 	}
 

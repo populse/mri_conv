@@ -58,6 +58,8 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 import abstractClass.ParamMRI2;
 import abstractClass.PrefParam;
 import exportFiles.BasketManager;
@@ -68,7 +70,7 @@ import exportFiles.ExportFilesOption;
 public class FileManagerFrame extends JFrame implements ItemListener, ComponentListener {
 
 	private static final long serialVersionUID = 1L;
-	private final String versionSoft="26.1.1a";
+	private final String versionSoft="26.2.0a";
 
 	public static String OS = System.getProperty("os.name").toLowerCase();
 
@@ -385,7 +387,8 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 		if (PrefParam.OptionLookAndFeel)
 			option.add(lookAfeel);
 		tools.add(openImagej);
-		tools.add(updateMRIFileManager);
+		if (!PrefParam.MIA)
+			tools.add(updateMRIFileManager);
 
 		menu_bar1.add(file);
 		menu_bar1.add(inform);
@@ -473,7 +476,10 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 
 		try {
 			if (!PrefParam.OptionLookAndFeel)
-				UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+//				UIManager.setLookAndFeel(new FlatLightLaf());
+//				UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+				UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+//				UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
 			treeParamInfoGeneral = new TreeInfo2(ParamMRI2.listParamInfoSystem, null).getTreeInfo();
 			treeParamInfoGeneral.setFocusable(false);
 			treeParamInfoUser = new TreeInfo2(ParamMRI2.listParamInfoUser, null).getTreeInfo();
@@ -486,9 +492,8 @@ public class FileManagerFrame extends JFrame implements ItemListener, ComponentL
 				UIManager.setLookAndFeel(PrefParam.LookFeelCurrent);
 			}
 		} catch (Exception e) {
-
+			new GetStackTrace(e, this.getClass().toString());
 		}
-
 
 		JScrollPane treeInfoGeneral = new JScrollPane(treeParamInfoGeneral);
 		JScrollPane treeInfoUser = new JScrollPane(treeParamInfoUser);

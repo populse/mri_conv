@@ -1,7 +1,7 @@
 package philips;
 
 public interface DictionParRec {
-	
+
 	String[] listType = { "M", "R", "I", "P", "CR", "T0", "T1", "T2", "RHO", "SPECTRO", "DERIVED", "ADC",
 			"RCBV", "RCBF", "MTT", "TTP", "NC1", "NC2", "NC3", "ASLCBF" }; // "list of possible values for image_type_mr "
 	// = 0  "M"
@@ -23,7 +23,7 @@ public interface DictionParRec {
 	// = 16 "NC1"
 	// = 17 "NC2"
 	// = 18 "NC3"
-	
+
 	String[] listScanSeq = {"IR","SE","FFE","DERIVED","PCA","UNSPECIFIED","SPECTRO","SI","Unknow1","Unknow2"}; // "list of possible values for scanning sequence "
 	// = 0   "IR"
 	// = 1   "SE"
@@ -35,11 +35,11 @@ public interface DictionParRec {
 	// = 7   "SI"
 	// = 8	 "unknow"
 	// = 9   "unknow"
-	
+
 	String[] listLabelPar = {"CONTROL","LABEL"};
-	
+
 	String[] listLabelXml = {"-","CONTROL","LABEL"}; // list of possible values for Label Type Xml/Rec
-	
+
 	// acquired Sequences = [0,1,2,6,7];
 	// calculated Sequences [all others]
 	
@@ -89,7 +89,7 @@ public interface DictionParRec {
 			//since v4.2
 			{"label type" 								, "48"},
 	};
-	
+
 	String[][] imageInformationXmlRec = {
 			{"Slice"                      , "0"}, 
 			{"Echo"                       , "1"},
@@ -115,7 +115,7 @@ public interface DictionParRec {
 			{"Display Orientation"        , "21"},
 			{"fMRI Status Indication"     , "22"},
 			{"Image Type Ed Es"           , "23"},
-			{"Pixel Spacing"	          , "24"},
+			{"Pixel Spacing"	          , "24"}, // to 25
 			{"Pixel Spacing (y)"          , "25"},
 			{"Echo Time"                  , "26"},
 			{"Dyn Scan Begin Time"        , "27"},
@@ -133,9 +133,9 @@ public interface DictionParRec {
 			{"Diffusion AP"               , "39"},
 			{"Diffusion FH"               , "40"},
 			{"Diffusion RL"               , "41"},
-			{"Angulation AP (Image_Info)" , "42"},
-			{"Angulation FH (Image_Info)" , "43"},
-			{"Angulation RL (Image_Info)" , "44"}, 
+			{"Angulation AP"			  , "42"},
+			{"Angulation FH"			  , "43"},
+			{"Angulation RL"			  , "44"}, 
 			{"Offcenter AP"               , "45"}, 
 			{"Offcenter FH"               , "46"},
 			{"Offcenter RL"               , "47"},

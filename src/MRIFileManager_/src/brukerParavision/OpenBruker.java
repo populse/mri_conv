@@ -277,9 +277,18 @@ public class OpenBruker implements ParamMRI2 {
 				Calibration cal = imp.getCalibration();
 				cal.pixelWidth = pxw;
 				cal.pixelHeight = pxh;
+				System.out.println("Free Memory = " + IJ.freeMemory());
+				if (100.0 * IJ.currentMemory() / IJ.maxMemory() > 70.0) {
+					System.out.println("Out of Memory !!");
+					return;
+				}
 				for (int i = 1; i <= imp.getStackSize(); i++) {
 					imp.setSlice(i);
-					stack.addSlice(imp.getProcessor().resize(w, h, true));
+					try {
+						stack.addSlice(imp.getProcessor().resize(w, h, true));
+					} catch(OutOfMemoryError err) {
+						return;
+					}
 				}
 				imp = new ImagePlus("", stack);
 				imp.setCalibration(cal);
@@ -290,19 +299,20 @@ public class OpenBruker implements ParamMRI2 {
 			 *****************************************************/
 //			else
 				try {
-	
-					if (c != 1 && t != 1 && z != 1)
+
+					if (c != 1 && t != 1 && z != 1) {
 						imp = HyperStackConverter.toHyperStack(imp, z, c, t, order, "grayscale");
+					}
 					else if ((c != 1 || t != 1) && z != 1)
 						imp = HyperStackConverter.toHyperStack(imp, c, z, t, order, "grayscale");
 					else
 						imp = HyperStackConverter.toHyperStack(imp, c, z, t, order, "grayscale");
-	
+
 				} catch (Exception e) {
 				}
 
 			imp.resetDisplayRange();
-			
+
 			if (scanmode.contains("3")) {
 
 				try {

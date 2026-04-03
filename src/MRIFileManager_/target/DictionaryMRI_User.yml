@@ -643,7 +643,7 @@ dictionaryMRI:
                   viewer: {category: MRI parameters}
                   json:   {tagJson: ExcPulse1, type: string, format: ~, units: ms}
 
-  TrigD0:
+  TrigD1:
                   description: {info: ""}
                   whereBruker:  {file: method, keyName: $PVM_TrigD0=, type: float, format: ~, units: ~}
                    

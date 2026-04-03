@@ -11,27 +11,25 @@ public class Dateformatmodif {
 
 	public Dateformatmodif(String date, String oldFormat, String newFormat) {
 		
-//		System.out.println(date+" , "+oldFormat+" , "+newFormat);
+//		System.out.println(this + ":" + date + " , " + oldFormat + " , " + newFormat);
 
-		resul = "";
+		resul = date.replace(":", ".");
 
 		if (!date.isEmpty()) {
 			SimpleDateFormat dt;
 			Date df = null;
+			SimpleDateFormat dt1 = new SimpleDateFormat(newFormat);
 			
 			for (String jj : oldFormat.split("or")) {
 				dt = new SimpleDateFormat(jj.trim(),new Locale("EN","en")); 
-				
 				try {
 					df = dt.parse(date);
+					resul = dt1.format(df);
 					break;
 				}
 				catch (ParseException e) {
 				} 
 			}
-			SimpleDateFormat dt1 = new SimpleDateFormat(newFormat);
-			
-			resul = dt1.format(df);
 		}
 	}
 

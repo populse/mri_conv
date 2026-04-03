@@ -20,6 +20,7 @@ public class OpenImageJ extends PrefParam {
 					UtilsSystem.pathOfJar() + "dist" + File.separator);
 
 			IJ.run("Appearance...", "interpolate auto menu=15 16-bit=Automatic");
+//			IJ.run("Memory & Threads...", "maximum=8192 parallel=4 run");
 			ij = new ImageJ();
 //			ij.setAlwaysOnTop(true);
 			ij.exitWhenQuitting(false);

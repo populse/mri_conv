@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -108,6 +109,8 @@ public class GetInfofromXML implements DictionParRec, ListPhilipsParamData {
 			List<Element> list2 = imageArray.getChildren();
 			ite1 = list2.iterator();
 			String columnDetail = "";
+			String currentTag = "";
+			int indexTag;
 			ArrayList<String[]> listColumn = new ArrayList<>();
 			ArrayList<String[]> listColumnAcq = new ArrayList<>();
 			ArrayList<String[]> listColumnCal = new ArrayList<>();
@@ -115,25 +118,55 @@ public class GetInfofromXML implements DictionParRec, ListPhilipsParamData {
 			ListPhilipsSequence.hasAcqImg = false;
 
 			while (ite1.hasNext()) {
+				String[] column = new String[imageInformationXmlRec.length];
+				column[49] = "0"; // Some XML files do not contain the tag "Image Planar Configuration".
+				column[50] = "1"; // Some XML files do not contain these tags "Samples Per Pixel".
+
 				Nimage++;
 				Element std2 = ite1.next();
 				List<Element> list3 = std2.getChildren();
 				columnDetail = "";
 
+//				for (int h = 0; h < list3.size(); h++) {
+//					if (list3.get(h).getChildren().size() != 0) {
+//						List<Element> list4 = list3.get(h).getChildren();
+//						ite2 = list4.iterator();
+//						while (ite2.hasNext()) {
+//							Element std4 = ite2.next();
+//							columnDetail = columnDetail + std4.getValue() + " ";
+//						}
+//
+//					} else
+//							columnDetail = columnDetail + list3.get(h).getValue() + " ";
+//				}
+				
 				for (int h = 0; h < list3.size(); h++) {
 					if (list3.get(h).getChildren().size() != 0) {
 						List<Element> list4 = list3.get(h).getChildren();
 						ite2 = list4.iterator();
+						int index = 0;
 						while (ite2.hasNext()) {
 							Element std4 = ite2.next();
-							columnDetail = columnDetail + std4.getValue() + " ";
+							column[index] = std4.getValue();
+							index += 1;
 						}
 					} else {
-						columnDetail = columnDetail + list3.get(h).getValue() + " ";
+						currentTag = list3.get(h).getAttributeValue("Name");
+						indexTag = indexKey(imageInformationXmlRec, currentTag);
+						if (indexTag != -1) {
+							if (!currentTag.contentEquals("Pixel Spacing"))
+								column[indexTag] = list3.get(h).getValue();
+							else {
+								String fgh = list3.get(h).getValue();
+								column[indexTag] = fgh.split(" +")[0];
+								column[indexTag + 1] = fgh.split(" +")[1];
+							}
+						}
 					}
 				}
 
-				String[] column = columnDetail.split((" +"));
+//				String[] column = columnDetail.split(" +");
+
 				column[7] = String.valueOf(Arrays.asList(listType).indexOf(column[7]));
 				int indAcq = Arrays.asList(listScanSeq).indexOf(column[8]);
 				column[8] = String.valueOf(indAcq);
@@ -330,7 +363,21 @@ public class GetInfofromXML implements DictionParRec, ListPhilipsParamData {
 
 		return resul.trim();
 	}
+	
+//    public static int indexKey(String[][] data, String motCle) {
+//        return Arrays.stream(data)
+//                     .map(row -> row[0])
+//                     .collect(Collectors.toList())  // <-- ici pour Java 8+
+//                     .indexOf(motCle);              // renvoie -1 si absent
+//    }
 
+	public static int indexKey(String[][] data, String motCle) {
+	    return IntStream.range(0, data.length)
+	            .filter(i -> data[i][0].contentEquals(motCle))
+	            .findFirst()
+	            .orElse(-1);
+	}
+	
 	@Override
 	public HashMap<String, String> getInfoImageAcq() {
 		return informationXmlAcq;

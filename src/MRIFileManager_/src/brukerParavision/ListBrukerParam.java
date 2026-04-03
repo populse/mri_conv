@@ -218,7 +218,6 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 								listlabel[1].substring(listlabel[1].indexOf(": ") + 2, listlabel[1].length()));
 					}
 					if (listlabel[0].contains("FG_MOVIE")) { // to verify !!
-						System.out.println("FG_MOVIE, FG_Slice");
 						lv[0] = "xyczt";
 					}
 				}
@@ -320,8 +319,7 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 				lv[1] = Integer.parseInt(listlabel[1].substring(listlabel[1].indexOf(": ") + 2, listlabel[1].length()));
 				lv[2] = Integer.parseInt(listlabel[0].substring(listlabel[0].indexOf(": ") + 2, listlabel[0].length()));
 				lv[3] = Integer.parseInt(listlabel[2].substring(listlabel[2].indexOf(": ") + 2, listlabel[2].length()));
-				
-				System.out.println(tmp);
+			
 
 				// if (listlabel[0].contains("FG_SLICE")) {
 				// lv[0] = "xyzct";
@@ -344,7 +342,7 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 		 **************************************************************/
 
 		if (dim.contains("3")) {
-
+			
 			lv[0] = "xyzct";
 			lv[1] = 1;
 			lv[2] = Integer.parseInt(nImage);
@@ -361,7 +359,8 @@ public class ListBrukerParam extends PrefParam implements ParamMRI2, ListParam2 
 						lv[0] = "xyczt";
 						lv[3] = Integer.parseInt(
 								listlabel[0].substring(listlabel[0].indexOf(": ") + 2, listlabel[0].length()));
-					} else {
+					} 
+					else {
 						lv[0] = "xyczt";
 						lv[1] = Integer.parseInt(
 								listlabel[0].substring(listlabel[0].indexOf(": ") + 2, listlabel[0].length()));

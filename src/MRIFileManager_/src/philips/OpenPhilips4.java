@@ -54,6 +54,8 @@ public class OpenPhilips4 implements ParamMRI2, DictionParRec {
 		c = (int) orderIm[1];
 		z = (int) orderIm[2];
 		t = (int) orderIm[3];
+		
+//		System.out.println(this + " : " + c + " : " + z +" : " + t +" : " + order);
 
 		nimages = c * z * t;
 

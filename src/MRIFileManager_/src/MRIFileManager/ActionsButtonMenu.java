@@ -277,6 +277,7 @@ class ActionsButtonMenu extends AbstractAction implements ParamMRI2, Format {
 //			tmpa = tmpa.replace("Bids", "Nifti");
 			new DictionaryYaml2(UtilsSystem.pathOfJar() + "DictionaryMRI_System.yml", tmpa).loadDictionarySystem();
 			new DictionaryYaml2(UtilsSystem.pathOfJar() + "DictionaryMRI_User.yml", tmpa).loadDictionaryUser();
+
 			if (!listParamInfoSystem.isEmpty())
 				try {
 					switch (PrefParam.formatCurrentInt) {

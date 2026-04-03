@@ -24,7 +24,7 @@ public class TreeInfo2 implements ParamMRI2 {
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("IRMaGe");
 		DefaultMutableTreeNode param = null;
 		String keyVector = "", valueVector = "";
-
+		
 		for (String sd : listLabel.keySet()) {
 
 			param = new DefaultMutableTreeNode(sd);

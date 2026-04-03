@@ -37,5 +37,4 @@ public class TableMod extends AbstractTableModel{
 	public Class<? extends Object> getColumnClass(int c) {
         return getValueAt(0, c).getClass();
     }
-
 }

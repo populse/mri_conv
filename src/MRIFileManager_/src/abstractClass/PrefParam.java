@@ -9,20 +9,21 @@ public class PrefParam {
 			
 							urlLookAndFeel = { "default", // default
 			"com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel", // Nimbus
-//			"com.jtattoo.plaf.noire.NoireLookAndFeel", // Noire
-//			"com.jtattoo.plaf.texture.TextureLookAndFeel", // Texture
-//			"com.jtattoo.plaf.mcwin.McWinLookAndFeel", // McWin
-//			"com.jtattoo.plaf.aluminium.AluminiumLookAndFeel", // Aluminium
-//			"com.jtattoo.plaf.bernstein.BernsteinLookAndFeel", // Bernstein
 			"com.jtattoo.plaf.graphite.GraphiteLookAndFeel", // Graphite
-//			"com.jtattoo.plaf.luna.LunaLookAndFeel", // Luna
-//			"com.jtattoo.plaf.mint.MintLookAndFeel", // Mint
 			"com.jtattoo.plaf.hifi.HiFiLookAndFeel", // HiFi
-//			"com.jtattoo.plaf.fast.FastLookAndFeel", // Fast
-//			"com.jtattoo.plaf.aero.AeroLookAndFeel", // Aero
-//			"com.jtattoo.plaf.acryl.AcrylLookAndFeel", // Acryl
-//			"com.jtattoo.plaf.smart.SmartLookAndFeel", // Smart
 	};
+
+//	public static String[] nameLookAndFeel = { "System", "FlatLafLight", "FlatLafDark", "FlatLafIntelliJ", "FlatLafDarcula",
+//												"FlatLafmacOSLight", "FlatLafmacOSDark"},
+//			
+//			urlLookAndFeel = { "default", // default
+//			"com.formdev.flatlaf.FlatLightLaf", // FlatLafLight
+//			"com.formdev.flatlaf.FlatDarkLaf", // FlatLafDark
+//			"com.formdev.flatlaf.FlatIntelliJLaf", // FlatLafIntelliJ
+//			"com.formdev.flatlaf.FlatDarculaLaf", // FlatLafDarcula
+//			"com.formdev.flatlaf.themes.FlatMacLightLaf", // FlatLafmacOSLight
+//			"com.formdev.flatlaf.themes.FlatMacDarkLaf" // FlatLafmacOSDark
+//			};
 
 	public static String separator, LookFeelCurrent, versionSoft, SeqDetail,
 						lectBruker, lectDicom, lectParRec, lectNifTI, lectBids, outExport,

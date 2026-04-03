@@ -13,6 +13,9 @@ import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+
 import abstractClass.Format;
 import abstractClass.PrefParam;
 import abstractClass.SelectionSeq;
@@ -133,7 +136,8 @@ public class ActionSelectionSeq extends PrefParam implements Format, MouseListen
 		formatDecl();
 		try {
 			if (!OptionLookAndFeel)
-				UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+				UIManager.setLookAndFeel(new FlatLightLaf());
+//				UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 
 			seleseq.goSelectionSeq();
 
