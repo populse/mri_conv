@@ -31,6 +31,12 @@ To download the latest 'development' version, click [here](https://github.com/po
 
 <p></p>
 
+	13/08/2026: version 26.3.0a
+	- The FilestmpRep.txt file is now saved in the hidden '.mri_conv' folder in the user's home directory.
+	- Some graphical bugs fixed.
+
+<p></p>
+
 	03/04/2026: version 26.2.0a
 	- Lookandfeel changed to test compatibility with MATLAB under macOS
 	Philips: 

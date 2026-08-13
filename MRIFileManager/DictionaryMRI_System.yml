@@ -529,7 +529,15 @@ dictionaryMRI:
                   
                   viewer: {category: Angulation-Position}
                   json:   {tagJson: ~, type: ~, format: ~, units: ~}
+
+  Preparation Direction:              
+                  description: {info: ""}
   
+                  wherePhilips: {file: PAR ; Xml, keyName: Preparation direction ; Preparation Direction , type: string  ; string, format: ~, units: ~}
+                  
+                  viewer: {category: MRI parameters}
+                  json:   {tagJson: PreparationDirection, type: string, format: ~, units: ~}
+
   Protocol:
                   description: {info: ""}
   
