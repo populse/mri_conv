@@ -1,4 +1,4 @@
-<!-- (25.1.0a) -->
+<!-- (26.3.0a) -->
 [![](https://img.shields.io/badge/java-8-yellow.svg)](https://www.java.com/fr/download/)
 [![](https://img.shields.io/badge/platform-Linux%2C%20OSX%2C%20Windows-orange.svg)](#)
 
@@ -28,6 +28,74 @@ The documentation is available on mri_conv's website here: [https://populse.gith
 To download the latest 'development' version, click [here](https://github.com/populse/mri_conv/archive/devpt.zip) or 'Download ZIP' in 'Clone or download'.
 
 # Release history
+
+<p></p>
+
+	13/08/2026: version 26.3.0a
+	- The FilestmpRep.txt file is now saved in the hidden '.mri_conv' folder in the user's home directory.
+	- Some graphical bugs fixed.
+
+<p></p>
+
+	03/04/2026: version 26.2.0a
+	- Lookandfeel changed to test compatibility with MATLAB under macOS
+	Philips: 
+		- improved compatibility with XML/REC files
+
+<p></p>
+
+	13/01/2026: version 26.1.1a
+	Bug:
+		- BIDS : read bug on some BIDS files resolved
+
+<p></p>
+
+	12/01/2026: version 26.1.0a
+	Bug:
+		- DICOM : bug during DICOM reading resolved
+
+<p></p>
+
+	19/12/2025: version 25.3.0c
+	Bug:
+		- Sequence Table : bug with MacOS when changing tags
+
+<p></p>
+
+	19/12/2025: version 25.3.0b
+	Features modified:
+		- Sequence Table : tags have been added
+
+<p></p>
+
+	09/12/2025: version 25.2.4a
+	Bugs fixed:
+        	- Dicom: Read bug on some DICOM files resolved
+
+<p></p>
+
+	23/10/2025: version 25.2.3a
+	Bugs fixed:
+		- bug with software update under Windows
+		- bug with software update when no internet
+
+<p></p>
+
+	22/10/2025: version 25.2.2a
+	Feature added:
+		- Splash screen
+
+<p></p>
+
+	21/10/2025: version 25.2.1a
+	Bug fixed:
+		- bug with software update fixed
+
+<p></p>
+
+	20/10/2025: version 25.2.0a
+	Features modified:
+		- Software update function added in 'Tools' menu.
 
 <p></p>
 
